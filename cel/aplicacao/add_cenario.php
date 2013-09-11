@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
@@ -14,198 +13,185 @@ include_once("bd.inc");
 
 chkUser("index.php");        // Checa se o usuario foi autenticado
 
-if ( !isset( $sucesso ) )
-{
-    $sucesso = "n" ;
+if (!isset($sucesso)) {
+    $sucesso = "n";
 }
 
 // Conecta ao SGBD
 $r = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
-    $ret = checarCenarioExistente($_SESSION['id_projeto_corrente'],$titulo);
+    $ret = checarCenarioExistente($_SESSION['id_projeto_corrente'], $titulo);
     ?>  <!-- ADICIONEI ISTO PARA TESTES -->
-        <!--
-           RET = <?=$ret?> => RET = <?PHP $ret? print("TRUE") : print("FALSE") ; ?><BR>
-       $sucesso        = <?=$sucesso?><BR>
-       _GET["sucesso"] = <?=$_GET["sucesso"]?><BR>   
-        -->
+    <!--
+       RET = <?= $ret ?> => RET = <?PHP $ret ? print("TRUE")  : print("FALSE") ; ?><BR>
+    $sucesso        = <?= $sucesso ?><BR>
+    _GET["sucesso"] = <?= $_GET["sucesso"] ?><BR>   
+    -->
     <?PHP
-    if ($ret == true)
-    {    
-            print("<!-- Tentando Inserir Cenario --><BR>");
+    if ($ret == true) {
+        print("<!-- Tentando Inserir Cenario --><BR>");
 
         /* Substitui todas as ocorrencias de ">" e "<" por " " */
-        $titulo     = str_replace( ">" , " " , str_replace ( "<" , " " , $titulo     ) ) ;
-        $objetivo   = str_replace( ">" , " " , str_replace ( "<" , " " , $objetivo   ) ) ;
-        $contexto   = str_replace( ">" , " " , str_replace ( "<" , " " , $contexto   ) ) ;
-        $atores     = str_replace( ">" , " " , str_replace ( "<" , " " , $atores     ) ) ;
-        $recursos   = str_replace( ">" , " " , str_replace ( "<" , " " , $recursos   ) ) ;
-        $excecao    = str_replace( ">" , " " , str_replace ( "<" , " " , $excecao    ) ) ;
-        $episodios  = str_replace( ">" , " " , str_replace ( "<" , " " , $episodios  ) ) ;
-        inserirPedidoAdicionarCenario($_SESSION['id_projeto_corrente'],       
-                                      $titulo,
-                                      $objetivo,
-                                      $contexto,
-                                      $atores,
-                                      $recursos,
-                                      $excecao,
-                                      $episodios,
-                                      $_SESSION['id_usuario_corrente']);
-            print("<!-- Cenario Inserido Com Sucesso! --><BR>");
-     }
-     else
-     { 
-    ?>
-    <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
-        <p style="color: red; font-weight: bold; text-align: center">Este cenário já existe!</p>
-        <br>
-        <br>
+        $titulo = str_replace(">", " ", str_replace("<", " ", $titulo));
+        $objetivo = str_replace(">", " ", str_replace("<", " ", $objetivo));
+        $contexto = str_replace(">", " ", str_replace("<", " ", $contexto));
+        $atores = str_replace(">", " ", str_replace("<", " ", $atores));
+        $recursos = str_replace(">", " ", str_replace("<", " ", $recursos));
+        $excecao = str_replace(">", " ", str_replace("<", " ", $excecao));
+        $episodios = str_replace(">", " ", str_replace("<", " ", $episodios));
+        inserirPedidoAdicionarCenario($_SESSION['id_projeto_corrente'], $titulo, $objetivo, $contexto, $atores, $recursos, $excecao, $episodios, $_SESSION['id_usuario_corrente']);
+        print("<!-- Cenario Inserido Com Sucesso! --><BR>");
+    } else {
+        ?>
+        <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
+                <p style="color: red; font-weight: bold; text-align: center">Este cenï¿½rio jï¿½ existe!</p>
+                <br>
+                <br>
             <center><a href="JavaScript:window.history.go(-1)">Voltar</a></center>
-    </body></html>
+        </body></html>
+        <?php
+        return;
+    }
+    ?>
+
+    <script language="javascript1.2">
+
+        opener.parent.frames['code'].location.reload();
+        opener.parent.frames['text'].location.replace('main.php?id_projeto=<?= $_SESSION['id_projeto_corrente'] ?>');
+    //self.close();
+    //location.href = "http://<?php print( CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo")); ?>add_cenario.php?id_projeto=<?= $id_projeto ?>&sucesso=s" ;
+
+
+        location.href = "add_cenario.php?id_projeto=<?= $id_projeto ?>&sucesso=s";
+
+    </script>
+
     <?php
-        return;   
-     }
-?>
-
-<script language="javascript1.2">
-
-opener.parent.frames['code'].location.reload();
-opener.parent.frames['text'].location.replace('main.php?id_projeto=<?=$_SESSION['id_projeto_corrente']?>');
-//self.close();
-//location.href = "http://<?php print( CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo") ); ?>add_cenario.php?id_projeto=<?=$id_projeto?>&sucesso=s" ;
-
-
-location.href = "add_cenario.php?id_projeto=<?=$id_projeto?>&sucesso=s";
-
-</script>
-
-<?php
-
 } else {    // Script chamado atraves do menu superior
     $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
-?>
+    ?>
 
-<html>
-    <head>
-        <title>Adicionar Cenário</title>
-    </head>
-    <body>
-<script language="JavaScript">
-<!--
-function TestarBranco(form)
-{
-titulo     = form.titulo.value;
-objetivo   = form.objetivo.value;
-contexto   = form.contexto.value;
+    <html>
+        <head>
+            <title>Adicionar Cenï¿½rio</title>
+        </head>
+        <body>
+            <script language="JavaScript">
+            <!--
+                function TestarBranco(form)
+                {
+                    titulo = form.titulo.value;
+                    objetivo = form.objetivo.value;
+                    contexto = form.contexto.value;
 
-  if ((titulo == ""))
-    { 
-		alert ("Por favor, digite o titulo do cenário.")
-		form.titulo.focus()
-		return false;
-	}else{
-		padrao = /[\\\/\?"<>:|]/;
-		OK = padrao.exec(titulo);
-		if (OK)
-		{
-			window.alert ("O título do cenário não pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
-			form.titulo.focus();
-			return false;
-		} 
-	}
-      
-  if ((objetivo == ""))
-    { alert ("Por favor, digite o objetivo do cenário.")
-      form.objetivo.focus()
-      return false;}    
-      
-   if ((contexto == ""))
-    { alert ("Por favor, digite o contexto do cenário.")
-      form.contexto.focus()
-      return false;}        
-}
-//-->
+                    if ((titulo == ""))
+                    {
+                        alert("Por favor, digite o titulo do cenï¿½rio.")
+                        form.titulo.focus()
+                        return false;
+                    } else {
+                        padrao = /[\\\/\?"<>:|]/;
+                        OK = padrao.exec(titulo);
+                        if (OK)
+                        {
+                            window.alert("O tï¿½tulo do cenï¿½rio nï¿½o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
+                            form.titulo.focus();
+                            return false;
+                        }
+                    }
 
-<?php
+                    if ((objetivo == ""))
+                    {
+                        alert("Por favor, digite o objetivo do cenï¿½rio.")
+                        form.objetivo.focus()
+                        return false;
+                    }
 
-// Cenário -  Incluir Cenário 
+                    if ((contexto == ""))
+                    {
+                        alert("Por favor, digite o contexto do cenï¿½rio.")
+                        form.contexto.focus()
+                        return false;
+                    }
+                }
+            //-->
 
-//Objetivo:        Permitir ao usuário a inclusão de um novo cenário
-//Contexto:        Usuário deseja incluir um novo cenário.
-//              Pré-Condição: Login, cenário ainda não cadastrado
-//Atores:        Usuário, Sistema
-//Recursos:        Dados a serem cadastrados
-//Episódios:    O sistema fornecerá para o usuário uma tela com os seguintes campos de texto:
-//                - Nome Cenário
-//                - Objetivo.  Restrição: Caixa de texto com pelo menos 5 linhas de escrita visíveis
-//                - Contexto.  Restrição: Caixa de texto com pelo menos 5 linhas de escrita visíveis
-//                - Atores.    Restrição: Caixa de texto com pelo menos 5 linhas de escrita visíveis
-//                - Recursos.  Restrição: Caixa de texto com pelo menos 5 linhas de escrita visíveis
-//                - Exceção.   Restrição: Caixa de texto com pelo menos 5 linhas de escrita visíveis
-//                - Episódios. Restrição: Caixa de texto com pelo menos 16 linhas de escrita visíveis
-//                - Botão para confirmar a inclusão do novo cenário
-//              Restrições: Depois de clicar no botão de confirmação,
-//                          o sistema verifica se todos os campos foram preenchidos. 
-// Exceção:        Se todos os campos não foram preenchidos, retorna para o usuário uma mensagem avisando
-//              que todos os campos devem ser preenchidos e um botão de voltar para a pagina anterior.
+    <?php
+    // Cenï¿½rio -  Incluir Cenï¿½rio 
+    //Objetivo:        Permitir ao usuï¿½rio a inclusï¿½o de um novo cenï¿½rio
+    //Contexto:        Usuï¿½rio deseja incluir um novo cenï¿½rio.
+    //              Prï¿½-Condiï¿½ï¿½o: Login, cenï¿½rio ainda nï¿½o cadastrado
+    //Atores:        Usuï¿½rio, Sistema
+    //Recursos:        Dados a serem cadastrados
+    //Episï¿½dios:    O sistema fornecerï¿½ para o usuï¿½rio uma tela com os seguintes campos de texto:
+    //                - Nome Cenï¿½rio
+    //                - Objetivo.  Restriï¿½ï¿½o: Caixa de texto com pelo menos 5 linhas de escrita visï¿½veis
+    //                - Contexto.  Restriï¿½ï¿½o: Caixa de texto com pelo menos 5 linhas de escrita visï¿½veis
+    //                - Atores.    Restriï¿½ï¿½o: Caixa de texto com pelo menos 5 linhas de escrita visï¿½veis
+    //                - Recursos.  Restriï¿½ï¿½o: Caixa de texto com pelo menos 5 linhas de escrita visï¿½veis
+    //                - Exceï¿½ï¿½o.   Restriï¿½ï¿½o: Caixa de texto com pelo menos 5 linhas de escrita visï¿½veis
+    //                - Episï¿½dios. Restriï¿½ï¿½o: Caixa de texto com pelo menos 16 linhas de escrita visï¿½veis
+    //                - Botï¿½o para confirmar a inclusï¿½o do novo cenï¿½rio
+    //              Restriï¿½ï¿½es: Depois de clicar no botï¿½o de confirmaï¿½ï¿½o,
+    //                          o sistema verifica se todos os campos foram preenchidos. 
+    // Exceï¿½ï¿½o:        Se todos os campos nï¿½o foram preenchidos, retorna para o usuï¿½rio uma mensagem avisando
+    //              que todos os campos devem ser preenchidos e um botï¿½o de voltar para a pagina anterior.
+    ?>
 
-?>
+            </SCRIPT>
 
-</SCRIPT>
-
-        <h4>Adicionar Cenário</h4>
-        <br>
-<?php
-           if ( $sucesso == "s" )
-           {
-?>
-              <p style="color: blue; font-weight: bold; text-align: center">Cenário inserido com sucesso!</p>
-<?php    
-           }
-?>    
-        <form action="" method="post">
-        <table>
-            <tr>
-                <td>Projeto:</td>
-                <td><input disabled size="51" type="text" value="<?=$nome_projeto?>"></td>
-            </tr>
-                <td>Título:</td>
-                <td><input size="51" name="titulo" type="text" value=""></td>                
-            <tr>
-                <td>Objetivo:</td>
-                <td><textarea cols="51" name="objetivo" rows="3" WRAP="SOFT"></textarea></td>
-            </tr>
-            <tr>
-                <td>Contexto:</td>
-                <td><textarea cols="51" name="contexto" rows="3" WRAP="SOFT"></textarea></td>
-            </tr>
-            <tr>
-                <td>Atores:</td>
-                <td><textarea cols="51" name="atores" rows="3" WRAP="SOFT"></textarea></td>
-            </tr>
-            <tr>
-                <td>Recursos:</td>
-                <td><textarea cols="51" name="recursos" rows="3" WRAP="SOFT"></textarea></td>
-            </tr>
-            <tr>
-                <td>Exceção:</td>
-                <td><textarea cols="51" name="excecao" rows="3" WRAP="SOFT"></textarea></td>
-            </tr>
-            <tr>
-                <td>Episódios:</td>
-                <td><textarea cols="51" name="episodios" rows="5" WRAP="SOFT"></textarea></td>
-            </tr>
-            <tr>
-                <td align="center" colspan="2" height="60"><input name="submit" type="submit" onClick="return TestarBranco(this.form);" value="Adicionar Cenário"></td>
-            </tr>
-        </table>
-        </form>
+            <h4>Adicionar Cenï¿½rio</h4>
+            <br>
+    <?php
+    if ($sucesso == "s") {
+        ?>
+                <p style="color: blue; font-weight: bold; text-align: center">Cenï¿½rio inserido com sucesso!</p>
+        <?php
+    }
+    ?>    
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <td>Projeto:</td>
+                        <td><input disabled size="51" type="text" value="<?= $nome_projeto ?>"></td>
+                    </tr>
+                    <td>Tï¿½tulo:</td>
+                    <td><input size="51" name="titulo" type="text" value=""></td>                
+                    <tr>
+                        <td>Objetivo:</td>
+                        <td><textarea cols="51" name="objetivo" rows="3" WRAP="SOFT"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Contexto:</td>
+                        <td><textarea cols="51" name="contexto" rows="3" WRAP="SOFT"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Atores:</td>
+                        <td><textarea cols="51" name="atores" rows="3" WRAP="SOFT"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Recursos:</td>
+                        <td><textarea cols="51" name="recursos" rows="3" WRAP="SOFT"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Exceï¿½ï¿½o:</td>
+                        <td><textarea cols="51" name="excecao" rows="3" WRAP="SOFT"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Episï¿½dios:</td>
+                        <td><textarea cols="51" name="episodios" rows="5" WRAP="SOFT"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2" height="60"><input name="submit" type="submit" onClick="return TestarBranco(this.form);" value="Adicionar Cenï¿½rio"></td>
+                    </tr>
+                </table>
+            </form>
         <center><a href="javascript:self.close();">Fechar</a></center>
-        <br><i><a href="showSource.php?file=add_cenario.php">Veja o código fonte!</a></i>
+        <br><i><a href="showSource.php?file=add_cenario.php">Veja o cï¿½digo fonte!</a></i>
     </body>
-</html>
+    </html>
 
-<?php
+    <?php
 }
 ?>

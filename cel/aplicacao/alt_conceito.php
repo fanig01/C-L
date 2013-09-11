@@ -11,103 +11,93 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
-chkUser("index.php");// Checa se o usuario foi autenticado
-
+chkUser("index.php"); // Checa se o usuario foi autenticado
 // Conecta ao SGBD
 $r = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {       // Script chamado atraves do submit do formulario
-    inserirPedidoAlterarConceito($_SESSION['id_projeto_corrente'],
-                                $id_conceito,
-                                $nome,
-                                $descricao,
-                                $namespace,
-                                $justificativa,
-                                $_SESSION['id_usuario_corrente']);
-?>
+    inserirPedidoAlterarConceito($_SESSION['id_projeto_corrente'], $id_conceito, $nome, $descricao, $namespace, $justificativa, $_SESSION['id_usuario_corrente']);
+    ?>
 
-<script language="javascript1.3">
+    <script language="javascript1.3">
 
-opener.parent.frames['code'].location.reload();
-opener.parent.frames['text'].location.replace('main.php?id_projeto=<?=$_SESSION['id_projeto_corrente']?>');
+        opener.parent.frames['code'].location.reload();
+        opener.parent.frames['text'].location.replace('main.php?id_projeto=<?= $_SESSION['id_projeto_corrente'] ?>');
 
-</script>
+    </script>
 
-<h4>Operação efetuada com sucesso!</h4>
+    <h4>Operaï¿½ï¿½o efetuada com sucesso!</h4>
 
-<script language="javascript1.3">
+    <script language="javascript1.3">
 
-self.close();
+        self.close();
 
-</script>
+    </script>
 
-<?php
+    <?php
 } else { // Script chamado atraves do link no cenario corrente
-
     $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
 
     $q = "SELECT * FROM conceito WHERE id_conceito = $id_conceito";
     $qrr = mysql_query($q) or die("Erro ao executar a query");
     $result = mysql_fetch_array($qrr);
 
-// Cenário -    Alterar Conceito 
-
-//Objetivo:	Permitir a alteração de um conceito por um usuário
-//Contexto:	Usuário deseja alterar conceito previamente cadastrado
-//              Pré-Condição: Login, Cenário cadastrado no sistema
-//Atores:	Usuário
+// Cenï¿½rio -    Alterar Conceito 
+//Objetivo:	Permitir a alteraï¿½ï¿½o de um conceito por um usuï¿½rio
+//Contexto:	Usuï¿½rio deseja alterar conceito previamente cadastrado
+//              Prï¿½-Condiï¿½ï¿½o: Login, Cenï¿½rio cadastrado no sistema
+//Atores:	Usuï¿½rio
 //Recursos:	Sistema, dados cadastrados
-//Episódios:	O sistema fornecerá para o usuário a mesma tela de INCLUIR CENÁRIO,
-//              porém com os seguintes dados do cenário a ser alterado preenchidos
-//              e editáveis nos seus respectivos campos: Objetivo, Contexto, Atores, Recursos e Episódios.
-//              Os campos Projeto e Título estarão preenchidos, mas não editáveis.
-//              Será exibido um campo Justificativa para o usuário colocar uma
-//              justificativa para a alteração feita.
+//Episï¿½dios:	O sistema fornecerï¿½ para o usuï¿½rio a mesma tela de INCLUIR CENï¿½RIO,
+//              porï¿½m com os seguintes dados do cenï¿½rio a ser alterado preenchidos
+//              e editï¿½veis nos seus respectivos campos: Objetivo, Contexto, Atores, Recursos e Episï¿½dios.
+//              Os campos Projeto e Tï¿½tulo estarï¿½o preenchidos, mas nï¿½o editï¿½veis.
+//              Serï¿½ exibido um campo Justificativa para o usuï¿½rio colocar uma
+//              justificativa para a alteraï¿½ï¿½o feita.
+    ?>
 
-?>
+    <html>
+        <head>
+            <title>Alterar Conceito</title>
+        </head>
+        <body>
+            <h4>Alterar Conceito</h4>
+            <br>
+            <form action="?id_projeto=<?= $id_projeto ?>" method="post">
+                <table>
+                    <tr>
+                        <td>Projeto:</td>
+                        <td><input disabled size="48" type="text" value="<?= $nome_projeto ?>"></td>
+                    </tr>
+                    <input type="hidden" name="id_conceitos" value="<?= $result['id_conceito'] ?>">
+                    <td>Nome:</td>
+    <? $result['nome'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['nome']); ?>
+                    <input type="hidden" name="nome" value="<?= $result['nome'] ?>">
+                    <td><input disabled maxlength="128" name="nome2" size="48" type="text" value="<?= $result['nome'] ?>"></td>
+                    <tr>
+                        <td>Descricao:</td>
+    <? $result['descricao'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['descricao']); ?>
 
-<html>
-    <head>
-        <title>Alterar Conceito</title>
-    </head>
-    <body>
-        <h4>Alterar Conceito</h4>
-        <br>
-        <form action="?id_projeto=<?=$id_projeto?>" method="post">
-        <table>
-				<tr>
-                <td>Projeto:</td>
-                <td><input disabled size="48" type="text" value="<?=$nome_projeto?>"></td>
-            </tr>
-								 <input type="hidden" name="id_conceitos" value="<?=$result['id_conceito']?>">
-                <td>Nome:</td>
-								<? $result['nome'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['nome']); ?>
-                <input type="hidden" name="nome" value="<?=$result['nome']?>">
-								<td><input disabled maxlength="128" name="nome2" size="48" type="text" value="<?=$result['nome']?>"></td>
-            <tr>
-                <td>Descricao:</td>
-								<? $result['descricao'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['descricao']); ?>
-  
-                <td><textarea name="descricao" cols="48" rows="3"><?=$result['descricao']?></textarea></td>
-            </tr>
-            <tr>
-                <td>Namespace:</td>
-								<? $result['namespace'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['namespace']); ?>
-                <td><textarea name="namespace" cols="48" rows="3"><?=$result['namespace']?></textarea></td>
-            </tr>
-            <tr>
-                <td>Justificativa para a altera&ccedil;&atilde;o:</td>
-                <td><textarea name="justificativa" cols="48" rows="2"></textarea></td>
-            </tr>
-            <tr>
-                <td align="center" colspan="2" height="60"><input name="submit" type="submit" value="Alterar Cenário" onClick="updateOpener()"></td>
-            </tr>
-        </table>
-        </form>
-        <br><i><a href="showSource.php?file=alt_cenario.php">Veja o código fonte!</a></i>
-    </body>
-</html>
+                        <td><textarea name="descricao" cols="48" rows="3"><?= $result['descricao'] ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Namespace:</td>
+    <? $result['namespace'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['namespace']); ?>
+                        <td><textarea name="namespace" cols="48" rows="3"><?= $result['namespace'] ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Justificativa para a altera&ccedil;&atilde;o:</td>
+                        <td><textarea name="justificativa" cols="48" rows="2"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2" height="60"><input name="submit" type="submit" value="Alterar Cenï¿½rio" onClick="updateOpener()"></td>
+                    </tr>
+                </table>
+            </form>
+            <br><i><a href="showSource.php?file=alt_cenario.php">Veja o cï¿½digo fonte!</a></i>
+        </body>
+    </html>
 
-<?php
+    <?php
 }
 ?>
