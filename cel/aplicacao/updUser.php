@@ -12,7 +12,7 @@ $r = bd_connect() or die("Erro ao conectar ao SGBD");
 
 <html>
     <head>
-        <title>Alterar dados de Usu�rio</title>
+        <title>Alterar dados de Usuário</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     </head>
 
@@ -20,16 +20,16 @@ $r = bd_connect() or die("Erro ao conectar ao SGBD");
     <body>
 
 <?php
-// Cen�rio - Alterar cadastro
+// Scenario - change cadastrate
 //
-//Objetivo:  Permitir ao usu�rio realizar altera��o nos seus dados cadastrais	
-//Contexto:  Sistema aberto, Usu�rio ter acessado ao sistema e logado 
-//           Usu�rio deseja alterar seus dados cadastrais 
-//           Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-//Atores:    Usu�rio, Sistema.	
-//Recursos:  Interface	
-//Epis�dios: O usu�rio altera os dados desejados
-// 	     Usu�rio clica no bot�o de atualizar
+//Objective: To allow to the user actualize changes in the his cadastral data	
+//Context: Open system, User have acess to the system and logged
+//         User desire change his cadastral data
+//Precondition: User have acess to the system
+//Actors:   User, System
+//Resource: Interface
+//Episodes: The user change the desired data
+//          User click int the button of update
 
 $senha_cript = md5($senha);
 $q = "UPDATE usuario SET  nome ='$nome' , login = '$login' , email = '$email' , senha = '$senha_cript' WHERE  id_usuario='$id_usuario'";
