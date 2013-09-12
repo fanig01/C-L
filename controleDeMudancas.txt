@@ -1,0 +1,82 @@
+Controle de Mudanças
+
+Arquivo: ver_pedido_lexico.php
+
+Variáveis:
+
+	Não alterei nome de variáveis.
+
+Comentários:
+
+
+	(1)Comentário anterior: /* ver_pedido_lexico.php: Esse script exibe os varios pedidos referentes
+ 				ao lexico.O gerente tem a opcao de ver os pedidos
+				jah validados. O gerente tb podera validar e processar pedidos.
+				O gerente tera uma terceira opcao que eh a de remover o pedido
+				validado ou nao da lista de pedidos.O gerente podera responder
+				a um pedido via e-mail direto desta pagina.
+ 				Arquivo chamador: heading.php
+			     */
+	(1)Comentário atual:  /* Ver_pedido_lexico.php: This script shows the different requests related
+  				the lexicon. The manager has the option to see the requests
+				already validated. The manager can validate and process requests.
+				The manager can remove the application (validated or not) from the list of requests. 
+				The manager can respond to a request by e-mail on this page.
+  				Archive caller: heading.php
+			     */
+	
+	(2)Comentário anterior: // Checa se o usuario foi autenticado
+	(2)Comentário atual: // Check if the user has been authenticated
+
+	(3)Comentário anterior:     /*
+      					Cen?rio: Verificar pedidos de altera??o de termos do l?xico
+     					Objetivo: Permitir ao administrador gerenciar os pedidos de altera??o de termos do l?xico.
+      					Contexto: Gerente deseja visualizar os pedidos de altera??o de termos do l?xico.
+      					Pr?-Condi??o: Login, projeto cadastrado.
+      					Atores:	Administrador
+      					Recursos: Sistema, banco de dados.
+      					Epis?dios: 1- O administrador clica na op??o de Verificar pedidos de altera??o de termos do l?xico.
+      					Restri??o: Somente o Administrador do projeto pode ter essa fun??o vis?vel.
+      					2- O sistema fornece para o administrador uma tela onde poder? visualizar o hist?rico
+      					de todas as altera??es pendentes ou n?o para os termos do l?xico.
+      					3- Para novos pedidos de inclus?o ou altera??o de termos do l?xico,
+      					O sistema permite que o administrador opte por Aprovar ou Remover.
+      					4- Para os pedidos de inclus?o ou altera??o j? aprovados,
+      					o sistema somente habilita a op??o remover para o administrador.
+      					5- Para efetivar as sele??es de aprova??o e remo??o, o administrador deve clicar em Processar.
+     				   */
+	(3)Comentário atual: 	   /*
+					Scenario - Check requests for changes in the terms of the lexicon.
+					Objective: Enable the administrator to control requests for changes in the terms of the lexicon.
+					Context: Manager want to view the change requests the terms of lexicon.
+					Precondition: Login and project registered.
+					Actors: Administrator
+					Features: System and database.
+					Episodes:
+					1 - The administrator clicks the option Check Requests changes in terms of the lexicon.
+					Restriction: Only the Project Manager may have this function visible.
+            				2 - The system provides for the Administrator a screen where he can view the history of all changes (pending or not) to the terms of the lexicon.
+            				3 - For new requests to include or modification of terms of the lexicon, the system allows the administrator to choose to Approve or Remove.
+            				4 - For requests to add or modification already approved, the system only enables the Remove option for the administrator.
+            				5 - To complete the selections approval and removal, the administrator must click Process.
+
+				   */
+
+
+
+Comentários:
+
+	Pensando em alterar o nome da função chkUser() para check_User_Authenticated() para podermos retirar os comentários explicando ela. 
+	Vocês acham que esse nome é muito grande?
+
+	Talvez tenhamos que desfazer a tabulação devido as consequências nos outputs. Aguardo confirmação se iremos desfazer ou não.
+
+	Meu inglês não é muito bom, então qualquer erro, podem corrigir. 
+
+	Eu considerei esses comentários que traduzi como importantes. Se alguém discordar, avise-me.
+
+
+
+Thaiane Braga
+
+--------------------------------------------------------------------
