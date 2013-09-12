@@ -80,3 +80,36 @@ Comentários:
 Thaiane Braga
 
 --------------------------------------------------------------------
+Arquivo: updUser.php
+
+Variáveis:
+
+	Não alterei nome de variáveis.
+
+Comentários:
+	(1)Comentário anterior: // Cen?rio - Alterar cadastro
+				//
+				//Objetivo:  Permitir ao usu?rio realizar altera??o nos seus dados cadastrais	
+				//Contexto:  Sistema aberto, Usu?rio ter acessado ao sistema e logado 
+				//           Usu?rio deseja alterar seus dados cadastrais 
+				//           Pr?-Condi??o: Usu?rio ter acessado ao sistema	
+				//Atores:    Usu?rio, Sistema.	
+				//Recursos:  Interface	
+				//Epis?dios: O usu?rio altera os dados desejados
+				// 	     Usu?rio clica no bot?o de atualizar
+
+	(1)Comentário atual: 
+				// Scenario - change cadastrate
+				//
+				//Objective: To allow to the user actualize changes in the his cadastral data	
+				//Context: Open system, User have acess to the system and logged
+				//         User desire change his cadastral data
+				//Precondition: User have acess to the system
+				//Actors:   User, System
+				//Resource: Interface
+				//Episodes: The user change the desired data
+				//          User click int the button of update
+
+Tomáz Martins
+
+--------------------------------------------------------------------
