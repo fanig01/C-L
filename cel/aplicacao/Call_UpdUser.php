@@ -33,7 +33,7 @@ $senha = $row[4];
 ?>
 <html>
     <head>
-        <title>Alterar dados de Usu�rio</title>
+        <title>Alterar dados de Usuário</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     </head>
 
@@ -88,7 +88,7 @@ $senha = $row[4];
                 {
                     return (true)
                 }
-                alert("Aten��o: o E-mail digitado n�o � v�lido.")
+                alert("Atenção: o e-mail digitado não é válido.")
                 email.focus();
                 email.select();
                 return (false)
@@ -96,8 +96,8 @@ $senha = $row[4];
         }
 
 
-//-->
-    </SCRIPT>
+
+    </script>
     <body>
         <h3 style="text-align: center">Por favor, preencha os dados abaixo:</h3>
         <form action="updUser.php" method="post">
@@ -115,13 +115,13 @@ $senha = $row[4];
                     <td>Senha:</td><td><input name="senha" maxlength="32" size="16" type="password" value=""></td>
                 </tr>
                 <tr>
-                    <td>Senha (confirma��o):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
+                    <td>Senha (confirmação):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
                 </tr>
                 <tr>
                     <td align="center" colspan="4" height="40" valign="bottom"><input name="submit" onClick="return TestarBranco(this.form);" type="submit" value="Atualizar"></td>
                 </tr>
             </table>
         </form>
-        <br><i><a href="showSource.php?file=Call_UpdUser.php">Veja o c�digo fonte!</a></i>
+        <br><i><a href="showSource.php?file=Call_UpdUser.php">Veja o código fonte!</a></i>
     </body>
 </html>

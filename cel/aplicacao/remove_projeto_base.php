@@ -36,7 +36,7 @@ removeProjeto($id_projeto);
         <a href="javascript:logoff();">Clique aqui para Sair</a>
     </p>
     <p>
-        <i><a href="showSource.php?file=remove_projeto_base.php">Veja o c�digo fonte!</a></i> 
+        <i><a href="showSource.php?file=remove_projeto_base.php">Veja o código fonte!</a></i> 
     </p>
 </body>
 </html>
