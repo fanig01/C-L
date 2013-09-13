@@ -16,7 +16,8 @@ include_once("seguranca.php");
 if (!(function_exists("chkUser"))) {
 
     function chkUser($url) {
-        if (!(session_is_registered("id_usuario_corrente"))) {
+        //if (!(session_is_registered("id_usuario_corrente"))) {
+        if( isset($_SESSION["id_usuario_corrente"]))  {
             ?>
 
             <script language="javascript1.3">
