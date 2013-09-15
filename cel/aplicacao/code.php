@@ -116,11 +116,10 @@ $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao");
 // error when we show it in the menu.
 // This function, search and replace, remove anything that is in the form
 // <anything_here>.
-//
 $search = "'<[\/\!]*?[^<>]*?>'si";
 $replace = "";
 
-// para cada cenario do projeto
+// For each scenario of project
 while ($row = mysql_fetch_row($qrr)) {
     $row[1] = preg_replace($search, $replace, $row[1]);
     ?>
@@ -178,7 +177,7 @@ $q = "SELECT id_lexico, nome
 
 $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao");
 
-// para cada lexico do projeto
+// For each Lexicon of project
 while ($row = mysql_fetch_row($qrr)) {
     ?>
 
