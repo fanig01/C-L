@@ -510,7 +510,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
 
 
     <?php
-    $c = bd_connect() or die("Erro ao conectar ao SGBD");
+    $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
     ?>   
 
 
@@ -519,12 +519,12 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
 
     <?php
     if ($t == "c") {        // se for cenario 
-        $q = "SELECT id_cenario, titulo, objetivo, contexto, atores, recursos, excecao, episodios, id_projeto    
+        $comandoSql = "SELECT id_cenario, titulo, objetivo, contexto, atores, recursos, excecao, episodios, id_projeto    
               FROM cenario    
               WHERE id_cenario = $id";
 
-        $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao !!" . mysql_error());
-        $result = mysql_fetch_array($qrr);
+        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+        $result = mysql_fetch_array($resultadoRequisicaoSql);
 
         $c_id_projeto = $result['id_projeto'];
 
@@ -590,12 +590,12 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
                 <?php
             } elseif ($t == "l") {
 
-                $q = "SELECT id_lexico, nome, nocao, impacto, tipo, id_projeto    
+                $comandoSql = "SELECT id_lexico, nome, nocao, impacto, tipo, id_projeto    
               FROM lexico    
               WHERE id_lexico = $id";
 
-                $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao !!" . mysql_error());
-                $result = mysql_fetch_array($qrr);
+                $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+                $result = mysql_fetch_array($resultadoRequisicaoSql);
 
                 $l_id_projeto = $result['id_projeto'];
 
@@ -626,11 +626,11 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
                     //sinonimos 
                     $id_projeto = $_SESSION['id_projeto_corrente'];
                     $qSinonimo = "SELECT * FROM sinonimo WHERE id_lexico = $id";
-                    $qrr = mysql_query($qSinonimo) or die("Erro ao enviar a query de Sinonimos" . mysql_error());
+                    $resultadoRequisicaoSql = mysql_query($qSinonimo) or die("Erro ao enviar a query de Sinonimos" . mysql_error());
 
                     $tempS = array();
 
-                    while ($resultSinonimo = mysql_fetch_array($qrr)) {
+                    while ($resultSinonimo = mysql_fetch_array($resultadoRequisicaoSql)) {
                         $tempS[] = $resultSinonimo['nome'];
                     }
                     ?>    
@@ -669,12 +669,12 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
 
         <?php
     } elseif ($t == "oc") {        // se for cenario 
-        $q = "SELECT id_conceito, nome, descricao   
+        $comandoSql = "SELECT id_conceito, nome, descricao   
               FROM   conceito   
               WHERE  id_conceito = $id";
 
-        $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao !!" . mysql_error());
-        $result = mysql_fetch_array($qrr);
+        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+        $result = mysql_fetch_array($resultadoRequisicaoSql);
         ?>    
 
                     <tr> 
@@ -701,11 +701,11 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
 
                     <?php
                 } elseif ($t == "or") {        // se for cenario 
-                    $q = "SELECT id_relacao, nome   
+                    $comandoSql = "SELECT id_relacao, nome   
               FROM relacao   
               WHERE id_relacao = $id";
-                    $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao !!" . mysql_error());
-                    $result = mysql_fetch_array($qrr);
+                    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+                    $result = mysql_fetch_array($resultadoRequisicaoSql);
                     ?>    
 
                     <tr> 
@@ -759,7 +759,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
 
 
     <?php
-    frame_inferior($c, $t, $id);
+    frame_inferior($SgbdConnect, $t, $id);
 } elseif (isset($id_projeto)) {         // SCRIPT CHAMADO PELO HEADING.PHP 
     // Foi passada uma variavel $id_projeto. Esta variavel deve conter o id de um 
     // projeto que o usuario esteja cadastrado. Entretanto, como a passagem eh 

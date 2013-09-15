@@ -21,11 +21,11 @@ $r = bd_connect() or die("Erro ao conectar ao SGBD");
 $id_usuario = $_SESSION['id_usuario_corrente'];
 
 
-$q = "SELECT * FROM usuario WHERE id_usuario='$id_usuario'";
+$comandoSql = "SELECT * FROM usuario WHERE id_usuario='$id_usuario'";
 
-$qrr = mysql_query($q) or die("Erro ao executar a query");
+$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
 
-$row = mysql_fetch_row($qrr);
+$row = mysql_fetch_row($resultadoRequisicaoSql);
 $nome = $row[1];
 $email = $row[2];
 $login = $row[3];

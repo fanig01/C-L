@@ -108,14 +108,14 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
             <table>
 
             <?php
-            $c = bd_connect() or die("Erro ao conectar ao SGBD");
+            $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
             if ($t == "c") {        // se for cenario
-                $q = "SELECT id_cenario, titulo, objetivo, contexto, atores, recursos, episodios
+                $comandoSql = "SELECT id_cenario, titulo, objetivo, contexto, atores, recursos, episodios
               FROM cenario
               WHERE id_cenario = $id";
-                $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao");
-                $result = mysql_fetch_array($qrr);
+                $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
+                $result = mysql_fetch_array($resultadoRequisicaoSql);
                 ?>
 
                     <tr>
@@ -147,11 +147,11 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
 
         <?php
     } else {
-        $q = "SELECT id_lexico, nome, nocao, impacto
+        $comandoSql = "SELECT id_lexico, nome, nocao, impacto
               FROM lexico
               WHERE id_lexico = $id";
-        $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao");
-        $result = mysql_fetch_array($qrr);
+        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
+        $result = mysql_fetch_array($resultadoRequisicaoSql);
         ?>
 
                     <tr>
@@ -196,7 +196,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
                 <?php
             }
 
-            frame_inferior($c, $t, $id);
+            frame_inferior($SgbdConnect, $t, $id);
         } elseif (isset($id_projeto)) {         // SCRIPT CHAMADO PELO HEADING.PHP
             // Foi passada uma variavel $id_projeto. Esta variavel deve conter o id de um
             // projeto que o usuario esteja cadastrado. Entretanto, como a passagem eh

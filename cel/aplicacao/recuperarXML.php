@@ -33,12 +33,12 @@ if (isset($apaga)) {
         $qrrApaga = mysql_query($qApaga);
     }
 }
-$q = "SELECT * FROM publicacao WHERE id_projeto = '$id_projeto'";
-$qrr = mysql_query($q) or die("Erro ao enviar a query");
+$comandoSql = "SELECT * FROM publicacao WHERE id_projeto = '$id_projeto'";
+$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
 ?>
     <h2>Recupera XML/XSL</h2><br>
     <?php
-    while ($result = mysql_fetch_row($qrr)) {
+    while ($result = mysql_fetch_row($resultadoRequisicaoSql)) {
         $data = $result[1];
         $versao = $result[2];
         $XML = $result[3];

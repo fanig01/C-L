@@ -55,9 +55,9 @@ if (isset($submit)) {
     <?php
 // Script chamado atrav�s do menu superior
 } else {
-    $q = "SELECT nome FROM projeto WHERE id_projeto = $id_projeto";
-    $qrr = mysql_query($q) or die("Erro ao executar a query");
-    $result = mysql_fetch_array($qrr);
+    $comandoSql = "SELECT nome FROM projeto WHERE id_projeto = $id_projeto";
+    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
+    $result = mysql_fetch_array($resultadoRequisicaoSql);
     $nome_projeto = $result['nome'];
     ?>
 

@@ -15,9 +15,9 @@ include("httprequest.inc");
 
 $r = bd_connect() or die("Erro ao conectar ao SGBD");
 
-$q = "SELECT * FROM usuario WHERE login='$login'";
+$comandoSql = "SELECT * FROM usuario WHERE login='$login'";
 
-$qrr = mysql_query($q) or die("Erro ao executar a query");
+$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
 ?>
 
 <html>
@@ -28,13 +28,13 @@ $qrr = mysql_query($q) or die("Erro ao executar a query");
 
     <body bgcolor="#FFFFFF">
 <?php
-if (!mysql_num_rows($qrr)) {
+if (!mysql_num_rows($resultadoRequisicaoSql)) {
     ?>
             <p style="color: red; font-weight: bold; text-align: center">Login inexistente!</p>
         <center><a href="JavaScript:window.history.go(-1)">Voltar</a></center>
             <?php
         } else {
-            $row = mysql_fetch_row($qrr);
+            $row = mysql_fetch_row($resultadoRequisicaoSql);
             $nome = $row[1];
             $mail = $row[2];
             $login = $row[3];

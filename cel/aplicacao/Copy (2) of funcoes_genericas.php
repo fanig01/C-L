@@ -42,13 +42,13 @@ if (!(function_exists("inclui_cenario"))) {
         //global $r;      // Conexao com a base de dados
         $r = bd_connect() or die("Erro ao conectar ao SGBD<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 
-        $q = "INSERT INTO cenario (id_projeto,data, titulo, objetivo, contexto, atores, recursos, excecao, episodios)
+        $comandoSql = "INSERT INTO cenario (id_projeto,data, titulo, objetivo, contexto, atores, recursos, excecao, episodios)
               VALUES ($id_projeto,'now', '" . strtolower($titulo) . "', '$objetivo', '$contexto', '$atores', '$recursos', '$excecao', '$episodios')";
-        mysql_query($q) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
-        $q = "SELECT max(id_cenario) FROM cenario";
-        $qrr = mysql_query($q) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
-        $result = mysql_fetch_row($qrr);
-        return $result[0];
+        mysql_query($comandoSql) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
+        $comandoSql = "SELECT max(id_cenario) FROM cenario";
+        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
+        $rowResult = mysql_fetch_row($resultadoRequisicaoSql);
+        return $rowResult[0];
     }
 
 }
@@ -65,9 +65,9 @@ if (!(function_exists("inclui_lexico"))) {
     function inclui_lexico($id_projeto, $nome, $nocao, $impacto, $sinonimos, $classificacao) {
         $r = bd_connect() or die("Erro ao conectar ao SGBD<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
         $data = date("Y-m-d");
-        $q = "INSERT INTO lexico (id_projeto, data, nome, nocao, impacto, tipo)
+        $comandoSql = "INSERT INTO lexico (id_projeto, data, nome, nocao, impacto, tipo)
               VALUES ($id_projeto, '$data', '" . strtolower($nome) . "', '$nocao', '$impacto', '$classificacao')";
-        mysql_query($q) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
+        mysql_query($comandoSql) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 
         //sinonimo
         $newLexId = mysql_insert_id($r);
@@ -78,15 +78,15 @@ if (!(function_exists("inclui_lexico"))) {
 
         foreach ($sinonimos as $novoSin) {
 
-            $q = "INSERT INTO sinonimo (id_lexico, nome, id_projeto)
+            $comandoSql = "INSERT INTO sinonimo (id_lexico, nome, id_projeto)
             	VALUES ($newLexId, '" . strtolower($novoSin) . "', $id_projeto)";
 
-            mysql_query($q, $r) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
+            mysql_query($comandoSql, $r) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
         }
 
-        $q = "SELECT max(id_lexico) FROM lexico";
-        $qrr = mysql_query($q) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
-        $result = mysql_fetch_row($qrr);
+        $comandoSql = "SELECT max(id_lexico) FROM lexico";
+        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
+        $result = mysql_fetch_row($resultadoRequisicaoSql);
         return $result[0];
     }
 
