@@ -18,7 +18,7 @@ if (!isset($sucesso)) {
 }
 
 // Conecta ao SGBD
-$SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
     $ret = checarCenarioExistente($_SESSION['id_projeto_corrente'], $titulo);

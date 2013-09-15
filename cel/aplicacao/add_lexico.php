@@ -17,7 +17,7 @@ if (!isset($sucesso)) {
 authenticationCheckUser("index.php");
 
 // Conecta ao SGBD
-$SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 //Script chamado atrav�s do submit do formul�rio
 if (isset($submit)) {

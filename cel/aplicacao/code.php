@@ -17,8 +17,8 @@ authenticationCheckUser("index.php");
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
 
 <?php
-// conecta ao SGBD 
-$SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
+
+$SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 // A variavel $id_projeto, se estiver setada, corresponde ao id do projeto que 
 // devera ser mostrado. Se ela nao estiver setada entao, por default, 

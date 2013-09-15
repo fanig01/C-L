@@ -7,7 +7,7 @@ include("httprequest.inc");
 authenticationCheckUser("index.php");
 
 // Conecta ao SGBD
-$SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 
 if (isset($submit)) {   // Script chamado pelo submit

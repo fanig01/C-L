@@ -193,7 +193,7 @@ if (isset($id_projeto)) {
 // O sistema d� ao usu�rio a op��o de cadastrar um novo projeto
 // ou utilizar um projeto em que ele fa�a parte.
 // conecta ao SGBD
-                                    $SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
+                                    $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 // define a consulta
                                     $q = "SELECT p.id_projeto, p.nome, pa.gerente
