@@ -10,7 +10,7 @@ if (isset($_GET['id_projeto'])) {
 include("funcoes_genericas.php");
 include_once("bd.inc");
 
-authenticationCheckUser("index.php");
+checkUserAuthentication("index.php");
 //$id_projeto = 2; 
 ?>  
 
@@ -111,11 +111,12 @@ $q = "SELECT id_cenario, titulo
 
 $qrr = mysql_query($q) or die("Erro ao enviar a query de selecao");
 
-// Devemos retirar todas as tags HTML do titulo do cenario. Possivelmente 
-// havera tags de links (<a> </a>). Caso nao tiremos, havera erro ao 
-// mostra-lo no menu. Este search & replace retira qualquer coisa que 
-// seja da forma <qualquer_coisa_aqui>. Pode, inclusive, retirar trechos 
-// que nao sao tags HTML. 
+// We must remove all the tags HTML of the scenario's title. Possibly
+// there will be tags of links (<a> </a>). If we won't remove it, there will be
+// error when we show it in the menu.
+// This function, search and replace, remove anything that is in the form
+// <anything_here>.
+//
 $search = "'<[\/\!]*?[^<>]*?>'si";
 $replace = "";
 

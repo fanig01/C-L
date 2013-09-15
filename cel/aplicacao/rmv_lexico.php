@@ -7,7 +7,7 @@ session_start();
 
 include("funcoes_genericas.php");
 include("httprequest.inc");
-authenticationCheckUser("index.php");        // Checa se o usuario foi autenticado
+checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
 //Cen�rios -  Excluir L�xico 
 //Objetivo:	Permitir ao Usu�rio Excluir uma palavra do l�xico que esteja ativa
 //Contexto:	Usu�rio deseja excluir uma palavra do l�xico

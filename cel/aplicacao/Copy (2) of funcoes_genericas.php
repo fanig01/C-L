@@ -13,7 +13,7 @@ include_once("bd_class.php");
   script. Caso contr�rio, abre-se uma janela de logon. */
 if (!(function_exists("chkUser"))) {
 
-    function authenticationCheckUser($url) {
+    function checkUserAuthentication($url) {
         if (!(session_is_registered("id_usuario_corrente"))) {
             ?>
 

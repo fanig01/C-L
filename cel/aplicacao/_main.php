@@ -3,7 +3,7 @@ session_start();
 
 include("funcoes_genericas.php");
 
-authenticationCheckUser("index.php");        // Checa se o usuario foi autenticado
+checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
 ?>
 
 <html>

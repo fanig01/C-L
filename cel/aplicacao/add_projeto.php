@@ -5,7 +5,7 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 
 // Cen�rio controle de acesso
-authenticationCheckUser("index.php");
+checkUserAuthentication("index.php");
 
 // Este script eh chamado quando ocorre uma solicitacao de inclusao
 // de novo projeto, ou quando um novo usuario se cadastra no sistema

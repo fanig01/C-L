@@ -4,7 +4,7 @@ session_start();
 include("funcoes_genericas.php");
 
 
-authenticationCheckUser("index.php");        // Cenario: controle de acesso
+checkUserAuthentication("index.php");        // Cenario: controle de acesso
 // Cen�rio - Usu�rio escolhe Projeto
 // Objetivo:  Permitir ao Usu�rio escolher um projeto.
 // Contexto:  O usu�rio deseja escoher um projeto.

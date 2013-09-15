@@ -18,7 +18,7 @@ include_once("coloca_links.php");
 
 
 // Checa se o usu�rio foi autenticado
-authenticationCheckUser("index.php");
+checkUserAuthentication("index.php");
 
 //Recebe parametro da heading.php. Sem isso vai travar ja que a variavel nao foi inicializada 
 if (isset($_GET['id_projeto'])) {

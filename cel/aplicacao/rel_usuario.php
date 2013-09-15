@@ -4,7 +4,7 @@ session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
-authenticationCheckUser("index.php");
+checkUserAuthentication("index.php");
 
 // Conecta ao SGBD
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
