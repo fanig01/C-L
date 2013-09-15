@@ -81,7 +81,7 @@ if (!(function_exists("gerar_xml"))) {
 
         $id_temp = "";
 
-        $vetor_todos_lexicos = carrega_vetor_lexicos($id_projeto, 0, false);
+        $vetor_todos_lexicos = load_ArrayLexicon($id_projeto, 0, false);
 
         // Para cada cen�rio
 
@@ -151,7 +151,7 @@ if (!(function_exists("gerar_xml"))) {
         // Para cada simbolo do lexico
 
         while ($row = mysql_fetch_row($tb_lexico)) {
-            $vetor_lexicos = carrega_vetor_lexicos($id_projeto, $row[0], true);
+            $vetor_lexicos = load_ArrayLexicon($id_projeto, $row[0], true);
             quicksort($vetor_lexicos, 0, count($vetor_lexicos) - 1, 'lexico');
             $id_lexico = "<ID>" . $row[0] . "</ID>";
             if (($id_temp != $id_lexico) or (primeiro)) {

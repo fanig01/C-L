@@ -531,7 +531,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
         $vetorDeCenarios = carrega_vetor_cenario($c_id_projeto, $id, true); // carrega vetor de cenario
         quicksort($vetorDeCenarios, 0, count($vetorDeCenarios) - 1, 'cenario');
 
-        $vetorDeLexicos = carrega_vetor_lexicos($c_id_projeto, 0, false); // carrega vetor de l�xicos 
+        $vetorDeLexicos = load_ArrayLexicon($c_id_projeto, 0, false); // carrega vetor de l�xicos 
         quicksort($vetorDeLexicos, 0, count($vetorDeLexicos) - 1, 'lexico');
         ?>    
 
@@ -599,7 +599,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
 
                 $l_id_projeto = $result['id_projeto'];
 
-                $vetorDeLexicos = carrega_vetor_lexicos($l_id_projeto, $id, true);
+                $vetorDeLexicos = load_ArrayLexicon($l_id_projeto, $id, true);
 
                 quicksort($vetorDeLexicos, 0, count($vetorDeLexicos) - 1, 'lexico');
                 ?>    
