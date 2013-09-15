@@ -10,11 +10,11 @@
         include_once("bd.inc");
         include_once("CELConfig/CELConfig.inc");
 
-        $link = bd_connect() or die("Erro na conex�o � BD : " . mysql_error() . __LINE__);
+        $link = bd_connect() or die("Erro na conex&atilde;o ao BD : " . mysql_error() . __LINE__);
         if ($link && mysql_select_db(CELConfig_ReadVar("BD_database")))
-            echo "SUCESSO NA CONEX�O � BD <br>";
+            echo "SUCESSO NA CONEX&Auml;O do BD <br>";
         else
-            echo "ERRO NA CONEX�O � BD <br>";
+            echo "ERRO NA CONEX&Auml;O do BD <br>";
 
 
         /* query para a adi��o do campo  tipo na tabela de lexicos */
