@@ -33,7 +33,7 @@ inserirPedidoRemoverConceito($_SESSION['id_projeto_corrente'], $id_conceito, $_S
 
 </script>
 
-<h4>Opera��o efetuada com sucesso!</h4>
+<h4>Operação efetuada com sucesso!</h4>
 
 <script language="javascript1.3">
 
