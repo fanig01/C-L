@@ -4,7 +4,7 @@ session_start();
 include("funcoes_genericas.php");
 
 
-chkUser("index.php");        // Cenario: controle de acesso
+checkUserAuthentication("index.php");        // Cenario: controle de acesso
 // Cen�rio - Usu�rio escolhe Projeto
 // Objetivo:  Permitir ao Usu�rio escolher um projeto.
 // Contexto:  O usu�rio deseja escoher um projeto.
@@ -52,7 +52,7 @@ if (isset($_GET['id_projeto'])) {
 if (isset($id_projeto)) {   // $id_projeto soh nao estara setada caso seja a primeira
     // vez que o usuario esteja acessando o sistema
     // Checagem de seguranca, pois $id_projeto eh passado atraves de JavaScript (cliente)
-    check_proj_perm($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
+     permissionCheckToProject($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
     ?>
 
         function setPrjSelected() {
@@ -193,7 +193,7 @@ if (isset($id_projeto)) {
 // O sistema d� ao usu�rio a op��o de cadastrar um novo projeto
 // ou utilizar um projeto em que ele fa�a parte.
 // conecta ao SGBD
-                                    $r = bd_connect() or die("Erro ao conectar ao SGBD");
+                                    $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 // define a consulta
                                     $comandoSql = "SELECT p.id_projeto, p.nome, pa.gerente

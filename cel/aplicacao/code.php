@@ -1,4 +1,4 @@
-<?php
+    <?php
 session_start();
 
 
@@ -10,29 +10,25 @@ if (isset($_GET['id_projeto'])) {
 include("funcoes_genericas.php");
 include_once("bd.inc");
 
-chkUser("index.php");        // Checa se o usuario foi autenticado 
+checkUserAuthentication("index.php");
 //$id_projeto = 2; 
 ?>  
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
 
 <?php
-// conecta ao SGBD 
-$r = bd_connect() or die("Erro ao conectar ao SGBD");
 
-// A variavel $id_projeto, se estiver setada, corresponde ao id do projeto que 
-// devera ser mostrado. Se ela nao estiver setada entao, por default, 
-// nao mostraremos projeto algum (esperaremos o usuario escolher um projeto). 
-// Como a passagem eh feita usando JavaScript (no heading.php), devemos checar 
-// se este id realmente corresponde a um projeto que o usuario tenha acesso 
-// (seguranca). 
+$SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($id_projeto)) {
-    check_proj_perm($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
+     permissionCheckToProject($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
+    
     $comandoSql = "SELECT nome FROM projeto WHERE id_projeto = $id_projeto";
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
+    
     $result = mysql_fetch_array($resultadoRequisicaoSql);
     $nome_projeto = $result['nome'];
+    
 } else {
     ?>  
 
@@ -114,14 +110,17 @@ $comandoSql = "SELECT id_cenario, titulo
                   ORDER BY titulo";
 
 $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
-// Devemos retirar todas as tags HTML do titulo do cenario. Possivelmente 
-// havera tags de links (<a> </a>). Caso nao tiremos, havera erro ao 
-// mostra-lo no menu. Este search & replace retira qualquer coisa que 
-// seja da forma <qualquer_coisa_aqui>. Pode, inclusive, retirar trechos 
-// que nao sao tags HTML. 
+
+// We must remove all the tags HTML of the scenario's title. Possibly
+// there will be tags of links (<a> </a>). If we won't remove it, there will be
+// error when we show it in the menu.
+// This function, search and replace, remove anything that is in the form
+// <anything_here>.
 $search = "'<[\/\!]*?[^<>]*?>'si";
 $replace = "";
-while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {    // para cada cenario do projeto 
+
+// For each scenario of project
+while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {
     $row[1] = preg_replace($search, $replace, $row[1]);
     ?>
 
@@ -177,7 +176,9 @@ $comandoSql = "SELECT id_lexico, nome
                   ORDER BY nome";
 
 $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
-while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {   // para cada lexico do projeto 
+
+// For each Lexicon of project
+while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {
     ?>
 
                 ml.addItem("<?= $row[1] ?>", "main.php?id=<?= $row[0] ?>&t=l");

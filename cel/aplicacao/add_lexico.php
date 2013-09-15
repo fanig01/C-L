@@ -14,10 +14,10 @@ if (!isset($sucesso)) {
 }
 
 // Checa se o usu�rio foi autenticado
-chkUser("index.php");
+checkUserAuthentication("index.php");
 
 // Conecta ao SGBD
-$r = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 //Script chamado atrav�s do submit do formul�rio
 if (isset($submit)) {

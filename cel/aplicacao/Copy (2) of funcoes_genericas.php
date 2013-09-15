@@ -13,7 +13,7 @@ include_once("bd_class.php");
   script. Caso contr�rio, abre-se uma janela de logon. */
 if (!(function_exists("chkUser"))) {
 
-    function chkUser($url) {
+    function checkUserAuthentication($url) {
         if (!(session_is_registered("id_usuario_corrente"))) {
             ?>
 
@@ -1899,7 +1899,7 @@ if (!(function_exists("is_admin"))) {
 // Retorna TRUE ssse $id_usuario tem permissao sobre $id_projeto
 if (!(function_exists("check_proj_perm"))) {
 
-    function check_proj_perm($id_usuario, $id_projeto) {
+    function  permissionCheckToProject($id_usuario, $id_projeto) {
         $r = bd_connect() or die("Erro ao conectar ao SGBD<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
         $q = "SELECT *
               FROM participa

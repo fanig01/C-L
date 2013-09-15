@@ -6,7 +6,7 @@ session_start();
 
 include("funcoes_genericas.php");
 include("httprequest.inc");
-chkUser("index.php");        // Checa se o usuario foi autenticado
+checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
 
 inserirPedidoRemoverConceito($_SESSION['id_projeto_corrente'], $id_conceito, $_SESSION['id_usuario_corrente']);
 ?>  
@@ -33,7 +33,7 @@ inserirPedidoRemoverConceito($_SESSION['id_projeto_corrente'], $id_conceito, $_S
 
 </script>
 
-<h4>Opera��o efetuada com sucesso!</h4>
+<h4>Operação efetuada com sucesso!</h4>
 
 <script language="javascript1.3">
 

@@ -12,7 +12,7 @@ session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
-chkUser("index.php"); // Checa se o usuario foi autenticado
+checkUserAuthentication("index.php"); // Checa se o usuario foi autenticado
 if (isset($submit)) {
     $DB = new PGDB ();
     $select = new QUERY($DB);

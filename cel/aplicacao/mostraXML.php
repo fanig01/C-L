@@ -4,7 +4,7 @@ session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
-chkUser("index.php");        // Checa se o usuario foi autenticado
+checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
 
 $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
 

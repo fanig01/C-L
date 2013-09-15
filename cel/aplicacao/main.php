@@ -18,7 +18,7 @@ include_once("coloca_links.php");
 
 
 // Checa se o usu�rio foi autenticado
-chkUser("index.php");
+checkUserAuthentication("index.php");
 
 //Recebe parametro da heading.php. Sem isso vai travar ja que a variavel nao foi inicializada 
 if (isset($_GET['id_projeto'])) {
@@ -531,7 +531,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
         $vetorDeCenarios = carrega_vetor_cenario($c_id_projeto, $id, true); // carrega vetor de cenario
         quicksort($vetorDeCenarios, 0, count($vetorDeCenarios) - 1, 'cenario');
 
-        $vetorDeLexicos = carrega_vetor_lexicos($c_id_projeto, 0, false); // carrega vetor de l�xicos 
+        $vetorDeLexicos = load_ArrayLexicon($c_id_projeto, 0, false); // carrega vetor de l�xicos 
         quicksort($vetorDeLexicos, 0, count($vetorDeLexicos) - 1, 'lexico');
         ?>    
 
@@ -599,7 +599,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
 
                 $l_id_projeto = $result['id_projeto'];
 
-                $vetorDeLexicos = carrega_vetor_lexicos($l_id_projeto, $id, true);
+                $vetorDeLexicos = load_ArrayLexicon($l_id_projeto, $id, true);
 
                 quicksort($vetorDeLexicos, 0, count($vetorDeLexicos) - 1, 'lexico');
                 ?>    
@@ -765,7 +765,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
     // projeto que o usuario esteja cadastrado. Entretanto, como a passagem eh 
     // feita usando JavaScript (no heading.php), devemos checar se este id realmente 
     // corresponde a um projeto que o usuario tenha acesso (seguranca). 
-    check_proj_perm($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
+     permissionCheckToProject($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
 
     // Seta uma variavel de sessao correspondente ao projeto atual 
     $_SESSION['id_projeto_corrente'] = $id_projeto;

@@ -4,10 +4,10 @@ session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
-chkUser("index.php");
+checkUserAuthentication("index.php");
 
 // Conecta ao SGBD
-$r = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 
 if (isset($submit)) {   // Script chamado pelo submit
