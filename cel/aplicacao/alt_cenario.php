@@ -11,9 +11,9 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
-chkUser("index.php"); // Checa se o usuario foi autenticado
+authenticationCheckUser("index.php"); // Checa se o usuario foi autenticado
 // Conecta ao SGBD
-$r = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {       // Script chamado atraves do submit do formulario
     inserirPedidoAlterarCenario($_SESSION['id_projeto_corrente'], $id_cenario, $titulo, $objetivo, $contexto, $atores, $recursos, $excecao, $episodios, $justificativa, $_SESSION['id_usuario_corrente']);

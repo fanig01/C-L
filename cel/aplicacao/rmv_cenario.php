@@ -6,7 +6,7 @@ session_start();
 
 include("funcoes_genericas.php");
 include("httprequest.inc");
-chkUser("index.php");        // Checa se o usuario foi autenticado
+authenticationCheckUser("index.php");        // Checa se o usuario foi autenticado
 
 inserirPedidoRemoverCenario($_SESSION['id_projeto_corrente'], $id_cenario, $_SESSION['id_usuario_corrente']);
 ?>  

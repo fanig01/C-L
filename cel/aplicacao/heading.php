@@ -4,7 +4,7 @@ session_start();
 include("funcoes_genericas.php");
 
 
-chkUser("index.php");        // Cenario: controle de acesso
+authenticationCheckUser("index.php");        // Cenario: controle de acesso
 // Cen�rio - Usu�rio escolhe Projeto
 // Objetivo:  Permitir ao Usu�rio escolher um projeto.
 // Contexto:  O usu�rio deseja escoher um projeto.
@@ -193,7 +193,7 @@ if (isset($id_projeto)) {
 // O sistema d� ao usu�rio a op��o de cadastrar um novo projeto
 // ou utilizar um projeto em que ele fa�a parte.
 // conecta ao SGBD
-                                    $r = bd_connect() or die("Erro ao conectar ao SGBD");
+                                    $SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
 
 // define a consulta
                                     $q = "SELECT p.id_projeto, p.nome, pa.gerente

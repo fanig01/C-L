@@ -15,7 +15,7 @@ include_once("seguranca.php");
   script. Caso contr�rio, abre-se uma janela de logon. */
 if (!(function_exists("chkUser"))) {
 
-    function chkUser($url) {
+    function authenticationCheckUser($url) {
         //if (!(session_is_registered("id_usuario_corrente"))) {
         if( isset($_SESSION["id_usuario_correntegit"]))  {
             ?>

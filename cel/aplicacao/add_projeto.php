@@ -5,7 +5,7 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 
 // Cen�rio controle de acesso
-chkUser("index.php");
+authenticationCheckUser("index.php");
 
 // Este script eh chamado quando ocorre uma solicitacao de inclusao
 // de novo projeto, ou quando um novo usuario se cadastra no sistema
@@ -31,7 +31,7 @@ if (isset($submit)) {
     // Inserir na tabela participa
 
     if ($id_projeto_incluido != -1) {
-        $r = bd_connect() or die("Erro ao conectar ao SGBD");
+        $SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
         $gerente = 1;
         $id_usuario_corrente = $_SESSION['id_usuario_corrente'];
         $q = "INSERT INTO participa (id_usuario, id_projeto, gerente) VALUES ($id_usuario_corrente, $id_projeto_incluido, $gerente  )";

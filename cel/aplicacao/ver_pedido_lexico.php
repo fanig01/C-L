@@ -14,7 +14,7 @@ session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
-chkUser("index.php"); // Check if the user has been authenticated
+authenticationCheckUser("index.php"); // Check if the user has been authenticated
 
 if (isset($submit)) {
 

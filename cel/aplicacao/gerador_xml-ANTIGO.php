@@ -5,7 +5,7 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
-chkUser("index.php");        // Checa se o usuario foi autenticado
+authenticationCheckUser("index.php");        // Checa se o usuario foi autenticado
 // Testa se o usuario quer uma visualiza��o formatada ou n�o
 
 if (isset($_POST['flag'])) {

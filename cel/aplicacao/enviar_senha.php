@@ -13,7 +13,7 @@ include("httprequest.inc");
 //           Se o login informado for cadastrado, sistema consulta no banco de dados qual 
 //           o email e senha do login informado.           
 
-$r = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
 
 $q = "SELECT * FROM usuario WHERE login='$login'";
 

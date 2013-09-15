@@ -26,7 +26,7 @@ include("httprequest.inc");
 /** @Episodio 2: Conectar o SGBD * */
 /** @Restri��o: a fun��o bd_connect definida em bd.inc � utilizada * */
 /** @Exce��o: Erro ao conectar banco de dados * */
-$r = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
 
 /** @Episodio 9: Se o formul�rio tiver sido submetido ent�o verificar se o login e senha est�o corretos. * */
 if ($submit == 'Entrar') {

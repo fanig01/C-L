@@ -10,7 +10,7 @@ if (isset($_GET['id_projeto'])) {
 include("funcoes_genericas.php");
 include_once("bd.inc");
 
-chkUser("index.php");        // Checa se o usuario foi autenticado 
+authenticationCheckUser("index.php");
 //$id_projeto = 2; 
 ?>  
 
@@ -18,7 +18,7 @@ chkUser("index.php");        // Checa se o usuario foi autenticado
 
 <?php
 // conecta ao SGBD 
-$r = bd_connect() or die("Erro ao conectar ao SGBD");
+$SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD");
 
 // A variavel $id_projeto, se estiver setada, corresponde ao id do projeto que 
 // devera ser mostrado. Se ela nao estiver setada entao, por default, 
