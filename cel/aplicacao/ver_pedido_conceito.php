@@ -1,18 +1,22 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4: */
-// ver_pedido_conceito.php: Esse script exibe os varios pedidos referentes
-// ao conceito.O gerente tem a opcao de ver os pedidos
-// jah validados. O gerente tb podera validar e processar pedidos.
-// O gerente tera uma terceira opcao que eh a de remover o pedido
-// validado ou nao da lista de pedidos.O gerente podera responder
-// a um pedido via e-mail direto desta pagina.
-// Arquivo chamador: heading.php
+/* 
+ * vim: set expandtab tabstop=4 shiftwidth=4: 
+ * 
+ * ver_pedido_conceito.php: Esse script exibe os varios pedidos referentes ao conceito.
+ *                          O gerente tem a opcao de ver os pedidos jah validados.
+ *                          O gerente tb podera validar e processar pedidos.
+ *                          O gerente tera uma terceira opcao que eh a de remover o pedido validado ou nao da lista de pedidos.
+ *                          O gerente podera responder a um pedido via e-mail direto desta pagina.
+ * Arquivo chamador: heading.php 
+ */
+
 session_start();
 
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
-checkUserAuthentication("index.php"); // Checa se o usuario foi autenticado
+checkUserAuthentication("index.php");
+
 if (isset($submit)) {
     $DB = new PGDB ();
     $select = new QUERY($DB);
@@ -34,7 +38,7 @@ if (isset($submit)) {
 
     </script>
 
-    <h4>Opera��o efetuada com sucesso!</h4>
+    <h4>Opera&ccedil;&atilde;o efetuada com sucesso!</h4>
     <script language="javascript1.3">
 
         self.close();
@@ -45,28 +49,30 @@ if (isset($submit)) {
     ?>
     <html>
         <head>
-            <title>Pedidos de altera��o dos Conceitos</title>
+            <title>Pedidos de alteração dos Conceitos</title>
         </head>
         <body>
-            <h2>Pedidos de Altera��o no Conjunto de Conceitos</h2>
+            <h2>Pedidos de Alteração no Conjunto de Conceitos</h2>
             <form action="?id_projeto=<?= $id_projeto ?>" method="post">
 
     <?php
-// Cen�rio - Verificar pedidos de altera��o de conceitos
-//Objetivo:	Permitir ao administrador gerenciar os pedidos de altera��o de conceitos.
-//Contexto:	Gerente deseja visualizar os pedidos de altera��o de conceitos.
-//              Pr�-Condi��o: Login, projeto cadastrado.
-//Atores:	Administrador
-//Recursos:	Sistema, banco de dados.
-//Epis�dios: O administrador clica na op��o de Verificar pedidos de altera��o de cen�rios.
-//           Restri��o: Somente o Administrador do projeto pode ter essa fun��o vis�vel.
-//           O sistema fornece para o administrador uma tela onde poder� visualizar o hist�rico
-//           de todas as altera��es pendentes ou n�o para os cen�rios.
-//           Para novos pedidos de inclus�o ou altera��o de cen�rios,
-//           o sistema permite que o administrador opte por Aprovar ou Remover.
-//           Para os pedidos de inclus�o ou altera��o j� aprovados,
-//           o sistema somente habilita a op��o remover para o administrador.
-//           Para efetivar as sele��es de aprova��o e remo��o, basta clicar em Processar.
+    /* 
+     * Cenário - Verificar pedidos de alteração de conceitos
+     * Objetivo: Permitir ao administrador gerenciar os pedidos de altera��o de conceitos.
+     * Contexto: Gerente deseja visualizar os pedidos de altera��o de conceitos.
+     * Pré-Condição: Login, projeto cadastrado.
+     * Atores: Administrador
+     * Recursos: Sistema, banco de dados.
+     * Episódios: O administrador clica na opção de Verificar pedidos de alteração de cenários.
+     * Restrição: Somente o Administrador do projeto pode ter essa função visível.
+     *            O sistema fornece para o administrador uma tela onde poderá visualizar o histórico
+     *            de todas as alterações pendentes ou não para os cenários.
+     *            Para novos pedidos de inclus�o ou alteração de cenários, 
+     *            o sistema permite que o administrador opte por Aprovar ou Remover.
+     *            Para os pedidos de inclusão ou alteração já aprovados,
+     *            o sistema somente habilita a op��o remover para o administrador.
+     *            Para efetivar as seleções de aprovação e remoção, basta clicar em Processar.
+     */
 
     $DB = new PGDB ();
     $select = new QUERY($DB);

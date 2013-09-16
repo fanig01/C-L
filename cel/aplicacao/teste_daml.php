@@ -1,7 +1,9 @@
 <?php
 
 include 'daml.php';
-//include 'auxiliar_daml.php';
+/*
+ * include 'auxiliar_daml.php';
+ */
 include 'auxiliar_bd.php';
 include_once("bd.inc");
 include_once("CELConfig/CELConfig.inc");
@@ -14,7 +16,7 @@ $arquivo = nome_arquivo_daml();
 
 $i = array("title" => "Ontologia de teste",
     "creator" => "Pedro",
-    "description" => "teste de tradu��o de l�xico para ontologia",
+    "description" => "teste de tradução de léxico para ontologia",
     "subject" => "",
     "versionInfo" => "1.1");
 
@@ -32,7 +34,6 @@ if (!$daml) {
     print 'Arquivo criado: ';
     print "<a href=\"$site$daml\">$daml</a>";
 }
-
 
 mysql_close($link);
 ?>

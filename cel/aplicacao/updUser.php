@@ -20,16 +20,17 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
     <body>
 
 <?php
-// Scenario - change cadastrate
-//
-//Objective: To allow to the user actualize changes in the his cadastral data	
-//Context: Open system, User have acess to the system and logged
-//         User desire change his cadastral data
-//Precondition: User have acess to the system
-//Actors:   User, System
-//Resource: Interface
-//Episodes: The user change the desired data
-//          User click int the button of update
+/* 
+ * Scenario - change cadastrate
+ * Objective: To allow to the user actualize changes in the his cadastral data	
+ * Context: Open system, User have acess to the system and logged 
+ *          User desire change his cadastral data
+ * Precondition: User have acess to the system
+ * Actors: User, System
+ * Resource: Interface
+ * Episodes: The user change the desired data
+ *           User click int the button of update 
+ */
 
 $senha_cript = md5($senha);
 $comandoSql = "UPDATE usuario SET  nome ='$nome' , login = '$login' , email = '$email' , senha = '$senha_cript' WHERE  id_usuario='$id_usuario'";
