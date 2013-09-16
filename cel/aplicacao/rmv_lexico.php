@@ -24,7 +24,6 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 checkUserAuthentication("index.php");
 
-
 inserirPedidoRemoverLexico($id_projeto, $id_lexico, $_SESSION['id_usuario_corrente']);
 ?>  
 
