@@ -237,23 +237,23 @@ while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {
 
             <td align="right" valign=MIDDLE> <?php
          
+            
+/*
+Scenario - Administrator chooses project
+Objective: Allow the administrator to choose a project
+Context: The administrator wants to choose a project
+Preconditions: Login and be the administrator of the selected project.
+Actors: Administrator
+Resources: Administrator's Project
+Episodes: Appearing in the menu options:
+             - Add scenario
+             - Add lexicon
+             - Information
+             - Add project
+             - Change register
+ */ 
+            
  if (isset($id_projeto)) { 
-                                            
-// Se o usuario ja tiver escolhido um projeto,
-// entao podemos mostrar os links de adicionar cen/lex
-// e de informacoes (pagina principal) do projeto
-// Cen�rio - Administrador escolhe Projeto
-// Objetivo:  Permitir ao Administrador escolher um projeto.
-// Contexto:  O Administrador deseja escolher um projeto.
-//            Pr�-Condi��es: Login, Ser administrador do projeto selecionado.
-// Atores:    Administrador
-// Recursos:  Projetos doAdministrador
-// Epis�dios: Aparecendo no menu as op��es de: 
-//            -Adicionar Cen�rio (ver Adicionar Cen�rio); 
-//            -Adicionar L�xico (ver Adicionar L�xico); 
-//            -Info; 
-//            -Adicionar Projeto; 
-//            -Alterar Cadastro.
      
         ?> <a href="#" onClick="novoCenario();">Adicionar Cenário</a>&nbsp;&nbsp;&nbsp; 
            <a href="#" onClick="novoLexico();">Adicionar Símbolo</a>&nbsp;&nbsp;&nbsp; 
@@ -261,25 +261,32 @@ while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {
                Info</a>&nbsp;&nbsp;&nbsp; 
                <?php
  }
+ 
+ 
+ /*
+Scenario: Register new project
+Objective: Allow user to register a new project
+Context: User wants to include a new project in the database
+Precondition: Login
+Actors: User
+Resources: System, project's data and database
+Episodes: The User clicks the add project option found on the top menu. 
+*/
+ 
               ?> <?php
-//Cen�rio  -  Cadastrar Novo Projeto 
-//Objetivo:    Permitir ao usu�rio cadastrar um novo projeto
-//Contexto:    Usu�rio deseja incluir um novo projeto na base de dados
-//             Pr�-Condi��o: Login
-//Atores:      Usu�rio
-//Recursos:    Sistema, dados do projeto, base de dados
-//Epis�dios:   O Usu�rio clica na op��o �adicionar projeto� encontrada no menu superior.
               
              ?> <a href="#" onClick="window.open('add_projeto.php', '_blank', 'dependent,height=313,width=550,resizable,scrollbars,titlebar');">
                  Adicionar Projeto</a>&nbsp;&nbsp;&nbsp; <?php
                                         
-//Cen�rio  -   Remover Novo Projeto 
-//Objetivo:    Permitir ao Administrador do projeto remover um projeto
-//Contexto:    Um Administrador de projeto deseja remover um determinado projeto da base de dados
-//             Pr�-Condi��o: Login, Ser administrador do projeto selecionado.
-//Atores:      Administrador
-//Recursos:    Sistema, dados do projeto, base de dados
-//Epis�dios:   O Administrador clica na op��o �remover projeto� encontrada no menu superior.
+/*
+Scenario: Remove new project
+Objective: Allow Project's Manager can remove a project
+Context: A Project's Manager wants to remove a project from the database
+Precondition: Login and be the project's manager selected
+Actors: Administrator
+Resources: System, project's data and database
+Episodes: The administrator clicks the Remove Project in the top menu.
+ */
 
 
   if (isset($id_projeto)) {
@@ -294,26 +301,17 @@ while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {
               }
   }
 
-// Cen�rio - Logar no sistema
-// Objetivo:  Permitir ao usu�rio entrar no sistema e escolher um projeto que ele esteja 
-//              cadastrado, ou cadastrar novo projeto	
-// Contexto:  Sistema est� aberto Usu�rio na tela de login do sistema. 
-//            Usu�rio sabe a sua senha Usu�rio deseja entrar no sistema com seu perfil 
-//            Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-// Atores:	  Usu�rio, Sistema	
-// Recursos:  Banco de Dados	
-// Epis�dios: O sistema d� ao usu�rio as op��es:
-//             - ALTERAR CADASTRO, no qual o usu�rio ter� a possibilidade de realizar 
-//               altera��es nos seus dados cadastrais
-// Cen�rio - Alterar cadastro
-//
-//Objetivo:  Permitir ao usu�rio realizar altera��o nos seus dados cadastrais	
-//Contexto:  Sistema aberto, Usu�rio ter acessado ao sistema e logado 
-//           Usu�rio deseja alterar seus dados cadastrais 
-//           Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-//Atores:    Usu�rio, Sistema.	
-//Recursos:  Interface	
-//Epis�dios: O usu�rio clica na op��o de alterar cadastro da interface
+  
+/*
+Scenario - Change registry
+Objective: Allow user to make changes to his data registered
+Context: Open system, user have accessed the system and logged
+          User wants to change his registration
+Precondition: User has accessed the system
+Actors: User and System.
+Resources: Interface
+Episodes: The user clicks the option to change the interface's registration
+ */
   
        ?> <a href="#" onClick="window.open('Call_UpdUser.php', '_blank', 'dependent,height=300,width=550,resizable,scrollbars,titlebar');">
            Alterar Cadastro</a>&nbsp;&nbsp;&nbsp; 
@@ -322,27 +320,18 @@ while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {
 
 
 <?php
-// Cen�rio - Logar no sistema
-// Objetivo:  Permitir ao usu�rio entrar no sistema e escolher um projeto que ele esteja 
-//              cadastrado, ou cadastrar novo projeto	
-// Contexto:  Sistema est� aberto Usu�rio na tela de login do sistema. 
-//            Usu�rio sabe a sua senha Usu�rio deseja entrar no sistema com seu perfil 
-//            Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-// Atores:    Usu�rio, Sistema	
-// Recursos:  Banco de Dados	
-// Epis�dios: O sistema d� ao usu�rio as op��es:
-//             - REALIZAR LOGOUT, no qual o usu�rio ter� a possibilidade de sair da 
-//               sess�o e se logar novamente
-// Cen�rio - Realizar logout
-// Objetivo:  Permitir ao usu�rio realizar o logout, mantendo a integridade do que foi 
-//            realizado,  e retorna a tela de login	
-// Contexto:  Sistema aberto. Usu�rio ter acessado ao sistema. 
-//            Usu�rio deseja sair da aplica��o e manter a integridade do que foi 
-//            realizado 
-//            Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-// Atores:	  Usu�rio, Sistema.	
-// Recursos:  Interface	
-// Epis�dios: O usu�rio clica na op��o de logout
+               
+/*
+Scenario - Make logout
+Objective: Allow the user to logout and returns to login screen
+Context: Open System. User has accessed the system.
+         User wants to exit the application and
+         save all of what was done
+Precondition: User has accessed the system
+Actors: User and system.
+Resources: Interface
+Episodes: The user clicks the Logout option
+*/
 
 ?> <a href="logout.php" target="_parent">Sair</a>&nbsp;&nbsp;&nbsp; 
    <a href="ajuda.htm" target="_blank"> Ajuda</a></td>
