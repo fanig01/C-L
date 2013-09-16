@@ -23,98 +23,97 @@ function poe_tag_xml($str) {
     return $r;
 }
 
-function pega_id_xml($str) {
+function get_IdXml($string) {
 
-    $j = 0;
-    $i = 0;
+    $index2 = 0;
+    $index1 = 0;
     
-    while ($str[$i] != '*') {
-        $buffer[$j] = $str[$i];
+    while ($string[$index1] != '*') {
+        $buffer[$index2] = $string[$index1];
         
-        $i++;
-        $j++;
+        $index1++;
+        $index2++;
     }
 
     return implode('', $buffer);
 }
 
-function troca_chaves_xml($str) {
+function troca_chaves_xml($string) {
     $conta_abertos = 0;
     $conta_fehados = 0;
-    $comeco;
-    $fim;
+    $begin;
+    $end;
     
     $realLinks = 0;
     $y = 0;
     
-    $vet_id;
-    $link_original;
-    $link_novo;
+    $arrayId;
+    $originalLink;
+    $newLink;
     
     $buffer3 = '';
     $buffer = 0;
     
-    $i = 0;
+    $index = 0;
     
-    $tam_str = strlen($str);
+    $sizeOfString = strlen($string);
 
-    while ($i <= $tam_str) {
-        if ($str[$i] == '}') {
+    while ($index <= $sizeOfString) {
+        if ($string[$index] == '}') {
             $conta_abertos = $conta_abertos + 1;
         }
        
-        $i++;
+        $index++;
     }
     
-    $i = 0;
+    $index = 0;
     
-    while ($i <= $tam_str) {
-        if ($str[$i] == '}') {
+    while ($index <= $sizeOfString) {
+        if ($string[$index] == '}') {
             $conta_fechados = $conta_fechados + 1;
         }
         
-        $i++;
-        
+        $index++;    
     }
     
-    $i = 0;
+    $index = 0;
     
     if ($conta_abertos == 0) {
-        return $str;
+        return $string;
     }
     
-    $i = 0;
+    $index = 0;
     
-    while ($i <= $tam_str) {
+    while ($index <= $sizeOfString) {
         
-        if ($str[$i] == '{') {
+        if ($string[$index] == '{') {
             $buffer = $buffer + 1;
             
             if ($buffer == 1) {
-                $comeco[$realLinks] = $i;
+                $begin[$realLinks] = $index;
                 
                 $realLinks++;
             }
         }
         
-        if ($str[$i] == '}') {    
+        if ($string[$index] == '}') {    
             $buffer = $buffer - 1;
            
             if ($buffer == 0) {
-                $fim[$y] = $i + 1;
+                $end[$y] = $index + 1;
                 
                 $y++;
             }
         }
         
-        $i++;
+        $index++;
     };
     
-    $i = 0;
+    $index = 0;
 
-    while ($i < $realLinks) { 
-        $link = substr($str, $comeco[$i], $fim[$i] - $comeco[$i]);
-        $link_original[$i] = $link;
+    while ($index < $realLinks) { 
+        $link = substr($string, $begin[$index], $end[$index] - $begin[$index]);
+        $originalLink[$index] = $link;
         
         $link = str_replace('{', '', $link);
         $link = str_replace('}', '', $link);
@@ -123,11 +122,11 @@ function troca_chaves_xml($str) {
         $n = 0;
        
         //echo('aki - >'."$link".'<br>');
-        $vet_id[$i] = pega_id_xml($link);
+        $arrayId[$index] = get_IdXml($link);
         $link = '**' . $link;
         $marcador = 0;
 
-        while ($n < $fim[$i] - $comeco[$i]) {
+        while ($n < $end[$index] - $begin[$index]) {
             if ($link[$n] == '*' && $link[$n + 1] == '*' && $marcador == 1) {
                 $marcador = 0;
                 $link[$n] = '{';
@@ -152,21 +151,21 @@ function troca_chaves_xml($str) {
         }
         
         $link = str_replace('{', '', $link);
-        $link = poe_tag_xml($link, $vet_id[$i]);
-        $link_novo[$i] = $link;
-        $i++;
+        $link = poe_tag_xml($link, $arrayId[$index]);
+        $newLink[$index] = $link;
+        $index++;
     }
     
-    $i = 0;
+    $index = 0;
     
     //echo("STRING INICAL -> $str<br/>");
-    while ($i < $realLinks) {
-        $str = str_replace($link_original[$i], $link_novo[$i], $str);
+    while ($index < $realLinks) {
+        $string = str_replace($originalLink[$index], $newLink[$index], $string);
        
-        $i++;
+        $index++;
     }
     //echo("STRING FINAL -> $str<br/>");
-    return $str;
+    return $string;
 }
 
 function faz_links_XML($texto, $vetor_lex, $vetor_cen) {
