@@ -1,13 +1,16 @@
 <?php
+
 //	@session_destroy();
 //	session_unset();
+
 include("script_bd2.php");
 session_start();
 
 if (isset($_SESSION['id_projeto_corrente'])) {
     $_SESSION['id_projeto'] = $_SESSION['id_projeto_corrente'];
-} else {
-    print("<b> PROJETO N�O SELECIONADO </b><br>");
+} 
+else {
+    print("<b> PROJETO NÀO SELECIONADO </b><br>");
     exit();
 }
 
