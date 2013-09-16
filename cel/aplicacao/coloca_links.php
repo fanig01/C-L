@@ -1,10 +1,5 @@
 <?php
 
-// $id_lexico_atual = id do lexico atual, para que ele n�o crie um link para si mesmo
-// funcao que carrega o vetor com todos os titulos dos lexicos e seus sinonimos menos o titulo do
-// l�xico passado na variavel $id_lexico_atual e seus sinonimos
-// Fun��o que carrega vetor com todos os titulos e sinonimos de lexicos menos o de id id_lexico_atual
-
 function load_ArrayLexicon($id_projeto, $idCurrentLexicon, $noCurrent) {
     $vetorDeLexicos = array();
     if ($noCurrent) {
@@ -45,10 +40,6 @@ function load_ArrayLexicon($id_projeto, $idCurrentLexicon, $noCurrent) {
     return $vetorDeLexicos;
 }
 
-// $id_cenario_atual = id do cenario atual, para que ele n�o crie um link para si mesmo
-// funcao que carrega o vetor com todos os titulos dos cenarios menos o titulo do cenario
-// passado na variavel $id_cenario_atual 
-
 function carrega_vetor_cenario($id_projeto, $id_cenario_atual, $semAtual) {
     if (!isset($vetorDeCenarios)) {
         $vetorDeCenarios = array();
@@ -75,8 +66,6 @@ function carrega_vetor_cenario($id_projeto, $id_cenario_atual, $semAtual) {
 
     return $vetorDeCenarios;
 }
-
-// Divide o array em dois
 
 function divide_array(&$vet, $ini, $fim, $tipo) {
     $index = $ini;
@@ -108,8 +97,6 @@ function divide_array(&$vet, $ini, $fim, $tipo) {
     return $index;
 }
 
-// Ordena o vetor
-
 function quicksort(&$vet, $ini, $fim, $tipo) {
     if ($ini < $fim) {
         $k = divide_array($vet, $ini, $fim, $tipo);
@@ -117,9 +104,6 @@ function quicksort(&$vet, $ini, $fim, $tipo) {
         quicksort($vet, $k + 1, $fim, $tipo);
     }
 }
-
-// Funcao que constroi os links de acordo com o texto, passado atrav�s do par�metro $texto, lexicos, passados
-// atrav�s do par�metro $vetorDeLexicos, e cenarios, passados atraves do parametro $vetorDeCenarios   
 
 function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
     $copiaTexto = $texto;
