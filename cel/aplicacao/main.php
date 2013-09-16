@@ -1,15 +1,22 @@
 <?php
+
 session_start();
 include_once("CELConfig/CELConfig.inc");
 
-//$_SESSION['site'] = 'http://pes.inf.puc-rio.br/pes03_1_1/Site/desenvolvimento/teste/';       
-//$_SESSION['site'] = 'http://139.82.24.189/cel_vf/aplicacao/teste/';
-/* URL do diretorio contendo os arquivos de DAML */
+/*
+$_SESSION['site'] = 'http://pes.inf.puc-rio.br/pes03_1_1/Site/desenvolvimento/teste/';       
+$_SESSION['site'] = 'http://139.82.24.189/cel_vf/aplicacao/teste/';
+URL do diretorio contendo os arquivos de DAML 
+*/
+
 $_SESSION['site'] = "http://" . CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo") . CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
 
-//$_SESSION['diretorio'] = "/home/local/pes/pes03_1_1/Site/desenvolvimento/teste/";        
-//$_SESSION['diretorio'] = "teste/";        
-/* Caminho relativo ao CEL do diretorio contendo os arquivos de DAML */
+/*
+$_SESSION['diretorio'] = "/home/local/pes/pes03_1_1/Site/desenvolvimento/teste/";        
+$_SESSION['diretorio'] = "teste/";        
+Caminho relativo ao CEL do diretorio contendo os arquivos de DAML
+*/
+
 $_SESSION['diretorio'] = CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
 
 include("funcoes_genericas.php");
@@ -17,10 +24,13 @@ include("httprequest.inc");
 include_once("coloca_links.php");
 
 
-// Checa se o usu�rio foi autenticado
 checkUserAuthentication("index.php");
 
-//Recebe parametro da heading.php. Sem isso vai travar ja que a variavel nao foi inicializada 
+/*
+Receives parameter heading.php. 
+If the variable is not initialized, the system will give error. Insert assertive.
+*/
+
 if (isset($_GET['id_projeto'])) {
     $id_projeto = $_GET['id_projeto'];
 } else {
@@ -34,28 +44,29 @@ if (!isset($_SESSION['id_projeto_corrente'])) {
 ?>    
 
 <html> 
-
-
-
     <head> 
         <LINK rel="stylesheet" type="text/css" href="style.css"> 
         <script language="javascript1.3">
 
-            // Funcoes que serao usadas quando o script for chamado atraves dele proprio ou da arvore 
-            function reCarrega(URL) {
+        // Functions that will be used when the script is invoked through himself or tree 
+          function reCarrega(URL) {
                 document.location.replace(URL);
-            }
+          }
 
 <?php
-// Cen�rio - Atualizar Cen�rio 
-//Objetivo:    Permitir Inclus�o, Altera��o e Exclus�o de um Cen�rio por um usu�rio 
-//Contexto:    Usu�rio deseja incluir um cen�rio ainda n�o cadastrado, alterar e/ou excluir 
-//              um cen�rio previamente cadastrados. 
-//              Pr�-Condi��o: Login 
-//Atores:    Usu�rio, Gerente do projeto 
-//Recursos:    Sistema, menu superior, objeto a ser modificado 
-//Epis�dios:    O usu�rio clica no menu superior na op��o: 
-//                Se usu�rio clica em Alterar ent�o ALTERAR CEN�RIO 
+
+/*
+Scenario: Update Scenario
+Objective: Allow inclusion, modification and deletion of a scenario by an user
+Context: User wants to include a scenario not registered, change or delete a registered scenario.
+Precondition: Login
+Actors: User and Project's Manager
+Resources: System, top menu and the object to be modified
+Episédios: The user clicks on the top menu option:
+           If user clicks the Change button, then CHANGE SCENARIO
+           If user clicks on Delete, then DELETE SCENARIO
+ */
+
 ?>
 
             function altCenario(cenario) {
@@ -65,16 +76,7 @@ if (!isset($_SESSION['id_projeto_corrente'])) {
                 open(url, where, window_spec);
             }
 
-<?php
-// Cen�rio - Atualizar Cen�rio 
-//Objetivo:    Permitir Inclus�o, Altera��o e Exclus�o de um Cen�rio por um usu�rio 
-//Contexto:    Usu�rio deseja incluir um cen�rio ainda n�o cadastrado, alterar e/ou excluir 
-//              um cen�rio previamente cadastrados. 
-//              Pr�-Condi��o: Login 
-//Atores:    Usu�rio, Gerente do projeto 
-//Recursos:    Sistema, menu superior, objeto a ser modificado 
-//Epis�dios:    O usu�rio clica no menu superior na op��o: 
-//                Se usu�rio clica em Excluir ent�o EXCLUIR CEN�RIO 
+<?php 
 ?>
 
             function rmvCenario(cenario) {
@@ -85,56 +87,6 @@ if (!isset($_SESSION['id_projeto_corrente'])) {
             }
 
 <?php
-//Cen�rios -  Atualizar L�xico 
-//Objetivo:    Permitir Inclus�o, Altera��o e Exclus�o de um L�xico por um usu�rio 
-//Contexto:    Usu�rio deseja incluir um lexico ainda n�o cadastrado, alterar e/ou 
-//              excluir um cen�rio/l�xico previamente cadastrados. 
-//              Pr�-Condi��o: Login 
-//Atores:    Usu�rio, Gerente do projeto 
-//Recursos:    Sistema, menu superior, objeto a ser modificado 
-//Epis�dios:    O usu�rio clica no menu superior na op��o: 
-//                Se usu�rio clica em Alterar ent�o ALTERAR L�XICO 
-?>
-
-            function altLexico(lexico) {
-                var url = 'alt_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
-                var where = '_blank';
-                var window_spec = 'dependent,height=573,width=570,resizable,scrollbars,titlebar';
-                open(url, where, window_spec);
-            }
-
-<?php
-//Cen�rios -  Atualizar L�xico 
-//Objetivo:    Permitir Inclus�o, Altera��o e Exclus�o de um L�xico por um usu�rio 
-//Contexto:    Usu�rio deseja incluir um lexico ainda n�o cadastrado, alterar e/ou 
-//              excluir um cen�rio/l�xico previamente cadastrados. 
-//              Pr�-Condi��o: Login 
-//Atores:    Usu�rio, Gerente do projeto 
-//Recursos:    Sistema, menu superior, objeto a ser modificado 
-//Epis�dios:    O usu�rio clica no menu superior na op��o: 
-//                Se usu�rio clica em Excluir ent�o EXCLUIR L�XICO 
-?>
-
-            function rmvLexico(lexico) {
-                var url = 'rmv_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
-                var where = '_blank';
-                var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
-                open(url, where, window_spec);
-            }
-
-            // Funcoes que serao usadas quando o script 
-            // for chamado atraves da heading.php 
-
-<?php
-// Cen�rio - Atualizar Cen�rio 
-//Objetivo:    Permitir Inclus�o, Altera��o e Exclus�o de um Cen�rio por um usu�rio 
-//Contexto:    Usu�rio deseja incluir um cen�rio ainda n�o cadastrado, alterar e/ou excluir 
-//              um cen�rio previamente cadastrados. 
-//              Pr�-Condi��o: Login 
-//Atores:    Usu�rio, Gerente do projeto 
-//Recursos:    Sistema, menu superior, objeto a ser modificado 
-//Epis�dios:    O usu�rio clica no menu superior na op��o: 
-//                Se usu�rio clica em Alterar ent�o ALTERAR CEN�RIO 
 ?>
 
             function altConceito(conceito) {
@@ -145,15 +97,6 @@ if (!isset($_SESSION['id_projeto_corrente'])) {
             }
 
 <?php
-// Cen�rio - Atualizar Conceito
-//Objetivo:    Permitir Inclus�o, Altera��o e Exclus�o de um Cen�rio por um usu�rio 
-//Contexto:    Usu�rio deseja incluir um cen�rio ainda n�o cadastrado, alterar e/ou excluir 
-//              um cen�rio previamente cadastrados. 
-//              Pr�-Condi��o: Login 
-//Atores:    Usu�rio, Gerente do projeto 
-//Recursos:    Sistema, menu superior, objeto a ser modificado 
-//Epis�dios:    O usu�rio clica no menu superior na op��o: 
-//                Se usu�rio clica em Excluir ent�o EXCLUIR CEN�RIO 
 ?>
 
             function rmvConceito(conceito) {
@@ -172,6 +115,42 @@ if (!isset($_SESSION['id_projeto_corrente'])) {
             }
 
 <?php
+
+/*
+Scenarios: Update Lexicon
+Objective: Allow inclusion, change and deletion of a lexicon by an user
+Context: User wants to include a lexicon not registered, change or
+exclude a scenario/lexicon registered.
+Precondition: Login
+Actors: User and Project's Manager
+Resources: System, top menu and the object to be modified
+Episodes: The user clicks on the top menu option:
+          If user click Change, then CHANGE LEXICON
+          If user clicks on Delete, then DELETE LEXICON
+ */
+?>
+
+            function altLexico(lexico) {
+                var url = 'alt_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
+                var where = '_blank';
+                var window_spec = 'dependent,height=573,width=570,resizable,scrollbars,titlebar';
+                open(url, where, window_spec);
+            }
+
+<?php
+?>
+
+            function rmvLexico(lexico) {
+                var url = 'rmv_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
+                var where = '_blank';
+                var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
+                open(url, where, window_spec);
+            }
+
+            // These functions that will be used when the script is invoked through the heading.php 
+
+<?php
+
 // Cen�rio - Administrador escolhe Projeto 
 // Objetivo:  Permitir ao Administrador escolher um projeto. 
 // Contexto:  O Administrador deseja escolher um projeto. 
