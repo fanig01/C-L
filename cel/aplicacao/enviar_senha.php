@@ -2,16 +2,16 @@
 include("bd.inc");
 include("httprequest.inc");
 
-// Cen�rio - Lembrar senha 
-//Objetivo:	 Permitir o usu�rio cadastrado, que esqueceu sua senha,  receber  a mesma por email	
-//Contexto:	 Sistema est� aberto, Usu�rio esqueceu sua senha Usu�rio na tela de lembran�a de 
-//           senha. 
-//           Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-//Atores:	 Usu�rio, Sistema	
-//Recursos:	 Banco de Dados	
-//Epis�dios: O sistema verifica se o login informado � cadastrado no banco de dados.     
-//           Se o login informado for cadastrado, sistema consulta no banco de dados qual 
-//           o email e senha do login informado.           
+// Scenario - Remember Password
+// Objective:       Allow the registered user, that forgot his password, to receive
+//                  the password for email
+// Context:         System is open, user forgot his password, user in the screen of Remember password
+// Precondition:    user have acess to the System
+// Actors:          user, system
+// Resource:        Database
+// Episodes:        the system verify if the informed login is registered in the database.
+//                  If the informed login is registered, system consult in the database what the email and
+//                  password of the informed login.
 
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
@@ -40,13 +40,13 @@ if (!mysql_num_rows($resultadoRequisicaoSql)) {
             $login = $row[3];
             $password = $row[4];
 
-// Cen�rio - Lembrar senha 
-//Objetivo:	 Permitir o usu�rio cadastrado, que esqueceu sua senha,  receber  a mesma por email	
-//Contexto:	 Sistema est� aberto, Usu�rio esqueceu sua senha Usu�rio na tela de lembran�a de 
-//           senha. 
-//           Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-//Atores:	 Usu�rio, Sistema	
-//Recursos:	 Banco de Dados	
+// Scenario - Remember Password
+// Objective:       Allow the registered user, that forgot his password, to receive
+//                  the password for email
+// Context:         System is open, user forgot his password, user in the screen of Remember password
+// Precondition:    user have acess to the System
+// Actors:          user, system
+// Resource:        Database
 //Epis�dios: Sistema envia a senha para o email cadastrado correspondente ao login que 
 //           foi informado pelo usu�rio.     
 //           Caso n�o exista nenhum login cadastrado igual ao informado pelo usu�rio, 
@@ -57,6 +57,8 @@ if (!mysql_num_rows($resultadoRequisicaoSql)) {
             // Seta o SMTP sem alterar o config
             //ini_set("SMTP","mail.hotpop.com");
             //Funcao que gera uma senha randomica de 6 caracteres
+//
+//
 
             function gerarandonstring($n) {
                 $str = "ABCDEFGHIJKLMNOPQRSTUVXYWZabcdefghijklmnopqrstuvxywz0123456789";
