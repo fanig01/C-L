@@ -127,5 +127,52 @@ Arquivo main.php
 				done using JavaScript (in heading.php), we should check if this identifier
 				corresponds to a project that the user has access (security).
 				Insert assertive.
+Thaiane Braga
+-----------------------------------------------------------------------------------
 
+
+Dicionário de Variáveis:
+
+1. $do_debug = $setLevelDebug
+2. $smtp_conn     = $networkSocketSmtp
+3. $SMTP_PORT   = $serverPortSmtp
+4. $CRLF             = $endLine
+5. $error              = $errorOnLastCall
+6. $helo_rply        = $heloReply
+7. $host               = $serverHost
+8. $port               = $serverPort
+9. $tval                = $timeToGiveUp
+10. $errno            = $numericError
+11. $errstr            = $messageError
+12 $q                   = $comandoSql
+13. $rply              = $reply
+14. $byemsg        = $GoodByeMessage
+15. $e                 = $temporary
+16. $rval             = $replyValue
+17.$qrr               = $resultadoRequisicaoSql
+18. $r                 = $SgbdConnectStatus
+19.$result           = $rowResult obs: pertence a função inclui_cenario(), ou seja,
+                                       é local, no arquivo copy(2) of funcoes_genericas
+20. $i                  = $index   obs: local no arquivo coloca_links.php
+21. $j                  = $indexAux_1 obs: local no arquivo coloca_links.php
+22. $a                 = $indexAux_2 obs: local no arquivo coloca_links.php
+23. $b                 = $indexAux_3 obs: local no arquivo coloca_links.php
+24. $indice2         = $index2 obs: local no arquivo coloca_links.php
+25. $id_lexico_atual = idCurrentLexicon
+26. $c                  = $SgbdConnect
+27. select            = selectComboBox (variável local de uma função em javascript)
+28. indice             = index (variável local de uma função em javascript)
+29.  $i                  = $index   obs: local no arquivo coloca_tags_xml.php
+30. $tam_str        = $sizeOfString obs: local no arquivo coloca_tags_xml.php
+31. $str               = $string obs: local no arquivo coloca_tags_xml.php
+32.$senha           = $password
+ 
+Dicionário de Funções:1. chkUser  = checkUserAuthentication
+2. check_proj_perm = permissionCheckToProject
+3. carrega_vetor_lexicos = load_arrayLexicon
+4. pega_id_xml = get_IdXml
+
+
+
+-------------------------------------------------------------------------------
      
