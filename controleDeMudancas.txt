@@ -113,3 +113,19 @@ Comentários:
 Tomáz Martins
 
 --------------------------------------------------------------------
+Arquivo main.php
+	(1)comentário anterior:
+				SCRIPT CHAMADO PELO HEADING.PHP 
+				Foi passada uma variavel $id_projeto. Esta variavel deve conter o id de um 
+				projeto que o usuario esteja cadastrado. Entretanto, como a passagem eh 
+				feita usando JavaScript (no heading.php), devemos checar se este id realmente 
+				corresponde a um projeto que o usuario tenha acesso (seguranca).
+	(2)Comentário atual:
+				Script called by heading.php
+				Was passed a variable $ id_projeto. This variable should contain the identifier
+				of a project that the user is registered. However, as the passage is
+				done using JavaScript (in heading.php), we should check if this identifier
+				corresponds to a project that the user has access (security).
+				Insert assertive.
+
+     
