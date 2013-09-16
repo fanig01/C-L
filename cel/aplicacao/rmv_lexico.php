@@ -1,26 +1,29 @@
 <?php
-// rmv_lexico.php: Este script faz um pedido de remover um lexico do projeto.
-//                 Remove o lexico corrente.
-// Arquivo chamador: main.php
+/*
+ * rmv_lexico.php: Este script faz um pedido de remover um lexico do projeto.Remove o lexico corrente.
+ * Arquivo chamador: main.php
+ * 
+ * Cenários -  Excluir Léxico 
+ * Objetivo:	Permitir ao Usuário Excluir uma palavra do léxico que esteja ativa
+ * Contexto:	Usuário deseja excluir uma palavra do léxico
+ *              Pró-Condição: Login, palavra do léxico cadastrada no sistema 
+ * Atores:	Usuário, Sistema
+ * Recursos:	Dados informados
+ * Epis�dios:	O sistema fornecer uma tela para o usu�rio justificar a necessidade
+ *              daquela exclusão para que o administrador possa ler e aprovar ou não.
+ *              Esta tela também conter um botão para a confirmação da exclusão.
+ *               Restrição: Depois de clicado o botão o sistema verifica se todos os campos foram preenchidos 
+ * Exceção:	Se todos os campos não foram preenchidos, retorna para o usuário 
+ *              uma mensagem avisando que todos os campos devem ser preenchidos
+ *              e um botão de voltar para a pagina anterior.
+ */
 
 session_start();
 
 include("funcoes_genericas.php");
 include("httprequest.inc");
-checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
-//Cen�rios -  Excluir L�xico 
-//Objetivo:	Permitir ao Usu�rio Excluir uma palavra do l�xico que esteja ativa
-//Contexto:	Usu�rio deseja excluir uma palavra do l�xico
-//              Pr�-Condi��o: Login, palavra do l�xico cadastrada no sistema 
-//Atores:	Usu�rio, Sistema
-//Recursos:	Dados informados
-//Epis�dios:	O sistema fornecer� uma tela para o usu�rio justificar a necessidade
-//              daquela exclus�o para que o administrador possa ler e aprovar ou n�o.
-//              Esta tela tamb�m conter� um bot�o para a confirma��o da exclus�o.
-//              Restri��o: Depois de clicado o bot�o o sistema verifica se todos os campos foram preenchidos 
-//Exce��o:	Se todos os campos n�o foram preenchidos, retorna para o usu�rio 
-//              uma mensagem avisando que todos os campos devem ser preenchidos 
-//              e um bot�o de voltar para a pagina anterior.
+checkUserAuthentication("index.php");
+
 
 inserirPedidoRemoverLexico($id_projeto, $id_lexico, $_SESSION['id_usuario_corrente']);
 ?>  
@@ -32,7 +35,7 @@ inserirPedidoRemoverLexico($id_projeto, $id_lexico, $_SESSION['id_usuario_corren
 
 </script>
 
-<h4>Opera��o efetuada com sucesso!</h4>
+<h4>Opera&ccedil;&atilde;o efetuada com sucesso!</h4>
 
 <script language="javascript1.3">
 
