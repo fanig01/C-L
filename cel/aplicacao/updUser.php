@@ -32,7 +32,7 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
  *           User click int the button of update 
  */
 
-$senha_cript = md5($senha);
+$senha_cript = md5($password);
 $comandoSql = "UPDATE usuario SET  nome ='$nome' , login = '$login' , email = '$email' , senha = '$senha_cript' WHERE  id_usuario='$id_usuario'";
 
 mysql_query($comandoSql) or die("<p style='color: red; font-weight: bold; text-align: center'>Erro!Login ja existente!</p><br><br><center><a href='JavaScript:window.history.go(-1)'>Voltar</a></center>");

@@ -17,14 +17,14 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
     // ** Cenario "Inclusao de Usuario Independente" **
     // O sistema checa se todos os campos estao preenchidos. Se algum nao estiver, o
     // sistema avisa pro usuario que todos os campos devem ser preenchidos.
-    if ($nome == "" || $email == "" || $login == "" || $senha == "" || $senha_conf == "") {
+    if ($nome == "" || $email == "" || $login == "" || $password == "" || $senha_conf == "") {
         $p_style = "color: red; font-weight: bold";
         $p_text = "Por favor, preencha todos os campos.";
-        recarrega("?p_style=$p_style&p_text=$p_text&nome=$nome&email=$email&login=$login&senha=$senha&senha_conf=$senha_conf&novo=$novo");
+        recarrega("?p_style=$p_style&p_text=$p_text&nome=$nome&email=$email&login=$login&senha=$password&senha_conf=$senha_conf&novo=$novo");
     } else {
 
         // Testa se as senhas fornecidas pelo usuario sao iguais.
-        if ($senha != $senha_conf) {
+        if ($password != $senha_conf) {
             $p_style = "color: red; font-weight: bold";
             $p_text = "Senhas diferentes. Favor preencher novamente as senhas.";
             recarrega("?p_style=$p_style&p_text=$p_text&nome=$nome&email=$email&login=$login&novo=$novo");
@@ -84,8 +84,8 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
                 $email = str_replace(">", " ", str_replace("<", " ", $email));
 
                 // Criptografando a senha
-                $senha = md5($senha);
-                $comandoSql = "INSERT INTO usuario (nome, login, email, senha) VALUES ('$nome', '$login', '$email', '$senha')";
+                $password = md5($password);
+                $comandoSql = "INSERT INTO usuario (nome, login, email, senha) VALUES ('$nome', '$login', '$email', '$password')";
                 mysql_query($comandoSql) or die("Erro ao cadastrar o usuario");
                 recarrega("?cadastrado=&novo=$novo&login=$login");
             }
@@ -164,7 +164,7 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
         $email = "";
         $login = "";
         $nome = "";
-        $senha = "";
+        $password = "";
         $senha_conf = "";
     }
     ?>
@@ -222,7 +222,7 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
                         <td>Login:</td><td><input name="login" maxlength="32" size="24" type="text" value="<?= $login ?>"></td>
                     </tr>
                     <tr>
-                        <td>Senha:</td><td><input name="senha" maxlength="32" size="16" type="password" value="<?= $senha ?>"></td>
+                        <td>Senha:</td><td><input name="senha" maxlength="32" size="16" type="password" value="<?= $password ?>"></td>
                         <td>Senha (confirma��o):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
                     </tr>
                     <tr>

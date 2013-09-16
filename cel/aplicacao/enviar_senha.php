@@ -38,7 +38,7 @@ if (!mysql_num_rows($resultadoRequisicaoSql)) {
             $nome = $row[1];
             $mail = $row[2];
             $login = $row[3];
-            $senha = $row[4];
+            $password = $row[4];
 
 // Cen�rio - Lembrar senha 
 //Objetivo:	 Permitir o usu�rio cadastrado, que esqueceu sua senha,  receber  a mesma por email	

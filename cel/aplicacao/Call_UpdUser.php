@@ -29,7 +29,7 @@ $row = mysql_fetch_row($resultadoRequisicaoSql);
 $nome = $row[1];
 $email = $row[2];
 $login = $row[3];
-$senha = $row[4];
+$password = $row[4];
 ?>
 <html>
     <head>
