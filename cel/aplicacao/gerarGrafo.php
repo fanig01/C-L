@@ -4,7 +4,7 @@ session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
-checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
+checkUserAuthentication("index.php"); 
 
 $XML = "";
 ?>
@@ -16,12 +16,15 @@ $XML = "";
     </head>
 
 <?php
-//Cen�rio -  Gerar Grafo 
-//Objetivo:   Permitir ao administrador gerar o grafo de um projeto
-//Contexto:   Gerente deseja gerar um grafo para uma das vers�es de XML
-//Atores:     Administrador
-//Recursos:   Sistema, XML, dados cadastrados do projeto, banco de dados.
-//Epis�dios:  Restri��o: Possuir um XML gerado do projeto
+
+/*
+Scenario - Generate Graph
+Objective: Allow the administrator to generate the project's graph
+Context: Manager to generate a graph for one of the versions of XML
+Actors: Administrator
+Resources: System, XML and data registered the project database.
+Restrictions: Having a XML Generated project
+ */
 
 $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
 $comandoSql = "SELECT * FROM publicacao WHERE id_projeto = '$id_projeto'";
@@ -36,10 +39,11 @@ $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a quer
         ?>
         <table>
             <tr>
-                <th>Vers�o:</th><td><?= $versao ?></td>
+                <th>Versão:</th><td><?= $versao ?></td>
                 <th>Data:</th><td><?= $data ?></td>
                 <th><a href="mostraXML.php?id_projeto=<?= $id_projeto ?>&versao=<?= $versao ?>">XML</a></th>
-                <th><a href="grafo\mostraGrafo.php?versao=<?= $versao ?>&id_projeto=<?= $id_projeto ?>">Gerar Grafo</a></th>
+                <th><a href="grafo\mostraGrafo.php?versao=<?= $versao ?>&id_projeto=<?= $id_projeto ?>"
+                       >Gerar Grafo</a></th>
 
             </tr>
         </table>
@@ -48,7 +52,7 @@ $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a quer
 }
 ?>
 
-    <br><i><a href="showSource.php?file=recuperarXML.php">Veja o c�digo fonte!</a></i>
+    <br><i><a href="showSource.php?file=recuperarXML.php">Veja o código fonte!</a></i>
 
 </body>
 
