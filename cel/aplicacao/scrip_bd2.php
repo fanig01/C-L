@@ -14,9 +14,9 @@
         $link = bd_connect() or die("Erro na conexão ao BD : " . mysql_error() . __LINE__);
 
         if ($link && mysql_select_db(CELConfig_ReadVar("BD_database"))){
-            echo "SUCESSO NA CONEXÃO � BD <br>";
+            echo "SUCESSO NA CONEXÃO ao BD <br>";
         } else{ 
-                echo "ERRO NA CONEXÃO � BD <br>";
+                echo "ERRO NA CONEXÃO ao BD <br>";
               }
 
         $query = "alter table conceito add namespace varchar(250) NULL after descricao;";
