@@ -6,7 +6,8 @@ session_start();
 
 include("funcoes_genericas.php");
 include("httprequest.inc");
-checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
+
+checkUserAuthentication("index.php");        
 
 inserirPedidoRemoverCenario($_SESSION['id_projeto_corrente'], $id_cenario, $_SESSION['id_usuario_corrente']);
 ?>  
@@ -33,7 +34,7 @@ inserirPedidoRemoverCenario($_SESSION['id_projeto_corrente'], $id_cenario, $_SES
 
 </script>
 
-<h4>Opera��o efetuada com sucesso!</h4>
+<h4>Operação efetuada com sucesso!</h4>
 
 <script language="javascript1.3">
 

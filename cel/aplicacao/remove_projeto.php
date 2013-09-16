@@ -50,12 +50,12 @@ $descricao_Projeto = $resultArrayProjeto[3];
             </tr>
         </table>
         <br><br>
-    <center><b>Cuidado!O projeto ser� apagado para todos seus usu�rios!</b></center>
+    <center><b>Cuidado!O projeto será apagado para todos seus usuários!</b></center>
     <p><br>
     <center><a href="remove_projeto_base.php">Apagar o projeto</a></center> 
 </p>
 <p>
-    <i><a href="showSource.php?file=remove_projeto.php">Veja o c�digo fonte!</a></i> 
+    <i><a href="showSource.php?file=remove_projeto.php">Veja o código fonte!</a></i> 
 </p>
 </body>
 </html>

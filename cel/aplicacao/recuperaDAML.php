@@ -1,11 +1,11 @@
 <HTML> 
     <HEAD> 
         <LINK rel="stylesheet" type="text/css" href="style.css"> 
-        <TITLE>Recupera��o de Arquivos DAML</TITLE> 
+        <TITLE>Recuperação de Arquivos DAML</TITLE> 
     </HEAD> 
 
     <BODY> 
-        <H2>Hist�rico de Arquivos DAML</H2> 
+        <H2>Histórico de Arquivos DAML</H2> 
         <?PHP
         include_once( "CELConfig/CELConfig.inc" );
         /*

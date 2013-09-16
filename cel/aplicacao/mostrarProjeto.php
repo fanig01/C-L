@@ -16,8 +16,11 @@ include("httprequest.inc");
 $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
 
 $qq = "select * from publicacao where id_projeto = $id_projeto AND versao = $versao";
+
 $resultadoRequisicaoSql = mysql_query($qq) or die("Erro ao enviar a query");
+
 $row = mysql_fetch_row($resultadoRequisicaoSql);
+
 $xml_banco = $row[3];
 
 echo $xml_banco;

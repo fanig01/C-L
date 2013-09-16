@@ -6,11 +6,12 @@ include("httprequest.inc");
 
 checkUserAuthentication("index.php");
 
-// Conecta ao SGBD
+
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 
-if (isset($submit)) {   // Script chamado pelo submit
+if (isset($submit)) {
+    // Script chamado pelo submit
     // O procedimento sera remover todos que estao no projeto em questao
     // (menos o administrador que esta adicionando/removendo usuarios)
     // e depois acrescentar aqueles que tiverem sido selecionados
@@ -69,8 +70,8 @@ if (isset($submit)) {   // Script chamado pelo submit
             </style>
         </head>
         <body onLoad="createMSelect();">
-            <h4>Selecione os usu�rios para participar do projeto "<span style="color: orange"><?= simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']) ?></span>":</h4>
-            <p style="color: red">Mantenha <strong>CTRL</strong> pressionado para selecionar m�ltiplas op��es</p>
+            <h4>Selecione os usuários para participar do projeto "<span style="color: orange"><?= simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']) ?></span>":</h4>
+            <p style="color: red">Mantenha <strong>CTRL</strong> pressionado para selecionar múltiplas opções</p>
             <form action="" method="post" onSubmit="selAll();">
                 <table cellspacing="8" width="100%">
                     <tr>

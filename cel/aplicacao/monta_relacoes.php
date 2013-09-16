@@ -2,6 +2,7 @@
 
 include_once("monta_relacoes.php");
 include_once("coloca_links.php");
+
 ### MONTA AS RELACOES USADAS NO MENU LATERAL###
 
 function monta_relacoes($id_projeto) {

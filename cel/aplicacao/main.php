@@ -217,7 +217,7 @@ function pedidoLexico() {
         else {
             ?>
                     
-            var url = 'ver_pedido_lexico.php?'
+            var url = 'ver_pedido_lexico.php?';
             <?php
         }
 
@@ -273,7 +273,7 @@ function pedidoRelacao() {
               
             ?>
                     
-            var url = 'ver_pedido_relacao.php?'
+            var url = 'ver_pedido_relacao.php?';
     
             <?php
         }
@@ -342,7 +342,7 @@ function geraXML(){
         else {
     
             ?>
-            var url = 'form_xml.php?'
+            var url = 'form_xml.php?';
     
             <?php
         }
@@ -395,7 +395,7 @@ function geraGrafo(){
         else {
     
             ?>
-            var url = 'gerarGrafo.php?'
+            var url = 'gerarGrafo.php?';
             <?php
         }
         
@@ -427,7 +427,7 @@ function geraOntologia(){
         else {
         
             ?>
-            var url = 'inicio.php?'
+            var url = 'inicio.php?';
     
             <?php
         }
@@ -490,7 +490,7 @@ function recuperaDAML(){
         else {
         
             ?>
-            var url = 'recuperaDAML.php?'
+            var url = 'recuperaDAML.php?';
         
             <?php
         }
