@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 include("funcoes_genericas.php");
@@ -6,27 +7,26 @@ include("httprequest.inc");
 
 checkUserAuthentication("index.php");
 
-
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 
 if (isset($submit)) {
-    // Script chamado pelo submit
-    // O procedimento sera remover todos que estao no projeto em questao
-    // (menos o administrador que esta adicionando/removendo usuarios)
-    // e depois acrescentar aqueles que tiverem sido selecionados
+    
     $comandoSql = "DELETE FROM participa
           WHERE id_usuario != " . $_SESSION['id_usuario_corrente'] . "
           AND id_projeto = " . $_SESSION['id_projeto_corrente'];
     mysql_query($comandoSql) or die("Erro ao executar a query de DELETE");
 
-    $n_sel = count($usuarios);  // Numero de usuarios selecionados no <select>
+    $n_sel = count($usuarios);
+    
     for ($i = 0; $i < $n_sel; $i++) {
-        // Para cada usuario selecionado
+        
         $comandoSql = "INSERT INTO participa (id_usuario, id_projeto)
               VALUES (" . $usuarios[$i] . ", " . $_SESSION['id_projeto_corrente'] . ")";
-        mysql_query($comandoSql) or die("Erro ao cadastrar usuario");
+        mysql_query($comandoSql) or die("Erro ao cadastrar usuario");   
+        
     }
+    
     ?>
 
     <script language="javascript1.3">
@@ -36,12 +36,16 @@ if (isset($submit)) {
     </script>
 
     <?php
-} else {
+}
+
+else {
+
     ?>
 
     <html>
         <head>
-            <title>Selecione os usu�rios</title>
+            
+            <title>Selecione os usuários</title>
             <script language="javascript1.3" src="MSelect.js"></script>
             <script language="javascript1.3">
 
@@ -59,16 +63,21 @@ if (isset($submit)) {
                         usuarios.options[i].selected = true;
                 }
 
+            
             </script>
             <style>
+            
                 <!--
                 select {
                     width: 200;
                     background-color: #CCFFFF
                 }
                 -->
+            
             </style>
+        
         </head>
+        
         <body onLoad="createMSelect();">
             <h4>Selecione os usuários para participar do projeto "<span style="color: orange"><?= simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']) ?></span>":</h4>
             <p style="color: red">Mantenha <strong>CTRL</strong> pressionado para selecionar múltiplas opções</p>
@@ -84,15 +93,27 @@ if (isset($submit)) {
                             <select name="usuarios[]" multiple size="6">
 
     <?php
-// Cen�rio - Relacionar usu�rios ao projeto
-// Objetivo:  Permitir ao Administrador relacionar novos usu�rios cadastrados ao projeto selecionado.
-// Contexto:  O Administrador deseja relacionar novos usu�rios cadastrados ao projeto selecionado.
-//            Pr�-Condi��es: Ser administrador do projeto que deseja relacionar os usu�rios
-// Atores:    Administrador
-// Recursos:  Usu�rios cadastrados
-// Epis�dios: O Administrador clica no link �Relacionar usu�rio j� existentes com este projeto�.
-    // Selecionar todos os usuarios que participam deste projeto,
-    // menos o administrador que esta executando este script
+    
+/*
+Scenario - Relate to the project users
+Objective: Allow the administrator to relate new users registered to the selected project.
+Context: The administrator wants to connect new users registered to the selected project.
+Pre-conditions: Being the project manager that you want to list the users
+Actors: Administrator
+Resources: registered users
+Episdios: 
+        The Administrator clicks on the link Relate existing User with this project. 
+Select all users participating in this project, less the administrator who is executing this script.
+        
+        Deleting users Project: The administrator selects the registered users (existing)
+list participants (users that belong to this project) and click the button ->
+        
+        Adding users to the project. The administrator selects the registered users (existing)
+from the list of users who do not belong to this project and click the button <-
+        
+        To update the relationships, the administrator clicks the Refresh button
+*/   
+
     $comandoSql = "SELECT u.id_usuario, login
           FROM usuario u, participa p
           WHERE u.id_usuario = p.id_usuario
@@ -100,27 +121,23 @@ if (isset($submit)) {
           AND u.id_usuario != " . $_SESSION['id_usuario_corrente'];
 
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
+   
+    
     while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {
+    
         ?>
+                               
+            <option value="<?= $result['id_usuario'] ?>"><?= $result['login'] ?></option>
 
-                                    <option value="<?= $result['id_usuario'] ?>"><?= $result['login'] ?></option>
-
-                                    <?php
-// Cen�rio - Relacionar usu�rios ao projeto
-// Objetivo:  Permitir ao Administrador relacionar novos usu�rios cadastrados ao projeto selecionado.
-// Contexto:  O Administrador deseja relacionar novos usu�rios cadastrados ao projeto selecionado.
-//            Pr�-Condi��es: Ser administrador do projeto que deseja relacionar os usu�rios
-// Atores:    Administrador
-// Recursos:  Usu�rios cadastrados
-// Epis�dios: Excluindo usu�rio(s) do projeto: o administrador seleciona os usu�rios cadastrados 
-//            (j� existentes) da lista Participantes (usu�rios que pertencem a este projeto) 
-//            e clica no bot�o -> . 
+                                   <?php
+ 
                                     ?>
 
                                     <?php
-                                }
+    }
                                 ?>
 
+                          
                             </select>
                         </td>
                         <td>
@@ -130,43 +147,39 @@ if (isset($submit)) {
                             <select  multiple name="usuarios_r" size="6">
 
     <?php
-    // Selecionar todos os usuarios que nao participam deste projeto
+    
     $subq = "SELECT id_usuario FROM participa where participa.id_projeto =" . $_SESSION['id_projeto_corrente'];
     $subqrr = mysql_query($subq) or die("Erro ao enviar a subquery");
     $resultadosubq = "(0)";
+    
     if ($subqrr != 0) {
+    
         $row = mysql_fetch_row($subqrr);
         $resultadosubq = "( $row[0]";
         while ($row = mysql_fetch_row($subqrr))
             $resultadosubq = "$resultadosubq , $row[0]";
         $resultadosubq = "$resultadosubq )";
     }
-    $comandoSql = "SELECT usuario.id_usuario, usuario.login FROM usuario where usuario.id_usuario not in " . $resultadosubq;
-    //$q = "SELECT usuario.id_usuario, usuario.login FROM usuario, participa where usuario.id_usuario=participa.id_usuario and participa.id_projeto<>".$_SESSION['id_projeto_corrente']." and participa.id_usuario not in ".$resultadosubq;
-
+    
+    $comandoSql = "SELECT usuario.id_usuario, usuario.login 
+                  FROM usuario where usuario.id_usuario not in " . $resultadosubq;
+    
     echo($comandoSql);
+    
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
+    
     while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {
         ?>
-
-                                    <option value="<?= $result['id_usuario'] ?>"><?= $result['login'] ?></option>
+                                    
+                                
+            <option value="<?= $result['id_usuario'] ?>"><?= $result['login'] ?></option>
 
                                     <?php
-// Cen�rio - Relacionar usu�rios ao projeto
-// Objetivo:  Permitir ao Administrador relacionar novos usu�rios cadastrados ao projeto selecionado.
-// Contexto:  O Administrador deseja relacionar novos usu�rios cadastrados ao projeto selecionado.
-//            Pr�-Condi��es: Ser administrador do projeto que deseja relacionar os usu�rios
-// Atores:    Administrador
-// Recursos:  Usu�rios cadastrados
-// Epis�dios: Incluindo usu�rio(s) ao projeto: o administrador seleciona os usu�rios cadastrados 
-//           (j� existentes) da lista de usu�rios que n�o pertencem a este projeto e 
-//           clica no bot�o <- . 
+
                                     ?>
-
                                     <?php
-                                }
+    }
                                 ?>
-
                             </select>
                         </td>
                     </tr>
@@ -177,13 +190,6 @@ if (isset($submit)) {
                     </tr>
 
                                 <?php
-// Cen�rio - Relacionar usu�rios ao projeto
-// Objetivo:  Permitir ao Administrador relacionar novos usu�rios cadastrados ao projeto selecionado.
-// Contexto:  O Administrador deseja relacionar novos usu�rios cadastrados ao projeto selecionado.
-//            Pr�-Condi��es: Ser administrador do projeto que deseja relacionar os usu�rios
-// Atores:    Administrador
-// Recursos:  Usu�rios cadastrados
-// Epis�dios: Para atualizar os relacionamentos realizados, o administrador clica no bot�o Atualizar.
                                 ?>
 
                     <tr>
@@ -191,10 +197,11 @@ if (isset($submit)) {
                     </tr>
                 </table>
             </form>
-            <br><i><a href="showSource.php?file=rel_usuario.php">Veja o c�digo fonte!</a></i>
+            <br><i><a href="showSource.php?file=rel_usuario.php">Veja o código fonte!</a></i>
         </body>
     </html>
-
-                    <?php
-                }
-                ?>
+             
+        <?php
+}
+                
+?>

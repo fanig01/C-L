@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
-	<xsl:template match="/">
-		<html>
-			<head>
-				<title><xsl:value-of select="//Projeto" /></title>
-				<style><![CDATA[
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">	
+    <xsl:template match="/">	
+        <html>		
+            <head>
+			
+                <title>
+                
+                    <xsl:value-of select="//Projeto" />
+
+                </title>
+
+                <style><![CDATA[
+
 BODY
 {
     MARGIN: 10px 0px;
@@ -111,7 +119,7 @@ P
 				</td>
 			</tr>
 			<tr valign="top">
-				<th>Excecao</th>
+				<th>Exceção</th>
 				<td>
 					<xsl:value-of select="excecao" />
 				</td>

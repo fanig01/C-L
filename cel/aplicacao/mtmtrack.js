@@ -1,13 +1,14 @@
-// Morten's JavaScript Tree Menu Tracking Script
-// version 2.3.2, dated 2002-02-24
-// http://www.treemenu.com/
+/* Morten's JavaScript Tree Menu Tracking Script
+   version 2.3.2, dated 2002-02-24
+   http://www.treemenu.com/
 
-// Copyright (c) 2001-2002, Morten Wang & contributors
-// All rights reserved.
+   Copyright (c) 2001-2002, Morten Wang & contributors
+   All rights reserved.
 
-// This software is released under the BSD License which should accompany
-// it in the file "COPYING".  If you do not have this file you can access
-// the license through the WWW at http://www.treemenu.com/license.txt
+   This software is released under the BSD License which should accompany
+   it in the file "COPYING".  If you do not have this file you can access
+  the license through the WWW at http://www.treemenu.com/license.txt
+*/
 
 if((navigator.appName == "Netscape" && parseInt(navigator.appVersion) >= 3 && navigator.userAgent.indexOf("Opera") == -1) || (navigator.appName == "Microsoft Internet Explorer" && parseInt(navigator.appVersion) >= 4) || (navigator.appName == "Opera" && parseInt(navigator.appVersion) >= 5)) {
 	var MTMCodeFrame = "code";
