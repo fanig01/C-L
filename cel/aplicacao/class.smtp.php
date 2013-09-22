@@ -1,19 +1,5 @@
 <?php
 
-////////////////////////////////////////////////////
-// SMTP - PHP SMTP class
-//
-// Version 1.02
-//
-// Define an SMTP class that can be used to connect
-// and communicate with any SMTP server. It implements
-// all the SMTP functions defined in RFC821 except TURN.
-//
-// Author: Chris Ryan
-//
-// License: LGPL, see LICENSE
-////////////////////////////////////////////////////
-
 /**
  * SMTP is rfc 821 compliant and implements all the rfc 821 SMTP
  * commands except TURN which will always return a not implemented
@@ -24,38 +10,22 @@
  */
 class SMTP {
 
-    /**
-     *  SMTP server port
-     *  @var int
-     */
+    //  @var int
     var $serverPortSmtp = 25;
 
-    /**
-     *  SMTP reply line ending
-     *  @var string
-     */
+    //  @var string
     var $endLine = "\r\n";
 
-    /**
-     *  Sets whether debugging is turned on
-     *  @var bool
-     */
+    //  @var bool
     var $setLevelDebug;
 
-    /*     * #@+
-     * @access private
-     */
+    // @access private
     var $networkSocketSmtp;
     var $errorOnLastCall;
     var $heloReply;
 
-    /*     * #@- */
-
-    /**
-     * Initialize the class so that the data is in a known state.
-     * @access public
-     * @return void
-     */
+    // @access public
+    // @return void
     function SMTP() {
         $this->networkSocketSmtp = 0;
         $this->errorOnLastCall = null;
@@ -64,19 +34,11 @@ class SMTP {
         $this->setLevelDebug = 0;
     }
 
-    /*     * ***********************************************************
+    /**************************************************************
      *                    CONNECTION FUNCTIONS                  *
      * ********************************************************* */
 
-    /**
-     * Connect to the server specified on the port specified.
-     * If the port is not specified use the default serverPortSmtp.
-     * If tval is specified then a connection will try and be
-     * established with the server for that number of seconds.
-     * If tval is not specified the default is 30 seconds to
-     * try on the connection.
-     *
-     * SMTP CODE SUCCESS: 220
+     /* SMTP CODE SUCCESS: 220
      * SMTP CODE FAILURE: 421
      * @access public
      * @return bool
@@ -88,6 +50,7 @@ class SMTP {
             
             $this->errorOnLastCall =
                     array("error" => "Already connected to a server");
+            
             return false;
         }
 
@@ -95,18 +58,22 @@ class SMTP {
             $serverPort = $this->serverPortSmtp;
         }
 
-        $this->networkSocketSmtp = fsockopen($serverHost, $serverPort, $numericError,
-                $messageError, $timeToGiveUp);
+        $this->networkSocketSmtp = 
+                fsockopen($serverHost, $serverPort, $numericError,
+                
+                        $messageError, $timeToGiveUp);
         
         # verify we connected properly
         if (empty($this->networkSocketSmtp)) {
             $this->errorOnLastCall = array("error" => "Failed to connect to server",
                 "errno" => $numericError,
                 "errstr" => $messageError);
+            
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": $messageError ($numericError)" . $this->endLine;
             }
+            
             return false;
         }
 
@@ -126,12 +93,8 @@ class SMTP {
         return true;
     }
 
-    /**
-     * Performs SMTP authentication.  Must be run after running the
-     * Hello() method.  Returns true if successfully authenticated.
-     * @access public
-     * @return bool
-     */
+    // @access public
+    // @return bool
     function Authenticate($username, $password) {
 
         fputs($this->networkSocketSmtp, "AUTH LOGIN" . $this->endLine);
@@ -145,10 +108,12 @@ class SMTP {
                     array("error" => "AUTH not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($reply, 4));
+            
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $reply . $this->endLine;
             }
+            
             return false;
         }
 
@@ -162,10 +127,12 @@ class SMTP {
                     array("error" => "Username not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($reply, 4));
+
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $reply . $this->endLine;
             }
+            
             return false;
         }
 
@@ -179,21 +146,20 @@ class SMTP {
                     array("error" => "Password not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($reply, 4));
+            
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $reply . $this->endLine;
             }
+            
             return false;
         }
 
         return true;
     }
 
-    /**
-     * Returns true if connected to a server otherwise false
-     * @access private
-     * @return bool
-     */
+    // @access private
+    // @return bool
     function Connected() {
         if (!empty($this->networkSocketSmtp)) {
             $sock_status = socket_get_status($this->networkSocketSmtp);
@@ -203,24 +169,23 @@ class SMTP {
                     echo "SMTP -> NOTICE:" . $this->endLine .
                     "EOF caught while checking if connected";
                 }
+                
                 $this->Close();
                 return false;
             }
+            
             return true;
         }
+        
         return false;
     }
 
-    /**
-     * Closes the socket and cleans up the state of the class.
-     * It is not considered good to use this function without
-     * first trying to use QUIT.
-     * @access public
-     * @return void
-     */
+    // @access public
+    // @return void
     function Close() {
         $this->errorOnLastCall = null;
         $this->heloreply = null;
+        
         if (!empty($this->networkSocketSmtp)) {
 
             fclose($this->networkSocketSmtp);
@@ -228,24 +193,13 @@ class SMTP {
         }
     }
 
-    /*     * *************************************************************
-     *                        SMTP COMMANDS                       *
+    /* *************************************************************
+                              SMTP COMMANDS                       
      * *********************************************************** */
 
     /**
-     * Issues a data command and sends the msg_data to the server
-     * finializing the mail transaction. $msg_data is the message
-     * that is to be send with the headers. Each header needs to be
-     * on a single line followed by a <endLine> with the message headers
-     * and the message body being seperated by and additional <endLine>.
-     *
-     * Implements rfc 821: DATA <endLine>
-     *
-     * SMTP CODE INTERMEDIATE: 354
-     *     [data]
-     *     <endLine>.<endLine>
-     *     SMTP CODE SUCCESS: 250
-     *     SMTP CODE FAILURE: 552,554,451,452
+     * SMTP CODE SUCCESS: 250
+     * SMTP CODE FAILURE: 552,554,451,452
      * SMTP CODE FAILURE: 451,554
      * SMTP CODE ERROR  : 500,501,503,421
      * @access public
@@ -274,6 +228,7 @@ class SMTP {
                     array("error" => "DATA command not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+      
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
