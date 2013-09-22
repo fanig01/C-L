@@ -11,13 +11,13 @@
         include_once("CELConfig/CELConfig.inc");
 
         $link = bd_connect() or die("Erro na conex&atilde;o ao BD : " . mysql_error() . __LINE__);
-        if ($link && mysql_select_db(CELConfig_ReadVar("BD_database")))
-        {
+        if ($link && mysql_select_db(CELConfig_ReadVar("BD_database"))){
+           
             echo "SUCESSO NA CONEX&Auml;O do BD <br>";
-        } else
-            { 
+        }
+        else{ 
                 echo "ERRO NA CONEX&Auml;O do BD <br>";
-            }
+        }
 
         $query = "create table conceito (id_conceito int(11) not null AUTO_INCREMENT,
                                         nome varchar(250) not null ,

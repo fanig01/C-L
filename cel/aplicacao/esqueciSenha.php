@@ -56,6 +56,6 @@
             <br>
             <br>
             <center><a href="JavaScript:window.history.go(-1)">Voltar</a></center>
-        </form<i><a href="showSource.php?file=esqueciSenha.php">Veja o c�digo fonte!</a></i>
+        </form<i><a href="showSource.php?file=esqueciSenha.php">Veja o código fonte!</a></i>
     </body>
 </html>

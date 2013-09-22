@@ -5,14 +5,18 @@ include("funcoes_genericas.php");
 
 <html>
     <head>
+
     <p style="color: red; font-weight: bold; text-align: center">
+
         <img src="Images/Logo_CEL.jpg" width="180" height="100"><br/><br/>
         Projetos Publicados</p>
+
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     </head>
     <body>
 
 <?php
+
 $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
 
 /*

@@ -15,6 +15,7 @@ if (isset($submit)) {
     $comandoSql = "DELETE FROM participa
           WHERE id_usuario != " . $_SESSION['id_usuario_corrente'] . "
           AND id_projeto = " . $_SESSION['id_projeto_corrente'];
+    
     mysql_query($comandoSql) or die("Erro ao executar a query de DELETE");
 
     $n_sel = count($usuarios);
@@ -22,7 +23,8 @@ if (isset($submit)) {
     for ($i = 0; $i < $n_sel; $i++) {
         
         $comandoSql = "INSERT INTO participa (id_usuario, id_projeto)
-              VALUES (" . $usuarios[$i] . ", " . $_SESSION['id_projeto_corrente'] . ")";
+                       VALUES (" . $usuarios[$i] . ", " . $_SESSION['id_projeto_corrente'] . ")";
+        
         mysql_query($comandoSql) or die("Erro ao cadastrar usuario");   
         
     }
@@ -79,7 +81,9 @@ else {
         </head>
         
         <body onLoad="createMSelect();">
+           
             <h4>Selecione os usuários para participar do projeto "<span style="color: orange"><?= simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']) ?></span>":</h4>
+            
             <p style="color: red">Mantenha <strong>CTRL</strong> pressionado para selecionar múltiplas opções</p>
             <form action="" method="post" onSubmit="selAll();">
                 <table cellspacing="8" width="100%">

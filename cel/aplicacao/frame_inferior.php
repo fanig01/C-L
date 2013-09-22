@@ -27,7 +27,7 @@ function frame_inferior($bd, $tipo, $id) {
 
         <table> 
             <tr> 
-                <th>Cen�rios</th> 
+                <th>Cenários</th> 
             </tr> 
 
         <?php
@@ -67,8 +67,8 @@ function frame_inferior($bd, $tipo, $id) {
 
             <table> 
                 <tr> 
-                    <th>Cen�rios</th> 
-                    <th>L�xicos</th> 
+                    <th>Cenários</th> 
+                    <th>Léxicos</th> 
                 </tr> 
 
             <?php
