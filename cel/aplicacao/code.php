@@ -114,8 +114,6 @@ $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a quer
 // We must remove all the tags HTML of the scenario's title. Possibly
 // there will be tags of links (<a> </a>). If we won't remove it, there will be
 // error when we show it in the menu.
-// This function, search and replace, remove anything that is in the form
-// <anything_here>.
 $search = "'<[\/\!]*?[^<>]*?>'si";
 $replace = "";
 
