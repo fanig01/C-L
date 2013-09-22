@@ -314,16 +314,7 @@ class SMTP {
         return true;
     }
 
-    /**
-     * Expand takes the name and asks the server to list all the
-     * people who are members of the _list_. Expand will return
-     * back and array of the result or false if an error occurs.
-     * Each value in the array returned has the format of:
-     *     [ <full-name> <sp> ] <path>
-     * The definition of <path> is defined in rfc 821
-     *
-     * Implements rfc 821: EXPN <SP> <string> <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250
      * SMTP CODE FAILURE: 550
      * SMTP CODE ERROR  : 500,501,502,504,421
@@ -353,6 +344,7 @@ class SMTP {
                     array("error" => "EXPN not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+            
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
@@ -368,20 +360,14 @@ class SMTP {
         return $list;
     }
 
-    /**
-     * Sends the HELO command to the smtp server.
-     * This makes sure that we and the server are in
-     * the same known state.
-     *
-     * Implements from rfc 821: HELO <SP> <domain> <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250
      * SMTP CODE ERROR  : 500, 501, 504, 421
      * @access public
      * @return bool
      */
     function Hello($serverHost = "") {
-        $this->errorOnLastCall = null; # so no confusion is caused
+        $this->errorOnLastCall = null;
 
         if (!$this->connected()) {
             $this->errorOnLastCall = array(
@@ -394,8 +380,8 @@ class SMTP {
             $serverHost = "localhost";
         }
 
-        // Send extended hello first (RFC 2821)
         if (!$this->SendHello("EHLO", $serverHost)) {
+            
             if (!$this->SendHello("HELO", $serverHost))
                 return false;
         }
@@ -403,11 +389,8 @@ class SMTP {
         return true;
     }
 
-    /**
-     * Sends a HELO/EHLO command.
-     * @access private
-     * @return bool
-     */
+    // @access private
+    // @return bool
     function SendHello($hello, $serverHost) {
         fputs($this->networkSocketSmtp, $hello . " " . $serverHost . $this->endLine);
 
@@ -423,6 +406,7 @@ class SMTP {
                     array("error" => $hello . " not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+          
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
@@ -435,23 +419,14 @@ class SMTP {
         return true;
     }
 
-    /**
-     * Gets help information on the keyword specified. If the keyword
-     * is not specified then returns generic help, ussually contianing
-     * A list of keywords that help is available on. This function
-     * returns the results back to the user. It is up to the user to
-     * handle the returned data. If an error occurs then false is
-     * returned with $this->errorOnLastCall set appropiately.
-     *
-     * Implements rfc 821: HELP [ <SP> <string> ] <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 211,214
      * SMTP CODE ERROR  : 500,501,502,504,421
      * @access public
      * @return string
      */
     function Help($keyword = "") {
-        $this->errorOnLastCall = null; # to avoid confusion
+        $this->errorOnLastCall = null;
 
         if (!$this->connected()) {
             $this->errorOnLastCall = array(
@@ -478,24 +453,19 @@ class SMTP {
                     array("error" => "HELP not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+           
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
             }
+            
             return false;
         }
 
         return $rply;
     }
 
-    /**
-     * Starts a mail transaction from the email address specified in
-     * $from. Returns true if successful or false otherwise. If True
-     * the mail transaction is started and then one or more Recipient
-     * commands may be called followed by a Data command.
-     *
-     * Implements rfc 821: MAIL <SP> FROM:<reverse-path> <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250
      * SMTP CODE SUCCESS: 552,451,452
      * SMTP CODE SUCCESS: 500,501,421
@@ -508,6 +478,7 @@ class SMTP {
         if (!$this->connected()) {
             $this->errorOnLastCall = array(
                 "error" => "Called Mail() without being connected");
+            
             return false;
         }
 
@@ -525,20 +496,19 @@ class SMTP {
                     array("error" => "MAIL not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+          
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
             }
+            
             return false;
         }
+        
         return true;
     }
 
-    /**
-     * Sends the command NOOP to the SMTP server.
-     *
-     * Implements from rfc 821: NOOP <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250
      * SMTP CODE ERROR  : 500, 421
      * @access public
@@ -567,21 +537,19 @@ class SMTP {
                     array("error" => "NOOP not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+           
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
             }
+           
             return false;
         }
+  
         return true;
     }
 
-    /**
-     * Sends the quit command to the server and then closes the socket
-     * if there is no error or the $close_on_error argument is true.
-     *
-     * Implements from rfc 821: QUIT <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 221
      * SMTP CODE ERROR  : 500
      * @access public
@@ -614,7 +582,9 @@ class SMTP {
             $temporary = array("error" => "SMTP server rejected quit command",
                 "smtp_code" => $code,
                 "smtp_rply" => substr($$GoodByeMessage, 4));
+           
             $replyValue = false;
+           
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $temporary["error"] . ": " .
                 $$GoodByeMessage . $this->endLine;
@@ -628,12 +598,7 @@ class SMTP {
         return $replyValue;
     }
 
-    /**
-     * Sends the command RCPT to the SMTP server with the TO: argument of $to.
-     * Returns true if the recipient was accepted false if it was rejected.
-     *
-     * Implements from rfc 821: RCPT <SP> TO:<forward-path> <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250,251
      * SMTP CODE FAILURE: 550,551,552,553,450,451,452
      * SMTP CODE ERROR  : 500,501,503,421
@@ -663,22 +628,19 @@ class SMTP {
                     array("error" => "RCPT not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+           
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
             }
+          
             return false;
         }
+      
         return true;
     }
 
-    /**
-     * Sends the RSET command to abort and transaction that is
-     * currently in progress. Returns true if successful false
-     * otherwise.
-     *
-     * Implements rfc 821: RSET <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250
      * SMTP CODE ERROR  : 500,501,504,421
      * @access public
@@ -707,26 +669,19 @@ class SMTP {
                     array("error" => "RSET failed",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+           
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
             }
+          
             return false;
         }
 
         return true;
     }
 
-    /**
-     * Starts a mail transaction from the email address specified in
-     * $from. Returns true if successful or false otherwise. If True
-     * the mail transaction is started and then one or more Recipient
-     * commands may be called followed by a Data command. This command
-     * will send the message to the users terminal if they are logged
-     * in.
-     *
-     * Implements rfc 821: SEND <SP> FROM:<reverse-path> <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250
      * SMTP CODE SUCCESS: 552,451,452
      * SMTP CODE SUCCESS: 500,501,502,421
@@ -756,6 +711,7 @@ class SMTP {
                     array("error" => "SEND not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+          
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
@@ -765,16 +721,7 @@ class SMTP {
         return true;
     }
 
-    /**
-     * Starts a mail transaction from the email address specified in
-     * $from. Returns true if successful or false otherwise. If True
-     * the mail transaction is started and then one or more Recipient
-     * commands may be called followed by a Data command. This command
-     * will send the message to the users terminal if they are logged
-     * in and send them an email.
-     *
-     * Implements rfc 821: SAML <SP> FROM:<reverse-path> <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250
      * SMTP CODE SUCCESS: 552,451,452
      * SMTP CODE SUCCESS: 500,501,502,421
@@ -804,6 +751,7 @@ class SMTP {
                     array("error" => "SAML not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+          
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
@@ -813,16 +761,7 @@ class SMTP {
         return true;
     }
 
-    /**
-     * Starts a mail transaction from the email address specified in
-     * $from. Returns true if successful or false otherwise. If True
-     * the mail transaction is started and then one or more Recipient
-     * commands may be called followed by a Data command. This command
-     * will send the message to the users terminal if they are logged
-     * in or mail it to them if they are not.
-     *
-     * Implements rfc 821: SOML <SP> FROM:<reverse-path> <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250
      * SMTP CODE SUCCESS: 552,451,452
      * SMTP CODE SUCCESS: 500,501,502,421
@@ -852,6 +791,7 @@ class SMTP {
                     array("error" => "SOML not accepted from server",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+          
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
@@ -883,13 +823,7 @@ class SMTP {
         return false;
     }
 
-    /**
-     * Verifies that the name is recognized by the server.
-     * Returns false if the name could not be verified otherwise
-     * the response from the server is returned.
-     *
-     * Implements rfc 821: VRFY <SP> <string> <endLine>
-     *
+    /*
      * SMTP CODE SUCCESS: 250,251
      * SMTP CODE FAILURE: 550,551,553
      * SMTP CODE ERROR  : 500,501,502,421
@@ -919,6 +853,7 @@ class SMTP {
                     array("error" => "VRFY failed on name '$name'",
                         "smtp_code" => $code,
                         "smtp_msg" => substr($rply, 4));
+           
             if ($this->setLevelDebug >= 1) {
                 echo "SMTP -> ERROR: " . $this->errorOnLastCall["error"] .
                 ": " . $rply . $this->endLine;
@@ -928,16 +863,11 @@ class SMTP {
         return $rply;
     }
 
-    /*     * *****************************************************************
+    /* *****************************************************************
      *                       INTERNAL FUNCTIONS                       *
      * **************************************************************** */
 
-    /**
-     * Read in as many lines as possible
-     * either before eof or socket timeout occurs on the operation.
-     * With SMTP we can tell if we have more lines to read if the
-     * 4th character is '-' symbol. If it is a space then we don't
-     * need to read anything else.
+    /*
      * @access private
      * @return string
      */
@@ -951,6 +881,7 @@ class SMTP {
                 $this->endLine;
             }
             $data .= $str;
+           
             if ($this->setLevelDebug >= 4) {
                 echo "SMTP -> get_lines(): \$data is \"$data\"" . $this->endLine;
             }
