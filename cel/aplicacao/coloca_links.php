@@ -156,9 +156,6 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
         $vetorDeLexicos = array();
     }
 
-    // Se o vetor de cen�rios estiver vazio ele s� ira procurar por refer�ncias a lexicos
-
-
     if (count($vetorDeCenarios) == 0) {
 
         $index = 0;
@@ -179,8 +176,6 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
         }
     }
     else {
-
-        // Se o vetor de cen�rios n�o estiver vazio ele ir� procurar por l�xicos e cen�rios
 
         $tamLexicos = count($vetorDeLexicos);
         $tamCenarios = count($vetorDeCenarios);
@@ -256,9 +251,6 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
             $contador++;
         }
     }
-    
-    //print_r( $vetorAuxLexicos );
-    // Adiciona os links para lexicos no texto 
 
     $index = 0;
     $vetorAux = array();
@@ -283,9 +275,6 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
         $indice2++;
     }
 
-
-    // Adiciona os links para cen�rios no texto 
-
     $index = 0;
     $vetorAuxCen = array();
     
@@ -298,7 +287,6 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
         $texto = preg_replace($regex, "$1wzzxkkxyy" . $index . "$3", $texto);
         $index++;
     }
-
 
     $indice2 = 0;
     
