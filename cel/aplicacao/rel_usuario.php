@@ -180,13 +180,19 @@ from the list of users who do not belong to this project and click the button <-
                                     <?php
     }
                                 ?>
+                            
                             </select>
+                        
                         </td>
+                    
                     </tr>
+                    
                     <tr align="center">
+                    
                         <td>
                             <input name="usr_r2l" type="button" value="<-">
                         </td>
+                   
                     </tr>
 
                                 <?php
@@ -195,9 +201,13 @@ from the list of users who do not belong to this project and click the button <-
                     <tr>
                         <td align="center" colspan="3" height="50" valign="bottom"><input name="submit" type="submit" value="Atualizar"></td>
                     </tr>
+               
                 </table>
+            
             </form>
+           
             <br><i><a href="showSource.php?file=rel_usuario.php">Veja o código fonte!</a></i>
+        
         </body>
     </html>
              

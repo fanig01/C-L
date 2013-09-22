@@ -1,21 +1,22 @@
 <?php
 /*
- * rmv_conceito.php: Este script faz um pedido de remover um conceito do projeto.
- * Arquivo chamador: main.php
- * 
- * Cenário  -    Excluir Conceito 
- * Objetivo:	 Permitir ao Usuário Excluir um conceito que esteja ativo
- * Contexto:	 Usuário deseja excluir um conceito
- * Pró-Condição: Login, cenário cadastrado no sistema
- * Atores:	 Usuário, Sistema
- * Recursos:	 Dados informados
- * Epis�dios:	 O sistema fornecer uma tela para o usuário justificar a necessidade daquela
- *               exclusão para que o administrador possa ler e aprovar ou não a mesma.
- *               Esta tela tamb�m conter um botão para a confirmaçao da exclusão.
- *               Restrição: Depois de clicar no botão, o sistema verifica se todos os campos foram preenchidos 
- * Exceção:	 Se todos os campos não foram preenchidos, retorna para o usuário uma mensagem
- *               avisando que todos os campos devem ser preenchidos e um botão de voltar para a pagina anterior.
+rmv_conceito.php: This script does a request to remove a project concept.
+Calling file: main.php
+ 
+Scenario: Delete Concept
+Objective: Allow user to delete a concept that is active
+Context: User wants to delete a concept
+Pro-Condition: Login and scenario registered in the system
+Actors: User, System
+Resources: Data informed
+Episodes: The system providing a screen for the user to justify the need
+for exclusion so that the administrator can read and approve or disapprove the same.
+This screen also contains a button for confirmation of deletion.
+Restriction: After clicking the button, the system checks if all fields were filled
+Exception: If all fields have not been filled, returns to the user a message
+that all fields must be completed and a button to return to the previous page.
  */
+
 session_start();
 
 include("funcoes_genericas.php");

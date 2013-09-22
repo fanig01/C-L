@@ -1,6 +1,22 @@
 <?php
-// rmv_cenario.php: Este script faz um pedido de remover um cenario do projeto.
-// Arquivo chamador: main.php
+
+/*
+rmv_cenario.php:This script does a request to remove a scenario project.
+Calling file: main.php
+
+Scenario: Remove Scenario
+Objective: Allow user to Remove a setting that is active
+Context: User wants to delete a scenario
+Precondition: Login and scenario registered in the system
+Actors: User and System
+Resources: Data informed
+Episodes: The system will provide a screen for the user to justify the need 
+for that exclusion so that the administrator can read and approve or disapprove the same. 
+This screen also contains a button to confirm the deletion.
+Restriction: After clicking the button, the system checks if all fields were filled
+Exception: If all fields have not been filled, returns to the user a message
+that all fields must be completed and a button to return to the previous page.
+*/
 
 session_start();
 
@@ -10,6 +26,7 @@ include("httprequest.inc");
 checkUserAuthentication("index.php");        
 
 inserirPedidoRemoverCenario($_SESSION['id_projeto_corrente'], $id_cenario, $_SESSION['id_usuario_corrente']);
+
 ?>  
 
 <script language="javascript1.3">
@@ -18,18 +35,7 @@ inserirPedidoRemoverCenario($_SESSION['id_projeto_corrente'], $id_cenario, $_SES
     opener.parent.frames['text'].location.replace('main.php?id_projeto=<?= $_SESSION['id_projeto_corrente'] ?>');
 
 <?php
-// Cen�rio -  Excluir Cen�rio 
-//Objetivo:	Permitir ao Usu�rio Excluir um cen�rio que esteja ativo
-//Contexto:	Usu�rio deseja excluir um cen�rio
-//              Pr�-Condi��o: Login, cen�rio cadastrado no sistema
-//Atores:	Usu�rio, Sistema
-//Recursos:	Dados informados
-//Epis�dios:	O sistema fornecer� uma tela para o usu�rio justificar a necessidade daquela
-//              exclus�o para que o administrador possa ler e aprovar ou n�o a mesma.
-//              Esta tela tamb�m conter� um bot�o para a confirma��o da exclus�o.
-//              Restri��o: Depois de clicar no bot�o, o sistema verifica se todos os campos foram preenchidos 
-//Exce��o:	Se todos os campos n�o foram preenchidos, retorna para o usu�rio uma mensagem
-//              avisando que todos os campos devem ser preenchidos e um bot�o de voltar para a pagina anterior.
+
 ?>
 
 </script>
