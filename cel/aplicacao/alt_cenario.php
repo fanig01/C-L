@@ -40,7 +40,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
 
     $comandoSql = "SELECT * FROM cenario WHERE id_cenario = $id_cenario";
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
-    $result = mysql_fetch_array($resultadoRequisicaoSql);
+    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
 
 // Cen�rio -    Alterar Cen�rio 
 //Objetivo:	    Permitir a altera��o de um cen�rio por um usu�rio
@@ -70,44 +70,44 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
                         <td>Projeto:</td>
                         <td><input disabled size="48" type="text" value="<?= $nome_projeto ?>"></td>
                     </tr>
-                    <input type="hidden" name="id_cenario" value="<?= $result['id_cenario'] ?>">
+                    <input type="hidden" name="id_cenario" value="<?= $resultArray['id_cenario'] ?>">
                     <td>T�tulo:</td>
-    <? $result['titulo'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['titulo']); ?>
-                    <input type="hidden" name="titulo" value="<?= $result['titulo'] ?>">
-                    <td><input disabled maxlength="128" name="titulo2" size="48" type="text" value="<?= $result['titulo'] ?>"></td>
+    <? $resultArray['titulo'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['titulo']); ?>
+                    <input type="hidden" name="titulo" value="<?= $resultArray['titulo'] ?>">
+                    <td><input disabled maxlength="128" name="titulo2" size="48" type="text" value="<?= $resultArray['titulo'] ?>"></td>
                     <tr>
                         <td>Objetivo:</td>
-    <? $result['objetivo'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['objetivo']); ?>
+    <? $resultArray['objetivo'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['objetivo']); ?>
 
-                        <td><textarea name="objetivo" cols="48" rows="3"><?= $result['objetivo'] ?></textarea></td>
+                        <td><textarea name="objetivo" cols="48" rows="3"><?= $resultArray['objetivo'] ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Contexto:</td>
-    <? $result['contexto'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['contexto']); ?>
-                        <td><textarea name="contexto" cols="48" rows="3"><?= $result['contexto'] ?></textarea></td>
+    <? $resultArray['contexto'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['contexto']); ?>
+                        <td><textarea name="contexto" cols="48" rows="3"><?= $resultArray['contexto'] ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Atores:</td>
-    <? $result['atores'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['atores']); ?>
+    <? $resultArray['atores'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['atores']); ?>
 
-                        <td><textarea name="atores" cols="48" rows="3"><?= $result['atores'] ?></textarea></td>
+                        <td><textarea name="atores" cols="48" rows="3"><?= $resultArray['atores'] ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Recursos:</td>
-    <? $result['recursos'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['recursos']); ?>
+    <? $resultArray['recursos'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['recursos']); ?>
 
-                        <td><textarea name="recursos" cols="48" rows="3"><?= $result['recursos'] ?></textarea></td>
+                        <td><textarea name="recursos" cols="48" rows="3"><?= $resultArray['recursos'] ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Exce��o:</td>
-    <? $result['excecao'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['excecao']); ?>
+    <? $resultArray['excecao'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['excecao']); ?>
 
-                        <td><textarea name="excecao" cols="48" rows="3"><?= $result['excecao'] ?></textarea></td>
+                        <td><textarea name="excecao" cols="48" rows="3"><?= $resultArray['excecao'] ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Epis�dios:</td>
-    <? $result['episodios'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['episodios']); ?>
-                        <td><textarea  cols="48" name="episodios" rows="5"><?= $result['episodios'] ?></textarea></td>
+    <? $resultArray['episodios'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['episodios']); ?>
+                        <td><textarea  cols="48" name="episodios" rows="5"><?= $resultArray['episodios'] ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Justificativa para a altera&ccedil;&atilde;o:</td>

@@ -44,10 +44,10 @@ session_start();
          * Adicionar a chave como um subconceito do conceito.
          */
 
-        function montar_hierarquia($conc, $nova_lista, $list) {
-            foreach ($nova_lista as $subcon) {
-                $key = existe_conceito($subcon, $list);
-                $conc->subconceitos[] = $subcon;
+        function montar_hierarquia($conceito, $nova_lista, $list) {
+            foreach ($nova_lista as $subConceito) {
+                $key = existe_conceito($subConceito, $list);
+                $conceito->subconceitos[] = $subConceito;
             }
         }
 
@@ -73,20 +73,20 @@ session_start();
 
             for (; $_SESSION["index1"] < count($lista_de_sujeito_e_objeto); ++$_SESSION["index1"]) {
 
-                $suj = $lista_de_sujeito_e_objeto[$_SESSION["index1"]];
+                $sujeito = $lista_de_sujeito_e_objeto[$_SESSION["index1"]];
 
                 if (!isset($_SESSION["conceito"])) {
                     $_SESSION["salvar"] = "TRUE";
-                    $_SESSION["conceito"] = new conceito($suj->nome, $suj->nocao);
+                    $_SESSION["conceito"] = new conceito($sujeito->nome, $sujeito->nocao);
                     $_SESSION["conceito"]->namespace = "proprio";
                 } else {
                     $_SESSION["salvar"] = "FALSE";
                 }
 
 
-                for (; $_SESSION["index2"] < count($suj->impacto); ++$_SESSION["index2"]) {
+                for (; $_SESSION["index2"] < count($sujeito->impacto); ++$_SESSION["index2"]) {
 
-                    $imp = $suj->impacto[$_SESSION["index2"]];
+                    $imp = $sujeito->impacto[$_SESSION["index2"]];
 
                     if (trim($imp) == "")
                         continue;
@@ -103,7 +103,7 @@ session_start();
                             asort($relacoes);
                             $_SESSION["lista"] = $relacoes;
                             $_SESSION["nome1"] = $imp;
-                            $_SESSION["nome2"] = $suj;
+                            $_SESSION["nome2"] = $sujeito;
                             $_SESSION["job"] = "exist";
                             ?>
                             <SCRIPT language='javascript'>
@@ -162,7 +162,7 @@ session_start();
                                 asort($conceitos);
                                 $_SESSION["lista"] = $conceitos;
                                 $_SESSION["nome1"] = $relacoes[$indice];
-                                $_SESSION["nome2"] = $suj->nome;
+                                $_SESSION["nome2"] = $sujeito->nome;
                                 $_SESSION["nome3"] = $imp;
                                 $_SESSION["job"] = "insert_relation";
                                 ?>
@@ -179,44 +179,44 @@ session_start();
 
 
                                 if ($_POST["existe"] == "FALSE") {
-                                    $conc = strtolower($_POST["nome"]);
+                                    $conceito = strtolower($_POST["nome"]);
 
-                                    if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conc, $_SESSION["predicados_selecionados"]) !== null)) {
+                                    if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conceito, $_SESSION["predicados_selecionados"]) !== null)) {
                                         continue;
                                     }
-                                    $_SESSION["predicados_selecionados"][] = $conc;
+                                    $_SESSION["predicados_selecionados"][] = $conceito;
 
-                                    if (existe_conceito($conc, $_SESSION['lista_de_conceitos']) == -1) {
-                                        if (existe_conceito($conc, $lista_de_sujeito_e_objeto) == -1) {
-                                            $nconc = new conceito($conc, "");
+                                    if (existe_conceito($conceito, $_SESSION['lista_de_conceitos']) == -1) {
+                                        if (existe_conceito($conceito, $lista_de_sujeito_e_objeto) == -1) {
+                                            $nconc = new conceito($conceito, "");
                                             $nconc->namespace = $_POST['namespace'];
                                             $_SESSION['lista_de_conceitos'][] = $nconc;
                                         }
                                     }
 
-                                    $ind_rel = existe_relacao($_SESSION['nome1'], $_SESSION['conceito']->relacoes);
-                                    if ($ind_rel != -1) {
-                                        if (array_search($conc, $_SESSION["conceito"]->relacoes[$ind_rel]->predicados) === false)
-                                            $_SESSION["conceito"]->relacoes[$ind_rel]->predicados[] = $conc;
+                                    $indiceRelacao = existe_relacao($_SESSION['nome1'], $_SESSION['conceito']->relacoes);
+                                    if ($indiceRelacao != -1) {
+                                        if (array_search($conceito, $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados) === false)
+                                            $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados[] = $conceito;
                                     }
                                     else {
-                                        $_SESSION["conceito"]->relacoes[] = new relacao_entre_conceitos($conc, $_SESSION["nome1"]);
+                                        $_SESSION["conceito"]->relacoes[] = new relacao_entre_conceitos($conceito, $_SESSION["nome1"]);
                                     }
                                 } else if ($_POST["indice"] != "-1") {
-                                    $conc = $conceitos[$_POST["indice"]]->nome;
-                                    if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conc, $_SESSION["predicados_selecionados"]) !== null)) {
+                                    $conceito = $conceitos[$_POST["indice"]]->nome;
+                                    if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conceito, $_SESSION["predicados_selecionados"]) !== null)) {
                                         continue;
                                     }
 
-                                    $_SESSION["predicados_selecionados"][] = $conc;
+                                    $_SESSION["predicados_selecionados"][] = $conceito;
 
-                                    $ind_rel = existe_relacao($_SESSION['nome1'], $_SESSION['conceito']->relacoes);
-                                    if ($ind_rel != -1) {
-                                        if (array_search($conc, $_SESSION["conceito"]->relacoes[$ind_rel]->predicados) === false)
-                                            $_SESSION["conceito"]->relacoes[$ind_rel]->predicados[] = $conc;
+                                    $indiceRelacao = existe_relacao($_SESSION['nome1'], $_SESSION['conceito']->relacoes);
+                                    if ($indiceRelacao != -1) {
+                                        if (array_search($conceito, $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados) === false)
+                                            $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados[] = $conceito;
                                     }
                                     else {
-                                        $_SESSION["conceito"]->relacoes[] = new relacao_entre_conceitos($conc, $_SESSION["nome1"]);
+                                        $_SESSION["conceito"]->relacoes[] = new relacao_entre_conceitos($conceito, $_SESSION["nome1"]);
                                     }
                                 } else {
                                     $_SESSION["finish_relation"] = TRUE;

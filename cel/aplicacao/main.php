@@ -513,27 +513,27 @@ function recuperaDAML(){
 include("frame_inferior.php");
 
 // Script called by itself main.php (or the tree) 
-if (isset($id) && isset($t)) {      
+if (isset($id) && isset($term)) {      
     
     $vetorVazio = array();
     
-    if ($t == "c") {
+    if ($term == "c") {
         
         print "<h3>Informações sobre o cenário</h3>";
     }
-    elseif ($t == "l") {
+    elseif ($term == "l") {
         
         print "<h3>Informações sobre o símbolo</h3>";
     }
-    elseif ($t == "oc") {
+    elseif ($term == "oc") {
         
         print "<h3>Informações sobre o conceito</h3>";
     }
-    elseif ($t == "or") {
+    elseif ($term == "or") {
         
         print "<h3>Informações sobre a relação</h3>";
     }
-    elseif ($t == "oa") {
+    elseif ($term == "oa") {
         
         print "<h3>Informações sobre o axioma</h3>";
     }
@@ -548,7 +548,7 @@ if (isset($id) && isset($t)) {
     ?>   
 
     <?php
-    if ($t == "c") {        // Change variables. C is scenario.
+    if ($term == "c") {        // Change variables. C is scenario.
         
         $comandoSql = "SELECT id_cenario, titulo, objetivo, contexto,
                         atores, recursos, excecao, episodios, id_projeto    
@@ -557,9 +557,9 @@ if (isset($id) && isset($t)) {
 
         $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
         
-        $result = mysql_fetch_array($resultadoRequisicaoSql);
+        $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
 
-        $c_id_projeto = $result['id_projeto'];
+        $c_id_projeto = $resultArray['id_projeto'];
 
         $vetorDeCenarios = carrega_vetor_cenario($c_id_projeto, $id, true); 
        
@@ -574,7 +574,7 @@ if (isset($id) && isset($t)) {
         <tr> 
             <th>Titulo:</th><td CLASS="Estilo">
                             
-                <?php echo nl2br(monta_links($result['titulo'], $vetorDeLexicos, $vetorVazio)); 
+                <?php echo nl2br(monta_links($resultArray['titulo'], $vetorDeLexicos, $vetorVazio)); 
         
                 ?>
             </td> 
@@ -585,7 +585,7 @@ if (isset($id) && isset($t)) {
             
            <th>Objetivo:</th><td CLASS="Estilo">
                
-                <?php echo nl2br(monta_links($result['objetivo'], $vetorDeLexicos, $vetorVazio));
+                <?php echo nl2br(monta_links($resultArray['objetivo'], $vetorDeLexicos, $vetorVazio));
                 
                 ?>
            </td> 
@@ -594,14 +594,14 @@ if (isset($id) && isset($t)) {
         <tr> 
              <th>Contexto:</th><td CLASS="Estilo">
                  
-                   <?php echo nl2br(monta_links($result['contexto'], $vetorDeLexicos, $vetorDeCenarios)); ?>		 
+                   <?php echo nl2br(monta_links($resultArray['contexto'], $vetorDeLexicos, $vetorDeCenarios)); ?>		 
              </td> 
        </tr> 
        
         <tr> 
               <th>Atores:</th><td CLASS="Estilo">
                   
-                    <?php echo nl2br(monta_links($result['atores'], $vetorDeLexicos, $vetorVazio));
+                    <?php echo nl2br(monta_links($resultArray['atores'], $vetorDeLexicos, $vetorVazio));
                     
                     ?>
               </td>  
@@ -610,7 +610,7 @@ if (isset($id) && isset($t)) {
         <tr> 
               <th>Recursos:</th><td CLASS="Estilo">
                   
-                <?php echo nl2br(monta_links($result['recursos'], $vetorDeLexicos, $vetorVazio));
+                <?php echo nl2br(monta_links($resultArray['recursos'], $vetorDeLexicos, $vetorVazio));
                 
                 ?>
                         </td> 
@@ -619,7 +619,7 @@ if (isset($id) && isset($t)) {
         <tr> 
                <th>Exceção:</th><td CLASS="Estilo">
                    
-                <?php echo nl2br(monta_links($result['excecao'], $vetorDeLexicos, $vetorVazio));
+                <?php echo nl2br(monta_links($resultArray['excecao'], $vetorDeLexicos, $vetorVazio));
                 
                 ?>
                         </td> 
@@ -627,7 +627,7 @@ if (isset($id) && isset($t)) {
         
         <tr> 
                 <th>Episódios:</th><td CLASS="Estilo">
-                <?php echo nl2br(monta_links($result['episodios'], $vetorDeLexicos, $vetorDeCenarios)); 
+                <?php echo nl2br(monta_links($resultArray['episodios'], $vetorDeLexicos, $vetorDeCenarios)); 
                 
                 ?>
 
@@ -638,10 +638,10 @@ if (isset($id) && isset($t)) {
              <TABLE> 
                 <tr> 
                    <td CLASS="Estilo" height="40" valign=MIDDLE> 
-                      <a href="#" onClick="altCenario(<?= $result['id_cenario'] ?>);">Alterar Cenário</a> 
+                      <a href="#" onClick="altCenario(<?= $resultArray['id_cenario'] ?>);">Alterar Cenário</a> 
                       </th> 
                     <td CLASS="Estilo"  valign=MIDDLE> 
-                       <a href="#" onClick="rmvCenario(<?= $result['id_cenario'] ?>);">Remover Cenário</a> 
+                       <a href="#" onClick="rmvCenario(<?= $resultArray['id_cenario'] ?>);">Remover Cenário</a> 
                       </th> 
                 </tr> 
 
@@ -651,7 +651,7 @@ if (isset($id) && isset($t)) {
                 <?php
     }
     
-    elseif ($t == "l") {
+    elseif ($term == "l") {
 
         $comandoSql = "SELECT id_lexico, nome, nocao, impacto, tipo, id_projeto    
                        FROM lexico    
@@ -659,9 +659,9 @@ if (isset($id) && isset($t)) {
 
         $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
          
-        $result = mysql_fetch_array($resultadoRequisicaoSql);
+        $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
                
-        $l_id_projeto = $result['id_projeto'];
+        $l_id_projeto = $resultArray['id_projeto'];
      
         $vetorDeLexicos = load_ArrayLexicon($l_id_projeto, $id, true);
 
@@ -669,22 +669,22 @@ if (isset($id) && isset($t)) {
                 
         ?>    
              <tr> 
-                  <th>Nome:</th><td CLASS="Estilo"><?php echo $result['nome']; ?>
+                  <th>Nome:</th><td CLASS="Estilo"><?php echo $resultArray['nome']; ?>
                   </td> 
              </tr>
              
              <tr> 
-                  <th>Noção:</th><td CLASS="Estilo"><?php echo nl2br(monta_links($result['nocao'], $vetorDeLexicos, $vetorVazio)); ?>
+                  <th>Noção:</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['nocao'], $vetorDeLexicos, $vetorVazio)); ?>
                   </td> 
              </tr>
              
              <tr> 
-                  <th>Classificação:</th><td CLASS="Estilo"><?= nl2br($result['tipo']) ?>
+                  <th>Classificação:</th><td CLASS="Estilo"><?= nl2br($resultArray['tipo']) ?>
                   </td> 
              </tr> 
              
              <tr> 
-                  <th>Impacto(s):</th><td CLASS="Estilo"><?php echo nl2br(monta_links($result['impacto'], $vetorDeLexicos, $vetorVazio)); ?> 
+                  <th>Impacto(s):</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['impacto'], $vetorDeLexicos, $vetorVazio)); ?> 
                   </td>
              </tr> 
              
@@ -744,12 +744,12 @@ if (isset($id) && isset($t)) {
               <tr> 
                   
                   <td CLASS="Estilo" height="40" valign="middle">                             
-                      <a href="#" onClick="altLexico(<?= $result['id_lexico'] ?>);">Alterar S�mbolo</a>                            
+                      <a href="#" onClick="altLexico(<?= $resultArray['id_lexico'] ?>);">Alterar S�mbolo</a>                            
                       </th> 
                        
                   <td CLASS="Estilo" valign="middle"> 
                             
-                      <a href="#" onClick="rmvLexico(<?= $result['id_lexico'] ?>);">Remover S�mbolo</a> 
+                      <a href="#" onClick="rmvLexico(<?= $resultArray['id_lexico'] ?>);">Remover S�mbolo</a> 
                             
                       </th>            
               </tr> 
@@ -758,7 +758,7 @@ if (isset($id) && isset($t)) {
         <?php
     }
     
-    elseif ($t == "oc") {        
+    elseif ($term == "oc") {        
         
         $comandoSql = "SELECT id_conceito, nome, descricao   
                        FROM   conceito   
@@ -766,17 +766,17 @@ if (isset($id) && isset($t)) {
 
         $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
         
-        $result = mysql_fetch_array($resultadoRequisicaoSql);
+        $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
         
         ?>    
 
                     
               <tr>                        
-                  <th>Nome:</th><td CLASS="Estilo"><?= $result['nome'] ?></td>                     
+                  <th>Nome:</th><td CLASS="Estilo"><?= $resultArray['nome'] ?></td>                     
               </tr> 
                     
               <tr>                        
-                  <th>Descrição:</th><td CLASS="Estilo"><?= nl2br($result['descricao']) ?></td>                    
+                  <th>Descrição:</th><td CLASS="Estilo"><?= nl2br($resultArray['descricao']) ?></td>                    
               </tr> 
                 
           </table>                
@@ -789,14 +789,14 @@ if (isset($id) && isset($t)) {
                         
                   <td CLASS="Estilo"  valign=MIDDLE> 
                             
-                      <a href="#" onClick="rmvConceito(<?= $result['id_conceito'] ?>);">Remover Conceito</a>                           
+                      <a href="#" onClick="rmvConceito(<?= $resultArray['id_conceito'] ?>);">Remover Conceito</a>                           
                       </th> 
               </tr> 
 
 
                     <?php
      }
-     elseif ($t == "or") {        
+     elseif ($term == "or") {        
                     
          $comandoSql = "SELECT id_relacao, nome   
                         FROM relacao   
@@ -804,13 +804,13 @@ if (isset($id) && isset($t)) {
                    
          $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
                     
-         $result = mysql_fetch_array($resultadoRequisicaoSql);
+         $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
                     
          ?>    
 
                     
               <tr>          
-                  <th>Nome:</th><td CLASS="Estilo"><?= $result['nome'] ?></td>                     
+                  <th>Nome:</th><td CLASS="Estilo"><?= $resultArray['nome'] ?></td>                     
               </tr> 
                 
           </table>                
@@ -823,7 +823,7 @@ if (isset($id) && isset($t)) {
                         
                   <td CLASS="Estilo"  valign=MIDDLE> 
                             
-                      <a href="#" onClick="rmvRelacao(<?= $result['id_relacao'] ?>);">Remover Relação</a>                             
+                      <a href="#" onClick="rmvRelacao(<?= $resultArray['id_relacao'] ?>);">Remover Relação</a>                             
                       </th>                     
               </tr> 
       
@@ -838,27 +838,27 @@ if (isset($id) && isset($t)) {
                   
               <?php
                         
-      if ($t == "c") {
+      if ($term == "c") {
                             
           print "<h3>Cenários que referenciam este cenário</h3>";
                         
       }
-      elseif ($t == "l") {
+      elseif ($term == "l") {
                             
           print "<h3>Cenários e termos do léxico que referenciam este termo</h3>";
                         
       }
-      elseif ($t == "oc") {
+      elseif ($term == "oc") {
                       
           print "<h3>Relações do conceito</h3>";
           
       }
-      elseif ($t == "or") {
+      elseif ($term == "or") {
                             
           print "<h3>Conceitos referentes à relação</h3>";
                               
       }
-      elseif ($t == "oa") {
+      elseif ($term == "oa") {
                             
           print "<h3>Axioma</h3>";
                         
@@ -870,7 +870,7 @@ if (isset($id) && isset($t)) {
           <?php
     
     
-          frame_inferior($SgbdConnect, $t, $id);
+          frame_inferior($SgbdConnect, $term, $id);
 }
 elseif (isset($id_projeto)) {
     

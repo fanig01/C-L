@@ -21,15 +21,15 @@ if (!isset($sucesso)) {
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
-    $ret = checarCenarioExistente($_SESSION['id_projeto_corrente'], $titulo);
+    $returnCheck = checarCenarioExistente($_SESSION['id_projeto_corrente'], $titulo);
     ?>  <!-- ADICIONEI ISTO PARA TESTES -->
     <!--
-       RET = <?= $ret ?> => RET = <?PHP $ret ? print("TRUE")  : print("FALSE") ; ?><BR>
+       RET = <?= $returnCheck ?> => RET = <?PHP $returnCheck ? print("TRUE")  : print("FALSE") ; ?><BR>
     $sucesso        = <?= $sucesso ?><BR>
     _GET["sucesso"] = <?= $_GET["sucesso"] ?><BR>   
     -->
     <?PHP
-    if ($ret == true) {
+    if ($returnCheck == true) {
         print("<!-- Tentando Inserir Cenario --><BR>");
 
         /* Substitui todas as ocorrencias de ">" e "<" por " " */

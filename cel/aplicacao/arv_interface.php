@@ -65,9 +65,9 @@ $link = bd_connect();
 //Arvore de Conceitos 
 
 if (isset($_SESSION['lista_de_conceitos']))
-    $arv = $_SESSION['lista_de_conceitos'];
+    $tree = $_SESSION['lista_de_conceitos'];
 else
-    $arv = array();
+    $tree = array();
 //$arv = get_lista_de_conceitos();   
 
 
@@ -85,15 +85,15 @@ else
 
 
 // Conceitos 
-foreach ($arv as $conc) {
-    echo "\nmenu.addItem(\"$conc->nome\");\n";
+foreach ($tree as $conceito) {
+    echo "\nmenu.addItem(\"$conceito->nome\");\n";
     echo " var mC = null;\n";
     echo " mC = new MTMenu();\n";
     echo "menu.makeLastSubmenu(mC);\n";
 
     //Rela��es 
     //Verbos 
-    foreach ($conc->relacoes as $relacao) {
+    foreach ($conceito->relacoes as $relacao) {
         echo " mC.addItem(\"$relacao->verbo\",\"\");\n";
         echo " var mV = new MTMenu();\n";
 
@@ -118,7 +118,7 @@ mysql_close($link);
 
 <?php
 print "<font color=black>";
-print_r($arv);
+print_r($tree);
 print "</font>";
 ?>
     </body>

@@ -22,13 +22,13 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 //Script chamado atrav�s do submit do formul�rio
 if (isset($submit)) {
 
-    $ret = checarLexicoExistente($_SESSION['id_projeto_corrente'], $nome);
+    $returnCheck = checarLexicoExistente($_SESSION['id_projeto_corrente'], $nome);
     if (!isset($listSinonimo))
         $listSinonimo = array();
 
-    $retSin = checarSinonimo($_SESSION['id_projeto_corrente'], $listSinonimo);
+    $returnCheckTheSynonym = checarSinonimo($_SESSION['id_projeto_corrente'], $listSinonimo);
 
-    if (($ret == true) AND ($retSin == true )) {
+    if (($returnCheck == true) AND ($returnCheckTheSynonym == true )) {
         $id_usuario_corrente = $_SESSION['id_usuario_corrente'];
         inserirPedidoAdicionarLexico($id_projeto, $nome, $nocao, $impacto, $id_usuario_corrente, $listSinonimo, $classificacao);
     } else {
@@ -57,8 +57,8 @@ if (isset($submit)) {
 } else {
     $comandoSql = "SELECT nome FROM projeto WHERE id_projeto = $id_projeto";
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
-    $result = mysql_fetch_array($resultadoRequisicaoSql);
-    $nome_projeto = $result['nome'];
+    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+    $nome_projeto = $resultArray['nome'];
     ?>
 
     <html>

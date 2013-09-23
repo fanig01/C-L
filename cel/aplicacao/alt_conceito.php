@@ -40,7 +40,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
 
     $comandoSql = "SELECT * FROM conceito WHERE id_conceito = $id_conceito";
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
-    $result = mysql_fetch_array($resultadoRequisicaoSql);
+    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
 
 // Cen�rio -    Alterar Conceito 
 //Objetivo:	Permitir a altera��o de um conceito por um usu�rio
@@ -69,21 +69,21 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
                         <td>Projeto:</td>
                         <td><input disabled size="48" type="text" value="<?= $nome_projeto ?>"></td>
                     </tr>
-                    <input type="hidden" name="id_conceitos" value="<?= $result['id_conceito'] ?>">
+                    <input type="hidden" name="id_conceitos" value="<?= $resultArray['id_conceito'] ?>">
                     <td>Nome:</td>
-    <? $result['nome'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['nome']); ?>
-                    <input type="hidden" name="nome" value="<?= $result['nome'] ?>">
-                    <td><input disabled maxlength="128" name="nome2" size="48" type="text" value="<?= $result['nome'] ?>"></td>
+    <? $resultArray['nome'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['nome']); ?>
+                    <input type="hidden" name="nome" value="<?= $resultArray['nome'] ?>">
+                    <td><input disabled maxlength="128" name="nome2" size="48" type="text" value="<?= $resultArray['nome'] ?>"></td>
                     <tr>
                         <td>Descricao:</td>
-    <? $result['descricao'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['descricao']); ?>
+    <? $resultArray['descricao'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['descricao']); ?>
 
-                        <td><textarea name="descricao" cols="48" rows="3"><?= $result['descricao'] ?></textarea></td>
+                        <td><textarea name="descricao" cols="48" rows="3"><?= $resultArray['descricao'] ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Namespace:</td>
-    <? $result['namespace'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $result['namespace']); ?>
-                        <td><textarea name="namespace" cols="48" rows="3"><?= $result['namespace'] ?></textarea></td>
+    <? $resultArray['namespace'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['namespace']); ?>
+                        <td><textarea name="namespace" cols="48" rows="3"><?= $resultArray['namespace'] ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Justificativa para a altera&ccedil;&atilde;o:</td>

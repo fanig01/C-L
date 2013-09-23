@@ -36,12 +36,12 @@ $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a quer
 ?>
 
     <?php
-    while ($result = mysql_fetch_row($resultadoRequisicaoSql)) {
+    while ($resultArray = mysql_fetch_row($resultadoRequisicaoSql)) {
        
-        $id_projeto = $result[0];
-        $data = $result[1];
-        $versao = $result[2];
-        $XML = $result[3];
+        $id_projeto = $resultArray[0];
+        $data = $resultArray[1];
+        $versao = $resultArray[2];
+        $XML = $resultArray[3];
 
         $qProcuraNomeProjeto = "SELECT * FROM projeto WHERE id_projeto = '$id_projeto'";
         $qrrProcura = mysql_query($qProcuraNomeProjeto) or die("Erro ao enviar a query de busca de projeto");

@@ -14,8 +14,8 @@ $list = verifica_tipo();
 
 if (is_array($list)) {
     foreach ($list as $id) {
-        $lex = obter_lexico($id);
-        $aux[] = $lex["nome"];
+        $lexic = obter_lexico($id);
+        $aux[] = $lexic["nome"];
     }
 
     $_SESSION["lista"] = $aux;

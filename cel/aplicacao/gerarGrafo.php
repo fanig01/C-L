@@ -32,10 +32,10 @@ $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a quer
 ?>
     <h2>Gerar Grafo</h2><br>
     <?php
-    while ($result = mysql_fetch_row($resultadoRequisicaoSql)) {
-        $data = $result[1];
-        $versao = $result[2];
-        $XML = $result[3];
+    while ($resultArray = mysql_fetch_row($resultadoRequisicaoSql)) {
+        $data = $resultArray[1];
+        $versao = $resultArray[2];
+        $XML = $resultArray[3];
         ?>
         <table>
             <tr>

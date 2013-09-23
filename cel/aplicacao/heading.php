@@ -170,9 +170,9 @@ if (isset($id_projeto)) {
 
     $id_usuario = $_SESSION['id_usuario_corrente'];
 
-    $ret = verificaGerente($id_usuario, $id_projeto);
+    $returnCheck = verificaGerente($id_usuario, $id_projeto);
 
-    if ($ret != 0) {
+    if ($returnCheck != 0) {
         ?>
           <font color="#FF0033">Administrador</font>
 
@@ -218,10 +218,10 @@ $comandoSql = "SELECT p.id_projeto, p.nome, pa.gerente
 // executes consultation
 $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar query");
 
-while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {   
+while ($resultArray = mysql_fetch_array($resultadoRequisicaoSql)) {   
     ?>
-      <option value="<?= $result['id_projeto'] ?>">
-      <?= ($result['gerente'] == 1) ? "*" : "" ?>  <?= $result['nome'] ?></option>
+      <option value="<?= $resultArray['id_projeto'] ?>">
+      <?= ($resultArray['gerente'] == 1) ? "*" : "" ?>  <?= $resultArray['nome'] ?></option>
 
      <?php
 }
@@ -293,9 +293,9 @@ Episodes: The administrator clicks the Remove Project in the top menu.
 
         $id_usuario = $_SESSION['id_usuario_corrente'];
 
-        $ret = verificaGerente($id_usuario, $id_projeto);
+        $returnCheck = verificaGerente($id_usuario, $id_projeto);
 
-              if ($ret != 0) {
+              if ($returnCheck != 0) {
                         ?> <a href="#" onClick="window.open('remove_projeto.php', '_blank', 'dependent,height=300,width=550,resizable,scrollbars,titlebar');">Remover 
                          Projeto</a>&nbsp;&nbsp;&nbsp; <?php
               }

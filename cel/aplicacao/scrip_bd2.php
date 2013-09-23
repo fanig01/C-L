@@ -20,7 +20,7 @@
               }
 
         $query = "alter table conceito add namespace varchar(250) NULL after descricao;";
-        $result = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
+        $resultArray = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
 
         echo "FIM !!!";
         

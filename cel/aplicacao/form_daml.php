@@ -26,8 +26,8 @@ $link = bd_connect();
 // Recupera nome do usu�rio
         $sql_user = "select nome from usuario where id_usuario='" . $_SESSION['id_usuario_corrente'] . "';";
         $query_user = mysql_query($sql_user) or die("Erro ao verificar usu�rio!" . mysql_error());
-        $result = mysql_fetch_array($query_user);
-        $usuario = $result[0];
+        $resultArray = mysql_fetch_array($query_user);
+        $usuario = $resultArray[0];
 
         mysql_close($link);
         ?> 

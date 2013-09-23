@@ -62,14 +62,14 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
     $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
     $comandoSql = "SELECT * FROM lexico WHERE id_lexico = $id_lexico";
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
-    $result = mysql_fetch_array($resultadoRequisicaoSql);
+    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
 
     //sinonimos
     // $DB = new PGDB () ;
     // $selectSin = new QUERY ($DB) ;
     // $selectSin->execute("SELECT nome FROM sinonimo WHERE id_lexico = $id_lexico");
-    $qSin = "SELECT nome FROM sinonimo WHERE id_lexico = $id_lexico";
-    $qrrSin = mysql_query($qSin) or die("Erro ao executar a query");
+    $comandoSqlSinonimo = "SELECT nome FROM sinonimo WHERE id_lexico = $id_lexico";
+    $resultadoRequisicaoSqlSinonimo = mysql_query($comandoSqlSinonimo) or die("Erro ao executar a query");
     //$resultSin = mysql_fetch_array($qrrSin);
     ?>
         <html>
@@ -154,7 +154,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
                 <br>
                 <form action="?id_projeto=<?= $id_projeto ?>" method="post" onSubmit="return(doSubmit());">
                     <table>
-                        <input type="hidden" name="id_lexico" value="<?= $result['id_lexico'] ?>">
+                        <input type="hidden" name="id_lexico" value="<?= $resultArray['id_lexico'] ?>">
 
                         <tr>
                             <td>Projeto:</td>
@@ -162,8 +162,8 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
                         </tr>
                         <tr>
                             <td>Nome:</td>
-                            <td><input disabled maxlength="64" name="nome_visivel" size="48" type="text" value="<?= $result['nome']; ?>">
-                                <input type="hidden"  maxlength="64" name="nome" size="48" type="text" value="<?= $result['nome']; ?>">
+                            <td><input disabled maxlength="64" name="nome_visivel" size="48" type="text" value="<?= $resultArray['nome']; ?>">
+                                <input type="hidden"  maxlength="64" name="nome" size="48" type="text" value="<?= $resultArray['nome']; ?>">
                             </td>
                         </tr>
 
@@ -181,9 +181,9 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
                             </td>   
                             <td width="100%">
                         <left><select multiple name="listSinonimo[]"  style="width: 400px;"  size="5"><?php
-    while ($rowSin = mysql_fetch_array($qrrSin)) {
+    while ($rowSynonym = mysql_fetch_array($resultadoRequisicaoSqlSinonimo)) {
         ?>
-                                    <option value="<?= $rowSin["nome"] ?>"><?= $rowSin["nome"] ?></option>
+                                    <option value="<?= $rowSynonym["nome"] ?>"><?= $rowSynonym["nome"] ?></option>
         <?php
     }
     ?>
@@ -194,23 +194,23 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
                                     <tr>
                                         <td>No��o:</td>
                                         <td>
-                                            <textarea name="nocao" cols="48" rows="3" ><?= $result['nocao']; ?></textarea>
+                                            <textarea name="nocao" cols="48" rows="3" ><?= $resultArray['nocao']; ?></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Impacto:</td>
                                         <td>
-                                            <textarea name="impacto" cols="48" rows="3"><?= $result['impacto']; ?></textarea>
+                                            <textarea name="impacto" cols="48" rows="3"><?= $resultArray['impacto']; ?></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Classifica�ao:</td>
                                         <td>
                                             <SELECT id='classificacao' name='classificacao' size=1 width="300">
-                                                <OPTION value='sujeito' <?php if ($result['tipo'] == 'sujeito') echo "selected" ?>>Sujeito</OPTION>
-                                                <OPTION value='objeto' <?php if ($result['tipo'] == 'objeto') echo "selected" ?>>Objeto</OPTION>
-                                                <OPTION value='verbo' <?php if ($result['tipo'] == 'verbo') echo "selected" ?>>Verbo</OPTION>
-                                                <OPTION value='estado' <?php if ($result['tipo'] == 'estado') echo "selected" ?>>Estado</OPTION>
+                                                <OPTION value='sujeito' <?php if ($resultArray['tipo'] == 'sujeito') echo "selected" ?>>Sujeito</OPTION>
+                                                <OPTION value='objeto' <?php if ($resultArray['tipo'] == 'objeto') echo "selected" ?>>Objeto</OPTION>
+                                                <OPTION value='verbo' <?php if ($resultArray['tipo'] == 'verbo') echo "selected" ?>>Verbo</OPTION>
+                                                <OPTION value='estado' <?php if ($resultArray['tipo'] == 'estado') echo "selected" ?>>Estado</OPTION>
                                             </SELECT>
                                         </td>
                                     </tr>

@@ -89,8 +89,8 @@ checkUserAuthentication("index.php");        // Checa se o usuario foi autentica
 <?php
 include("frame_inferior.php");
 
-if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU PELA ARVORE)
-    if ($t == "c") {
+if (isset($id) && isset($term)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU PELA ARVORE)
+    if ($term == "c") {
         ?>
 
                 <h3>Informa��es sobre o cen�rio</h3>
@@ -110,38 +110,38 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
             <?php
             $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
-            if ($t == "c") {        // se for cenario
+            if ($term == "c") {        // se for cenario
                 $comandoSql = "SELECT id_cenario, titulo, objetivo, contexto, atores, recursos, episodios
               FROM cenario
               WHERE id_cenario = $id";
                 $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
-                $result = mysql_fetch_array($resultadoRequisicaoSql);
+                $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
                 ?>
 
                     <tr>
-                        <td>Titulo:</td><td><?= $result['titulo'] ?></td>
+                        <td>Titulo:</td><td><?= $resultArray['titulo'] ?></td>
                     </tr>
                     <tr>
-                        <td>Objetivo:</td><td><?= $result['objetivo'] ?></td>
+                        <td>Objetivo:</td><td><?= $resultArray['objetivo'] ?></td>
                     </tr>
                     <tr>
-                        <td>Contexto:</td><td><?= $result['contexto'] ?></td>
+                        <td>Contexto:</td><td><?= $resultArray['contexto'] ?></td>
                     </tr>
                     <tr>
-                        <td>Atores:</td><td><?= $result['atores'] ?></td>
+                        <td>Atores:</td><td><?= $resultArray['atores'] ?></td>
                     </tr>
                     <tr>
-                        <td>Recursos:</td><td><?= $result['recursos'] ?></td>
+                        <td>Recursos:</td><td><?= $resultArray['recursos'] ?></td>
                     </tr>
                     <tr>
-                        <td>Epis�dios:</td><td><?= $result['episodios'] ?></td>
+                        <td>Epis�dios:</td><td><?= $resultArray['episodios'] ?></td>
                     </tr>
                     <tr>
                         <td height="40" valign="bottom">
-                            <a href="#" onClick="altCenario(<?= $result['id_cenario'] ?>);">Alterar Cen�rio</a>
+                            <a href="#" onClick="altCenario(<?= $resultArray['id_cenario'] ?>);">Alterar Cen�rio</a>
                         </td>
                         <td valign="bottom">
-                            <a href="#" onClick="rmvCenario(<?= $result['id_cenario'] ?>);">Remover Cen�rio</a>
+                            <a href="#" onClick="rmvCenario(<?= $resultArray['id_cenario'] ?>);">Remover Cen�rio</a>
                         </td>
                     </tr>
 
@@ -151,24 +151,24 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
               FROM lexico
               WHERE id_lexico = $id";
         $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
-        $result = mysql_fetch_array($resultadoRequisicaoSql);
+        $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
         ?>
 
                     <tr>
-                        <td>Nome:</td><td><?= $result['nome'] ?></td>
+                        <td>Nome:</td><td><?= $resultArray['nome'] ?></td>
                     </tr>
                     <tr>
-                        <td>No��o:</td><td><?= $result['nocao'] ?></td>
+                        <td>No��o:</td><td><?= $resultArray['nocao'] ?></td>
                     </tr>
                     <tr>
-                        <td>Impacto:</td><td><?= $result['impacto'] ?></td>
+                        <td>Impacto:</td><td><?= $resultArray['impacto'] ?></td>
                     </tr>
                     <tr>
                         <td height="40" valign="bottom">
-                            <a href="#" onClick="altLexico(<?= $result['id_lexico'] ?>);">Alterar L�xico</a>
+                            <a href="#" onClick="altLexico(<?= $resultArray['id_lexico'] ?>);">Alterar L�xico</a>
                         </td>
                         <td valign="bottom">
-                            <a href="#" onClick="rmvLexico(<?= $result['id_lexico'] ?>);">Remover L�xico</a>
+                            <a href="#" onClick="rmvLexico(<?= $resultArray['id_lexico'] ?>);">Remover L�xico</a>
                         </td>
                     </tr>
 
@@ -182,7 +182,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
             <br>
 
     <?php
-    if ($t == "c") {
+    if ($term == "c") {
         ?>
 
                 <h3>Cen�rios que referenciam este cen�rio</h3>
@@ -196,7 +196,7 @@ if (isset($id) && isset($t)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (OU 
                 <?php
             }
 
-            frame_inferior($SgbdConnect, $t, $id);
+            frame_inferior($SgbdConnect, $term, $id);
         } elseif (isset($id_projeto)) {         // SCRIPT CHAMADO PELO HEADING.PHP
             // Foi passada uma variavel $id_projeto. Esta variavel deve conter o id de um
             // projeto que o usuario esteja cadastrado. Entretanto, como a passagem eh

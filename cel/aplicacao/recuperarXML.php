@@ -49,11 +49,11 @@ $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a quer
     <h2>Recupera XML/XSL</h2><br>
     <?php
 
-    while ($result = mysql_fetch_row($resultadoRequisicaoSql)) {
+    while ($resultArray = mysql_fetch_row($resultadoRequisicaoSql)) {
     
-        $data = $result[1];
-        $versao = $result[2];
-        $XML = $result[3];
+        $data = $resultArray[1];
+        $versao = $resultArray[2];
+        $XML = $resultArray[3];
         
         ?>
         <table>

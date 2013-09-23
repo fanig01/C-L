@@ -127,11 +127,11 @@ from the list of users who do not belong to this project and click the button <-
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
    
     
-    while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {
+    while ($resultArray = mysql_fetch_array($resultadoRequisicaoSql)) {
     
         ?>
                                
-            <option value="<?= $result['id_usuario'] ?>"><?= $result['login'] ?></option>
+            <option value="<?= $resultArray['id_usuario'] ?>"><?= $resultArray['login'] ?></option>
 
                                    <?php
  
@@ -172,11 +172,11 @@ from the list of users who do not belong to this project and click the button <-
     
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
     
-    while ($result = mysql_fetch_array($resultadoRequisicaoSql)) {
+    while ($resultArray = mysql_fetch_array($resultadoRequisicaoSql)) {
         ?>
                                     
                                 
-            <option value="<?= $result['id_usuario'] ?>"><?= $result['login'] ?></option>
+            <option value="<?= $resultArray['id_usuario'] ?>"><?= $resultArray['login'] ?></option>
 
                                     <?php
 

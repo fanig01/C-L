@@ -26,8 +26,8 @@ if (isset($id_projeto)) {
     $comandoSql = "SELECT nome FROM projeto WHERE id_projeto = $id_projeto";
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
     
-    $result = mysql_fetch_array($resultadoRequisicaoSql);
-    $nome_projeto = $result['nome'];
+    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+    $nome_projeto = $resultArray['nome'];
     
 } else {
     ?>  

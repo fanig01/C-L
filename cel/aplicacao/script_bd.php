@@ -26,27 +26,27 @@
                                         unique key(nome),
                                         primary key(id_conceito)
                                         );";
-        $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
+        $resultArray = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
 
         $query = "create table relacao_conceito (id_conceito int(11) not null,
                                         id_relacao int(11) not null,
                                         predicado varchar(250) not null
                                         );";
-        $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
+        $resultArray = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
 
         $query = "create table relacao (id_relacao int(11) not null AUTO_INCREMENT,
                                         nome varchar(250) not null ,
                                         unique key(nome),
                                         primary key(id_relacao)
                                         );";
-        $result = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
+        $resultArray = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
 
         $query = "create table axioma (id_axioma int(11) not null AUTO_INCREMENT,
                                         axioma varchar(250) not null ,
                                         unique key(axioma),
                                         primary key(id_axioma)
                                         );";
-        $result = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
+        $resultArray = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
 
         $query = "create table algoritmo (id_variavel int(11) not null AUTO_INCREMENT,
                                         nome varchar(250) not null ,
@@ -54,7 +54,7 @@
                                         unique key(nome),
                                         primary key(id_variavel)
                                         );";
-        $result = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
+        $resultArray = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
 
         mysql_close($link);
         ?>

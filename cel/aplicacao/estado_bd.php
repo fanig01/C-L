@@ -5,12 +5,12 @@ include_once("bd.inc");
 $link = bd_connect();
 
 $query = "show tables";
-$result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
+$resultArray = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
 
 
 print "<font color=#7c75b2 face=arial><h3>TABELAS e seus ATRIBUTOS<h3></font>";
 
-while ($line = mysql_fetch_array($result, MYSQL_BOTH)) {
+while ($line = mysql_fetch_array($resultArray, MYSQL_BOTH)) {
     print "<table border=1><tr><td bgcolor=#7c75b2 width=120><font color=white>" . $line[0] . "</font></td>";
     $tabela = "describe " . $line[0];
     $atributos = mysql_query($tabela) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);

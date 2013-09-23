@@ -424,10 +424,10 @@ if (isset($_SESSION["tipos"])) {
 
     $list = verifica_tipo();
 
-    foreach ($list as $key => $termo) {
+    foreach ($list as $key => $term) {
         $aux = $_POST["type" . $key];
-        echo ("$termo, $aux <br>");
-        if (!atualiza_tipo($termo, $aux)) {
+        echo ("$term, $aux <br>");
+        if (!atualiza_tipo($term, $aux)) {
             echo "ERRO <br>";
         }
     }
