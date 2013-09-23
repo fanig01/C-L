@@ -67,7 +67,7 @@ $descricao_Projeto = $resultArrayProjeto[3];
         </table>
         <br><br>
     
-    <center><b>Cuidado!O projeto será apagado para todos seus usuários!</b></center>
+    <center><b>Cuidado!O projeto ser&aacute; apagado para todos seus usu&aacute;rios!</b></center>
     
     <p><br>
     

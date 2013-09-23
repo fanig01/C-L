@@ -47,7 +47,7 @@ else {
     <html>
         <head>
             
-            <title>Selecione os usuários</title>
+            <title>Selecione os usu&aacute;rios</title>
             <script language="javascript1.3" src="MSelect.js"></script>
             <script language="javascript1.3">
 
@@ -82,7 +82,7 @@ else {
         
         <body onLoad="createMSelect();">
            
-            <h4>Selecione os usuários para participar do projeto "<span style="color: orange"><?= simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']) ?></span>":</h4>
+            <h4>Selecione os usu&aacute;rios para participar do projeto "<span style="color: orange"><?= simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']) ?></span>":</h4>
             
             <p style="color: red">Mantenha <strong>CTRL</strong> pressionado para selecionar múltiplas opções</p>
             <form action="" method="post" onSubmit="selAll();">

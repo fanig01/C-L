@@ -10,7 +10,7 @@ checkUserAuthentication("index.php");
 $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
 
 /*
-Scenario - Generate XML Relatários
+Scenario - Generate XML report
 Objective: Allow the administrator to generate reports in XML format to a
 project identified by date.
 Context: Manager wants to generate a report for a project which is administrator.

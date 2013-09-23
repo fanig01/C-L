@@ -63,7 +63,7 @@ Context: User wants to include a scenario not registered, change or delete a reg
 Precondition: Login
 Actors: User and Project's Manager
 Resources: System, top menu and the object to be modified
-Episédios: The user clicks on the top menu option:
+Episodes: The user clicks on the top menu option:
            If user clicks the Change button, then CHANGE SCENARIO
            If user clicks on Delete, then DELETE SCENARIO
  */
@@ -519,7 +519,7 @@ if (isset($id) && isset($term)) {
     
     if ($term == "c") {
         
-        print "<h3>Informações sobre o cenário</h3>";
+        print "<h3>Informações sobre o cen&aacute;rio</h3>";
     }
     elseif ($term == "l") {
         
@@ -638,10 +638,10 @@ if (isset($id) && isset($term)) {
              <TABLE> 
                 <tr> 
                    <td CLASS="Estilo" height="40" valign=MIDDLE> 
-                      <a href="#" onClick="altCenario(<?= $resultArray['id_cenario'] ?>);">Alterar Cenário</a> 
+                      <a href="#" onClick="altCenario(<?= $resultArray['id_cenario'] ?>);">Alterar Cen&aacute;rio</a> 
                       </th> 
                     <td CLASS="Estilo"  valign=MIDDLE> 
-                       <a href="#" onClick="rmvCenario(<?= $resultArray['id_cenario'] ?>);">Remover Cenário</a> 
+                       <a href="#" onClick="rmvCenario(<?= $resultArray['id_cenario'] ?>);">Remover Cen&aacute;rio</a> 
                       </th> 
                 </tr> 
 
@@ -840,12 +840,12 @@ if (isset($id) && isset($term)) {
                         
       if ($term == "c") {
                             
-          print "<h3>Cenários que referenciam este cenário</h3>";
+          print "<h3>Cen&aacute;rios que referenciam este cen&aacute;rio</h3>";
                         
       }
       elseif ($term == "l") {
                             
-          print "<h3>Cenários e termos do léxico que referenciam este termo</h3>";
+          print "<h3>Cen&aacute;rios e termos do léxico que referenciam este termo</h3>";
                         
       }
       elseif ($term == "oc") {
@@ -963,11 +963,11 @@ Showing on-screen options:
                     
               </tr>               
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="addUsuario();">Adicionar usuário (não cadastrado) neste projeto</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="addUsuario();">Adicionar usu&aacute;rio (não cadastrado) neste projeto</a></td>                    
               </tr> 
                     
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="relUsuario();">Adicionar usuários já existentes neste projeto</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="relUsuario();">Adicionar usu&aacute;rios j&aacute; existentes neste projeto</a></td>                    
               </tr>   
                   
               <tr>                      
@@ -975,11 +975,11 @@ Showing on-screen options:
               </tr> 
                    
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="pedidoCenario();">Verificar pedidos de alteração de Cenários</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="pedidoCenario();">Verificar pedidos de alteração de Cen&aacute;rios</a></td>                    
               </tr> 
                     
               <tr>                       
-                  <td CLASS="Estilo"><a href="#" onClick="pedidoLexico();">Verificar pedidos de alteração de termos do Léxico</a></td>                     
+                  <td CLASS="Estilo"><a href="#" onClick="pedidoLexico();">Verificar pedidos de alteração de termos do L&eacute;xico</a></td>                     
               </tr>
                     
               <tr>                       
@@ -1051,7 +1051,7 @@ Showing on-screen options:
                 <br>
                 <table ALIGN=CENTER> 
                     <tr> 
-                        <th>Você não é um administrador deste projeto:</th> 	
+                        <th>Você não &eacute; um administrador deste projeto:</th> 	
                     </tr>	
                     <tr> 
                         <td CLASS="Estilo"><a href="#" onClick="geraGrafo();" >Gerar grafo deste projeto</a></td>

@@ -243,12 +243,12 @@ function adiciona_relacionamento($id_from, $tipo_from, $texto) {
                     
                     if (strcasecmp($tipo_from, 'lexico') == 0) {
                         
-                        echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'léxico para léxico")</script>';
+                        echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'l&eacute;xico para l&eacute;xico")</script>';
            	
                     }
                     else if (strcasecmp($tipo_from, 'cenario') == 0) {
                        
-                        echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'cen�rio para l�xico")</script>';
+                        echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'cen&aacute;rio para l&eacute;xico")</script>';
                       
                     }
                 }
@@ -257,7 +257,7 @@ function adiciona_relacionamento($id_from, $tipo_from, $texto) {
                     
                     if (strcasecmp($tipo_from, 'cenario') == 0) {
                         
-                        echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'cen�rio para cen�rio")</script>';
+                        echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'cen&aacute;rio para cen&aacute;rio")</script>';
 
                         /* Adds relation of scenario to  scenario in table centocen
                         

@@ -67,11 +67,11 @@ P
 				</style>
 			</head>
 			<body>
-			       <h2>Cenários</h2><br/>
+			       <h2>Cen&aacute;rios</h2><br/>
 				<xsl:apply-templates select="//cenario">
 					<xsl:sort select="titulo" order="ascending" />
 				</xsl:apply-templates><br/>
-				<h2>Léxicos</h2><br/>
+				<h2>L&eacute;xicos</h2><br/>
 				<xsl:apply-templates select="//lexico">
 					<xsl:sort select="nome_simbolo" order="ascending" />
 				</xsl:apply-templates>

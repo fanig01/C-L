@@ -33,7 +33,7 @@ $password = $row[4];
 ?>
 <html>
     <head>
-        <title>Alterar dados de Usuário</title>
+        <title>Alterar dados de Usu&aacute;rio</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     </head>
 
@@ -88,7 +88,7 @@ $password = $row[4];
                 {
                     return (true)
                 }
-                alert("Atenção: o e-mail digitado não é válido.")
+                alert("Atenção: o e-mail digitado não é v&aacute;lido.")
                 email.focus();
                 email.select();
                 return (false)

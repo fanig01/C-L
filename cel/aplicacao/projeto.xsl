@@ -60,7 +60,7 @@ P
    </style> 
   </head> 
   <body> 
-   <h2>Cenários</h2><br/> 
+   <h2>Cen&aacute;rios</h2><br/> 
    <xsl:apply-templates select="//cenario"> 
     <xsl:sort select="titulo" order="ascending" /> 
    </xsl:apply-templates><br/> 
@@ -105,7 +105,7 @@ P
        <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
       </xsl:when>
 	  <xsl:when test="@referencia_cenario"> 
-       <xsl:element name="a"><xsl:attribute name="title">Cenário</xsl:attribute><xsl:attribute name="HREF">#cenario_<xsl:value-of select="@referencia_cenario" /></xsl:attribute><xsl:element name="span"><xsl:attribute name="style">font-variant: small-caps</xsl:attribute><xsl:value-of select="." /></xsl:element></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">Cen&aacute;rio</xsl:attribute><xsl:attribute name="HREF">#cenario_<xsl:value-of select="@referencia_cenario" /></xsl:attribute><xsl:element name="span"><xsl:attribute name="style">font-variant: small-caps</xsl:attribute><xsl:value-of select="." /></xsl:element></xsl:element> 
       </xsl:when> 
       <xsl:otherwise> 
        <xsl:value-of select="." /> 
@@ -153,7 +153,7 @@ P
        <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." disable-output-escaping="yes" /></xsl:element> 
       </xsl:when> 
 	  <xsl:when test="@referencia_cenario"> 
-       <xsl:element name="a"><xsl:attribute name="title">Cenário</xsl:attribute><xsl:attribute name="HREF">#cenario_<xsl:value-of select="@referencia_cenario" /></xsl:attribute><xsl:element name="span"><xsl:attribute name="style">font-variant: small-caps</xsl:attribute><xsl:value-of select="." /></xsl:element></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">Cen&aacute;rio</xsl:attribute><xsl:attribute name="HREF">#cenario_<xsl:value-of select="@referencia_cenario" /></xsl:attribute><xsl:element name="span"><xsl:attribute name="style">font-variant: small-caps</xsl:attribute><xsl:value-of select="." /></xsl:element></xsl:element> 
       </xsl:when> 
       <xsl:otherwise> 
        <xsl:value-of select="." disable-output-escaping="yes"/> 
