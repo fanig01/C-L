@@ -1069,7 +1069,7 @@ else {
                     <?php
 }
                 ?>    
-        <i><a href="showSource.php?file=main.php">Veja o código fonte!</a></i> 
+        <i><a href="showSource.php?file=main.php">Veja o c&oacute;digo fonte!</a></i> 
     </body> 
 
 </html> 
