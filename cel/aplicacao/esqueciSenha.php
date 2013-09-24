@@ -16,7 +16,6 @@
                 form.login.focus()
                 return false;
             }
-
         }
 
     //-->
@@ -30,18 +29,21 @@
             <div align="center">
 
                 <?php
-// Cen�rio - Lembrar senha 
-//Objetivo:   Permitir o usu�rio cadastrado, que esqueceu sua senha,  receber  a mesma por email	
-//Contexto:   Sistema est� aberto, Usu�rio esqueceu sua senha Usu�rio na tela de lembran�a de 
-//             senha. 
-//            Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-//Atores:     Usu�rio, Sistema	
-//Recursos:   Banco de Dados	
-//Epis�dios:  O usu�rio acessa a tela de login do sistema. 
-//            O usu�rio clica no link �Esqueci senha� 
-//            O sistema apresenta uma mensagem na tela, pedindo ao usu�rio que digite o seu 
-//            login na caixa de texto. 
-//            O usu�rio digita o seu login e clica no bot�o Enviar. 
+                
+// Scenario: Remember password
+// Objective: Allow registered user, that forgot his password, receive his
+//            password by email
+// Context: System is open, user forgot his password on screen of reminder the
+//          password.
+// Precondition: user have acessed to the system
+// Actors: user, system
+// Resources: database
+// Episode: the user acess the screen of login of the system. 
+//            the user click the link FORGOT PASSWORD
+//            the system show a message on screen, asking to the user that
+// type his login in text box.
+//            The user type his login and click send button.
+                
                 ?>
 
                 <p style="color: green; font-weight: bold; text-align: center">Entre com seu Login:</p>
