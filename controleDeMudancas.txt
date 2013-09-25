@@ -131,7 +131,7 @@ Thaiane Braga
 -----------------------------------------------------------------------------------
 
 
-Dicionário de Variáveis:
+    Dicionário de Variáveis:
 
 1. $do_debug = $setLevelDebug
 2. $smtp_conn     = $networkSocketSmtp
@@ -151,8 +151,8 @@ Dicionário de Variáveis:
 16. $rval             = $replyValue
 17.$qrr               = $resultadoRequisicaoSql
 18. $r                 = $SgbdConnectStatus
-19.$result           = $rowResult obs: pertence a função inclui_cenario(), ou seja,
-                                       é local, no arquivo copy(2) of funcoes_genericas
+19.$result           = $rowResult obs: pertence a função inclui_cenario(), ou seja,                                  
+                                   é local, no arquivo copy(2) of funcoes_genericas
 20. $i                  = $index   obs: local no arquivo coloca_links.php
 21. $j                  = $indexAux_1 obs: local no arquivo coloca_links.php
 22. $a                 = $indexAux_2 obs: local no arquivo coloca_links.php
@@ -165,13 +165,49 @@ Dicionário de Variáveis:
 29.  $i                  = $index   obs: local no arquivo coloca_tags_xml.php
 30. $tam_str        = $sizeOfString obs: local no arquivo coloca_tags_xml.php
 31. $str               = $string obs: local no arquivo coloca_tags_xml.php
-32.$senha           = $password
+32. $senha           = $password
+33. $result           = $resultArray (é global)
+34. $t                  = $term
+35. $ret               = $returnCheck
+36. $retSin           = $returnCheckTheSynonym
+37. $conc             = $conceito
+38. $conc             = $conceito (local no arquivo algoritmo.php função montar_hierarquia)
+39. $conc             = $conceito (local no arquivo algoritmo.php função traduz_sujeito_objeto)
+40. $subcon         = $subConceito (local no arquivo algoritmo.php função montar_hierarquia)
+41. $suj               = $sujeito (local no arquivo algoritmo.php função traduz_sujeito_objeto)
+42. $ind_rel         = $indiceRelacao (local no arquivo algoritmo.php função traduz_sujeito_objeto)
+43. $lex               = $lexic
+44. $qSin             = $comandoSqlSinonimo
+45. $qrrSin          = $resultadoRequisicaoSqlSinonimo
+46. $rowSin         = $rowSynonym
+47. $arv              = $tree
+48.$comandoSql = $commandSQL
+49. $resultadoRequisicaoSql = $requestResultSQL
+50. $data = $date (local no arquivo gerarGrafo.php)51.$versao = $version (local no arquivo gerarGrafo.php)
+52. $senha_cript = $criptPassword 
  
-Dicionário de Funções:1. chkUser  = checkUserAuthentication
+   Dicionário de Funções:
+
+1. chkUser  = checkUserAuthentication
 2. check_proj_perm = permissionCheckToProject
 3. carrega_vetor_lexicos = load_arrayLexicon
 4. pega_id_xml = get_IdXml
-
+5. getIDPrj= getIdProject
+6.atualizaMenu = menuUpdate
+7. setPrjSelected = setProjectSelected
+8. reCarregar = reLoad
+9. altCenario =changeScenario
+10.rmvCenario = removeScenario
+11.altConceito = changeConcept
+12. rmvConceito = removeConcept
+13.rmvRelacao = removeRelationship14.altLexico = changeLexicon
+15.rmvLexico = removeLexicon 
+16.pedidoCenario = requestScenario
+16.pedidoLexico = requestLexicon
+17. pedidoConceito = requestConcept
+18. pedidoRelacao = requestRelationship
+19. addUsuario = addUser
+20.relUsuario = relateUsers 
 
 
 -------------------------------------------------------------------------------

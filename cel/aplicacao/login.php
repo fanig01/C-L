@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+
+include("bd.inc");
+
 /*
  Title: Acessing the system
  Objective: Allow the user to access the Lexical Editing's Application and Editing Scenarios, 
@@ -13,10 +17,6 @@
  Exception: Failed to connect database 
 */
 
-session_start();
-
-include("bd.inc");
-
 $url = '';
 $submit = '';
 $login = '';
@@ -28,14 +28,12 @@ include("httprequest.inc");
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if ($submit == 'Entrar') {
- 
-    $senha_cript = md5($password);
-    $comandoSql = "SELECT id_usuario FROM usuario WHERE login='$login' AND senha='$senha_cript'";
-
     
-    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
+    $criptPassword = md5($password);
+    $commandSQL = "SELECT id_usuario FROM usuario WHERE login='$login' AND senha='$criptPassword'";
+    $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
 
-    if (!mysql_num_rows($resultadoRequisicaoSql)) {
+    if (!mysql_num_rows($requestResultSQL)) {
         ?>
         <script language="javascript1.3">
             document.location.replace('login.php?wrong=true&url=<?= $url ?>');
@@ -45,14 +43,15 @@ if ($submit == 'Entrar') {
         
         $wrong = $_get["wrong"];
     }
-
     else {
 
-        $row = mysql_fetch_row($resultadoRequisicaoSql);
+        $row = mysql_fetch_row($requestResultSQL);
         $id_usuario_corrente = $row[0];
 
         session_register("id_usuario_corrente");
+        
         ?>
+        
         <script language="javascript1.3">
             opener.document.location.replace('<?= $url ?>');
             self.close();
@@ -61,8 +60,8 @@ if ($submit == 'Entrar') {
         <?php
     }
 }
- 
 else {
+    
     ?>
         
     <html>
@@ -113,7 +112,7 @@ else {
 
     <?php /* Show the code */ ?>
 
-        <i><a href="showSource.php?file=login.php">Veja o código fonte!</a></i>    
+        <i><a href="showSource.php?file=login.php">Veja o c&oacute;digo fonte!</a></i>    
     </html>
 
     <?php

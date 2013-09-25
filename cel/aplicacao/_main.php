@@ -12,32 +12,40 @@ checkUserAuthentication("index.php");        // Checa se o usuario foi autentica
 
             // Funcoes que serao usadas quando o script
             // for chamado atraves dele proprio ou da arvore
-            function reCarrega(URL) {
-                document.location.replace(URL);
-            }
+            
+    function reLoad(URL) {
+                
+        document.location.replace(URL);
+    }
+        
+    function changeScenario(cenario) {
+                
+        var url = 'alt_cenario.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_cenario=' + cenario;
+        var where = '_blank';
+        var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
+          
+        open(url, where, window_spec);
+    }
 
-            function altCenario(cenario) {
-                var url = 'alt_cenario.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_cenario=' + cenario;
-                var where = '_blank';
-                var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
+            
+    function removeScenario(cenario) {
+                
+        var url = 'rmv_cenario.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_cenario=' + cenario;
+        var where = '_blank';
+        var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
+        
+        open(url, where, window_spec);
+     }
+
+     function changeLexicon(lexico) {
+                
+        var url = 'alt_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
+        var where = '_blank';
+        var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
                 open(url, where, window_spec);
             }
 
-            function rmvCenario(cenario) {
-                var url = 'rmv_cenario.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_cenario=' + cenario;
-                var where = '_blank';
-                var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
-                open(url, where, window_spec);
-            }
-
-            function altLexico(lexico) {
-                var url = 'alt_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
-                var where = '_blank';
-                var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
-                open(url, where, window_spec);
-            }
-
-            function rmvLexico(lexico) {
+            function removeLexicon(lexico) {
                 var url = 'rmv_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
                 var where = '_blank';
                 var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
@@ -46,28 +54,28 @@ checkUserAuthentication("index.php");        // Checa se o usuario foi autentica
 
             // Funcoes que serao usadas quando o script
             // for chamado atraves da heading.php
-            function pedidoCenario() {
+            function requestScenario() {
                 var url = 'ver_pedido_cenario.php?id_projeto=' + '<?= $id_projeto ?>';
                 var where = '_blank';
                 var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
                 open(url, where, window_spec);
             }
 
-            function pedidoLexico() {
+            function requestLexicon() {
                 var url = 'ver_pedido_lexico.php?id_projeto=' + '<?= $id_projeto ?>';
                 var where = '_blank';
                 var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
                 open(url, where, window_spec);
             }
 
-            function addUsuario() {
+            function addUser() {
                 var url = 'add_usuario.php';
                 var where = '_blank';
                 var window_spec = 'dependent,height=270,width=490,resizable,scrollbars,titlebar';
                 open(url, where, window_spec);
             }
 
-            function relUsuario() {
+            function relateUsers() {
                 var url = 'rel_usuario.php';
                 var where = '_blank';
                 var window_spec = 'dependent,height=330,width=550,resizable,scrollbars,titlebar';
@@ -111,11 +119,11 @@ if (isset($id) && isset($term)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (
             $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
             if ($term == "c") {        // se for cenario
-                $comandoSql = "SELECT id_cenario, titulo, objetivo, contexto, atores, recursos, episodios
+                $commandSQL = "SELECT id_cenario, titulo, objetivo, contexto, atores, recursos, episodios
               FROM cenario
               WHERE id_cenario = $id";
-                $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
-                $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+                $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
+                $resultArray = mysql_fetch_array($requestResultSQL);
                 ?>
 
                     <tr>
@@ -138,20 +146,20 @@ if (isset($id) && isset($term)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (
                     </tr>
                     <tr>
                         <td height="40" valign="bottom">
-                            <a href="#" onClick="altCenario(<?= $resultArray['id_cenario'] ?>);">Alterar Cen�rio</a>
+                            <a href="#" onClick="changeScenario(<?= $resultArray['id_cenario'] ?>);">Alterar Cen�rio</a>
                         </td>
                         <td valign="bottom">
-                            <a href="#" onClick="rmvCenario(<?= $resultArray['id_cenario'] ?>);">Remover Cen�rio</a>
+                            <a href="#" onClick="removeScenario(<?= $resultArray['id_cenario'] ?>);">Remover Cen�rio</a>
                         </td>
                     </tr>
 
         <?php
     } else {
-        $comandoSql = "SELECT id_lexico, nome, nocao, impacto
+        $commandSQL = "SELECT id_lexico, nome, nocao, impacto
               FROM lexico
               WHERE id_lexico = $id";
-        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
-        $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+        $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
+        $resultArray = mysql_fetch_array($requestResultSQL);
         ?>
 
                     <tr>
@@ -165,10 +173,10 @@ if (isset($id) && isset($term)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (
                     </tr>
                     <tr>
                         <td height="40" valign="bottom">
-                            <a href="#" onClick="altLexico(<?= $resultArray['id_lexico'] ?>);">Alterar L�xico</a>
+                            <a href="#" onClick="changeLexicon(<?= $resultArray['id_lexico'] ?>);">Alterar L�xico</a>
                         </td>
                         <td valign="bottom">
-                            <a href="#" onClick="rmvLexico(<?= $resultArray['id_lexico'] ?>);">Remover L�xico</a>
+                            <a href="#" onClick="removeLexicon(<?= $resultArray['id_lexico'] ?>);">Remover L�xico</a>
                         </td>
                     </tr>
 
@@ -230,10 +238,10 @@ if (isset($id) && isset($term)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (
 
                 <br>
                 <p><b>Voc� � um administrador deste projeto</b></p>
-                <p><a href="#" onClick="pedidoCenario();">Verificar pedidos de altera��o de Cen�rios</a></p>
-                <p><a href="#" onClick="pedidoLexico();">Verificar pedidos de altera��o de termos do L�xico</a></p>
-                <p><a href="#" onClick="addUsuario();">Adicionar usu�rio (n�o existente) neste projeto</a></p>
-                <p><a href="#" onClick="relUsuario();">Relacionar usu�rios j� existentes com este projeto</a></p>
+                <p><a href="#" onClick="requestScenario();">Verificar pedidos de altera��o de Cen�rios</a></p>
+                <p><a href="#" onClick="requestLexicon();">Verificar pedidos de altera��o de termos do L�xico</a></p>
+                <p><a href="#" onClick="addUser();">Adicionar usu�rio (n�o existente) neste projeto</a></p>
+                <p><a href="#" onClick="relateUsers();">Relacionar usu�rios j� existentes com este projeto</a></p>
                 <p><a href="#" onClick="geraXML();">Gerar XML deste projeto</a></p>
 
         <?php

@@ -98,7 +98,7 @@
             
             if ($site == "http:///") {
                 print( "Atenção: O arquivo de configuração do CELConfig (padrão: config2.conf) precisa ser configurado corratamente.<BR>\n ");
-                print("* Não foram preenchidas as variáveis 'HTTPD_ip','CEL_dir_relativo' e 'DAML_dir_relativo_ao_CEL'.<BR>\n");
+                print("* Não foram preenchidas as vari&aacute;veis 'HTTPD_ip','CEL_dir_relativo' e 'DAML_dir_relativo_ao_CEL'.<BR>\n");
                 print("Por favor, verifique o arquivo e tente novamente.<BR>\n");
             }
         }

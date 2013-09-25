@@ -21,11 +21,11 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 $id_usuario = $_SESSION['id_usuario_corrente'];
 
 
-$comandoSql = "SELECT * FROM usuario WHERE id_usuario='$id_usuario'";
+$commandSQL = "SELECT * FROM usuario WHERE id_usuario='$id_usuario'";
 
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
 
-$row = mysql_fetch_row($resultadoRequisicaoSql);
+$row = mysql_fetch_row($requestResultSQL);
 $nome = $row[1];
 $email = $row[2];
 $login = $row[3];
@@ -33,7 +33,7 @@ $password = $row[4];
 ?>
 <html>
     <head>
-        <title>Alterar dados de Usuário</title>
+        <title>Alterar dados de Usu&aacute;rio</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     </head>
 
@@ -88,7 +88,7 @@ $password = $row[4];
                 {
                     return (true)
                 }
-                alert("Atenção: o e-mail digitado não é válido.")
+                alert("Atenção: o e-mail digitado não é v&aacute;lido.")
                 email.focus();
                 email.select();
                 return (false)

@@ -12,20 +12,20 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
     
-    $comandoSql = "DELETE FROM participa
+    $commandSQL = "DELETE FROM participa
           WHERE id_usuario != " . $_SESSION['id_usuario_corrente'] . "
           AND id_projeto = " . $_SESSION['id_projeto_corrente'];
     
-    mysql_query($comandoSql) or die("Erro ao executar a query de DELETE");
+    mysql_query($commandSQL) or die("Erro ao executar a query de DELETE");
 
     $n_sel = count($usuarios);
     
     for ($i = 0; $i < $n_sel; $i++) {
         
-        $comandoSql = "INSERT INTO participa (id_usuario, id_projeto)
+        $commandSQL = "INSERT INTO participa (id_usuario, id_projeto)
                        VALUES (" . $usuarios[$i] . ", " . $_SESSION['id_projeto_corrente'] . ")";
         
-        mysql_query($comandoSql) or die("Erro ao cadastrar usuario");   
+        mysql_query($commandSQL) or die("Erro ao cadastrar usuario");   
         
     }
     
@@ -47,7 +47,7 @@ else {
     <html>
         <head>
             
-            <title>Selecione os usuários</title>
+            <title>Selecione os usu&aacute;rios</title>
             <script language="javascript1.3" src="MSelect.js"></script>
             <script language="javascript1.3">
 
@@ -82,7 +82,7 @@ else {
         
         <body onLoad="createMSelect();">
            
-            <h4>Selecione os usuários para participar do projeto "<span style="color: orange"><?= simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']) ?></span>":</h4>
+            <h4>Selecione os usu&aacute;rios para participar do projeto "<span style="color: orange"><?= simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']) ?></span>":</h4>
             
             <p style="color: red">Mantenha <strong>CTRL</strong> pressionado para selecionar múltiplas opções</p>
             <form action="" method="post" onSubmit="selAll();">
@@ -118,16 +118,16 @@ from the list of users who do not belong to this project and click the button <-
         To update the relationships, the administrator clicks the Refresh button
 */   
 
-    $comandoSql = "SELECT u.id_usuario, login
+    $commandSQL = "SELECT u.id_usuario, login
           FROM usuario u, participa p
           WHERE u.id_usuario = p.id_usuario
           AND p.id_projeto = " . $_SESSION['id_projeto_corrente'] . "
           AND u.id_usuario != " . $_SESSION['id_usuario_corrente'];
 
-    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
+    $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
    
     
-    while ($resultArray = mysql_fetch_array($resultadoRequisicaoSql)) {
+    while ($resultArray = mysql_fetch_array($requestResultSQL)) {
     
         ?>
                                
@@ -165,14 +165,14 @@ from the list of users who do not belong to this project and click the button <-
         $resultadosubq = "$resultadosubq )";
     }
     
-    $comandoSql = "SELECT usuario.id_usuario, usuario.login 
+    $commandSQL = "SELECT usuario.id_usuario, usuario.login 
                   FROM usuario where usuario.id_usuario not in " . $resultadosubq;
     
-    echo($comandoSql);
+    echo($commandSQL);
     
-    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
+    $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
     
-    while ($resultArray = mysql_fetch_array($resultadoRequisicaoSql)) {
+    while ($resultArray = mysql_fetch_array($requestResultSQL)) {
         ?>
                                     
                                 

@@ -34,7 +34,7 @@ function frame_inferior($bd, $tipo, $id) {
         while ($row = mysql_fetch_row($tb_cenario)) {
             // Retira as tags HTML de dentro do titulo do cenario 
             $row[1] = preg_replace($search, $replace, $row[1]);
-            $link = "<a href=javascript:reCarrega" .
+            $link = "<a href=javascript:reLoad" .
                     "('main.php?id=$row[0]&t=c');><span style=\"font-variant: small-caps\">$row[1]</span></a>";
             ?> 
 
@@ -80,7 +80,7 @@ function frame_inferior($bd, $tipo, $id) {
             <?php
             if ($rowc = mysql_fetch_row($tb_cenario)) {
                 $rowc[1] = preg_replace($search, $replace, $rowc[1]);
-                $link = "<a href=javascript:reCarrega" .
+                $link = "<a href=javascript:reLoad" .
                         "('main.php?id=$rowc[0]&t=c');><span style=\"font-variant: small-caps\">$rowc[1]</span></a>";
             } // if 
             else {
@@ -92,7 +92,7 @@ function frame_inferior($bd, $tipo, $id) {
 
                         <?php
                         if ($rowl = mysql_fetch_row($tb_lexico)) {
-                            $link = "<a href=javascript:reCarrega" .
+                            $link = "<a href=javascript:reLoad" .
                                     "('main.php?id=$rowl[0]&t=l');>$rowl[1]</a>";
                         } // if 
                         else {

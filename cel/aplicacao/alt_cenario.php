@@ -38,9 +38,9 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
 } else { // Script chamado atraves do link no cenario corrente
     $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
 
-    $comandoSql = "SELECT * FROM cenario WHERE id_cenario = $id_cenario";
-    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
-    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+    $commandSQL = "SELECT * FROM cenario WHERE id_cenario = $id_cenario";
+    $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
+    $resultArray = mysql_fetch_array($requestResultSQL);
 
 // Cen�rio -    Alterar Cen�rio 
 //Objetivo:	    Permitir a altera��o de um cen�rio por um usu�rio

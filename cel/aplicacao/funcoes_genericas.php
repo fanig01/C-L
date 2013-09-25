@@ -1680,9 +1680,9 @@ if (!(function_exists("tratarPedidoLexico"))) {
 # Se for para alterar: Devemos (re)mover o cenario e inserir o novo.
 # Se for para inserir: chamamos a funcao insert();
 ###################################################################
-if (!(function_exists("tratarPedidoConceito"))) {
+if (!(function_exists("tratarrequestConcept"))) {
 
-    function tratarPedidoConceito($id_pedido) {
+    function tratarrequestConcept($id_pedido) {
         $DB = new PGDB ();
         $select = new QUERY($DB);
         $delete = new QUERY($DB);

@@ -156,6 +156,7 @@ if (isset($id_projeto)) {
             text-decoration: none
         }
     </style>
+    
     <body bgcolor="#ffffff" text="#000000" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" <?= (isset($id_projeto)) ? "onLoad=\"setPrjSelected();\"" : "" ?>>
         <form onSubmit="return atualizaMenu();">
             <table width="100%" cellspacing="0" cellpadding="0">
