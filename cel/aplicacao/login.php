@@ -48,7 +48,8 @@ if ($submit == 'Entrar') {
         $row = mysql_fetch_row($requestResultSQL);
         $id_usuario_corrente = $row[0];
 
-        session_register("id_usuario_corrente");
+        $_SESSION["id_usuario_corrente"];
+        //session_register("id_usuario_corrente");
         
         ?>
         
