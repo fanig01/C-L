@@ -28,9 +28,11 @@ include("httprequest.inc");
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if ($submit == 'Entrar') {
-    
+ 
     $senha_cript = md5($password);
     $comandoSql = "SELECT id_usuario FROM usuario WHERE login='$login' AND senha='$senha_cript'";
+
+    
     $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
 
     if (!mysql_num_rows($resultadoRequisicaoSql)) {
