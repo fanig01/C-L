@@ -38,9 +38,9 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
 } else { // Script chamado atraves do link no cenario corrente
     $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
 
-    $comandoSql = "SELECT * FROM conceito WHERE id_conceito = $id_conceito";
-    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
-    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+    $commandSQL = "SELECT * FROM conceito WHERE id_conceito = $id_conceito";
+    $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
+    $resultArray = mysql_fetch_array($requestResultSQL);
 
 // Cen�rio -    Alterar Conceito 
 //Objetivo:	Permitir a altera��o de um conceito por um usu�rio

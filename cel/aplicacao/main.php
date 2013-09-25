@@ -1,28 +1,17 @@
 <?php
 
 session_start();
+
 include_once("CELConfig/CELConfig.inc");
-
-/*
-$_SESSION['site'] = 'http://pes.inf.puc-rio.br/pes03_1_1/Site/desenvolvimento/teste/';       
-$_SESSION['site'] = 'http://139.82.24.189/cel_vf/aplicacao/teste/';
-URL do diretorio contendo os arquivos de DAML 
-*/
-
-$_SESSION['site'] = "http://" . CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo") . CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
-
-/*
-$_SESSION['diretorio'] = "/home/local/pes/pes03_1_1/Site/desenvolvimento/teste/";        
-$_SESSION['diretorio'] = "teste/";        
-Caminho relativo ao CEL do diretorio contendo os arquivos de DAML
-*/
-
-$_SESSION['diretorio'] = CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
-
 include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("coloca_links.php");
 
+//URL of the directory containing the files DAML 
+$_SESSION['site'] = "http://" . CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo") . CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
+        
+//Caminho relativo ao CEL do diretorio contendo os arquivos de DAML
+$_SESSION['diretorio'] = CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
 
 checkUserAuthentication("index.php");
 
@@ -32,15 +21,21 @@ If the variable is not initialized, the system will give error. Insert assertive
 */
 
 if (isset($_GET['id_projeto'])) {
+    
     $id_projeto = $_GET['id_projeto'];
-} else {
-    // $id_projeto = ""; 
+}
+else {
+    // Nothing should be done
 }
 
 if (!isset($_SESSION['id_projeto_corrente'])) {
 
     $_SESSION['id_projeto_corrente'] = "";
 }
+else{
+    //Nothing should be done
+}
+
 ?>    
 
 <html> 
@@ -50,7 +45,7 @@ if (!isset($_SESSION['id_projeto_corrente'])) {
             
 
  // Functions that will be used when the script is invoked through himself or tree 
- function reCarrega(URL) {
+ function reLoad(URL) {
                 document.location.replace(URL);
 }
 
@@ -70,7 +65,7 @@ Episodes: The user clicks on the top menu option:
 
 ?>
 
-function altCenario(cenario) {
+function changeScenario(cenario) {
     
         var url = 'alt_cenario.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_cenario=' + cenario;
         var where = '_blank';
@@ -82,7 +77,7 @@ function altCenario(cenario) {
 <?php 
 ?>
 
-function rmvCenario(cenario) {
+function removeScenario(cenario) {
     
         var url = 'rmv_cenario.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_cenario=' + cenario;
         var where = '_blank';
@@ -94,7 +89,7 @@ function rmvCenario(cenario) {
 <?php
 ?>
 
-function altConceito(conceito) {
+function changeConcept(conceito) {
                 
         var url = 'alt_conceito.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_conceito=' + conceito;
         var where = '_blank';
@@ -106,7 +101,7 @@ function altConceito(conceito) {
 <?php
 ?>
 
-function rmvConceito(conceito) {
+function removeConcept(conceito) {
         
         var url = 'rmv_conceito.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_conceito=' + conceito;
         var where = '_blank';
@@ -115,7 +110,7 @@ function rmvConceito(conceito) {
         open(url, where, window_spec);
 }
 
-function rmvRelacao(relacao) {
+function removeRelationship(relacao) {
 
         var url = 'rmv_relacao.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_relacao=' + relacao;
         var where = '_blank';
@@ -140,7 +135,7 @@ Episodes: The user clicks on the top menu option:
  */
 ?>
 
-function altLexico(lexico) {
+function changeLexicon(lexico) {
                 
         var url = 'alt_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
         var where = '_blank';
@@ -152,7 +147,7 @@ function altLexico(lexico) {
 <?php
 ?>
 
-function rmvLexico(lexico) {
+function removeLexicon(lexico) {
                 
         var url = 'rmv_lexico.php?id_projeto=' + '<?= $_SESSION['id_projeto_corrente'] ?>' + '&id_lexico=' + lexico;
         var where = '_blank';
@@ -179,19 +174,22 @@ Showing on-screen options:
  */ 
 ?>
 
-function pedidoCenario() {
+function requestScenario() {
+        
         <?php
         
         if (isset($id_projeto)) {
-        ?>
+       
+            ?>
             var url = 'ver_pedido_cenario.php?id_projeto=' + '<?= $id_projeto ?>';
-        <?php
+            <?php
         }
         else {
-        ?>
+            ?>
             var url = 'ver_pedido_cenario.php';
-        <?php
+            <?php
         }
+        
         ?>
 
         var where = '_blank';
@@ -204,7 +202,7 @@ function pedidoCenario() {
 
 ?>
 
-function pedidoLexico() {
+function requestLexicon() {
 
         <?php
             
@@ -232,7 +230,7 @@ function pedidoLexico() {
 <?php
 ?>
 
-function pedidoConceito() {
+function requestConcept() {
 
 <?php
         if (isset($id_projeto)) {
@@ -256,25 +254,21 @@ function pedidoConceito() {
         open(url, where, window_spec);
 }
 
-function pedidoRelacao() {
+function requestRelationship() {
 
         <?php
         
         if (isset($id_projeto)) {
     
-            ?>
-                    
+            ?>        
             var url = 'ver_pedido_relacao.php?id_projeto=' + '<?= $id_projeto ?>';
-        
             <?php
             
         } 
         else {
               
             ?>
-                    
             var url = 'ver_pedido_relacao.php?';
-    
             <?php
         }
         
@@ -303,7 +297,7 @@ Showing on-screen options:
  */ 
 ?>
 
-function addUsuario() {
+function addUser() {
                 
         var url = 'add_usuario.php';
         var where = '_blank';
@@ -315,7 +309,7 @@ function addUsuario() {
 
 ?>
 
-function relUsuario() {
+function relateUsers() {
                 
         var url = 'rel_usuario.php';
         var where = '_blank';
@@ -550,14 +544,14 @@ if (isset($id) && isset($term)) {
     <?php
     if ($term == "c") {        // Change variables. C is scenario.
         
-        $comandoSql = "SELECT id_cenario, titulo, objetivo, contexto,
+        $commandSQL = "SELECT id_cenario, titulo, objetivo, contexto,
                         atores, recursos, excecao, episodios, id_projeto    
                        FROM cenario    
                        WHERE id_cenario = $id";
 
-        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+        $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao !!" . mysql_error());
         
-        $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+        $resultArray = mysql_fetch_array($requestResultSQL);
 
         $c_id_projeto = $resultArray['id_projeto'];
 
@@ -638,10 +632,10 @@ if (isset($id) && isset($term)) {
              <TABLE> 
                 <tr> 
                    <td CLASS="Estilo" height="40" valign=MIDDLE> 
-                      <a href="#" onClick="altCenario(<?= $resultArray['id_cenario'] ?>);">Alterar Cen&aacute;rio</a> 
+                      <a href="#" onClick="changeScenario(<?= $resultArray['id_cenario'] ?>);">Alterar Cen&aacute;rio</a> 
                       </th> 
                     <td CLASS="Estilo"  valign=MIDDLE> 
-                       <a href="#" onClick="rmvCenario(<?= $resultArray['id_cenario'] ?>);">Remover Cen&aacute;rio</a> 
+                       <a href="#" onClick="removeScenario(<?= $resultArray['id_cenario'] ?>);">Remover Cen&aacute;rio</a> 
                       </th> 
                 </tr> 
 
@@ -653,13 +647,13 @@ if (isset($id) && isset($term)) {
     
     elseif ($term == "l") {
 
-        $comandoSql = "SELECT id_lexico, nome, nocao, impacto, tipo, id_projeto    
+        $commandSQL = "SELECT id_lexico, nome, nocao, impacto, tipo, id_projeto    
                        FROM lexico    
                        WHERE id_lexico = $id";
 
-        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+        $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao !!" . mysql_error());
          
-        $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+        $resultArray = mysql_fetch_array($requestResultSQL);
                
         $l_id_projeto = $resultArray['id_projeto'];
      
@@ -698,11 +692,11 @@ if (isset($id) && isset($term)) {
       
        $qSinonimo = "SELECT * FROM sinonimo WHERE id_lexico = $id";
                     
-       $resultadoRequisicaoSql = mysql_query($qSinonimo) or die("Erro ao enviar a query de Sinonimos" . mysql_error());
+       $requestResultSQL = mysql_query($qSinonimo) or die("Erro ao enviar a query de Sinonimos" . mysql_error());
           
        $tempS = array();
 
-       while ($resultSinonimo = mysql_fetch_array($resultadoRequisicaoSql)) {
+       while ($resultSinonimo = mysql_fetch_array($requestResultSQL)) {
                         
            $tempS[] = $resultSinonimo['nome'];
   
@@ -744,12 +738,12 @@ if (isset($id) && isset($term)) {
               <tr> 
                   
                   <td CLASS="Estilo" height="40" valign="middle">                             
-                      <a href="#" onClick="altLexico(<?= $resultArray['id_lexico'] ?>);">Alterar S�mbolo</a>                            
+                      <a href="#" onClick="changeLexicon(<?= $resultArray['id_lexico'] ?>);">Alterar S�mbolo</a>                            
                       </th> 
                        
                   <td CLASS="Estilo" valign="middle"> 
                             
-                      <a href="#" onClick="rmvLexico(<?= $resultArray['id_lexico'] ?>);">Remover S�mbolo</a> 
+                      <a href="#" onClick="removeLexicon(<?= $resultArray['id_lexico'] ?>);">Remover S�mbolo</a> 
                             
                       </th>            
               </tr> 
@@ -760,13 +754,13 @@ if (isset($id) && isset($term)) {
     
     elseif ($term == "oc") {        
         
-        $comandoSql = "SELECT id_conceito, nome, descricao   
+        $commandSQL = "SELECT id_conceito, nome, descricao   
                        FROM   conceito   
                         WHERE  id_conceito = $id";
 
-        $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+        $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao !!" . mysql_error());
         
-        $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+        $resultArray = mysql_fetch_array($requestResultSQL);
         
         ?>    
 
@@ -789,7 +783,7 @@ if (isset($id) && isset($term)) {
                         
                   <td CLASS="Estilo"  valign=MIDDLE> 
                             
-                      <a href="#" onClick="rmvConceito(<?= $resultArray['id_conceito'] ?>);">Remover Conceito</a>                           
+                      <a href="#" onClick="removeConcept(<?= $resultArray['id_conceito'] ?>);">Remover Conceito</a>                           
                       </th> 
               </tr> 
 
@@ -798,13 +792,13 @@ if (isset($id) && isset($term)) {
      }
      elseif ($term == "or") {        
                     
-         $comandoSql = "SELECT id_relacao, nome   
+         $commandSQL = "SELECT id_relacao, nome   
                         FROM relacao   
                         WHERE id_relacao = $id";
                    
-         $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+         $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao !!" . mysql_error());
                     
-         $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+         $resultArray = mysql_fetch_array($requestResultSQL);
                     
          ?>    
 
@@ -823,7 +817,7 @@ if (isset($id) && isset($term)) {
                         
                   <td CLASS="Estilo"  valign=MIDDLE> 
                             
-                      <a href="#" onClick="rmvRelacao(<?= $resultArray['id_relacao'] ?>);">Remover Relação</a>                             
+                      <a href="#" onClick="removeRelationship(<?= $resultArray['id_relacao'] ?>);">Remover Relação</a>                             
                       </th>                     
               </tr> 
       
@@ -963,11 +957,11 @@ Showing on-screen options:
                     
               </tr>               
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="addUsuario();">Adicionar usu&aacute;rio (não cadastrado) neste projeto</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="addUser();">Adicionar usu&aacute;rio (não cadastrado) neste projeto</a></td>                    
               </tr> 
                     
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="relUsuario();">Adicionar usu&aacute;rios j&aacute; existentes neste projeto</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="relateUsers();">Adicionar usu&aacute;rios j&aacute; existentes neste projeto</a></td>                    
               </tr>   
                   
               <tr>                      
@@ -975,19 +969,19 @@ Showing on-screen options:
               </tr> 
                    
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="pedidoCenario();">Verificar pedidos de alteração de Cen&aacute;rios</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="requestScenario();">Verificar pedidos de alteração de Cen&aacute;rios</a></td>                    
               </tr> 
                     
               <tr>                       
-                  <td CLASS="Estilo"><a href="#" onClick="pedidoLexico();">Verificar pedidos de alteração de termos do L&eacute;xico</a></td>                     
+                  <td CLASS="Estilo"><a href="#" onClick="requestLexicon();">Verificar pedidos de alteração de termos do L&eacute;xico</a></td>                     
               </tr>
                     
               <tr>                       
-                  <td CLASS="Estilo"><a href="#" onClick="pedidoConceito();">Verificar pedidos de alteração de Conceitos</a></td>                  
+                  <td CLASS="Estilo"><a href="#" onClick="requestConcept();">Verificar pedidos de alteração de Conceitos</a></td>                  
               </tr> 
                    
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="pedidoRelacao();">Verificar pedidos de alteração de Relações</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="requestRelationship();">Verificar pedidos de alteração de Relações</a></td>                    
               </tr>
                    
               <tr>                       

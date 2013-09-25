@@ -42,14 +42,14 @@ if (isset($apaga)) {
     
 }
 
-$comandoSql = "SELECT * FROM publicacao WHERE id_projeto = '$id_projeto'";
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
+$commandSQL = "SELECT * FROM publicacao WHERE id_projeto = '$id_projeto'";
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
 ?>
     
     <h2>Recupera XML/XSL</h2><br>
     <?php
 
-    while ($resultArray = mysql_fetch_row($resultadoRequisicaoSql)) {
+    while ($resultArray = mysql_fetch_row($requestResultSQL)) {
     
         $data = $resultArray[1];
         $versao = $resultArray[2];

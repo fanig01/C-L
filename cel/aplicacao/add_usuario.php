@@ -53,9 +53,9 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
 //               para o usu�rio avisando que o usu�rio deve escolher outro login,.
 
             $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
-            $comandoSql = "SELECT id_usuario FROM usuario WHERE login = '$login'";
-            $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
-            if (mysql_num_rows($resultadoRequisicaoSql)) {        // Se ja existe algum usuario com este login
+            $commandSQL = "SELECT id_usuario FROM usuario WHERE login = '$login'";
+            $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
+            if (mysql_num_rows($requestResultSQL)) {        // Se ja existe algum usuario com este login
 //                $p_style = "color: red; font-weight: bold";
 //                $p_text = "Login j� existente no sistema. Favor escolher outro login.";
 //                recarrega("?p_style=$p_style&p_text=$p_text&nome=$nome&email=$email&senha=$senha&senha_conf=$senha_conf&novo=$novo");
@@ -85,8 +85,8 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
 
                 // Criptografando a senha
                 $password = md5($password);
-                $comandoSql = "INSERT INTO usuario (nome, login, email, senha) VALUES ('$nome', '$login', '$email', '$password')";
-                mysql_query($comandoSql) or die("Erro ao cadastrar o usuario");
+                $commandSQL = "INSERT INTO usuario (nome, login, email, senha) VALUES ('$nome', '$login', '$email', '$password')";
+                mysql_query($commandSQL) or die("Erro ao cadastrar o usuario");
                 recarrega("?cadastrado=&novo=$novo&login=$login");
             }
         }   // else
@@ -137,9 +137,9 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
         $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
         // $login eh o login do usuario incluido, passado na URL
         $id_usuario_incluido = simple_query("id_usuario", "usuario", "login = '$login'");
-        $comandoSql = "INSERT INTO participa (id_usuario, id_projeto)
+        $commandSQL = "INSERT INTO participa (id_usuario, id_projeto)
           VALUES ($id_usuario_incluido, " . $_SESSION['id_projeto_corrente'] . ")";
-        mysql_query($comandoSql) or die("Erro ao inserir na tabela participa");
+        mysql_query($commandSQL) or die("Erro ao inserir na tabela participa");
 
         $nome_usuario = simple_query("nome", "usuario", "id_usuario = $id_usuario_incluido");
         $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);

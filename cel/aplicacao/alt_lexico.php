@@ -60,16 +60,16 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
     <?php
 } else {        // Script chamado atraves do link do lexico corrente
     $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
-    $comandoSql = "SELECT * FROM lexico WHERE id_lexico = $id_lexico";
-    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao executar a query");
-    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+    $commandSQL = "SELECT * FROM lexico WHERE id_lexico = $id_lexico";
+    $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
+    $resultArray = mysql_fetch_array($requestResultSQL);
 
     //sinonimos
     // $DB = new PGDB () ;
     // $selectSin = new QUERY ($DB) ;
     // $selectSin->execute("SELECT nome FROM sinonimo WHERE id_lexico = $id_lexico");
-    $comandoSqlSinonimo = "SELECT nome FROM sinonimo WHERE id_lexico = $id_lexico";
-    $resultadoRequisicaoSqlSinonimo = mysql_query($comandoSqlSinonimo) or die("Erro ao executar a query");
+    $commandSQLSinonimo = "SELECT nome FROM sinonimo WHERE id_lexico = $id_lexico";
+    $requestResultSQLSinonimo = mysql_query($commandSQLSinonimo) or die("Erro ao executar a query");
     //$resultSin = mysql_fetch_array($qrrSin);
     ?>
         <html>
@@ -181,7 +181,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
                             </td>   
                             <td width="100%">
                         <left><select multiple name="listSinonimo[]"  style="width: 400px;"  size="5"><?php
-    while ($rowSynonym = mysql_fetch_array($resultadoRequisicaoSqlSinonimo)) {
+    while ($rowSynonym = mysql_fetch_array($requestResultSQLSinonimo)) {
         ?>
                                     <option value="<?= $rowSynonym["nome"] ?>"><?= $rowSynonym["nome"] ?></option>
         <?php

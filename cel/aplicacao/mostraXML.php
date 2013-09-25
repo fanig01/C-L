@@ -23,9 +23,9 @@ the system provides for the Administrator screen display XML report created.
 
 $qq = "select * from publicacao where id_projeto = $id_projeto AND versao = $versao";
 
-$resultadoRequisicaoSql = mysql_query($qq) or die("Erro ao enviar a query");
+$requestResultSQL = mysql_query($qq) or die("Erro ao enviar a query");
 
-$row = mysql_fetch_row($resultadoRequisicaoSql);
+$row = mysql_fetch_row($requestResultSQL);
 
 $xml_banco = $row[3];
 

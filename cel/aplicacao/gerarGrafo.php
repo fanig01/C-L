@@ -6,7 +6,7 @@ include("httprequest.inc");
 
 checkUserAuthentication("index.php"); 
 
-$XML = "";
+
 ?>
 <html>
     <body>
@@ -27,22 +27,32 @@ Restrictions: Having a XML Generated project
  */
 
 $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
-$comandoSql = "SELECT * FROM publicacao WHERE id_projeto = '$id_projeto'";
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
+$commandSQL = "SELECT * FROM publicacao WHERE id_projeto = '$id_projeto'";
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
+
 ?>
     <h2>Gerar Grafo</h2><br>
     <?php
-    while ($resultArray = mysql_fetch_row($resultadoRequisicaoSql)) {
-        $data = $resultArray[1];
-        $versao = $resultArray[2];
+    
+    $XML = "";
+
+    while ($resultArray = mysql_fetch_row($requestResultSQL)) {
+        
+        $date = $resultArray[1];
+        $version = $resultArray[2];
         $XML = $resultArray[3];
+        
         ?>
         <table>
             <tr>
-                <th>Versão:</th><td><?= $versao ?></td>
-                <th>Data:</th><td><?= $data ?></td>
-                <th><a href="mostraXML.php?id_projeto=<?= $id_projeto ?>&versao=<?= $versao ?>">XML</a></th>
-                <th><a href="grafo\mostraGrafo.php?versao=<?= $versao ?>&id_projeto=<?= $id_projeto ?>"
+                <th>Vers&atilde;o:</th><td><?= $version ?></td>
+                
+                <th>Data:</th><td><?= $date ?></td>
+                
+                <th><a href="mostraXML.php?id_projeto=<?= $id_projeto ?>&version=<?= $version ?>">XML</a></th>
+                
+                <th><a href="grafo\mostraGrafo.php?version=<?= $version ?>&id_projeto=<?= $id_projeto ?>"
+                
                        >Gerar Grafo</a></th>
 
             </tr>
@@ -52,7 +62,7 @@ $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a quer
 }
 ?>
 
-    <br><i><a href="showSource.php?file=recuperarXML.php">Veja o código fonte!</a></i>
+    <br><i><a href="showSource.php?file=recuperarXML.php">Veja o c&oacute;digo fonte!</a></i>
 
 </body>
 

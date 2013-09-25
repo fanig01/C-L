@@ -23,10 +23,10 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 if (isset($id_projeto)) {
      permissionCheckToProject($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
     
-    $comandoSql = "SELECT nome FROM projeto WHERE id_projeto = $id_projeto";
-    $resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query");
+    $commandSQL = "SELECT nome FROM projeto WHERE id_projeto = $id_projeto";
+    $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
     
-    $resultArray = mysql_fetch_array($resultadoRequisicaoSql);
+    $resultArray = mysql_fetch_array($requestResultSQL);
     $nome_projeto = $resultArray['nome'];
     
 } else {
@@ -104,12 +104,12 @@ if (isset($id_projeto)) {
             mc = new MTMenu();
 
 <?php
-$comandoSql = "SELECT id_cenario, titulo  
+$commandSQL = "SELECT id_cenario, titulo  
                   FROM cenario  
                   WHERE id_projeto = $id_projeto  
                   ORDER BY titulo";
 
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
 
 // We must remove all the tags HTML of the scenario's title. Possibly
 // there will be tags of links (<a> </a>). If we won't remove it, there will be
@@ -118,7 +118,7 @@ $search = "'<[\/\!]*?[^<>]*?>'si";
 $replace = "";
 
 // For each scenario of project
-while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {
+while ($row = mysql_fetch_row($requestResultSQL)) {
     $row[1] = preg_replace($search, $replace, $row[1]);
     ?>
 
@@ -133,9 +133,9 @@ while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {
                 mcsrc_<?= $row[0] ?> = new MTMenu();
 
     <?php
-    $comandoSql = "SELECT c.id_cenario_to, cen.titulo FROM centocen c, cenario cen WHERE c.id_cenario_from = " . $row[0];
-    $comandoSql = $comandoSql . " AND c.id_cenario_to = cen.id_cenario";
-    $qrr_2 = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
+    $commandSQL = "SELECT c.id_cenario_to, cen.titulo FROM centocen c, cenario cen WHERE c.id_cenario_from = " . $row[0];
+    $commandSQL = $commandSQL . " AND c.id_cenario_to = cen.id_cenario";
+    $qrr_2 = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
     while ($row_2 = mysql_fetch_row($qrr_2)) {
         $row_2[1] = preg_replace($search, $replace, $row_2[1]);
         ?>
@@ -168,15 +168,15 @@ while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {
             ml = new MTMenu();
 
 <?php
-$comandoSql = "SELECT id_lexico, nome  
+$commandSQL = "SELECT id_lexico, nome  
                   FROM lexico  
                   WHERE id_projeto = $id_projeto  
                   ORDER BY nome";
 
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
 
 // For each Lexicon of project
-while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {
+while ($row = mysql_fetch_row($requestResultSQL)) {
     ?>
 
                 ml.addItem("<?= $row[1] ?>", "main.php?id=<?= $row[0] ?>&t=l");
@@ -189,9 +189,9 @@ while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {
             // mlsrl_<?= $row[0] ?> = new MTMenu(); 
 
     <?php
-    $comandoSql = "SELECT l.id_lexico_to, lex.nome FROM lextolex l, lexico lex WHERE l.id_lexico_from = " . $row[0];
-    $comandoSql = $comandoSql . " AND l.id_lexico_to = lex.id_lexico";
-    $qrr_2 = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
+    $commandSQL = "SELECT l.id_lexico_to, lex.nome FROM lextolex l, lexico lex WHERE l.id_lexico_from = " . $row[0];
+    $commandSQL = $commandSQL . " AND l.id_lexico_to = lex.id_lexico";
+    $qrr_2 = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
     while ($row_2 = mysql_fetch_row($qrr_2)) {
         ?>
 
@@ -240,13 +240,13 @@ while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {
             moc = new MTMenu();
 
 <?php
-$comandoSql = "SELECT id_conceito, nome  
+$commandSQL = "SELECT id_conceito, nome  
                   FROM conceito 
                   WHERE id_projeto = $id_projeto  
                   ORDER BY nome";
 
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
-while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {  // para cada conceito do projeto 
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
+while ($row = mysql_fetch_row($requestResultSQL)) {  // para cada conceito do projeto 
     print "moc.addItem(\"$row[1]\", \"main.php?id=$row[0]&t=oc\");";
 }
 ?>
@@ -264,13 +264,13 @@ while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {  // para cada conceito
             mor = new MTMenu();
 
 <?php
-$comandoSql = "SELECT   id_relacao, nome 
+$commandSQL = "SELECT   id_relacao, nome 
                   FROM     relacao r 
                   WHERE    id_projeto = $id_projeto  
                   ORDER BY nome";
 
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
-while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {   // para cada rela��o do projeto 
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
+while ($row = mysql_fetch_row($requestResultSQL)) {   // para cada rela��o do projeto 
     print "mor.addItem(\"$row[1]\", \"main.php?id=$row[0]&t=or\");";
 }
 ?>
@@ -288,14 +288,14 @@ while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {   // para cada rela�
             moa = new MTMenu();
 
 <?php
-$comandoSql = "SELECT   id_axioma, axioma 
+$commandSQL = "SELECT   id_axioma, axioma 
                  FROM     axioma 
                  WHERE    id_projeto = $id_projeto  
                  ORDER BY axioma";
 
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao");
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao");
 
-while ($row = mysql_fetch_row($resultadoRequisicaoSql)) {  // para cada axioma do projeto 
+while ($row = mysql_fetch_row($requestResultSQL)) {  // para cada axioma do projeto 
     $axi = explode(" disjoint ", $row[1]);
     print "moa.addItem(\"$axi[0]\", \"main.php?id=$row[0]&t=oa\");";
 }

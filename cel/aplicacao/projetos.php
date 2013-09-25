@@ -31,12 +31,12 @@ he is an administrator, see  ADMINISTRATOR CHOSSE PROJECT,
 otherwise, see USERS CHOOSE DESIGN
 */
 
-$comandoSql = "SELECT * FROM publicacao";
-$resultadoRequisicaoSql = mysql_query($comandoSql) or die("Erro ao enviar a query de busca");
+$commandSQL = "SELECT * FROM publicacao";
+$requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de busca");
 ?>
 
     <?php
-    while ($resultArray = mysql_fetch_row($resultadoRequisicaoSql)) {
+    while ($resultArray = mysql_fetch_row($requestResultSQL)) {
        
         $id_projeto = $resultArray[0];
         $data = $resultArray[1];
