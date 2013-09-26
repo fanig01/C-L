@@ -11,7 +11,7 @@
         include_once("bd.inc");
         include_once("CELConfig/CELConfig.inc");
 
-        $link = bd_connect() or die("Erro na conexão ao BD : " . mysql_error() . __LINE__);
+        $link = bd_connect() or die("Erro na conex&atilde;o ao BD : " . mysql_error() . __LINE__);
 
         if ($link && mysql_select_db(CELConfig_ReadVar("BD_database"))){
             echo "SUCESSO NA CONEXÃO ao BD <br>";

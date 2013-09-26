@@ -1,20 +1,18 @@
 <?php
 /*
- * Este script faz um pedido de remoção de uma relação de projeto.
- * Arquivo chamador: main.php
- * Cenário -    Excluir Conceito 
- * Objetivo:	Permitir ao Usuario Excluir um conceito que esteja ativo
- * Contexto:	Usuário deseja excluir um conceito
- *              Pró-Condiçãoo: Login, cenário cadastrado no sistema
- * Atores:	Usuário, Sistema
- * Recursos:	Dados informados
- * Episódios:	O sistema fornecer uma tela para o usuário justificar a necessidade daquela
- *              exclusão para que o administrador possa ler e aprovar ou não a mesma.
- *              Esta tela também conter um botão para a confirmação da exclusão.
- *              Restrição: Depois de clicar no botão, o sistema verifica se todos os campos foram preenchidos 
- * Exceção:	Se todos os campos não foram preenchidos, retorna para o usuário uma mensagem
- *              avisando que todos os campos devem ser preenchidos e um botão de voltar para a pagina anterior.
- */
+ * This script makes a request to remove a link design.
+Calling file: main.php
+Scenario - Delete Concept
+Objective: Allow User to Delete a concept that is active
+Context: User wants to delete a concept.
+Pro-Condiçãoo: Login and scenery on our system.
+Actors: User, System.
+Resources: Data informed.
+Episodes: The system provide a screen to the user the need to justify that exclusion so that the administrator can read and approve or disapprove the same.
+This screen also contains a button to confirm the deletion.
+Restriction: After clicking the button, the system checks whether all fields have been filled.
+Exception: If all fields are empty, returns to the user a message that all fields must be completed and a button to return to the previous page.
+*/
 session_start();
 
 include("funcoes_genericas.php");

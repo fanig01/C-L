@@ -24,7 +24,7 @@ include("httprequest.inc");
 
 checkUserAuthentication("index.php");
 
-inserirPedidoRemoverConceito($_SESSION['id_projeto_corrente'], $id_conceito, $_SESSION['id_usuario_corrente']);
+inserirPedidoRemoverConceito($_SESSION['id_projeto_corrente'], $id_concept, $_SESSION['id_usuario_corrente']);
 ?>  
 
 <script language="javascript1.3">
