@@ -501,30 +501,33 @@ include("frame_inferior.php");
 
 // Script called by itself main.php (or the tree) 
 
+$term = "indefinido";
+
 
 if (isset($id) && isset($term)) {      
     
     $emptyVector = array();
     
-    if ($term == "c") {
+    switch ($term){
         
-        print "<h3>Informações sobre o cen&aacute;rio</h3>";
-    }
-    elseif ($term == "l") {
-        
-        print "<h3>Informações sobre o símbolo</h3>";
-    }
-    elseif ($term == "oc") {
-        
-        print "<h3>Informações sobre o conceito</h3>";
-    }
-    elseif ($term == "or") {
-        
-        print "<h3>Informações sobre a relação</h3>";
-    }
-    elseif ($term == "oa") {
-        
-        print "<h3>Informações sobre o axioma</h3>";
+        case "c":       
+            print "<h3>Informações sobre o cen&aacute;rio</h3>";
+            break;
+        case "l":
+            print "<h3>Informações sobre o símbolo</h3>";
+            break;
+        case "oc":
+            print "<h3>Informações sobre o conceito</h3>";
+            break;
+        case "or":
+            print "<h3>Informações sobre a relação</h3>";
+            break;
+        case "oa":
+            print "<h3>Informações sobre o axioma</h3>";
+            break;
+        default:
+            //Nothing should be done
+ 
     }
     
     ?>    
@@ -537,10 +540,10 @@ if (isset($id) && isset($term)) {
     ?>   
 
     <?php
-    if ($term == "c") {        // Change variables. C is scenario.
+    if ($term == "c") {     
         
         $commandSQL = "SELECT id_cenario, titulo, objetivo, contexto,
-                        atores, recursos, excecao, episodios, id_projeto    
+                       atores, recursos, excecao, episodios, id_projeto    
                        FROM cenario    
                        WHERE id_cenario = $id";
 
@@ -548,23 +551,22 @@ if (isset($id) && isset($term)) {
         
         $resultArray = mysql_fetch_array($requestResultSQL);
 
-        $c_id_projeto = $resultArray['id_projeto'];
+        $idScenarioProject = $resultArray['id_projeto'];
 
-        $vetorDeCenarios = carrega_vetor_cenario($c_id_projeto, $id, true); 
+        $scenariosVector = carrega_vetor_cenario($idScenarioProject, $id, true); 
        
-        quicksort($vetorDeCenarios, 0, count($vetorDeCenarios) - 1, 'cenario');
+        quicksort($scenariosVector, 0, count($scenariosVector) - 1, 'cenario');
 
-        $vetorDeLexicos = load_ArrayLexicon($c_id_projeto, 0, false); 
+        $lexiconVector = load_ArrayLexicon($idScenarioProject, 0, false); 
         
-        quicksort($vetorDeLexicos, 0, count($vetorDeLexicos) - 1, 'lexico');
+        quicksort($lexiconVector, 0, count($lexiconVector) - 1, 'lexico');
         
         ?>    
 
         <tr> 
-            <th>Titulo:</th><td CLASS="Estilo">
+            <th>T&iacute;tulo:</th><td CLASS="Estilo">
                             
-                <?php echo nl2br(monta_links($resultArray['titulo'], $vetorDeLexicos, $emptyVector)); 
-        
+                <?php echo nl2br(monta_links($resultArray['titulo'], $lexiconVector, $emptyVector)); 
                 ?>
             </td> 
 
@@ -574,7 +576,7 @@ if (isset($id) && isset($term)) {
             
            <th>Objetivo:</th><td CLASS="Estilo">
                
-                <?php echo nl2br(monta_links($resultArray['objetivo'], $vetorDeLexicos, $emptyVector));
+                <?php echo nl2br(monta_links($resultArray['objetivo'], $lexiconVector, $emptyVector));
                 
                 ?>
            </td> 
@@ -583,14 +585,14 @@ if (isset($id) && isset($term)) {
         <tr> 
              <th>Contexto:</th><td CLASS="Estilo">
                  
-                   <?php echo nl2br(monta_links($resultArray['contexto'], $vetorDeLexicos, $vetorDeCenarios)); ?>		 
+                   <?php echo nl2br(monta_links($resultArray['contexto'], $lexiconVector, $scenariosVector)); ?>		 
              </td> 
        </tr> 
        
         <tr> 
               <th>Atores:</th><td CLASS="Estilo">
                   
-                    <?php echo nl2br(monta_links($resultArray['atores'], $vetorDeLexicos, $emptyVector));
+                    <?php echo nl2br(monta_links($resultArray['atores'], $lexiconVector, $emptyVector));
                     
                     ?>
               </td>  
@@ -599,24 +601,24 @@ if (isset($id) && isset($term)) {
         <tr> 
               <th>Recursos:</th><td CLASS="Estilo">
                   
-                <?php echo nl2br(monta_links($resultArray['recursos'], $vetorDeLexicos, $emptyVector));
+                <?php echo nl2br(monta_links($resultArray['recursos'], $lexiconVector, $emptyVector));
                 
                 ?>
                         </td> 
         </tr> 
         
         <tr> 
-               <th>Exceção:</th><td CLASS="Estilo">
+               <th>Exce&ccedil;&atilde;o:</th><td CLASS="Estilo">
                    
-                <?php echo nl2br(monta_links($resultArray['excecao'], $vetorDeLexicos, $emptyVector));
+                <?php echo nl2br(monta_links($resultArray['excecao'], $lexiconVector, $emptyVector));
                 
                 ?>
                         </td> 
         </tr> 
         
         <tr> 
-                <th>Episódios:</th><td CLASS="Estilo">
-                <?php echo nl2br(monta_links($resultArray['episodios'], $vetorDeLexicos, $vetorDeCenarios)); 
+                <th>Epis&oacute;dios:</th><td CLASS="Estilo">
+                <?php echo nl2br(monta_links($resultArray['episodios'], $lexiconVector, $scenariosVector)); 
                 
                 ?>
 
@@ -650,11 +652,11 @@ if (isset($id) && isset($term)) {
          
         $resultArray = mysql_fetch_array($requestResultSQL);
                
-        $l_id_projeto = $resultArray['id_projeto'];
+        $idLexiconProject = $resultArray['id_projeto'];
      
-        $vetorDeLexicos = load_ArrayLexicon($l_id_projeto, $id, true);
+        $lexiconVector = load_ArrayLexicon($idLexiconProject, $id, true);
 
-        quicksort($vetorDeLexicos, 0, count($vetorDeLexicos) - 1, 'lexico');
+        quicksort($lexiconVector, 0, count($lexiconVector) - 1, 'lexico');
                 
         ?>    
              <tr> 
@@ -663,33 +665,33 @@ if (isset($id) && isset($term)) {
              </tr>
              
              <tr> 
-                  <th>Noção:</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['nocao'], $vetorDeLexicos, $emptyVector)); ?>
+                  <th>No&ccedil;&atilde;o:</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['nocao'], $lexiconVector, $emptyVector)); ?>
                   </td> 
              </tr>
              
              <tr> 
-                  <th>Classificação:</th><td CLASS="Estilo"><?= nl2br($resultArray['tipo']) ?>
+                  <th>Classifica&ccedil;&atilde;o:</th><td CLASS="Estilo"><?= nl2br($resultArray['tipo']) ?>
                   </td> 
              </tr> 
              
              <tr> 
-                  <th>Impacto(s):</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['impacto'], $vetorDeLexicos, $emptyVector)); ?> 
+                  <th>Impacto(s):</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['impacto'], $lexiconVector, $emptyVector)); ?> 
                   </td>
              </tr> 
              
              <tr> 
-                   <th>Sinônimo(s):</th> 
+                   <th>Sin&ocirc;nimo(s):</th> 
 
             <?php
             //synonyms
             
-      $id_projeto = $_SESSION['id_projeto_corrente'];
+       $id_projeto = $_SESSION['id_projeto_corrente'];
       
        $qSinonimo = "SELECT * FROM sinonimo WHERE id_lexico = $id";
                     
        $requestResultSQL = mysql_query($qSinonimo) or die("Erro ao enviar a query de Sinonimos" . mysql_error());
           
-       $tempS = array();
+       $tempS = array(); //Seria um vetor de sinônimo temporário?
 
        while ($resultSinonimo = mysql_fetch_array($requestResultSQL)) {
                         
@@ -751,7 +753,7 @@ if (isset($id) && isset($term)) {
         
         $commandSQL = "SELECT id_conceito, nome, descricao   
                        FROM   conceito   
-                        WHERE  id_conceito = $id";
+                       WHERE  id_conceito = $id";
 
         $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de selecao !!" . mysql_error());
         
@@ -765,7 +767,7 @@ if (isset($id) && isset($term)) {
               </tr> 
                     
               <tr>                        
-                  <th>Descrição:</th><td CLASS="Estilo"><?= nl2br($resultArray['descricao']) ?></td>                    
+                  <th>Descri&ccedil;&atilde;o:</th><td CLASS="Estilo"><?= nl2br($resultArray['descricao']) ?></td>                    
               </tr> 
                 
           </table>                
@@ -812,7 +814,7 @@ if (isset($id) && isset($term)) {
                         
                   <td CLASS="Estilo"  valign=MIDDLE> 
                             
-                      <a href="#" onClick="removeRelationship(<?= $resultArray['id_relacao'] ?>);">Remover Relação</a>                             
+                      <a href="#" onClick="removeRelationship(<?= $resultArray['id_relacao'] ?>);">Remover Rela&ccedil;&atilde;o</a>                             
                       </th>                     
               </tr> 
       
