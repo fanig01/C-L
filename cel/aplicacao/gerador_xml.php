@@ -41,7 +41,7 @@ if (!(function_exists("gerar_xml"))) {
 
     function gerar_xml($bd, $id_projeto, $data_pesquisa, $flag_formatado) {
         $xml_resultante = "";
-        $vetorVazio = array();
+        $emptyVector = array();
 
         if ($flag_formatado == "ON") {
             $xml_resultante = "";
@@ -95,15 +95,15 @@ if (!(function_exists("gerar_xml"))) {
             if (($id_temp != $id_cenario) or (primeiro)) {
                 $titulo = '<titulo id="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . ucwords(strip_tags($row[1])) . '</titulo>';
 
-                $objetivo = "<objetivo>" . "<sentenca>" . gera_xml_links(monta_links($row[2], $vetor_todos_lexicos, $vetorVazio)) . "</sentenca>" . "<PT/>" . "</objetivo>";
+                $objetivo = "<objetivo>" . "<sentenca>" . gera_xml_links(monta_links($row[2], $vetor_todos_lexicos, $emptyVector)) . "</sentenca>" . "<PT/>" . "</objetivo>";
 
                 $contexto = "<contexto>" . "<sentenca>" . gera_xml_links(monta_links($row[3], $vetor_todos_lexicos, $vetor_cenarios)) . "</sentenca>" . "<PT/>" . "</contexto>";
 
-                $atores = "<atores>" . "<sentenca>" . gera_xml_links(monta_links($row[4], $vetor_todos_lexicos, $vetorVazio)) . "</sentenca>" . "<PT/>" . "</atores>";
+                $atores = "<atores>" . "<sentenca>" . gera_xml_links(monta_links($row[4], $vetor_todos_lexicos, $emptyVector)) . "</sentenca>" . "<PT/>" . "</atores>";
 
-                $recursos = "<recursos>" . "<sentenca>" . gera_xml_links(monta_links($row[5], $vetor_todos_lexicos, $vetorVazio)) . "</sentenca>" . "<PT/>" . "</recursos>";
+                $recursos = "<recursos>" . "<sentenca>" . gera_xml_links(monta_links($row[5], $vetor_todos_lexicos, $emptyVector)) . "</sentenca>" . "<PT/>" . "</recursos>";
 
-                $excecao = "<excecao>" . "<sentenca>" . gera_xml_links(monta_links($row[7], $vetor_todos_lexicos, $vetorVazio)) . "</sentenca>" . "<PT/>" . "</excecao>";
+                $excecao = "<excecao>" . "<sentenca>" . gera_xml_links(monta_links($row[7], $vetor_todos_lexicos, $emptyVector)) . "</sentenca>" . "<PT/>" . "</excecao>";
 
                 $episodios = "<episodios>" . "<sentenca>" . gera_xml_links(monta_links($row[6], $vetor_todos_lexicos, $vetor_cenarios)) . "</sentenca>" . "<PT/>" . "</episodios>";
 
@@ -175,9 +175,9 @@ if (!(function_exists("gerar_xml"))) {
                 }
                 $sinonimo .= "</sinonimos>";
 
-                $nocao = "<nocao>" . "<sentenca>" . gera_xml_links(monta_links($row[2], $vetor_lexicos, $vetorVazio)) . "<PT/>" . "</sentenca>" . "</nocao>";
+                $nocao = "<nocao>" . "<sentenca>" . gera_xml_links(monta_links($row[2], $vetor_lexicos, $emptyVector)) . "<PT/>" . "</sentenca>" . "</nocao>";
 
-                $impacto = "<impacto>" . "<sentenca>" . gera_xml_links(monta_links($row[3], $vetor_lexicos, $vetorVazio)) . "<PT/>" . "</sentenca>" . "</impacto>";
+                $impacto = "<impacto>" . "<sentenca>" . gera_xml_links(monta_links($row[3], $vetor_lexicos, $emptyVector)) . "<PT/>" . "</sentenca>" . "</impacto>";
 
                 $xml_resultante = $xml_resultante . "<lexico>\n";
 
