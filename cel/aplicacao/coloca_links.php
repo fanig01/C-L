@@ -2,7 +2,7 @@
 
 function load_ArrayLexicon($id_projeto, $idCurrentLexicon, $noCurrent) {
     
-    $vetorDeLexicos = array();
+    $lexiconVector = array();
     
     if ($noCurrent) {
     
@@ -34,7 +34,7 @@ function load_ArrayLexicon($id_projeto, $idCurrentLexicon, $noCurrent) {
     
     while ($linhaLexico = mysql_fetch_object($resultadoQueryLexicos)) {
         
-        $vetorDeLexicos[$index] = $linhaLexico;
+        $lexiconVector[$index] = $linhaLexico;
         $index++;
     }
 
@@ -42,18 +42,18 @@ function load_ArrayLexicon($id_projeto, $idCurrentLexicon, $noCurrent) {
     
     while ($linhaSinonimo = mysql_fetch_object($resultadoQuerySinonimos)) {
     
-        $vetorDeLexicos[$index] = $linhaSinonimo;
+        $lexiconVector[$index] = $linhaSinonimo;
         $index++;
     }
     
-    return $vetorDeLexicos;
+    return $lexiconVector;
 }
 
 function carrega_vetor_cenario($id_projeto, $id_cenario_atual, $semAtual) {
    
-    if (!isset($vetorDeCenarios)) {
+    if (!isset($scenariosVector)) {
         
-        $vetorDeCenarios = array();
+        $scenariosVector = array();
     }
     
     if ($semAtual) {
@@ -77,11 +77,11 @@ function carrega_vetor_cenario($id_projeto, $id_cenario_atual, $semAtual) {
     
     while ($linhaCenario = mysql_fetch_object($resultadoQueryCenarios)) {
       
-        $vetorDeCenarios[$index] = $linhaCenario;
+        $scenariosVector[$index] = $linhaCenario;
         $index++;
     }
 
-    return $vetorDeCenarios;
+    return $scenariosVector;
 }
 
 function divide_array(&$vet, $ini, $fim, $tipo) {
@@ -136,7 +136,7 @@ function quicksort(&$vet, $ini, $fim, $tipo) {
     }
 }
 
-function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
+function monta_links($texto, $lexiconVector, $scenariosVector) {
     
     $copiaTexto = $texto;
     
@@ -148,27 +148,27 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
         $vetorAuxCenarios = array();
     }
     
-    if (!isset($vetorDeCenarios)) {
-        $vetorDeCenarios = array();
+    if (!isset($scenariosVector)) {
+        $scenariosVector = array();
     }
     
-    if (!isset($vetorDeLexicos)) {
-        $vetorDeLexicos = array();
+    if (!isset($lexiconVector)) {
+        $lexiconVector = array();
     }
 
-    if (count($vetorDeCenarios) == 0) {
+    if (count($scenariosVector) == 0) {
 
         $index = 0;
         $indexAux_2 = 0;
     
-        while ($index < count($vetorDeLexicos)) {
+        while ($index < count($lexiconVector)) {
         
-            $nomeLexico = escapa_metacaracteres($vetorDeLexicos[$index]->nome);
+            $nomeLexico = escapa_metacaracteres($lexiconVector[$index]->nome);
             $regex = "/(\s|\b)(" . $nomeLexico . ")(\s|\b)/i";
             
             if (preg_match($regex, $copiaTexto) != 0) {
                 $copiaTexto = preg_replace($regex, " ", $copiaTexto);
-                $vetorAuxLexicos[$indexAux_2] = $vetorDeLexicos[$index];
+                $vetorAuxLexicos[$indexAux_2] = $lexiconVector[$index];
                 $indexAux_2++;
             }
             
@@ -177,8 +177,8 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
     }
     else {
 
-        $tamLexicos = count($vetorDeLexicos);
-        $tamCenarios = count($vetorDeCenarios);
+        $tamLexicos = count($lexiconVector);
+        $tamCenarios = count($scenariosVector);
         $tamanhoTotal = $tamLexicos + $tamCenarios;
         $index = 0;
         $indexAux_1 = 0;
@@ -190,15 +190,15 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
         
             if (($index < $tamLexicos ) && ($indexAux_1 < $tamCenarios)) {
             
-                if (strlen($vetorDeCenarios[$indexAux_1]->titulo) < strlen($vetorDeLexicos[$index]->nome)) {
+                if (strlen($scenariosVector[$indexAux_1]->titulo) < strlen($lexiconVector[$index]->nome)) {
                 
-                    $nomeLexico = escapa_metacaracteres($vetorDeLexicos[$index]->nome);
+                    $nomeLexico = escapa_metacaracteres($lexiconVector[$index]->nome);
                     $regex = "/(\s|\b)(" . $nomeLexico . ")(\s|\b)/i";
                     
                     if (preg_match($regex, $copiaTexto) != 0) {
                     
                         $copiaTexto = preg_replace($regex, " ", $copiaTexto);
-                        $vetorAuxLexicos[$indexAux_2] = $vetorDeLexicos[$index];
+                        $vetorAuxLexicos[$indexAux_2] = $lexiconVector[$index];
                         $indexAux_2++;
                     }
                     
@@ -206,13 +206,13 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
                 }
                 else {
 
-                    $tituloCenario = escapa_metacaracteres($vetorDeCenarios[$indexAux_1]->titulo);
+                    $tituloCenario = escapa_metacaracteres($scenariosVector[$indexAux_1]->titulo);
                     $regex = "/(\s|\b)(" . $tituloCenario . ")(\s|\b)/i";
                     
                     if (preg_match($regex, $copiaTexto) != 0) {
                     
                         $copiaTexto = preg_replace($regex, " ", $copiaTexto);
-                        $vetorAuxCenarios[$indexAux_3] = $vetorDeCenarios[$indexAux_1];
+                        $vetorAuxCenarios[$indexAux_3] = $scenariosVector[$indexAux_1];
                         $indexAux_3++;
                     }
                     
@@ -221,13 +221,13 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
             }
             else if ($tamLexicos == $index) {
 
-                $tituloCenario = escapa_metacaracteres($vetorDeCenarios[$indexAux_1]->titulo);
+                $tituloCenario = escapa_metacaracteres($scenariosVector[$indexAux_1]->titulo);
                 $regex = "/(\s|\b)(" . $tituloCenario . ")(\s|\b)/i";
                 
                 if (preg_match($regex, $copiaTexto) != 0) {
                     
                     $copiaTexto = preg_replace($regex, " ", $copiaTexto);
-                    $vetorAuxCenarios[$indexAux_3] = $vetorDeCenarios[$indexAux_1];
+                    $vetorAuxCenarios[$indexAux_3] = $scenariosVector[$indexAux_1];
                     $indexAux_3++;
                 }
                 
@@ -235,13 +235,13 @@ function monta_links($texto, $vetorDeLexicos, $vetorDeCenarios) {
             }
             else if ($tamCenarios == $indexAux_1) {
 
-                $nomeLexico = escapa_metacaracteres($vetorDeLexicos[$index]->nome);
+                $nomeLexico = escapa_metacaracteres($lexiconVector[$index]->nome);
                 $regex = "/(\s|\b)(" . $nomeLexico . ")(\s|\b)/i";
                 
                 if (preg_match($regex, $copiaTexto) != 0) {
                     
                     $copiaTexto = preg_replace($regex, " ", $copiaTexto);
-                    $vetorAuxLexicos[$indexAux_2] = $vetorDeLexicos[$index];
+                    $vetorAuxLexicos[$indexAux_2] = $lexiconVector[$index];
                     $indexAux_2++;
                 }
                 
