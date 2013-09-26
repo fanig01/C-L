@@ -3,7 +3,7 @@ session_start();
 
 include("funcoes_genericas.php");
 
-checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
+checkUserAuthentication("index.php");
 ?>
 
 <html>
@@ -17,10 +17,12 @@ checkUserAuthentication("index.php");        // Checa se o usuario foi autentica
 
         <h2>Propriedades do Relat�rio a ser Gerado:</h2>
 <?php
-//Cen�rio - Gerar Relat�rios XML 
-//Objetivo:    Permitir ao administrador gerar relat�rios em formato XML de um projeto,
-//          identificados por data.     
-//Contexto:    Gerente deseja gerar um relat�rio para um dos projetos da qual � administrador.
+
+// Scenario: Generate XML Reports
+// Objective: Allow the administrator generate reports in XML format of the project
+//            identified by date.
+// Context: Manager want generate a report for one of the projects whose is administrator.
+// 
 //          Pr�-Condi��o: Login, projeto cadastrado.
 //Atores:    Administrador     
 //Recursos:    Sistema, dados do relat�rio, dados cadastrados do projeto, banco de dados.     

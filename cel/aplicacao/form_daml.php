@@ -19,17 +19,18 @@ $link = bd_connect();
 
         <h2>Propriedades da ontologia:</h2> 
         <?php
-//Objetivo: Gerar Relat�rios DAML
+        
+        // Objective: Generate DAML reports
 
         $today = getdate();
 
-// Recupera nome do usu�rio
         $sql_user = "select nome from usuario where id_usuario='" . $_SESSION['id_usuario_corrente'] . "';";
         $query_user = mysql_query($sql_user) or die("Erro ao verificar usu�rio!" . mysql_error());
         $resultArray = mysql_fetch_array($query_user);
         $usuario = $resultArray[0];
 
         mysql_close($link);
+        
         ?> 
 
         &nbsp;Data da Vers�o: <?= $today['mday']; ?>/<?= $today['mon']; ?>/<?= $today['year']; ?> 
@@ -39,11 +40,11 @@ $link = bd_connect();
 
         <p>
         <table>
-            <tr><td>T�tulo:          </td><td><input type="text" name="title" size="15">              </td></tr>
-            <tr><td>Assunto:      </td><td><input type="text" name="subject" size="50">       </td></tr>
-            <tr><td>Descri��o:  </td><td><input type="text" name="description" size="50">  </td></tr>   
-            <tr><td>Usu�rio:      </td><td><input type="text" name="user" value= "<?= $usuario ?>" size="50">  </td></tr>   
-            <tr><td>Vers�o:       </td><td><input type="text" name="versionInfo" size="15">   </td></tr>
+            <tr><td>T�tulo: </td><td><input type="text" name="title" size="15">              </td></tr>
+            <tr><td>Assunto: </td><td><input type="text" name="subject" size="50">       </td></tr>
+            <tr><td>Descri��o: </td><td><input type="text" name="description" size="50">  </td></tr>   
+            <tr><td>Usu�rio: </td><td><input type="text" name="user" value= "<?= $usuario ?>" size="50">  </td></tr>   
+            <tr><td>Vers�o: </td><td><input type="text" name="versionInfo" size="15">   </td></tr>
         </table>
         <p>
             <input type="submit" value="Gerar DAML"> 
