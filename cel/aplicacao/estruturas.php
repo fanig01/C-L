@@ -14,7 +14,7 @@ class conceito {
         $this->nome = $n;
         $this->descricao = $d;
         $this->relacoes = array();
-        $this->subconceitos = array(); //not initialized
+        $this->subconceitos = array();
         $this->namespace = "";
     }
 
@@ -29,7 +29,6 @@ class relacao_entre_conceitos {
         $this->predicados[] = $p;
         $this->verbo = $v;
     }
-
 }
 
 class termo_do_lexico {
@@ -43,7 +42,6 @@ class termo_do_lexico {
         $this->nocao = $notion;
         $this->impacto = $i;
     }
-
 }
 
 ?>
