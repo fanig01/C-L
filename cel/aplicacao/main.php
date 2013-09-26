@@ -322,10 +322,9 @@ function relateUsers() {
  
 ?>
 
-function geraXML(){
+function generateXML(){
 
         <?php
-
         if (isset($id_projeto)) {
     
             ?>
@@ -337,7 +336,6 @@ function geraXML(){
     
             ?>
             var url = 'form_xml.php?';
-    
             <?php
         }
 
@@ -349,7 +347,7 @@ function geraXML(){
         open(url, where, window_spec);
 }
 
-function recuperaXML(){
+function recuperateXML(){
 
         <?php
 
@@ -357,7 +355,6 @@ function recuperaXML(){
     
             ?>
             var url = 'recuperarXML.php?id_projeto=' + '<?= $id_projeto ?>';
-    
             <?php
         }
         else {
@@ -376,15 +373,15 @@ function recuperaXML(){
         open(url, where, window_spec);
 }
 
-function geraGrafo(){
+function generateGraph(){
 
         <?php
 
         if (isset($id_projeto)) {
-        ?>
+        
+            ?>
             var url = 'gerarGrafo.php?id_projeto=' + '<?= $id_projeto ?>';
-    
-        <?php
+            <?php
         }
         else {
     
@@ -407,22 +404,21 @@ Ontology
 Objective: Generate ontology of the project
 */
 ?>
-function geraOntologia(){
+
+function generateOntology(){
 
         <?php
         
         if (isset($id_projeto)) {
     
             ?>
-            var url = 'inicio.php?id_projeto=' + '<?= $id_projeto ?>';
-    
+            var url = 'inicio.php?id_projeto=' + '<?= $id_projeto ?>';    
             <?php
         }
         else {
         
             ?>
-            var url = 'inicio.php?';
-    
+            var url = 'inicio.php?';    
             <?php
         }
         
@@ -440,22 +436,20 @@ Ontology - DAML
 Objective: Generate DAML projetct's ontology 
  */
 ?>
-function geraDAML(){
+function generateDAML(){
 
         <?php
 
         if (isset($id_projeto)) {
     
             ?>
-            var url = 'form_daml.php?id_projeto=' + '<?= $id_projeto ?>';
-    
+            var url = 'form_daml.php?id_projeto=' + '<?= $id_projeto ?>';    
             <?php
         }
         else {
             
             ?>
-            var url = 'form_daml.php?';
-            
+            var url = 'form_daml.php?';            
             <?php
         }
         
@@ -470,22 +464,21 @@ function geraDAML(){
 <?php
  
 ?>
-function recuperaDAML(){
+
+function recuperateDAML(){
 
         <?php
         
         if (isset($id_projeto)) {
         
             ?>
-            var url = 'recuperaDAML.php?id_projeto=' + '<?= $id_projeto ?>';
-    
+            var url = 'recuperaDAML.php?id_projeto=' + '<?= $id_projeto ?>';    
             <?php
         }
         else {
         
             ?>
-            var url = 'recuperaDAML.php?';
-        
+            var url = 'recuperaDAML.php?';        
             <?php
         }
 
@@ -507,9 +500,11 @@ function recuperaDAML(){
 include("frame_inferior.php");
 
 // Script called by itself main.php (or the tree) 
+
+
 if (isset($id) && isset($term)) {      
     
-    $vetorVazio = array();
+    $emptyVector = array();
     
     if ($term == "c") {
         
@@ -568,7 +563,7 @@ if (isset($id) && isset($term)) {
         <tr> 
             <th>Titulo:</th><td CLASS="Estilo">
                             
-                <?php echo nl2br(monta_links($resultArray['titulo'], $vetorDeLexicos, $vetorVazio)); 
+                <?php echo nl2br(monta_links($resultArray['titulo'], $vetorDeLexicos, $emptyVector)); 
         
                 ?>
             </td> 
@@ -579,7 +574,7 @@ if (isset($id) && isset($term)) {
             
            <th>Objetivo:</th><td CLASS="Estilo">
                
-                <?php echo nl2br(monta_links($resultArray['objetivo'], $vetorDeLexicos, $vetorVazio));
+                <?php echo nl2br(monta_links($resultArray['objetivo'], $vetorDeLexicos, $emptyVector));
                 
                 ?>
            </td> 
@@ -595,7 +590,7 @@ if (isset($id) && isset($term)) {
         <tr> 
               <th>Atores:</th><td CLASS="Estilo">
                   
-                    <?php echo nl2br(monta_links($resultArray['atores'], $vetorDeLexicos, $vetorVazio));
+                    <?php echo nl2br(monta_links($resultArray['atores'], $vetorDeLexicos, $emptyVector));
                     
                     ?>
               </td>  
@@ -604,7 +599,7 @@ if (isset($id) && isset($term)) {
         <tr> 
               <th>Recursos:</th><td CLASS="Estilo">
                   
-                <?php echo nl2br(monta_links($resultArray['recursos'], $vetorDeLexicos, $vetorVazio));
+                <?php echo nl2br(monta_links($resultArray['recursos'], $vetorDeLexicos, $emptyVector));
                 
                 ?>
                         </td> 
@@ -613,7 +608,7 @@ if (isset($id) && isset($term)) {
         <tr> 
                <th>Exceção:</th><td CLASS="Estilo">
                    
-                <?php echo nl2br(monta_links($resultArray['excecao'], $vetorDeLexicos, $vetorVazio));
+                <?php echo nl2br(monta_links($resultArray['excecao'], $vetorDeLexicos, $emptyVector));
                 
                 ?>
                         </td> 
@@ -668,7 +663,7 @@ if (isset($id) && isset($term)) {
              </tr>
              
              <tr> 
-                  <th>Noção:</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['nocao'], $vetorDeLexicos, $vetorVazio)); ?>
+                  <th>Noção:</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['nocao'], $vetorDeLexicos, $emptyVector)); ?>
                   </td> 
              </tr>
              
@@ -678,7 +673,7 @@ if (isset($id) && isset($term)) {
              </tr> 
              
              <tr> 
-                  <th>Impacto(s):</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['impacto'], $vetorDeLexicos, $vetorVazio)); ?> 
+                  <th>Impacto(s):</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['impacto'], $vetorDeLexicos, $emptyVector)); ?> 
                   </td>
              </tr> 
              
@@ -989,15 +984,15 @@ Showing on-screen options:
               </tr> 
                    
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="geraGrafo();" >Gerar grafo deste projeto</a></td>                   
+                  <td CLASS="Estilo"><a href="#" onClick="generateGraph();" >Gerar grafo deste projeto</a></td>                   
               </tr>       
                     
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="geraXML();">Gerar XML deste projeto</a></td>                   
+                  <td CLASS="Estilo"><a href="#" onClick="generateXML();">Gerar XML deste projeto</a></td>                   
               </tr> 
                     
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="recuperaXML();">Recuperar XML deste projeto</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="recuperateXML();">Recuperar XML deste projeto</a></td>                    
               </tr> 
               
               <tr>                         
@@ -1005,15 +1000,15 @@ Showing on-screen options:
               </tr> 
                    
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="geraOntologia();">Gerar ontologia deste projeto</a></td>                     
+                  <td CLASS="Estilo"><a href="#" onClick="generateOntology();">Gerar ontologia deste projeto</a></td>                     
               </tr>            
                     
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="geraDAML();">Gerar DAML da ontologia do projeto</a></td>                     
+                  <td CLASS="Estilo"><a href="#" onClick="generateDAML();">Gerar DAML da ontologia do projeto</a></td>                     
               </tr> 
                     
               <tr>                      
-                  <td CLASS="Estilo"><a href="#" onClick="recuperaDAML();">Histórico em DAML da ontologia do projeto</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="recuperateDAML();">Histórico em DAML da ontologia do projeto</a></td>                    
               </tr>           
                     
               <tr>                         
@@ -1048,7 +1043,7 @@ Showing on-screen options:
                         <th>Você não &eacute; um administrador deste projeto:</th> 	
                     </tr>	
                     <tr> 
-                        <td CLASS="Estilo"><a href="#" onClick="geraGrafo();" >Gerar grafo deste projeto</a></td>
+                        <td CLASS="Estilo"><a href="#" onClick="generateGraph();" >Gerar grafo deste projeto</a></td>
                     </tr>  
                 </table>			
                 <?php

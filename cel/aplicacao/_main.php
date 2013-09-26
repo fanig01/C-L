@@ -82,7 +82,7 @@ checkUserAuthentication("index.php");        // Checa se o usuario foi autentica
                 open(url, where, window_spec);
             }
 
-            function geraXML() {
+            function generateXML() {
                 var url = 'xml_gerador.php?id_projeto=' + '<?= $id_projeto ?>';
                 var where = '_blank';
                 var window_spec = 'dependent,height=330,width=550,resizable,scrollbars,titlebar';
@@ -242,7 +242,7 @@ if (isset($id) && isset($term)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (
                 <p><a href="#" onClick="requestLexicon();">Verificar pedidos de altera��o de termos do L�xico</a></p>
                 <p><a href="#" onClick="addUser();">Adicionar usu�rio (n�o existente) neste projeto</a></p>
                 <p><a href="#" onClick="relateUsers();">Relacionar usu�rios j� existentes com este projeto</a></p>
-                <p><a href="#" onClick="geraXML();">Gerar XML deste projeto</a></p>
+                <p><a href="#" onClick="generateXML();">Gerar XML deste projeto</a></p>
 
         <?php
     }
