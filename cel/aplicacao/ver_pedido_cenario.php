@@ -1,12 +1,12 @@
 <?php
-/* 
- * vim: set expandtab tabstop=4 shiftwidth=4:
- * ver_pedido_cenario.php: Esse script exibe os varios pedidos referentes ao cenario.
- * O gerente tem a opcao de ver os pedidos jah validados. 
- * O gerente tb podera validar e processar pedidos.
- * O gerente tera uma terceira opcao que eh a de remover o pedido validado ou nao da lista de pedidos.
- * O gerente podera responder a um pedido via e-mail direto desta pagina.
- *  Arquivo chamador: heading.php
+/*
+ * Vim: set expandtab tabstop = 4 shiftwidth = 4:
+ * Ver_pedido_cenario.php: This script displays the various applications for the scenario.
+ * The manager has the option to see the requests already validated.
+ * The manager can validate and process requests.
+ * The manager has a third option is to remove the validated request or not request list.
+ * The manager will be able to respond to a request via e-mail directly from this page.
+ * Archive caller: heading.php
  */
 
 session_start();
@@ -36,7 +36,7 @@ if (isset($submit)) {
 
     </script>
 
-    <h4>Opera��o efetuada com sucesso!</h4>
+    <h4>Opera&ccedil;&atilde;o efetuada com sucesso!</h4>
     <script language="javascript1.3">
 
         self.close();
@@ -47,29 +47,29 @@ if (isset($submit)) {
     ?>
     <html>
         <head>
-            <title>Pedidos de alteração dos Cen�rios</title>
+            <title>Pedidos de alteração dos Cen&agrave;rios</title>
         </head>
         <body>
-            <h2>Pedidos de Alteração no Conjunto de Cenários</h2>
+            <h2>Pedidos de Altera&ccedil;&atilde;o no Conjunto de Cen&agrave;rios</h2>
             <form action="?id_projeto=<?= $idProject  ?>" method="post">
 
     <?php
 /*
- * Cenário - Verificar pedidos de alteração de cenários
- * Objetivo: Permitir ao administrador gerenciar os pedidos de alteração de cenários.
- * Contexto: Gerente deseja visualizar os pedidos de alteração de cenários.
- * Pré-Condição: Login, projeto cadastrado.
- * Atores: Administrador
- * Recursos: Sistema, banco de dados.
- * Episódios: O administrador clica na opção de Verificar pedidos de alteração de cenários.
- * Restrição: Somente o Administrador do projeto pode ter essa função visível.
- *            O sistema fornece para o administrador uma tela onde poderá visualizar o hist�rico
- *            de todas as alterações pendentes ou não para os cenários.
- *            Para novos pedidos de inclusão ou alteração de cenários,
- *            o sistema permite que o administrador opte por Aprovar ou Remover.
- *            Para os pedidos de inclusão ou alteração já aprovados,
- *            o sistema somente habilita a opção remover para o administrador.
- *            Para efetivar as seleções de aprovação e remoção, basta clicar em Processar.
+ * Scenario - Check order change scenarios.
+ * Purpose: Allow the administrator to manage requests for change scenarios.
+ * Context: Manager wish to view the applications change scenarios.
+ * Precondition: Login, registered design.
+ * Actors: Administrator
+ * Features: System database.
+ * Episodes: The administrator clicks the option Check applications change scenarios.
+ * Restriction: Only the Project Manager may have this function visible.
+ * The system provides the administrator a screen where you can view the history 
+ * of all pending changes or not for the scenarios.
+ * For new applications for inclusion or modification of scenarios, 
+ * the system allows the administrator chooses Approve or Remove.
+ * For requests to add or change already approved, 
+ * the system only enables the option to remove the administrator.
+ * To carry selections approval and removal, simply click Process.
  */
 
     $DB = new PGDB ();
@@ -92,13 +92,13 @@ if (isset($submit)) {
                 ?>
 
                             <br>
-                            <h3>O usu�rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> o cen�rio <font color="#ff0000"><?= $record['titulo'] ?></font> <? if (!strcasecmp($tipo_pedido, 'alterar')) {
-                    echo"para cen�rio abaixo:</h3>";
+                            <h3>O usu&agrave;rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> o cen�rio <font color="#ff0000"><?= $record['titulo'] ?></font> <? if (!strcasecmp($tipo_pedido, 'alterar')) {
+                    echo"para cen&agrave;io abaixo:</h3>";
                 } else {
                     echo"</h3>";
                 } ?>
                                 <table>
-                                    <td><b>T�tulo:</b></td>
+                                    <td><b>T&iacute;tulo:</b></td>
                                     <td><?= $record['titulo'] ?></td>
                                     <tr>
                                         <td><b>Objetivo:</b></td>
@@ -117,11 +117,11 @@ if (isset($submit)) {
                                         <td><?= $record['recursos'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td><b>Exce��o:</b></td>
+                                        <td><b>Exce&ccedil;&atilde;o:</b></td>
                                         <td><?= $record['excecao'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td><b>Epis�dios:</b></td>
+                                        <td><b>Epis&oacute;dios:</b></td>
                                         <td><textarea cols="48" name="episodios" rows="5"><?= $record['episodios'] ?></textarea></td>
                                     </tr>
                                     <tr>
@@ -130,7 +130,7 @@ if (isset($submit)) {
                                     </tr>
                                 </table>
                             <?php } else { ?>
-                                <h3>O usu�rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> o cen�rio <font color="#ff0000"><?= $record['titulo'] ?></font></h3>
+                                <h3>O usu&agrave;rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> o cen&agrave;rio <font color="#ff0000"><?= $record['titulo'] ?></font></h3>
                             <?php
                             }
                             if ($aprovado == 1) {
@@ -149,7 +149,7 @@ if (isset($submit)) {
                     ?>
                     <input name="submit" type="submit" value="Processar">
                     </form>
-                    <br><i><a href="showSource.php?file=ver_pedido_cenario.php">Veja o código fonte!</a></i>
+                    <br><i><a href="showSource.php?file=ver_pedido_cenario.php">Veja o c&oacute;digo fonte!</a></i>
                     </body>
                     </html>
                     <?php
