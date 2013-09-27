@@ -46,13 +46,13 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de b
         $qProcuraNomeProjeto = "SELECT * FROM projeto WHERE id_projeto = '$idProject '";
         $qrrProcura = mysql_query($qProcuraNomeProjeto) or die("Erro ao enviar a query de busca de projeto");
         $resultNome = mysql_fetch_row($qrrProcura);
-        $nome_projeto = $resultNome[1];
+        $nameProject = $resultNome[1];
         
         ?>
         <table border='0'>
             <tr>
 
-                <th height="29" width="140"><a href="mostrarProjeto.php?id_projeto=<?= $idProject  ?>&versao=<?= $versao ?>"><?= $nome_projeto ?></a></th>
+                <th height="29" width="140"><a href="mostrarProjeto.php?id_projeto=<?= $idProject  ?>&versao=<?= $versao ?>"><?= $nameProject ?></a></th>
                 <th height="29" width="140">Data: <?= $data ?></th>
                 <th height="29" width="100">Versão: <?= $versao ?></th>
 

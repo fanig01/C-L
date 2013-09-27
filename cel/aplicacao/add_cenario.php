@@ -69,7 +69,7 @@ if (isset($submit)) {
 
     <?php
 } else {    // Script chamado atraves do menu superior
-    $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
+    $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
     ?>
 
     <html>
@@ -154,7 +154,7 @@ if (isset($submit)) {
                 <table>
                     <tr>
                         <td>Projeto:</td>
-                        <td><input disabled size="51" type="text" value="<?= $nome_projeto ?>"></td>
+                        <td><input disabled size="51" type="text" value="<?= $nameProject ?>"></td>
                     </tr>
                     <td>T�tulo:</td>
                     <td><input size="51" name="titulo" type="text" value=""></td>                

@@ -142,12 +142,12 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
         mysql_query($commandSQL) or die("Erro ao inserir na tabela participa");
 
         $nome_usuario = simple_query("nome", "usuario", "id_usuario = $id_usuario_incluido");
-        $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
+        $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
         ?>
 
         <script language="javascript1.3">
 
-            document.writeln('<p style="color: blue; font-weight: bold; text-align: center">Usu�rio <b><?= $nome_usuario ?></b> cadastrado e inclu�do no projeto <b><?= $nome_projeto ?></b></p>');
+            document.writeln('<p style="color: blue; font-weight: bold; text-align: center">Usu�rio <b><?= $nome_usuario ?></b> cadastrado e inclu�do no projeto <b><?= $nameProject ?></b></p>');
             document.writeln('<p align="center"><a href="javascript:self.close();">Fechar</a></p>');
 
         </script>

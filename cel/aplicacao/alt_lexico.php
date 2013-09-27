@@ -59,7 +59,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
 
     <?php
 } else {        // Script chamado atraves do link do lexico corrente
-    $nome_projeto = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
+    $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
     $commandSQL = "SELECT * FROM lexico WHERE id_lexico = $id_lexico";
     $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
     $resultArray = mysql_fetch_array($requestResultSQL);
@@ -158,7 +158,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
 
                         <tr>
                             <td>Projeto:</td>
-                            <td><input disabled size="48" type="text" value="<?= $nome_projeto ?>"></td>
+                            <td><input disabled size="48" type="text" value="<?= $nameProject ?>"></td>
                         </tr>
                         <tr>
                             <td>Nome:</td>
