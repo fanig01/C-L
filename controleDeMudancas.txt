@@ -131,7 +131,7 @@ Thaiane Braga
 -----------------------------------------------------------------------------------
 
 
-    Dicionário de Variáveis:
+ Dicionário de Variáveis:
 
 1. $do_debug = $setLevelDebug
 2. $smtp_conn     = $networkSocketSmtp
@@ -151,8 +151,8 @@ Thaiane Braga
 16. $rval             = $replyValue
 17.$qrr               = $resultadoRequisicaoSql
 18. $r                 = $SgbdConnectStatus
-19.$result           = $rowResult obs: pertence a função inclui_cenario(), ou seja,                                  
-                                   é local, no arquivo copy(2) of funcoes_genericas
+19.$result           = $rowResult obs: pertence a função inclui_cenario(), ou seja,
+                                  é local, no arquivo copy(2) of funcoes_genericas
 20. $i                  = $index   obs: local no arquivo coloca_links.php
 21. $j                  = $indexAux_1 obs: local no arquivo coloca_links.php
 22. $a                 = $indexAux_2 obs: local no arquivo coloca_links.php
@@ -184,9 +184,40 @@ Thaiane Braga
 48.$comandoSql = $commandSQL
 49. $resultadoRequisicaoSql = $requestResultSQL
 50. $data = $date (local no arquivo gerarGrafo.php)51.$versao = $version (local no arquivo gerarGrafo.php)
-52. $senha_cript = $criptPassword 
- 
-   Dicionário de Funções:
+52. $senha_cript = $criptPassword
+53.$vetorVazio = $emptyVector
+54.$c_id_projeto = $idScenarioProject 
+55. $vetorDeCenarios = $scenariosVector
+56.$vetorDeLexicos = $lexiconVector
+57.$l_id_projeto = $idLexiconProject
+58.$qSinonimo = $querySynonym 
+59.$id_projeto = $idProject 
+60.$tempS = $tempSynonym 
+61.$id_cenario_atual = $idCurrentScenario
+62. $vetor_cenarios = $vector_scenarios
+63.$vetor_lexicos = $vector_lexicons
+64.$titulo = $title
+65.$tempTitulo = $temporaryTitle
+66. $objetivo = $objective
+67. $tempObjetivo = $temporaryObjective 
+68. $contexto = $context
+69. $tempContexto = $temporaryContext 
+70.$atores = $actors
+71. $tempAtores = $temporaryActors
+72. $recursos = $resources
+73.$tempRecursos = $temporaryResources
+74. $excecao = $exception
+75. $tempExcecao = $temporaryException
+76. $episodios = $episodes
+77. $tempEpisodios = $temporaryEpisodes
+78. $id_lexico_atual = $idCurrentLexicon
+79. $nocao = $notion
+80. $tempNocao = $temporaryNotion
+81. $impacto = $impact
+82. $tempImpacto = $temporaryImpact
+83. $texto = $text
+
+Dicionário de Funções:
 
 1. chkUser  = checkUserAuthentication
 2. check_proj_perm = permissionCheckToProject
@@ -206,8 +237,14 @@ Thaiane Braga
 16.pedidoLexico = requestLexicon
 17. pedidoConceito = requestConcept
 18. pedidoRelacao = requestRelationship
-19. addUsuario = addUser
+ 19. addUsuario = addUser
 20.relUsuario = relateUsers 
+21. geraXML = generateXML
+22. recuperaXML = recuperateXML
+23. geraGrafo = generateGraph
+24. geraOntologia = generateOntology
+25. geraDAML = generateDAML
+26. recuperaDAML = recuperateDAML
 
 
 -------------------------------------------------------------------------------

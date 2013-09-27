@@ -18,9 +18,9 @@ Episodes: The system deletes all data on the particular project from database.
  */
 
 
-$id_projeto = $_SESSION['id_projeto_corrente'];
+$idProject  = $_SESSION['id_projeto_corrente'];
 
-removeProjeto($id_projeto);
+removeProjeto($idProject );
 
 ?>
 

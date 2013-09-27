@@ -110,13 +110,13 @@ function frame_inferior($bd, $tipo, $id) {
                     } // while 
                 } //elseif 
                 else if ($tipo == "oc") /* CONCEITO */ {
-                    $q = "SELECT   r.id_relacao, r.nome, predicado 
+                    $comandoSql = "SELECT   r.id_relacao, r.nome, predicado 
                  FROM     conceito c, relacao_conceito rc, relacao r 
                  WHERE    c.id_conceito = $id 
                  AND      c.id_conceito = rc.id_conceito 
                  AND      r.id_relacao = rc.id_relacao 
                  ORDER BY r.nome  ";
-                    $result = mysql_query($q) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+                    $result = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
 
                     print "<TABLE><tr><th align=left CLASS=\"Estilo\">Rela��o</th><th align=left CLASS=\"Estilo\">Conceito</Th></tr>";
 
@@ -125,13 +125,13 @@ function frame_inferior($bd, $tipo, $id) {
                     }
                 } //elseif 
                 else if ($tipo == "or") /* RELA��O */ {
-                    $q = "SELECT DISTINCT  c.id_conceito, c.nome 
+                    $comandoSql = "SELECT DISTINCT  c.id_conceito, c.nome 
                  FROM     conceito c, relacao_conceito rc, relacao r 
                  WHERE    r.id_relacao = $id 
                  AND      c.id_conceito = rc.id_conceito 
                  AND      r.id_relacao = rc.id_relacao 
                  ORDER BY r.nome  ";
-                    $result = mysql_query($q) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+                    $result = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
 
                     print "<TABLE><tr><th align=left CLASS=\"Estilo\">Conceitos</th></tr>";
 
@@ -141,11 +141,11 @@ function frame_inferior($bd, $tipo, $id) {
                 } //elseif 
                 else if ($tipo == "oa") /* AXIOMA */ {
 
-                    $q = "SELECT   * 
+                    $comandoSql = "SELECT   * 
                  FROM     axioma
                  WHERE    id_axioma = \"$id\";";
 
-                    $result = mysql_query($q) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+                    $result = mysql_query($comandoSql) or die("Erro ao enviar a query de selecao !!" . mysql_error());
 
                     print "<TABLE><tr><th align=left CLASS=\"Estilo\">Conceito</th><th align=left CLASS=\"Estilo\">Conceito disjunto</th></tr>";
 

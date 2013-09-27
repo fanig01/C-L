@@ -5,7 +5,7 @@ include_once("coloca_links.php");
 
 // Assemble the relations used in the side menu
 
-function monta_relacoes($id_projeto) {
+function monta_relacoes($idProject ) {
 
     $DB = new PGDB ();
     $sql1 = new QUERY($DB);
@@ -19,208 +19,202 @@ function monta_relacoes($id_projeto) {
     */
  
 
-    $q = "SELECT *
+    $comandoSql = "SELECT *
 	          FROM cenario
-	          WHERE id_projeto = $id_projeto
+	          WHERE id_projeto = $idProject 
 	          ORDER BY CHAR_LENGTH(titulo) DESC";
     
-    $qrr = mysql_query($q) or die("Erro ao enviar a query");
+    $requestResultSQL = mysql_query($comandoSql) or die("Erro ao enviar a query");
 
-    while ($result = mysql_fetch_array($qrr)) { 
+    while ($result = mysql_fetch_array($requestResultSQL)) { 
         
-        $id_cenario_atual = $result['id_cenario'];
+        $idCurrentScenario = $result['id_cenario'];
 
         // This function makes vector with scenarios's title
-
-        $vetor_cenarios = carrega_vetor_cenario($id_projeto, $id_cenario_atual);
+        $vector_scenarios = carrega_vetor_cenario($idProject , $idCurrentScenario);
 
         // This function makes vector with name and synonyms of all lexical
-
-        $vetor_lexicos = carrega_vetor_todos($id_projeto);
+        $vector_lexicons = carrega_vetor_todos($idProject );
 
         // Sorts the levical's vector by the amount of words in name or synonym
-
-        quicksort($vetor_lexicos, 0, count($vetor_lexicos) - 1, 'lexico');
+        quicksort($vector_lexicons, 0, count($vector_lexicons) - 1, 'lexico');
 
         // Sorts the scenario's vector by the number of words of the title
+        quicksort($vector_scenarios, 0, count($vector_scenarios) - 1, 'cenario');
 
-        quicksort($vetor_cenarios, 0, count($vetor_cenarios) - 1, 'cenario');
+        $title = $result['titulo'];
+        $temporaryTitle = cenario_para_lexico($idCurrentScenario, $title, $vector_lexicons);
+        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryTitle);
 
- 
+        $objective = $result['objetivo'];
+        $temporaryObjective = cenario_para_lexico($idCurrentScenario, $objective, $vector_lexicons);
+        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryObjective);
 
-        $titulo = $result['titulo'];
-        $tempTitulo = cenario_para_lexico($id_cenario_atual, $titulo, $vetor_lexicos);
-        adiciona_relacionamento($id_cenario_atual, 'cenario', $tempTitulo);
+        $context = $result['contexto'];
+        $temporaryContext = cenario_para_lexico_cenario_para_cenario($idCurrentScenario, $context, $vector_lexicons, $vector_scenarios);
+        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryContext); 
 
-        $objetivo = $result['objetivo'];
-        $tempObjetivo = cenario_para_lexico($id_cenario_atual, $objetivo, $vetor_lexicos);
-        adiciona_relacionamento($id_cenario_atual, 'cenario', $tempObjetivo);
+        $actors = $result['atores'];
+        $temporaryActors = cenario_para_lexico($idCurrentScenario, $actors, $vector_lexicons);
+        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryActors);
 
-        $contexto = $result['contexto'];
-        $tempContexto = cenario_para_lexico_cenario_para_cenario($id_cenario_atual, $contexto, $vetor_lexicos, $vetor_cenarios);
-        adiciona_relacionamento($id_cenario_atual, 'cenario', $tempContexto); 
+        $resources = $result['recursos'];
+        $temporaryResources = cenario_para_lexico($idCurrentScenario, $resources, $vector_lexicons);
+        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryResources);
 
-        $atores = $result['atores'];
-        $tempAtores = cenario_para_lexico($id_cenario_atual, $atores, $vetor_lexicos);
-        adiciona_relacionamento($id_cenario_atual, 'cenario', $tempAtores);
+        $exception = $result['excecao'];
+        $temporaryException = cenario_para_lexico($idCurrentScenario, $exception, $vector_lexicons);
+        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryException);
 
-        $recursos = $result['recursos'];
-        $tempRecursos = cenario_para_lexico($id_cenario_atual, $recursos, $vetor_lexicos);
-        adiciona_relacionamento($id_cenario_atual, 'cenario', $tempRecursos);
-
-        $excecao = $result['excecao'];
-        $tempExcecao = cenario_para_lexico($id_cenario_atual, $excecao, $vetor_lexicos);
-        adiciona_relacionamento($id_cenario_atual, 'cenario', $tempExcecao);
-
-        $episodios = $result['episodios'];
-        $tempEpisodios = cenario_para_lexico_cenario_para_cenario($id_cenario_atual, $episodios, $vetor_lexicos, $vetor_cenarios);
-        adiciona_relacionamento($id_cenario_atual, 'cenario', $tempEpisodios);
+        $episodes = $result['episodios'];
+        $temporaryEpisodes = cenario_para_lexico_cenario_para_cenario($idCurrentScenario, $episodes, $vector_lexicons, $vector_scenarios);
+        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryEpisodes);
     }
 
-    $q = "SELECT *
+    $comandoSql = "SELECT *
 	          FROM lexico
-	          WHERE id_projeto = $id_projeto
+	          WHERE id_projeto = $idProject 
 	          ORDER BY CHAR_LENGTH(nome) DESC";
     
-    $qrr = mysql_query($q) or die("Erro ao enviar a query");
+    $requestResultSQL = mysql_query($comandoSql) or die("Erro ao enviar a query");
 
-    while ($result = mysql_fetch_array($qrr)) { 
+    while ($result = mysql_fetch_array($requestResultSQL)) { 
         
-        $id_lexico_atual = $result['id_lexico'];
+        $idCurrentLexicon = $result['id_lexico'];
 
         // This function makes vector with name and synonyms of all lexical less current vector
 
-        $vetor_lexicos = carrega_vetor($id_projeto, $id_lexico_atual);
+        $vector_lexicons = carrega_vetor($idProject , $idCurrentLexicon);
 
         //// Sorts the levical's vector by the amount of words in name or synonym
-        quicksort($vetor_lexicos, 0, count($vetor_lexicos) - 1, 'lexico');
+        quicksort($vector_lexicons, 0, count($vector_lexicons) - 1, 'lexico');
 
-        $nocao = $result['nocao'];
-        $tempNocao = lexico_para_lexico($id_lexico, $nocao, $vetor_lexicos);
-        adiciona_relacionamento($id_lexico_atual, 'lexico', $tempNocao);	
+        $notion = $result['nocao'];
+        $temporaryNotion = lexico_para_lexico($id_lexico, $notion, $vector_lexicons);
+        adiciona_relacionamento($idCurrentLexicon, 'lexico', $temporaryNotion);	
 
-        $impacto = $result['impacto'];
-        $tempImpacto = lexico_para_lexico($id_lexico, $impacto, $vetor_lexicos);
-        adiciona_relacionamento($id_lexico_atual, 'lexico', $tempImpacto);
+        $impact = $result['impacto'];
+        $temporaryImpact = lexico_para_lexico($id_lexico, $impact, $vector_lexicons);
+        adiciona_relacionamento($idCurrentLexicon, 'lexico', $temporaryImpact);
     }
 }
 
-function lexico_para_lexico($id_lexico, $texto, $vetor_lexicos) {
+function lexico_para_lexico($id_lexico, $text, $vector_lexicons) {
     
     $i = 0;
     
-    while ($i < count($vetor_lexicos)) {
+    while ($i < count($vector_lexicons)) {
     
-        $regex = "/(\s|\b)(" . $vetor_lexicos[$i]->nome . ")(\s|\b)/i";
-        $texto = preg_replace($regex, "$1{l" . $vetor_lexicos[$i]->id_lexico . "**$2" . "}$3", $texto);
+        $regex = "/(\s|\b)(" . $vector_lexicons[$i]->nome . ")(\s|\b)/i";
+        $text = preg_replace($regex, "$1{l" . $vector_lexicons[$i]->id_lexico . "**$2" . "}$3", $text);
         $i++;
         
         /*  Code to insert the relationship in the lextolex's table 
         
-        $q = "INSERT 
+        $comandoSql = "INSERT 
               INTO lextolex (id_lexico_from, id_lexico_to)
-              VALUES ($id_lexico, " . $vetor_lexicos[$i]->id_lexico . ")";
-        mysql_query($q) or die("Erro ao enviar a query de INSERT na lextolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__); 
+              VALUES ($id_lexico, " . $vector_lexicons[$i]->id_lexico . ")";
+        mysql_query($comandoSql) or die("Erro ao enviar a query de INSERT na lextolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__); 
         
         */
         
         }
         
-    return $texto;
+    return $text;
 
     
  }
 
-function cenario_para_lexico($id_cenario, $texto, $vetor_lexicos) {
+function cenario_para_lexico($id_cenario, $text, $vector_lexicons) {
     
     $i = 0;
     
-    while ($i < count($vetor_lexicos)) {
+    while ($i < count($vector_lexicons)) {
     
-        $regex = "/(\s|\b)(" . $vetor_lexicos[$i]->nome . ")(\s|\b)/i";
-        $texto = preg_replace($regex, "$1{l" . $vetor_lexicos[$j]->id_lexico . "**$2" . "}$3", $texto);
+        $regex = "/(\s|\b)(" . $vector_lexicons[$i]->nome . ")(\s|\b)/i";
+        $text = preg_replace($regex, "$1{l" . $vector_lexicons[$j]->id_lexico . "**$2" . "}$3", $text);
         $i++;
         
         /* Code to insert the relationship in the centolex's table  
          
-        $q = "INSERT 
+        $comandoSql = "INSERT 
               INTO centolex (id_cenario, id_lexico)
-              VALUES ($id_cenario, " . $vetor_lexicos[$i]->id_lexico . ")";
-        mysql_query($q) or die("Erro ao enviar a query de INSERT na centolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__); 
+              VALUES ($id_cenario, " . $vector_lexicons[$i]->id_lexico . ")";
+        mysql_query($comandoSql) or die("Erro ao enviar a query de INSERT na centolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__); 
          */
     }
     
-    return $texto;
+    return $text;
 }
 
-function cenario_para_cenario($id_cenario, $texto, $vetor_cenarios) {
+function cenario_para_cenario($id_cenario, $text, $vector_scenarios) {
     
     $i = 0;
     
-    while ($i < count($vetor_cenarios)) {
+    while ($i < count($vector_scenarios)) {
     
-        $regex = "/(\s|\b)(" . $vetor_cenarios[$i]->titulo . ")(\s|\b)/i";
-        $texto = preg_replace($regex, "$1{c" . $vetor_cenarios[$j]->id_cenario . "**$2" . "}$3", $texto);
+        $regex = "/(\s|\b)(" . $vector_scenarios[$i]->titulo . ")(\s|\b)/i";
+        $text = preg_replace($regex, "$1{c" . $vector_scenarios[$j]->id_cenario . "**$2" . "}$3", $text);
         $i++;
         
         /* Code to insert the relationship in the centolex's table
           
-        $q = "INSERT 
+        $comandoSql = "INSERT 
               INTO centolex (id_cenario, id_lexico)
-              VALUES ($id_cenario, " . $vetor_lexicos[$i]->id_lexico . ")";
-        mysql_query($q) or die("Erro ao enviar a query de INSERT na centolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__); 
+              VALUES ($id_cenario, " . $vector_lexicons[$i]->id_lexico . ")";
+        mysql_query($comandoSql) or die("Erro ao enviar a query de INSERT na centolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__); 
          */
     }
     
-    return $texto;
+    return $text;
 }
 
-function cenario_para_lexico_cenario_para_cenario($id_cenario, $texto, $vetor_lexicos, $vetor_cenarios) {
+function cenario_para_lexico_cenario_para_cenario($id_cenario, $text, $vector_lexicons, $vector_scenarios) {
  
     $i = 0;
     $j = 0;
     $k = 0;
     
-    $total = count($vetor_lexicos) + count($vetor_cenarios);
+    $total = count($vector_lexicons) + count($vector_scenarios);
     
     while ($k < $total) {
-        if (strlen($vetor_cenarios[$j]->titulo) < strlen($vetor_lexicos[$i]->nome)) {
-            $regex = "/(\s|\b)(" . $vetor_lexicos[$i]->nome . ")(\s|\b)/i";
-            $texto = preg_replace($regex, "$1{l" . $vetor_lexicos[$i]->id_lexico . "**$2" . "}$3", $texto);
+        if (strlen($vector_scenarios[$j]->titulo) < strlen($vector_lexicons[$i]->nome)) {
+            $regex = "/(\s|\b)(" . $vector_lexicons[$i]->nome . ")(\s|\b)/i";
+            $text = preg_replace($regex, "$1{l" . $vector_lexicons[$i]->id_lexico . "**$2" . "}$3", $text);
             $i++;
 
             /* Code to insert the relationship in the centolex's table
             
-            $q = "INSERT 
+            $comandoSql = "INSERT 
                	  INTO centolex (id_cenario, id_lexico)
-            	  VALUES ($id_cenario, " . $vetor_lexicos[$i]->id_lexico . ")";
-            mysql_query($q) or die("Erro ao enviar a query de INSERT na centolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__); 
+            	  VALUES ($id_cenario, " . $vector_lexicons[$i]->id_lexico . ")";
+            mysql_query($comandoSql) or die("Erro ao enviar a query de INSERT na centolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__); 
             */
         }
         else {
              
-            $regex = "/(\s|\b)(" . $vetor_cenarios[$j]->titulo . ")(\s|\b)/i";
-            $texto = preg_replace($regex, "$1{c" . $vetor_cenarios[$j]->id_cenario . "**$2" . "}$3", $texto);
+            $regex = "/(\s|\b)(" . $vector_scenarios[$j]->titulo . ")(\s|\b)/i";
+            $text = preg_replace($regex, "$1{c" . $vector_scenarios[$j]->id_cenario . "**$2" . "}$3", $text);
             $j++;
         }
         
         $k++;
     }
     
-    return $texto;
+    return $text;
 }
 
 // Function to add relationships in tables centocen, centolex and lextolex
 
-function adiciona_relacionamento($id_from, $tipo_from, $texto) {
+function adiciona_relacionamento($id_from, $tipo_from, $text) {
     
     $i = 0; // text's index with placeholder
     $parser = 0; // checks when should be added tags
     $novo_texto = "";
     
-    while ($i < strlen(&$texto)) {
+    while ($i < strlen(&$text)) {
         
-        if ($texto[$i] == "{") {
+        if ($text[$i] == "{") {
             
             $parser++;
             
@@ -229,12 +223,12 @@ function adiciona_relacionamento($id_from, $tipo_from, $texto) {
             
                 $id_to = "";
                 $i++;
-                $tipo = $texto[$i];
+                $tipo = $text[$i];
                 $i++;
                 
-                while ($texto[$i] != "*") {
+                while ($text[$i] != "*") {
                     
-                    $id_to .= $texto[$i];
+                    $id_to .= $text[$i];
                     $i++;               
                     
                 }
@@ -261,10 +255,10 @@ function adiciona_relacionamento($id_from, $tipo_from, $texto) {
 
                         /* Adds relation of scenario to  scenario in table centocen
                         
-                        $q = "INSERT 
+                        $comandoSql = "INSERT 
                      	      INTO centocen (id_cenario_from, id_cenario_to)
-                              VALUES ($id_from, " . $vetor_cenarios[$j]->id_cenario . ")";
-                        mysql_query($q) or die("Erro ao enviar a query de INSERT na centocen<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
+                              VALUES ($id_from, " . $vector_scenarios[$j]->id_cenario . ")";
+                        mysql_query($comandoSql) or die("Erro ao enviar a query de INSERT na centocen<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
                         */
                         
                     }
@@ -274,7 +268,7 @@ function adiciona_relacionamento($id_from, $tipo_from, $texto) {
             }
             
         }
-        elseif ($texto[$i] == "}") {
+        elseif ($text[$i] == "}") {
           
             $parser--;
         

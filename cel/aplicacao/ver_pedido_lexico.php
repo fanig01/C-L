@@ -59,7 +59,7 @@ else {
         </head>
         <body>
             <h2>Pedidos de Alteração no Léxico</h2>
-            <form action="?id_projeto=<?= $id_projeto ?>" method="post">
+            <form action="?id_projeto=<?= $idProject  ?>" method="post">
 
     <?php
     /*
@@ -83,7 +83,7 @@ else {
     $select2 = new QUERY($DB);
     $select3 = new QUERY($DB);
 
-    $select->execute("SELECT * FROM pedidolex WHERE id_projeto = $id_projeto");
+    $select->execute("SELECT * FROM pedidolex WHERE id_projeto = $idProject ");
 
     if ($select->getntuples() == 0) {
         echo "<BR>Nenhum pedido.<BR>";

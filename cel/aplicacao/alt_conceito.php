@@ -63,7 +63,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
         <body>
             <h4>Alterar Conceito</h4>
             <br>
-            <form action="?id_projeto=<?= $id_projeto ?>" method="post">
+            <form action="?id_projeto=<?= $idProject  ?>" method="post">
                 <table>
                     <tr>
                         <td>Projeto:</td>

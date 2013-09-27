@@ -27,7 +27,7 @@ Restrictions: Having a XML Generated project
  */
 
 $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
-$commandSQL = "SELECT * FROM publicacao WHERE id_projeto = '$id_projeto'";
+$commandSQL = "SELECT * FROM publicacao WHERE id_projeto = '$idProject '";
 $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
 
 ?>
@@ -49,9 +49,9 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
                 
                 <th>Data:</th><td><?= $date ?></td>
                 
-                <th><a href="mostraXML.php?id_projeto=<?= $id_projeto ?>&version=<?= $version ?>">XML</a></th>
+                <th><a href="mostraXML.php?id_projeto=<?= $idProject  ?>&version=<?= $version ?>">XML</a></th>
                 
-                <th><a href="grafo\mostraGrafo.php?version=<?= $version ?>&id_projeto=<?= $id_projeto ?>"
+                <th><a href="grafo\mostraGrafo.php?version=<?= $version ?>&id_projeto=<?= $idProject  ?>"
                 
                        >Gerar Grafo</a></th>
 

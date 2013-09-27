@@ -22,7 +22,7 @@ The user can:
 
 if (isset($_GET['id_projeto'])) {
     
-    $id_projeto = $_GET['id_projeto'];
+    $idProject  = $_GET['id_projeto'];
 }
 else{
     //Nothing should be done
@@ -61,9 +61,9 @@ function menuUpdate() {
 
 <?php
 
-if (isset($id_projeto)) {   
+if (isset($idProject )) {   
 
-    permissionCheckToProject($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
+    permissionCheckToProject($_SESSION['id_usuario_corrente'], $idProject ) or die("Permissao negada");
     ?>
 
         
@@ -73,7 +73,7 @@ if (isset($id_projeto)) {
             
         for (var i = 0; i < select.length; i++) {
                 
-            if (select.options[i].value === <?= $id_projeto ?>) {
+            if (select.options[i].value === <?= $idProject  ?>) {
                     
                 select.options[i].selected = true;
                 i = select.length;
@@ -107,10 +107,10 @@ function newScenario() {
     
     <?php
 
-    if (isset($id_projeto)) {
+    if (isset($idProject )) {
             
         ?>
-        var url = 'add_cenario.php?id_projeto=' + '<?= $id_projeto ?>';
+        var url = 'add_cenario.php?id_projeto=' + '<?= $idProject  ?>';
         <?php
     }
     else {
@@ -141,10 +141,10 @@ function newLexicon() {
 
     <?php
 
-    if (isset($id_projeto)) {
+    if (isset($idProject )) {
         
         ?>
-        var url = 'add_lexico.php?id_projeto=' + '<?= $id_projeto ?>';
+        var url = 'add_lexico.php?id_projeto=' + '<?= $idProject  ?>';
         <?php
     }
     else {
@@ -187,7 +187,7 @@ function prjInfo(idprojeto) {
         }
     </style>
     
-    <body bgcolor="#ffffff" text="#000000" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" <?= (isset($id_projeto)) ? "onLoad=\"setProjectSelected();\"" : "" ?>>
+    <body bgcolor="#ffffff" text="#000000" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" <?= (isset($idProject )) ? "onLoad=\"setProjectSelected();\"" : "" ?>>
         <form onSubmit="return menuUpdate();">
             <table width="100%" cellspacing="0" cellpadding="0">
                 <tr bgcolor="#E0FFFF">
@@ -198,10 +198,10 @@ function prjInfo(idprojeto) {
                             <tr>
                                 <td align="right" valign="top"> <?php
 
-if (isset($id_projeto)) {
+if (isset($idProject )) {
 
     $id_usuario = $_SESSION['id_usuario_corrente'];
-    $returnCheck = verificaGerente($id_usuario, $id_projeto);
+    $returnCheck = verificaGerente($id_usuario, $idProject );
 
     if ($returnCheck != 0) {
         
@@ -284,12 +284,12 @@ Episodes: Appearing in the menu options:
              - Change register
  */ 
             
- if (isset($id_projeto)) { 
+ if (isset($idProject )) { 
      
         
      ?> <a href="#" onClick="newScenario();">Adicionar Cenário</a>&nbsp;&nbsp;&nbsp; 
      <a href="#" onClick="newLexicon();">Adicionar Símbolo</a>&nbsp;&nbsp;&nbsp; 
-     <a href="#" title="Informações sobre o Projeto" onClick="prjInfo(<?= $id_projeto ?>);">
+     <a href="#" title="Informações sobre o Projeto" onClick="prjInfo(<?= $idProject  ?>);">
          Info</a>&nbsp;&nbsp;&nbsp;   
              <?php
  }
@@ -322,10 +322,10 @@ Episodes: The administrator clicks the Remove Project in the top menu.
  */
 
 
-if (isset($id_projeto)) {
+if (isset($idProject )) {
 
         $id_usuario = $_SESSION['id_usuario_corrente'];
-        $returnCheck = verificaGerente($id_usuario, $id_projeto);
+        $returnCheck = verificaGerente($id_usuario, $idProject );
       
         if ($returnCheck != 0) {
                         

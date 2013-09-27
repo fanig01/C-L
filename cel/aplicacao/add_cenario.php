@@ -4,7 +4,7 @@ session_start();
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 // add_cenario.php: Este script cadastra um novo cenario do projeto. Eh
-//                  passada, atraves da URL, uma variavel $id_projeto, que
+//                  passada, atraves da URL, uma variavel $idProject , que
 //                  indica em que projeto deve ser inserido o novo cenario.
 
 include("funcoes_genericas.php");
@@ -21,7 +21,7 @@ if (!isset($sucesso)) {
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
-    $returnCheck = checarCenarioExistente($_SESSION['id_projeto_corrente'], $titulo);
+    $returnCheck = checarCenarioExistente($_SESSION['id_projeto_corrente'], $title);
     ?>  <!-- ADICIONEI ISTO PARA TESTES -->
     <!--
        RET = <?= $returnCheck ?> => RET = <?PHP $returnCheck ? print("TRUE")  : print("FALSE") ; ?><BR>
@@ -33,14 +33,14 @@ if (isset($submit)) {
         print("<!-- Tentando Inserir Cenario --><BR>");
 
         /* Substitui todas as ocorrencias de ">" e "<" por " " */
-        $titulo = str_replace(">", " ", str_replace("<", " ", $titulo));
-        $objetivo = str_replace(">", " ", str_replace("<", " ", $objetivo));
-        $contexto = str_replace(">", " ", str_replace("<", " ", $contexto));
-        $atores = str_replace(">", " ", str_replace("<", " ", $atores));
-        $recursos = str_replace(">", " ", str_replace("<", " ", $recursos));
-        $excecao = str_replace(">", " ", str_replace("<", " ", $excecao));
-        $episodios = str_replace(">", " ", str_replace("<", " ", $episodios));
-        inserirPedidoAdicionarCenario($_SESSION['id_projeto_corrente'], $titulo, $objetivo, $contexto, $atores, $recursos, $excecao, $episodios, $_SESSION['id_usuario_corrente']);
+        $title = str_replace(">", " ", str_replace("<", " ", $title));
+        $objective = str_replace(">", " ", str_replace("<", " ", $objective));
+        $context = str_replace(">", " ", str_replace("<", " ", $context));
+        $actors = str_replace(">", " ", str_replace("<", " ", $actors));
+        $resources = str_replace(">", " ", str_replace("<", " ", $resources));
+        $exception = str_replace(">", " ", str_replace("<", " ", $exception));
+        $episodes = str_replace(">", " ", str_replace("<", " ", $episodes));
+        inserirPedidoAdicionarCenario($_SESSION['id_projeto_corrente'], $title, $objective, $context, $actors, $resources, $exception, $episodes, $_SESSION['id_usuario_corrente']);
         print("<!-- Cenario Inserido Com Sucesso! --><BR>");
     } else {
         ?>
@@ -60,10 +60,10 @@ if (isset($submit)) {
         opener.parent.frames['code'].location.reload();
         opener.parent.frames['text'].location.replace('main.php?id_projeto=<?= $_SESSION['id_projeto_corrente'] ?>');
     //self.close();
-    //location.href = "http://<?php print( CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo")); ?>add_cenario.php?id_projeto=<?= $id_projeto ?>&sucesso=s" ;
+    //location.href = "http://<?php print( CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo")); ?>add_cenario.php?id_projeto=<?= $idProject  ?>&sucesso=s" ;
 
 
-        location.href = "add_cenario.php?id_projeto=<?= $id_projeto ?>&sucesso=s";
+        location.href = "add_cenario.php?id_projeto=<?= $idProject  ?>&sucesso=s";
 
     </script>
 

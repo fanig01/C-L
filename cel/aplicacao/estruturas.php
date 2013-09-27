@@ -34,8 +34,8 @@ class relacao_entre_conceitos {
 class termo_do_lexico {
 
     var $nome;
-    var $nocao;
-    var $impacto;
+    var $notion;
+    var $impact;
 
     function termo_do_lexico($name, $notion, $i) {
         $this->nome = $name;

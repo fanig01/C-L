@@ -55,14 +55,14 @@ checkUserAuthentication("index.php");        // Checa se o usuario foi autentica
             // Funcoes que serao usadas quando o script
             // for chamado atraves da heading.php
             function requestScenario() {
-                var url = 'ver_pedido_cenario.php?id_projeto=' + '<?= $id_projeto ?>';
+                var url = 'ver_pedido_cenario.php?id_projeto=' + '<?= $idProject  ?>';
                 var where = '_blank';
                 var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
                 open(url, where, window_spec);
             }
 
             function requestLexicon() {
-                var url = 'ver_pedido_lexico.php?id_projeto=' + '<?= $id_projeto ?>';
+                var url = 'ver_pedido_lexico.php?id_projeto=' + '<?= $idProject  ?>';
                 var where = '_blank';
                 var window_spec = 'dependent,height=300,width=550,resizable,scrollbars,titlebar';
                 open(url, where, window_spec);
@@ -83,7 +83,7 @@ checkUserAuthentication("index.php");        // Checa se o usuario foi autentica
             }
 
             function generateXML() {
-                var url = 'xml_gerador.php?id_projeto=' + '<?= $id_projeto ?>';
+                var url = 'xml_gerador.php?id_projeto=' + '<?= $idProject  ?>';
                 var where = '_blank';
                 var window_spec = 'dependent,height=330,width=550,resizable,scrollbars,titlebar';
                 open(url, where, window_spec);
@@ -205,35 +205,35 @@ if (isset($id) && isset($term)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (
             }
 
             frame_inferior($SgbdConnect, $term, $id);
-        } elseif (isset($id_projeto)) {         // SCRIPT CHAMADO PELO HEADING.PHP
-            // Foi passada uma variavel $id_projeto. Esta variavel deve conter o id de um
+        } elseif (isset($idProject )) {         // SCRIPT CHAMADO PELO HEADING.PHP
+            // Foi passada uma variavel $idProject . Esta variavel deve conter o id de um
             // projeto que o usuario esteja cadastrado. Entretanto, como a passagem eh
             // feita usando JavaScript (no heading.php), devemos checar se este id realmente
             // corresponde a um projeto que o usuario tenha acesso (seguranca).
-             permissionCheckToProject($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
+             permissionCheckToProject($_SESSION['id_usuario_corrente'], $idProject ) or die("Permissao negada");
 
             // Seta uma variavel de sessao correspondente ao projeto atual
-            $_SESSION['id_projeto_corrente'] = $id_projeto;
+            $_SESSION['id_projeto_corrente'] = $idProject ;
             ?>
 
             <table>
                 <tr>
                     <td>Projeto:</td>
-                    <td><?= simple_query("nome", "projeto", "id_projeto = $id_projeto") ?></td>
+                    <td><?= simple_query("nome", "projeto", "id_projeto = $idProject ") ?></td>
                 </tr>
                 <tr>
                     <td>Data de cria��o:</td>
-                    <td><?= simple_query("TO_CHAR(data_criacao, 'DD/MM/YY')", "projeto", "id_projeto = $id_projeto") ?></td>
+                    <td><?= simple_query("TO_CHAR(data_criacao, 'DD/MM/YY')", "projeto", "id_projeto = $idProject ") ?></td>
                 </tr>
                 <tr>
                     <td>Descri��o:</td>
-                    <td><?= simple_query("descricao", "projeto", "id_projeto = $id_projeto") ?></td>
+                    <td><?= simple_query("descricao", "projeto", "id_projeto = $idProject ") ?></td>
                 </tr>
             </table>
 
     <?php
     // Verifica se o usuario eh administrador deste projeto
-    if (is_admin($_SESSION['id_usuario_corrente'], $id_projeto)) {
+    if (is_admin($_SESSION['id_usuario_corrente'], $idProject )) {
         ?>
 
                 <br>

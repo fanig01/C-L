@@ -243,10 +243,10 @@ Utilidade: obtém a lista do banco de dados que tem o tipo = sujeito e que seja d
 </TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>- Chama a função sort, mysql_query.
 - Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $aux
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="get_lista_de_objeto">Get_lista_de_objeto</NOME_SIMBOLO>
@@ -256,10 +256,10 @@ Número de Linhas de Código: 17
 Utilidade: obtem a lista do banco de dados que tem o tipo = objeto e que seja do mesmo id_projeto</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>- Chama a função sort, mysql_query.
 - Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $aux
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="get_lista_de_verbo">Get_lista_de_verbo</NOME_SIMBOLO>
@@ -269,10 +269,10 @@ Número de Linhas de Código: 17
 Utilidade: obtem a lista do banco de dados que tem o tipo = verbo e que seja do mesmo id_projeto</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função sort, mysql_query.
 - Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $aux
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="get_lista_de_estado">Get_lista_de_estado</NOME_SIMBOLO>
@@ -283,10 +283,10 @@ Utilidade: obtem a lista do banco de dados que tem o tipo = estado e que seja do
 <IMPACTO><SENTENCA><TEXTO>
 Chama a função sort, mysql_query.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $aux
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="verifica_tipo">Verifica_tipo</NOME_SIMBOLO>
@@ -297,11 +297,11 @@ Utilidade: verifica se todos os membros da tabela de léxicos têm um tipo definid
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_free_result, mysql_query.
 
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $col_value
 - $query
 - $result
-- $result2</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$col_value">$col_value</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result2</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$col_value">$col_value</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="atualiza_tipo">Atualiza_tipo</NOME_SIMBOLO>
@@ -315,10 +315,10 @@ Utilidade esta função atualiza o tipo do lexico $id_lexico (inteiro) para $tipo 
 <IMPACTO><SENTENCA><TEXTO>
 Chama a função mysql_query.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $tipo
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="obter_lexico">Obter_lexico</NOME_SIMBOLO>
@@ -344,11 +344,11 @@ Número de Linhas de Código: 12
 Utilidade: retorna o termo do léxico.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_query, mysql_fetch_array.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $id_lexico
 - $query
 - $result
-- $termo_do_lexico</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $termo_do_lexico</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="cadastra_impacto">Cadastra_impacto</NOME_SIMBOLO>
@@ -356,15 +356,15 @@ Dentro da função são criadas as variáveis:
 <NOCAO><SENTENCA><TEXTO>Localização: auxiliar_bd.php
 Parâmetro:
 - $id_lexico – inteiro
-- $impacto - string
+- $impact - string
 Número de Linhas de Código: 13
 Utilidade: cadastra impacto no banco de dados e retorna o seu id.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_query, mysql_fetch_array.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $id_impacto
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="get_lista_de_conceitos">Get_lista_de_conceitos</NOME_SIMBOLO>
@@ -374,7 +374,7 @@ Número de Linhas de Código: 66
 Utilidade: cadastra impacto no banco de dados e retorna o seu id.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_query, mysql_fetch_array, existe_relacao, conceito, sort.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $aux
 - $query
 - $result1
@@ -388,7 +388,7 @@ Dentro da função são criadas as variáveis:
 - $line2
 - $id_conceito
 - $id_subconceito
-- $key</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$line">$line</REFERENCIA><REFERENCIA TO="$id_conceito">$id_conceito</REFERENCIA></SENTENCA></IMPACTO>
+- $key</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$line">$line</REFERENCIA><REFERENCIA TO="$id_conceito">$id_conceito</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="get_lista_de_relacoes">Get_lista_de_relacoes</NOME_SIMBOLO>
@@ -398,10 +398,10 @@ Número de Linhas de Código: 14
 Utilidade: cria tabela de relações.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_query, mysql_fetch_array, sort.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $aux
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="get_lista_de_axiomas">Get_lista_de_axiomas</NOME_SIMBOLO>
@@ -411,10 +411,10 @@ Número de Linhas de Código: 12
 Utilidade: cria tabela para axiomas.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_query, mysql_fetch_array, sort.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $aux
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="get_funcao">Get_funcao</NOME_SIMBOLO>
@@ -425,10 +425,10 @@ Utilidade: cria uma variável função.
 </TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_query, mysql_fetch_array.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $line
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$line">$line</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$line">$line</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="get_indices">Get_indices</NOME_SIMBOLO>
@@ -438,10 +438,10 @@ Número de Linhas de Código: 13
 Utilidade: cria uma variável de índices.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_query, mysql_fetch_array.
 Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $indice
 - $query
-- $result</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
+- $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="salvar_algoritmo">Salvar_algoritmo</NOME_SIMBOLO>
@@ -451,7 +451,7 @@ Número de Linhas de Código: 13
 Utilidade: cria uma variável de índices.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>Chama a função mysql_query, mysql_fetch_array, mysql_close, array_key_exists, salvar_algoritmo.
 -Dentro da função são criadas as variáveis:
-- $id_projeto
+- $idProject 
 - $link
 - $query
 - $result
@@ -460,7 +460,7 @@ Utilidade: cria uma variável de índices.</TEXTO><REFERENCIA TO="auxiliar_bd.php"
 - $verbo
 - $predicados
 - $list
-- $aux</TEXTO><REFERENCIA TO="$id_projeto">$id_projeto</REFERENCIA><REFERENCIA TO="$link">$link</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA><REFERENCIA TO="$id_conceito">$id_conceito</REFERENCIA><REFERENCIA TO="$line">$line</REFERENCIA><REFERENCIA TO="$predicados">$predicados</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA></SENTENCA></IMPACTO>
+- $aux</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$link">$link</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA><REFERENCIA TO="$id_conceito">$id_conceito</REFERENCIA><REFERENCIA TO="$line">$line</REFERENCIA><REFERENCIA TO="$predicados">$predicados</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="addbcc">Addbcc</NOME_SIMBOLO>
@@ -478,7 +478,7 @@ São criadas as variáveis
 - $cur</TEXTO></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
-<NOME_SIMBOLO ID="$id_projeto">$id_projeto</NOME_SIMBOLO>
+<NOME_SIMBOLO ID="$idProject ">$idProject </NOME_SIMBOLO>
 <SINONIMOS></SINONIMOS>
 <NOCAO><SENTENCA><TEXTO>
 

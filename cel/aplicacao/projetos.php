@@ -38,12 +38,12 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de b
     <?php
     while ($resultArray = mysql_fetch_row($requestResultSQL)) {
        
-        $id_projeto = $resultArray[0];
+        $idProject  = $resultArray[0];
         $data = $resultArray[1];
         $versao = $resultArray[2];
         $XML = $resultArray[3];
 
-        $qProcuraNomeProjeto = "SELECT * FROM projeto WHERE id_projeto = '$id_projeto'";
+        $qProcuraNomeProjeto = "SELECT * FROM projeto WHERE id_projeto = '$idProject '";
         $qrrProcura = mysql_query($qProcuraNomeProjeto) or die("Erro ao enviar a query de busca de projeto");
         $resultNome = mysql_fetch_row($qrrProcura);
         $nome_projeto = $resultNome[1];
@@ -52,7 +52,7 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de b
         <table border='0'>
             <tr>
 
-                <th height="29" width="140"><a href="mostrarProjeto.php?id_projeto=<?= $id_projeto ?>&versao=<?= $versao ?>"><?= $nome_projeto ?></a></th>
+                <th height="29" width="140"><a href="mostrarProjeto.php?id_projeto=<?= $idProject  ?>&versao=<?= $versao ?>"><?= $nome_projeto ?></a></th>
                 <th height="29" width="140">Data: <?= $data ?></th>
                 <th height="29" width="100">Versão: <?= $versao ?></th>
 

@@ -21,7 +21,7 @@ Episodes: Generating the report from the registered data project,
 the system provides for the Administrator screen display XML report created.
  */
 
-$qq = "select * from publicacao where id_projeto = $id_projeto AND versao = $versao";
+$qq = "select * from publicacao where id_projeto = $idProject  AND versao = $versao";
 
 $requestResultSQL = mysql_query($qq) or die("Erro ao enviar a query");
 

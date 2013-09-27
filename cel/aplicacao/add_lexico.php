@@ -4,7 +4,7 @@ include("httprequest.inc");
 include_once("bd.inc");
 
 // add_lexico.php: Este script cadastra um novo termo no lexico do projeto. 
-//                 � passada, atraves da URL, uma variavel $id_projeto, que
+//                 � passada, atraves da URL, uma variavel $idProject , que
 //                 indica em que projeto deve ser inserido o novo termo.
 
 session_start();
@@ -30,7 +30,7 @@ if (isset($submit)) {
 
     if (($returnCheck == true) AND ($returnCheckTheSynonym == true )) {
         $id_usuario_corrente = $_SESSION['id_usuario_corrente'];
-        inserirPedidoAdicionarLexico($id_projeto, $nome, $nocao, $impacto, $id_usuario_corrente, $listSinonimo, $classificacao);
+        inserirPedidoAdicionarLexico($idProject , $nome, $notion, $impact, $id_usuario_corrente, $listSinonimo, $classificacao);
     } else {
         ?>
         <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
@@ -49,13 +49,13 @@ if (isset($submit)) {
 
         opener.parent.frames['code'].location.reload();
         opener.parent.frames['text'].location.replace('main.php?id_projeto=<?= $_SESSION['id_projeto_corrente'] ?>');
-        location.href = "add_lexico.php?id_projeto=<?= $id_projeto ?>&sucesso=s";
+        location.href = "add_lexico.php?id_projeto=<?= $idProject  ?>&sucesso=s";
 
     </script>   
     <?php
 // Script chamado atrav�s do menu superior
 } else {
-    $commandSQL = "SELECT nome FROM projeto WHERE id_projeto = $id_projeto";
+    $commandSQL = "SELECT nome FROM projeto WHERE id_projeto = $idProject ";
     $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
     $resultArray = mysql_fetch_array($requestResultSQL);
     $nome_projeto = $resultArray['nome'];
@@ -175,7 +175,7 @@ if (isset($submit)) {
         <?php
     }
     ?>       
-            <form action="?id_projeto=<?= $id_projeto ?>" method="post" onSubmit="return(doSubmit());">
+            <form action="?id_projeto=<?= $idProject  ?>" method="post" onSubmit="return(doSubmit());">
                 <table>
                     <tr>
                         <td>Projeto:</td>

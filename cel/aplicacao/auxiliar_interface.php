@@ -137,10 +137,10 @@ function importancia_central($termo, $impactos) {
                         <?php
                         print("Impactos:<br>");
 
-                        foreach ($impactos as $impacto) {
-                            if (trim($impacto) == "")
+                        foreach ($impactos as $impact) {
+                            if (trim($impact) == "")
                                 continue;
-                            print(" - $impacto <br>");
+                            print(" - $impact <br>");
                         }
                         print("O termo $termo vai transformar-se em:<br>");
                         ?>

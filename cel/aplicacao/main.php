@@ -22,7 +22,7 @@ If the variable is not initialized, the system will give error. Insert assertive
 
 if (isset($_GET['id_projeto'])) {
     
-    $id_projeto = $_GET['id_projeto'];
+    $idProject  = $_GET['id_projeto'];
 }
 else {
     // Nothing should be done
@@ -178,10 +178,10 @@ function requestScenario() {
         
         <?php
         
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
        
             ?>
-            var url = 'ver_pedido_cenario.php?id_projeto=' + '<?= $id_projeto ?>';
+            var url = 'ver_pedido_cenario.php?id_projeto=' + '<?= $idProject  ?>';
             <?php
         }
         else {
@@ -206,10 +206,10 @@ function requestLexicon() {
 
         <?php
             
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
     
             ?>
-            var url = 'ver_pedido_lexico.php?id_projeto=' + '<?= $id_projeto ?>';
+            var url = 'ver_pedido_lexico.php?id_projeto=' + '<?= $idProject  ?>';
             <?php
         } 
         else {
@@ -233,10 +233,10 @@ function requestLexicon() {
 function requestConcept() {
 
 <?php
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
             ?>
             
-            var url = 'ver_pedido_conceito.php?id_projeto=' + '<?= $id_projeto ?>';
+            var url = 'ver_pedido_conceito.php?id_projeto=' + '<?= $idProject  ?>';
             
             <?php
         }
@@ -258,10 +258,10 @@ function requestRelationship() {
 
         <?php
         
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
     
             ?>        
-            var url = 'ver_pedido_relacao.php?id_projeto=' + '<?= $id_projeto ?>';
+            var url = 'ver_pedido_relacao.php?id_projeto=' + '<?= $idProject  ?>';
             <?php
             
         } 
@@ -325,10 +325,10 @@ function relateUsers() {
 function generateXML(){
 
         <?php
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
     
             ?>
-            var url = 'form_xml.php?id_projeto=' + '<?= $id_projeto ?>';
+            var url = 'form_xml.php?id_projeto=' + '<?= $idProject  ?>';
     
             <?php
         }
@@ -351,10 +351,10 @@ function recuperateXML(){
 
         <?php
 
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
     
             ?>
-            var url = 'recuperarXML.php?id_projeto=' + '<?= $id_projeto ?>';
+            var url = 'recuperarXML.php?id_projeto=' + '<?= $idProject  ?>';
             <?php
         }
         else {
@@ -377,10 +377,10 @@ function generateGraph(){
 
         <?php
 
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
         
             ?>
-            var url = 'gerarGrafo.php?id_projeto=' + '<?= $id_projeto ?>';
+            var url = 'gerarGrafo.php?id_projeto=' + '<?= $idProject  ?>';
             <?php
         }
         else {
@@ -409,10 +409,10 @@ function generateOntology(){
 
         <?php
         
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
     
             ?>
-            var url = 'inicio.php?id_projeto=' + '<?= $id_projeto ?>';    
+            var url = 'inicio.php?id_projeto=' + '<?= $idProject  ?>';    
             <?php
         }
         else {
@@ -440,10 +440,10 @@ function generateDAML(){
 
         <?php
 
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
     
             ?>
-            var url = 'form_daml.php?id_projeto=' + '<?= $id_projeto ?>';    
+            var url = 'form_daml.php?id_projeto=' + '<?= $idProject  ?>';    
             <?php
         }
         else {
@@ -469,10 +469,10 @@ function recuperateDAML(){
 
         <?php
         
-        if (isset($id_projeto)) {
+        if (isset($idProject )) {
         
             ?>
-            var url = 'recuperaDAML.php?id_projeto=' + '<?= $id_projeto ?>';    
+            var url = 'recuperaDAML.php?id_projeto=' + '<?= $idProject  ?>';    
             <?php
         }
         else {
@@ -511,19 +511,19 @@ if (isset($id) && isset($term)) {
     switch ($term){
         
         case "c":       
-            print "<h3>Informações sobre o cen&aacute;rio</h3>";
+            print "<h3>Informa&ccedil;&otilde;es sobre o cen&aacute;rio</h3>";
             break;
         case "l":
-            print "<h3>Informações sobre o símbolo</h3>";
+            print "<h3>Informa&ccedil;&otilde;es sobre o s&iacute;mbolo</h3>";
             break;
         case "oc":
-            print "<h3>Informações sobre o conceito</h3>";
+            print "<h3>Informa&ccedil;&otilde;es sobre o conceito</h3>";
             break;
         case "or":
-            print "<h3>Informações sobre a relação</h3>";
+            print "<h3>Informa&ccedil;&otilde;es sobre a rela&ccedil;&atilde;o</h3>";
             break;
         case "oa":
-            print "<h3>Informações sobre o axioma</h3>";
+            print "<h3>Informa&ccedil;&otilde;es sobre o axioma</h3>";
             break;
         default:
             //Nothing should be done
@@ -683,19 +683,19 @@ if (isset($id) && isset($term)) {
                    <th>Sin&ocirc;nimo(s):</th> 
 
             <?php
-            //synonyms
-            
-       $id_projeto = $_SESSION['id_projeto_corrente'];
-      
-       $qSinonimo = "SELECT * FROM sinonimo WHERE id_lexico = $id";
-                    
-       $requestResultSQL = mysql_query($qSinonimo) or die("Erro ao enviar a query de Sinonimos" . mysql_error());
           
-       $tempS = array(); //Seria um vetor de sinônimo temporário?
+            
+       $idProject  = $_SESSION['id_projeto_corrente'];
+      
+       $querySynonym = "SELECT * FROM sinonimo WHERE id_lexico = $id";
+                    
+       $requestResultSQL = mysql_query($querySynonym) or die("Erro ao enviar a query de Sinonimos" . mysql_error());
+          
+       $tempSynonym = array(); //Seria um vetor de sinônimo temporário?
 
        while ($resultSinonimo = mysql_fetch_array($requestResultSQL)) {
                         
-           $tempS[] = $resultSinonimo['nome'];
+           $tempSynonym[] = $resultSinonimo['nome'];
   
        }
        
@@ -705,18 +705,18 @@ if (isset($id) && isset($term)) {
 
        <?php
                       
-       $count = count($tempS);
+       $count = count($tempSynonym);
                            
        for ($i = 0; $i < $count; $i++) {
                                 
            if ($i == $count - 1) {
                                     
-               echo $tempS[$i] . ".";
+               echo $tempSynonym[$i] . ".";
                                 
            }
            else {
                                     
-               echo $tempS[$i] . ", ";
+               echo $tempSynonym[$i] . ", ";
                                 
                
            }
@@ -735,12 +735,12 @@ if (isset($id) && isset($term)) {
               <tr> 
                   
                   <td CLASS="Estilo" height="40" valign="middle">                             
-                      <a href="#" onClick="changeLexicon(<?= $resultArray['id_lexico'] ?>);">Alterar S�mbolo</a>                            
+                      <a href="#" onClick="changeLexicon(<?= $resultArray['id_lexico'] ?>);">Alterar S&iacute;mbolo</a>                            
                       </th> 
                        
                   <td CLASS="Estilo" valign="middle"> 
                             
-                      <a href="#" onClick="removeLexicon(<?= $resultArray['id_lexico'] ?>);">Remover S�mbolo</a> 
+                      <a href="#" onClick="removeLexicon(<?= $resultArray['id_lexico'] ?>);">Remover S&iacute;mbolo</a> 
                             
                       </th>            
               </tr> 
@@ -828,42 +828,34 @@ if (isset($id) && isset($term)) {
           <br> 
                   
               <?php
-                        
-      if ($term == "c") {
-                            
-          print "<h3>Cen&aacute;rios que referenciam este cen&aacute;rio</h3>";
-                        
-      }
-      elseif ($term == "l") {
-                            
-          print "<h3>Cen&aacute;rios e termos do léxico que referenciam este termo</h3>";
-                        
-      }
-      elseif ($term == "oc") {
-                      
-          print "<h3>Relações do conceito</h3>";
+      
+      switch ($term){
           
+          case "c":
+              print "<h3>Cen&aacute;rios que referenciam este cen&aacute;rio</h3>";
+              break;
+          case "l":
+              print "<h3>Cen&aacute;rios e termos do léxico que referenciam este termo</h3>";
+              break;
+          case "oc":
+              print "<h3>Rela&ccedil;&otilde;es do conceito</h3>";
+              break;
+          case "or":
+              print "<h3>Conceitos referentes à rela&ccedil;&atilde;o</h3>";
+              break;
+          case "oa":
+              print "<h3>Axioma</h3>";
+              break;
+          default:
+            //Nothing should be done
       }
-      elseif ($term == "or") {
-                            
-          print "<h3>Conceitos referentes à relação</h3>";
-                              
-      }
-      elseif ($term == "oa") {
-                            
-          print "<h3>Axioma</h3>";
                         
-      }
-                        
-      ?>   
-
+      ?>  
+       <?php
     
-          <?php
-    
-    
-          frame_inferior($SgbdConnect, $term, $id);
+      frame_inferior($SgbdConnect, $term, $id);
 }
-elseif (isset($id_projeto)) {
+elseif (isset($idProject )) {
     
 /*
 Script called by heading.php
@@ -874,36 +866,33 @@ we should check if this identifier corresponds to a project that the user has ac
 Insert assertive.
 */ 
     
-     permissionCheckToProject($_SESSION['id_usuario_corrente'], $id_projeto) or die("Permissao negada");
+     permissionCheckToProject($_SESSION['id_usuario_corrente'], $idProject ) or die("Permissao negada");
 
     // Setting a session variable in the current project 
     
-     $_SESSION['id_projeto_corrente'] = $id_projeto;
+     $_SESSION['id_projeto_corrente'] = $idProject ;
     
-     ?>    
-
-            
+     ?>      
           <table ALIGN=CENTER>                
               <tr>                    
-                  <th>Projeto:</th> 
-                    
-                  <td CLASS="Estilo"><?= simple_query("nome", "projeto", "id_projeto = $id_projeto") ?></td>                
+                  <th>Projeto:</th>                     
+                  <td CLASS="Estilo"><?= simple_query("nome", "projeto", "id_projeto = $idProject ") ?></td>                
               </tr> 
                 
               <tr> 
-                    <th>Data de criação:</th> 
+                    <th>Data de cria&ccedil;&atilde;o:</th> 
                         <?php
-                
-                       
-                        $data = simple_query("data_criacao", "projeto", "id_projeto = $id_projeto");
+                        
+                        
+     $data = simple_query("data_criacao", "projeto", "id_projeto = $idProject ");
                 
                         ?>    
                     <td CLASS="Estilo"><?= formataData($data) ?></td> 
 
                 </tr> 
                 <tr> 
-                    <th>Descrição:</th> 
-                    <td CLASS="Estilo"><?= nl2br(simple_query("descricao", "projeto", "id_projeto = $id_projeto")) ?></td> 
+                    <th>Descri&ccedil;&atilde;o:</th> 
+                    <td CLASS="Estilo"><?= nl2br(simple_query("descricao", "projeto", "id_projeto = $idProject ")) ?></td> 
                 </tr> 
             </table> 
 
@@ -922,7 +911,7 @@ Insert assertive.
  
     //Checks if the user eh administrator of this project  
     
-    if (is_admin($_SESSION['id_usuario_corrente'], $id_projeto)) {
+    if (is_admin($_SESSION['id_usuario_corrente'], $idProject )) {
         ?>    
                 
           <br>         
@@ -954,7 +943,7 @@ Showing on-screen options:
                     
               </tr>               
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="addUser();">Adicionar usu&aacute;rio (não cadastrado) neste projeto</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="addUser();">Adicionar usu&aacute;rio (n&atilde;o cadastrado) neste projeto</a></td>                    
               </tr> 
                     
               <tr>                        
@@ -966,19 +955,19 @@ Showing on-screen options:
               </tr> 
                    
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="requestScenario();">Verificar pedidos de alteração de Cen&aacute;rios</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="requestScenario();">Verificar pedidos de altera&ccedil;&atilde;o de Cen&aacute;rios</a></td>                    
               </tr> 
                     
               <tr>                       
-                  <td CLASS="Estilo"><a href="#" onClick="requestLexicon();">Verificar pedidos de alteração de termos do L&eacute;xico</a></td>                     
+                  <td CLASS="Estilo"><a href="#" onClick="requestLexicon();">Verificar pedidos de altera&ccedil;&atilde;o de termos do L&eacute;xico</a></td>                     
               </tr>
                     
               <tr>                       
-                  <td CLASS="Estilo"><a href="#" onClick="requestConcept();">Verificar pedidos de alteração de Conceitos</a></td>                  
+                  <td CLASS="Estilo"><a href="#" onClick="requestConcept();">Verificar pedidos de altera&ccedil;&atilde;o de Conceitos</a></td>                  
               </tr> 
                    
               <tr>                        
-                  <td CLASS="Estilo"><a href="#" onClick="requestRelationship();">Verificar pedidos de alteração de Relações</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="requestRelationship();">Verificar pedidos de altera&ccedil;&atilde;o de Rela&ccedil;&otilde;es</a></td>                    
               </tr>
                    
               <tr>                       
@@ -1010,7 +999,7 @@ Showing on-screen options:
               </tr> 
                     
               <tr>                      
-                  <td CLASS="Estilo"><a href="#" onClick="recuperateDAML();">Histórico em DAML da ontologia do projeto</a></td>                    
+                  <td CLASS="Estilo"><a href="#" onClick="recuperateDAML();">Hist&oacute;rico em DAML da ontologia do projeto</a></td>                    
               </tr>           
                     
               <tr>                         
@@ -1030,7 +1019,7 @@ Showing on-screen options:
               </tr>
                     
               <tr>                         
-                  <td CLASS="Estilo">   <font size="1">Histórico em DAML da ontologia do projeto -> Botao Direito do Mouse -> Copiar Atalho</font></td>                                
+                  <td CLASS="Estilo">   <font size="1">Hist&oacute;rico em DAML da ontologia do projeto -> Botao Direito do Mouse -> Copiar Atalho</font></td>                                
               </tr>
                 
           </table>
@@ -1042,7 +1031,7 @@ Showing on-screen options:
                 <br>
                 <table ALIGN=CENTER> 
                     <tr> 
-                        <th>Você não &eacute; um administrador deste projeto:</th> 	
+                        <th>Voc&ecirc; n&atilde;o &eacute; um administrador deste projeto:</th> 	
                     </tr>	
                     <tr> 
                         <td CLASS="Estilo"><a href="#" onClick="generateGraph();" >Gerar grafo deste projeto</a></td>

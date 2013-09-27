@@ -16,7 +16,7 @@ checkUserAuthentication("index.php"); // Checa se o usuario foi autenticado
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {       // Script chamado atraves do submit do formulario
-    inserirPedidoAlterarCenario($_SESSION['id_projeto_corrente'], $id_cenario, $titulo, $objetivo, $contexto, $atores, $recursos, $excecao, $episodios, $justificativa, $_SESSION['id_usuario_corrente']);
+    inserirPedidoAlterarCenario($_SESSION['id_projeto_corrente'], $id_cenario, $title, $objective, $context, $actors, $resources, $exception, $episodes, $justificativa, $_SESSION['id_usuario_corrente']);
     ?>
 
     <script language="javascript1.3">
@@ -64,7 +64,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
         <body>
             <h4>Alterar Cen�rio</h4>
             <br>
-            <form action="?id_projeto=<?= $id_projeto ?>" method="post">
+            <form action="?id_projeto=<?= $idProject  ?>" method="post">
                 <table>
                     <tr>
                         <td>Projeto:</td>

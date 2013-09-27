@@ -168,12 +168,12 @@ function troca_chaves_xml($string) {
     return $string;
 }
 
-function faz_links_XML($texto, $vetor_lex, $vetor_cen) {
+function faz_links_XML($text, $vetor_lex, $vetor_cen) {
 
-    marca_texto($texto, $vetor_cen, "cenario");
-    marca_texto_cenario($texto, $vetor_lex, $vetor_cen);
+    marca_texto($text, $vetor_cen, "cenario");
+    marca_texto_cenario($text, $vetor_lex, $vetor_cen);
 
-    $str = troca_chaves_xml($texto);
+    $str = troca_chaves_xml($text);
     return $str;
 }
 ?> 
