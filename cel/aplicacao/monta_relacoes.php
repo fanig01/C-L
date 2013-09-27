@@ -31,7 +31,7 @@ function monta_relacoes($idProject ) {
         $idCurrentScenario = $result['id_cenario'];
 
         // This function makes vector with scenarios's title
-        $vector_scenarios = carrega_vetor_cenario($idProject , $idCurrentScenario);
+        $vector_scenarios = loadScenariosVector($idProject , $idCurrentScenario);
 
         // This function makes vector with name and synonyms of all lexical
         $vector_lexicons = carrega_vetor_todos($idProject );

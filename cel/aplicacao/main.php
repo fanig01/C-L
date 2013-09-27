@@ -553,7 +553,7 @@ if (isset($id) && isset($term)) {
 
         $idScenarioProject = $resultArray['id_projeto'];
 
-        $scenariosVector = carrega_vetor_cenario($idScenarioProject, $id, true); 
+        $scenariosVector = loadScenariosVector($idScenarioProject, $id, true); 
        
         quicksort($scenariosVector, 0, count($scenariosVector) - 1, 'cenario');
 

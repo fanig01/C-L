@@ -6,78 +6,78 @@ function load_ArrayLexicon($idProject , $idCurrentLexicon, $noCurrent) {
     
     if ($noCurrent) {
     
-        $queryLexicos = "SELECT id_lexico, nome    
-			 FROM lexico    
-			 WHERE id_projeto = '$idProject ' AND id_lexico <> '$idCurrentLexicon' 
-			 ORDER BY nome DESC";
+        $queryLexicons = "SELECT id_lexico, nome    
+			  FROM lexico    
+			  WHERE id_projeto = '$idProject ' AND id_lexico <> '$idCurrentLexicon' 
+			  ORDER BY nome DESC";
 
-        $querySinonimos = "SELECT id_lexico, nome 
-			   FROM sinonimo
-			   WHERE id_projeto = '$idProject ' AND id_lexico <> '$idCurrentLexicon' 
-			   ORDER BY nome DESC";
+        $querySynonyms = "SELECT id_lexico, nome 
+			  FROM sinonimo
+		          WHERE id_projeto = '$idProject ' AND id_lexico <> '$idCurrentLexicon' 
+		         ORDER BY nome DESC";
     }
     else {
 
-        $queryLexicos = "SELECT id_lexico, nome    
-			FROM lexico    
-			WHERE id_projeto = '$idProject ' 
-			ORDER BY nome DESC";
+        $queryLexicons = "SELECT id_lexico, nome    
+			  FROM lexico    
+			  WHERE id_projeto = '$idProject ' 
+		          ORDER BY nome DESC";
 
-        $querySinonimos = "SELECT id_lexico, nome    
-			   FROM sinonimo
-			   WHERE id_projeto = '$idProject ' ORDER BY nome DESC";
+        $querySynonyms = "SELECT id_lexico, nome    
+			  FROM sinonimo
+			  WHERE id_projeto = '$idProject ' ORDER BY nome DESC";
     }
 
-    $resultadoQueryLexicos = mysql_query($queryLexicos) or die("Erro ao enviar a query de selecao na tabela lexicos !" . mysql_error());
+    $queryLexiconsResult = mysql_query($queryLexicons) or die("Erro ao enviar a query de selecao na tabela lexicos !" . mysql_error());
 
     $index = 0;
     
-    while ($linhaLexico = mysql_fetch_object($resultadoQueryLexicos)) {
+    while ($lexicalLine = mysql_fetch_object($queryLexiconsResult)) {
         
-        $lexiconVector[$index] = $linhaLexico;
+        $lexiconVector[$index] = $lexicalLine;
         $index++;
     }
 
-    $resultadoQuerySinonimos = mysql_query($querySinonimos) or die("Erro ao enviar a query de selecao na tabela sinonimos !" . mysql_error());
+    $querySynonymsResult = mysql_query($querySynonyms) or die("Erro ao enviar a query de selecao na tabela sinonimos !" . mysql_error());
     
-    while ($linhaSinonimo = mysql_fetch_object($resultadoQuerySinonimos)) {
+    while ($synonymousLine = mysql_fetch_object($querySynonymsResult)) {
     
-        $lexiconVector[$index] = $linhaSinonimo;
+        $lexiconVector[$index] = $synonymousLine;
         $index++;
     }
     
     return $lexiconVector;
 }
 
-function carrega_vetor_cenario($idProject , $idCurrentScenario, $semAtual) {
+function loadScenariosVector($idProject , $idCurrentScenario, $noCurrent) {
    
     if (!isset($scenariosVector)) {
         
         $scenariosVector = array();
     }
     
-    if ($semAtual) {
+    if ($noCurrent) {
     
-        $queryCenarios = "SELECT id_cenario, titulo    
-			  FROM cenario    
-			  WHERE id_projeto = '$idProject ' AND id_cenario <> '$idCurrentScenario' 
-			  ORDER BY titulo DESC";
+        $queryScenarios = "SELECT id_cenario, titulo    
+			   FROM cenario    
+			   WHERE id_projeto = '$idProject ' AND id_cenario <> '$idCurrentScenario' 
+			   ORDER BY titulo DESC";
     }
     else {
         
-        $queryCenarios = "SELECT id_cenario, titulo    
-			  FROM cenario    
-			  WHERE id_projeto = '$idProject ' 
-			  ORDER BY titulo DESC";
+        $queryScenarios = "SELECT id_cenario, titulo    
+			   FROM cenario    
+			   WHERE id_projeto = '$idProject ' 
+			   ORDER BY titulo DESC";
     }
 
-    $resultadoQueryCenarios = mysql_query($queryCenarios) or die("Erro ao enviar a query de selecao !!" . mysql_error());
+    $queryScenariosResult = mysql_query($queryScenarios) or die("Erro ao enviar a query de selecao !!" . mysql_error());
 
     $index = 0;
     
-    while ($linhaCenario = mysql_fetch_object($resultadoQueryCenarios)) {
+    while ($scenarioLine = mysql_fetch_object($queryScenariosResult)) {
       
-        $scenariosVector[$index] = $linhaCenario;
+        $scenariosVector[$index] = $scenarioLine;
         $index++;
     }
 
