@@ -566,7 +566,7 @@ if (isset($id) && isset($term)) {
         <tr> 
             <th>T&iacute;tulo:</th><td CLASS="Estilo">
                             
-                <?php echo nl2br(monta_links($resultArray['titulo'], $lexiconVector, $emptyVector)); 
+                <?php echo nl2br(mountLinks($resultArray['titulo'], $lexiconVector, $emptyVector)); 
                 ?>
             </td> 
 
@@ -576,7 +576,7 @@ if (isset($id) && isset($term)) {
             
            <th>Objetivo:</th><td CLASS="Estilo">
                
-                <?php echo nl2br(monta_links($resultArray['objetivo'], $lexiconVector, $emptyVector));
+                <?php echo nl2br(mountLinks($resultArray['objetivo'], $lexiconVector, $emptyVector));
                 
                 ?>
            </td> 
@@ -585,14 +585,14 @@ if (isset($id) && isset($term)) {
         <tr> 
              <th>Contexto:</th><td CLASS="Estilo">
                  
-                   <?php echo nl2br(monta_links($resultArray['contexto'], $lexiconVector, $scenariosVector)); ?>		 
+                   <?php echo nl2br(mountLinks($resultArray['contexto'], $lexiconVector, $scenariosVector)); ?>		 
              </td> 
        </tr> 
        
         <tr> 
               <th>Atores:</th><td CLASS="Estilo">
                   
-                    <?php echo nl2br(monta_links($resultArray['atores'], $lexiconVector, $emptyVector));
+                    <?php echo nl2br(mountLinks($resultArray['atores'], $lexiconVector, $emptyVector));
                     
                     ?>
               </td>  
@@ -601,7 +601,7 @@ if (isset($id) && isset($term)) {
         <tr> 
               <th>Recursos:</th><td CLASS="Estilo">
                   
-                <?php echo nl2br(monta_links($resultArray['recursos'], $lexiconVector, $emptyVector));
+                <?php echo nl2br(mountLinks($resultArray['recursos'], $lexiconVector, $emptyVector));
                 
                 ?>
                         </td> 
@@ -610,7 +610,7 @@ if (isset($id) && isset($term)) {
         <tr> 
                <th>Exce&ccedil;&atilde;o:</th><td CLASS="Estilo">
                    
-                <?php echo nl2br(monta_links($resultArray['excecao'], $lexiconVector, $emptyVector));
+                <?php echo nl2br(mountLinks($resultArray['excecao'], $lexiconVector, $emptyVector));
                 
                 ?>
                         </td> 
@@ -618,7 +618,7 @@ if (isset($id) && isset($term)) {
         
         <tr> 
                 <th>Epis&oacute;dios:</th><td CLASS="Estilo">
-                <?php echo nl2br(monta_links($resultArray['episodios'], $lexiconVector, $scenariosVector)); 
+                <?php echo nl2br(mountLinks($resultArray['episodios'], $lexiconVector, $scenariosVector)); 
                 
                 ?>
 
@@ -665,7 +665,7 @@ if (isset($id) && isset($term)) {
              </tr>
              
              <tr> 
-                  <th>No&ccedil;&atilde;o:</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['nocao'], $lexiconVector, $emptyVector)); ?>
+                  <th>No&ccedil;&atilde;o:</th><td CLASS="Estilo"><?php echo nl2br(mountLinks($resultArray['nocao'], $lexiconVector, $emptyVector)); ?>
                   </td> 
              </tr>
              
@@ -675,7 +675,7 @@ if (isset($id) && isset($term)) {
              </tr> 
              
              <tr> 
-                  <th>Impacto(s):</th><td CLASS="Estilo"><?php echo nl2br(monta_links($resultArray['impacto'], $lexiconVector, $emptyVector)); ?> 
+                  <th>Impacto(s):</th><td CLASS="Estilo"><?php echo nl2br(mountLinks($resultArray['impacto'], $lexiconVector, $emptyVector)); ?> 
                   </td>
              </tr> 
              

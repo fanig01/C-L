@@ -8,12 +8,12 @@ checkUserAuthentication("index.php");        // Cenario: controle de acesso
 // id do respectivo, mostra os dados necess�rios 
 // no frame. 
 
-function frame_inferior($bd, $tipo, $id) {
+function frame_inferior($bd, $type, $id) {
     $search = "'<[\/\!]*?[^<>]*?>'si";
     $replace = "";
 
 
-    if ($tipo == "c") {            // Se for cenario 
+    if ($type == "c") {            // Se for cenario 
         // Seleciona os cen�rios que referenciam o cen�rio 
         // com o id passado. 
         $qry_cenario = "SELECT id_cenario, titulo 
@@ -43,7 +43,7 @@ function frame_inferior($bd, $tipo, $id) {
                 <?php
             } // while 
         } // if 
-        else if ($tipo == "l") {
+        else if ($type == "l") {
             // Seleciona os cen�rios que referenciam o l�xico 
             // com o id passado. 
             $qry_cenario = "SELECT c.id_cenario, c.titulo 
@@ -109,7 +109,7 @@ function frame_inferior($bd, $tipo, $id) {
                         } // if 
                     } // while 
                 } //elseif 
-                else if ($tipo == "oc") /* CONCEITO */ {
+                else if ($type == "oc") /* CONCEITO */ {
                     $comandoSql = "SELECT   r.id_relacao, r.nome, predicado 
                  FROM     conceito c, relacao_conceito rc, relacao r 
                  WHERE    c.id_conceito = $id 
@@ -124,7 +124,7 @@ function frame_inferior($bd, $tipo, $id) {
                         print "<tr><td CLASS=\"Estilo\"><a href=\"main.php?id=$line[0]&t=or\">$line[1]</a></td><td>$line[2]</TD></tr>";
                     }
                 } //elseif 
-                else if ($tipo == "or") /* RELA��O */ {
+                else if ($type == "or") /* RELA��O */ {
                     $comandoSql = "SELECT DISTINCT  c.id_conceito, c.nome 
                  FROM     conceito c, relacao_conceito rc, relacao r 
                  WHERE    r.id_relacao = $id 
@@ -139,7 +139,7 @@ function frame_inferior($bd, $tipo, $id) {
                         print "<tr><td CLASS=\"Estilo\"><a href=\"main.php?id=$line[0]&t=oc\">$line[1]</a></td></tr>";
                     }
                 } //elseif 
-                else if ($tipo == "oa") /* AXIOMA */ {
+                else if ($type == "oa") /* AXIOMA */ {
 
                     $comandoSql = "SELECT   * 
                  FROM     axioma

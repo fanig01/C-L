@@ -309,14 +309,14 @@ Dentro da função são criadas as variáveis:
 <NOCAO><SENTENCA><TEXTO>Localização: auxiliar_bd.php
 Parâmetro:
 - $id_léxico – inteiro
-- $tipo - string
+- $type - string
 Número de Linhas de Código: 22
-Utilidade esta função atualiza o tipo do lexico $id_lexico (inteiro) para $tipo (string), esta função só aceita os tipos: sujeito, objeto, verbo, estado e NULL.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
+Utilidade esta função atualiza o tipo do lexico $id_lexico (inteiro) para $type (string), esta função só aceita os tipos: sujeito, objeto, verbo, estado e NULL.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA></SENTENCA></NOCAO>
 <IMPACTO><SENTENCA><TEXTO>
 Chama a função mysql_query.
 Dentro da função são criadas as variáveis:
 - $idProject 
-- $tipo
+- $type
 - $query
 - $result</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>

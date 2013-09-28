@@ -223,7 +223,7 @@ function adiciona_relacionamento($id_from, $tipo_from, $text) {
             
                 $id_to = "";
                 $i++;
-                $tipo = $text[$i];
+                $type = $text[$i];
                 $i++;
                 
                 while ($text[$i] != "*") {
@@ -233,7 +233,7 @@ function adiciona_relacionamento($id_from, $tipo_from, $text) {
                     
                 }
                 
-                if ($tipo == "l") {
+                if ($type == "l") {
                     
                     if (strcasecmp($tipo_from, 'lexico') == 0) {
                         
@@ -247,7 +247,7 @@ function adiciona_relacionamento($id_from, $tipo_from, $text) {
                     }
                 }
                 
-                if ($tipo == "c") {
+                if ($type == "c") {
                     
                     if (strcasecmp($tipo_from, 'cenario') == 0) {
                         

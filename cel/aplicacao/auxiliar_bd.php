@@ -96,18 +96,18 @@ function verifica_tipo() {
     }
 }
 
-function atualiza_tipo($id_lexico, $tipo) {
+function atualiza_tipo($id_lexico, $type) {
     $idProject  = $_SESSION['id_projeto'];
-    // esta fun��o atualiza o tipo do lexico $id_lexico (inteiro) para $tipo (string)
+    // esta fun��o atualiza o tipo do lexico $id_lexico (inteiro) para $type (string)
     // esta fun��o s� aceita os tipos: sujeito, objeto, verbo, estado e NULL
 
-    if (!(($tipo != "sujeito") || ($tipo != "objeto") || ($tipo != "verbo") || ($tipo != "estado") || ($tipo != "null"))) {
+    if (!(($type != "sujeito") || ($type != "objeto") || ($type != "verbo") || ($type != "estado") || ($type != "null"))) {
         return (FALSE);
     }
-    if ($tipo == "null") {
-        $query = "update lexico set tipo = $tipo where id_lexico = '$id_lexico';";
+    if ($type == "null") {
+        $query = "update lexico set tipo = $type where id_lexico = '$id_lexico';";
     } else {
-        $query = "update lexico set tipo = '$tipo' where id_lexico = '$id_lexico';";
+        $query = "update lexico set tipo = '$type' where id_lexico = '$id_lexico';";
     }
 
     $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);

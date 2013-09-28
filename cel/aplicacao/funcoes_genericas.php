@@ -947,7 +947,7 @@ if (!(function_exists("removeConceito"))) {
         }
         # [ATENCAO] Essa query pode ser melhorada com um join
         //print("<br>SELECT * FROM cenario WHERE id_projeto = $idProject ");
-        /*  $sql->execute ("SELECT * FROM cenario WHERE id_projeto = $idProject  AND id_cenario != $tituloCenario");
+        /*  $sql->execute ("SELECT * FROM cenario WHERE id_projeto = $idProject  AND id_cenario != $scenarioName");
           if ($sql->getntuples() == 0){
           echo "<BR> Projeto n�o possui cenarios." ;
           }else{ */
@@ -963,12 +963,12 @@ if (!(function_exists("removeConceito"))) {
             $nomeAnterior = $result['nome'];
             $descricaoAnterior = $result['descricao'];
             $namespaceAnterior = $result['namespace'];
-            #echo        "/<a title=\"Cen�rio\" href=\"main.php?t='c'&id=$id_cenario>($tituloCenario)<\/a>/mi"  ;
+            #echo        "/<a title=\"Cen�rio\" href=\"main.php?t='c'&id=$id_cenario>($scenarioName)<\/a>/mi"  ;
             #$episodiosAnterior = "<a title=\"Cen�rio\" href=\"main.php?t=c&id=38\">robin</a>" ;
             /* "'<a title=\"Cen�rio\" href=\"main.php?t=c&id=38\">robin<\/a>'si" ; */
             $tiratag = "'<[\/\!]*?[^<>]*?>'si";
             //$tiratagreplace = "";
-            //$tituloCenario = preg_replace($tiratag,$tiratagreplace,$tituloCenario);
+            //$scenarioName = preg_replace($tiratag,$tiratagreplace,$scenarioName);
             $regexp = "/<a[^>]*?>($nomeConceito)<\/a>/mi"; //rever
             $replace = "$1";
             //echo($episodiosAnterior)."   ";
@@ -979,7 +979,7 @@ if (!(function_exists("removeConceito"))) {
             /* echo "ant:".$episodiosAtual ;
               echo "<br>" ;
               echo "dep:".$episodiosAnterior ; */
-            // echo($tituloCenario)."   ";
+            // echo($scenarioName)."   ";
             // echo($episodiosAtual)."  ";
             //print ("<br>update cenario set objetivo = '$objetivoAtual',contexto = '$contextoAtual',atores = '$atoresAtual',recursos = '$recursosAtual',episodios = '$episodiosAtual' where id_cenario = $idCenarioRef ");
             $sql7->execute("update conceito set descricao = '$descricaoAtual', namespace = '$namespaceAtual' where id_conceito = $idConceitoRef ");

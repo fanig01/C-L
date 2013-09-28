@@ -317,12 +317,12 @@ function insere_tipo($list) {
                         }
 
                         //$pred = explode($rel, $imp);
-                        $indice2 = -1;
+                        $indexAux_4 = -1;
                         foreach ($list as $key => $palavra) {
                             if (trim($palavra->nome) !== "") {
                                 if (strstr($pred, $palavra->nome)) {
                                     if (array_search($palavra->nome, $_SESSION["predicados_selecionados"]) === false) {
-                                        $indice2 = $key;
+                                        $indexAux_4 = $key;
                                         break;
                                     }
                                 }
@@ -358,15 +358,15 @@ function insere_tipo($list) {
                         <?php
                         foreach ($list as $key => $termo) {
                             ?>
-                                    <OPTION value='<?= $key ?>' <?php if ($indice2 === $key) echo "selected" ?> > <?php echo $termo->nome ?></OPTION>
+                                    <OPTION value='<?= $key ?>' <?php if ($indexAux_4 === $key) echo "selected" ?> > <?php echo $termo->nome ?></OPTION>
                             <?php
                         }
                         ?>
                                 <OPTION value="-1"></OPTION>
                             </SELECT><br>
 
-                            <input type="radio" onClick="seExiste('TRUE')" value="TRUE" id="existe" name="existe" size="20" <?php if ($indice2 !== -1) echo"checked" ?>> sim
-                            <input type="radio" onClick="seExiste('FALSE')" value="FALSE" id="existe" name="existe" size="20" <?php if ($indice2 === -1) echo"checked" ?> > n�o <BR>
+                            <input type="radio" onClick="seExiste('TRUE')" value="TRUE" id="existe" name="existe" size="20" <?php if ($indexAux_4 !== -1) echo"checked" ?>> sim
+                            <input type="radio" onClick="seExiste('FALSE')" value="FALSE" id="existe" name="existe" size="20" <?php if ($indexAux_4 === -1) echo"checked" ?> > n�o <BR>
 
                             <DIV id=naoExiste>
                                 <BR>
@@ -436,7 +436,7 @@ function insere_tipo($list) {
                                     }
 
     <?php
-    if ($indice2 !== -1)
+    if ($indexAux_4 !== -1)
         echo "seExiste('TRUE');";
     else
         echo "seExiste('FALSE');";
