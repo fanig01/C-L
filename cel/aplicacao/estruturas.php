@@ -2,45 +2,45 @@
 
 $_SESSION["estruturas"] = 1;
 
-class conceito {
+class concept {
 
-    var $nome;
-    var $descricao;
-    var $relations;
-    var $subconceitos;
-    var $namespace;
+    var $name = NULL;
+    var $description = NULL;
+    var $relations = NULL;
+    var $subconcepts = NULL;
+    var $namespace = NULL;
 
-    function conceito($n, $d) {
-        $this->nome = $n;
-        $this->descricao = $d;
-        $this->relacoes = array();
-        $this->subconceitos = array();
+    function concept($name, $description) {
+        $this->name = $name;
+        $this->description = $description;
+        $this->relations = array();
+        $this->subconcepts = array();
         $this->namespace = "";
     }
 
 }
 
-class relacao_entre_conceitos {
+class relationshipBetweenConcepts {
 
-    var $predicados;
-    var $verbo;
+    var $predicates = NULL;
+    var $verb = NULL;
 
-    function relacao_entre_conceitos($p, $v) {
-        $this->predicados[] = $p;
-        $this->verbo = $v;
+    function relationshipBetweenConcepts($predicates, $verb) {
+        $this->predicates[] = $predicates;
+        $this->verb = $verb;
     }
 }
 
-class termo_do_lexico {
+class lexiconTerm {
 
-    var $nome;
-    var $notion;
-    var $impact;
+    var $name = NULL;
+    var $notion = NULL;
+    var $impact = NULL;
 
-    function termo_do_lexico($name, $notion, $i) {
-        $this->nome = $name;
-        $this->nocao = $notion;
-        $this->impacto = $i;
+    function lexiconTerm($name, $notion, $impact) {
+        $this->name = $name;
+        $this->notion = $notion;
+        $this->impact = $impact;
     }
 }
 

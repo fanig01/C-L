@@ -48,8 +48,8 @@ session_start();
                         <?php
                         if (count($_SESSION["verbos_selecionados"]) != 0) {
                             echo "Propriedades j� cadastradas para esse impacto:<p>";
-                            foreach ($_SESSION["verbos_selecionados"] as $verbo) {
-                                echo "   - " . $verbo . "<br>";
+                            foreach ($_SESSION["verbos_selecionados"] as $verb) {
+                                echo "   - " . $verb . "<br>";
                             }
                         }
                         ?>
@@ -165,7 +165,7 @@ function importancia_central($termo, $impactos) {
                      */
 
 //function faz_referencia($con1, $con2)
-                    function faz_referencia($concepts, $subconceitos) {
+                    function faz_referencia($concepts, $subconcepts) {
                         ?>
 
 
@@ -343,8 +343,8 @@ function insere_tipo($list) {
                         print "<H4>Propriedade:	 $rel </H4><BR>";
                         if (count($_SESSION["predicados_selecionados"]) != 0) {
                             echo "Predicados j� cadastrados para essa propriedade:<p>";
-                            foreach ($_SESSION["predicados_selecionados"] as $verbo) {
-                                echo "- " . $verbo . "<br>";
+                            foreach ($_SESSION["predicados_selecionados"] as $verb) {
+                                echo "- " . $verb . "<br>";
                             }
                         }
                         ?>
@@ -450,7 +450,7 @@ function insere_tipo($list) {
     $_SESSION['insert_relation'] = 1;
 }
 
-function disjuncao($nome, $list) {
+function disjuncao($name, $list) {
     $_SESSION["disjoint"] = 1;
 
     if (count($_SESSION["axiomas_selecionados"]) != 0) {
@@ -461,14 +461,14 @@ function disjuncao($nome, $list) {
         echo "</p>";
     }
 
-    print "Existe algum termo disjunto do conceito <b>$nome</b> na lista abaixo ou no vocabul�rio m�nimo?";
+    print "Existe algum termo disjunto do conceito <b>$name</b> na lista abaixo ou no vocabul�rio m�nimo?";
     ?>
                         <form id='rel_form' name='rel_form'  method="POST" action="algoritmo.php">
                             <p>
                                 <SELECT onChange='seleciona(this[this.selectedIndex].text)' name="indice" size=10 width="300">
     <?php
     foreach ($_SESSION["lista_de_sujeito_e_objeto"] as $key => $termo) {
-        if (strcmp($termo->nome, $nome) != 0) {
+        if (strcmp($termo->nome, $name) != 0) {
             ?>
                                             <OPTION value='<?= $termo->nome ?>'><?php echo $termo->nome ?></OPTION>
             <?php

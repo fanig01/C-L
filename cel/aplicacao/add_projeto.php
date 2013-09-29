@@ -26,7 +26,7 @@ checkUserAuthentication("index.php");
 // Chamado atraves do botao de submit
 if (isset($submit)) {
 
-    $id_projeto_incluido = inclui_projeto($nome, $descricao);
+    $id_projeto_incluido = inclui_projeto($name, $description);
 
     // Inserir na tabela participa
 

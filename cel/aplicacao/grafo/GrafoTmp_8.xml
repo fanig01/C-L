@@ -459,8 +459,8 @@ Utilidade: cria uma variável de índices.</texto><PT/></sentenca></nocao>
 - </texto><texto referencia_lexico="$result">$result</texto><texto>
 - </texto><texto referencia_lexico="$id_conceito">$id_conceito</texto><texto>
 - </texto><texto referencia_lexico="$line">$line</texto><texto>
-- $verbo
-- </texto><texto referencia_lexico="$predicados">$predicados</texto><texto>
+- $verb
+- </texto><texto referencia_lexico="$predicates">$predicates</texto><texto>
 - $list
 - </texto><texto referencia_lexico="$aux">$aux</texto><PT/></sentenca></impacto>
 </lexico>
@@ -645,7 +645,7 @@ Utilidade: armazena em qual linha estão o id_conceito.</texto><PT/></sentenca></
 <impacto><sentenca><texto>recebe o resultado da variável </texto><texto referencia_lexico="$line">$line</texto><texto>['id_conceito']</texto><PT/></sentenca></impacto>
 </lexico>
 <lexico>
-<nome_simbolo id="$predicados"><texto>$predicados</texto></nome_simbolo>
+<nome_simbolo id="$predicates"><texto>$predicates</texto></nome_simbolo>
 <sinonimos></sinonimos>
 <nocao><sentenca><texto>Localização:
 - Arquivo:

@@ -49,7 +49,7 @@ if (!mysql_num_rows($requestResultSQL)) {
 else {
             
     $row = mysql_fetch_row($requestResultSQL);
-    $nome = $row[1];
+    $name = $row[1];
     $mail = $row[2];
     $login = $row[3];
     $password = $row[4];
@@ -71,7 +71,7 @@ $newPassword = generatePasswordRandom(6);
 $encryptedNewPassword = md5($newPassword);
 $queryUpdate = "UPDATE usuario SET senha = '$encryptedNewPassword' WHERE login = '$login'";
 $requestResultOfQueryUpdate = mysql_query($queryUpdate) or die("Erro ao executar a query de update na tabela usuario");
-$bodyEmail = "Caro $nome,\n Como solicitado, estamos enviando sua nova senha para acesso ao sistema C&L.\n\n login: $login \n senha: $newPassword \n\n Para evitar futuros transtornos altere sua senha o mais breve poss&iacute;vel. \n Obrigado! \n Equipe de Suporte do C&L.";
+$bodyEmail = "Caro $name,\n Como solicitado, estamos enviando sua nova senha para acesso ao sistema C&L.\n\n login: $login \n senha: $newPassword \n\n Para evitar futuros transtornos altere sua senha o mais breve poss&iacute;vel. \n Obrigado! \n Equipe de Suporte do C&L.";
 $headers = "";
 
 if (mail("$mail", "Nova senha do C&L", "$bodyEmail", $headers)) {

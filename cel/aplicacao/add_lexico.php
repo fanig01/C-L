@@ -22,7 +22,7 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 //Script chamado atrav�s do submit do formul�rio
 if (isset($submit)) {
 
-    $returnCheck = checarLexicoExistente($_SESSION['id_projeto_corrente'], $nome);
+    $returnCheck = checarLexicoExistente($_SESSION['id_projeto_corrente'], $name);
     if (!isset($listSinonimo))
         $listSinonimo = array();
 
@@ -30,7 +30,7 @@ if (isset($submit)) {
 
     if (($returnCheck == true) AND ($returnCheckTheSynonym == true )) {
         $id_usuario_corrente = $_SESSION['id_usuario_corrente'];
-        inserirPedidoAdicionarLexico($idProject , $nome, $notion, $impact, $id_usuario_corrente, $listSinonimo, $classificacao);
+        inserirPedidoAdicionarLexico($idProject , $name, $notion, $impact, $id_usuario_corrente, $listSinonimo, $classificacao);
     } else {
         ?>
         <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">

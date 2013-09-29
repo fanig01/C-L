@@ -134,7 +134,7 @@ function obter_termo_do_lexico($lexico) {
     while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
         $impactos[] = strtolower($line['impacto']);
     }
-    $termo_do_lexico = new termo_do_lexico(strtolower($lexico['nome']), strtolower($lexico['nocao']), $impactos);
+    $termo_do_lexico = new lexiconTerm(strtolower($lexico['nome']), strtolower($lexico['nocao']), $impactos);
     return $termo_do_lexico;
 }
 
@@ -169,7 +169,7 @@ function get_lista_de_conceitos() {
     $result1 = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
 
     while ($line = mysql_fetch_array($result1, MYSQL_BOTH)) {
-        $conc = new conceito($line['nome'], $line['descricao']);
+        $conc = new concept($line['nome'], $line['descricao']);
         $conc->namespace = $line['namespace'];
 
         $id = $line['id_conceito'];
@@ -186,7 +186,7 @@ function get_lista_de_conceitos() {
             if ($indice != -1) {
                 $conc->relacoes[$indice]->predicados[] = $pred;
             } else {
-                $conc->relacoes[] = new relacao_entre_conceitos($pred, $rel);
+                $conc->relacoes[] = new relationshipBetweenConcepts($pred, $rel);
             }
         }
         $aux[] = $conc;
@@ -334,13 +334,13 @@ function salvar_algoritmo() {
 
 
             foreach ($conc->relacoes as $relation) {
-                $verbo = $relation->verbo;
-                $query = "select id_relacao from relacao where nome = '$verbo' and id_projeto='$idProject ';";
+                $verb = $relation->verbo;
+                $query = "select id_relacao from relacao where nome = '$verb' and id_projeto='$idProject ';";
                 $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
                 $line = mysql_fetch_array($result, MYSQL_BOTH);
                 $id_relacao = $line['id_relacao'];
-                $predicados = $relation->predicados;
-                foreach ($predicados as $pred) {
+                $predicates = $relation->predicados;
+                foreach ($predicates as $pred) {
                     $query = "insert into relacao_conceito (id_conceito,id_relacao,predicado,id_projeto) values ('$id_conceito', '$id_relacao', '$pred', '$idProject ');";
                     $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
                 }
@@ -354,8 +354,8 @@ function salvar_algoritmo() {
                     $line = mysql_fetch_array($result, MYSQL_BOTH);
                     $id_subconceito = $line['id_conceito'];
 
-                    $nome = $conc->nome;
-                    $query = "select id_conceito from conceito where nome = '$nome' and id_projeto='$idProject ';";
+                    $name = $conc->nome;
+                    $query = "select id_conceito from conceito where nome = '$name' and id_projeto='$idProject ';";
                     $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
                     $line = mysql_fetch_array($result, MYSQL_BOTH);
                     $id_conceito = $line['id_conceito'];

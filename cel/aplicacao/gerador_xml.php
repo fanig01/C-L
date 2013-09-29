@@ -156,7 +156,7 @@ if (!(function_exists("gerar_xml"))) {
             $id_lexico = "<ID>" . $row[0] . "</ID>";
             if (($id_temp != $id_lexico) or (primeiro)) {
 
-                $nome = '<nome_simbolo id="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . '<texto>' . ucwords(strip_tags($row[1])) . '</texto>' . '</nome_simbolo>';
+                $name = '<nome_simbolo id="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . '<texto>' . ucwords(strip_tags($row[1])) . '</texto>' . '</nome_simbolo>';
 
 
                 // Consulta os sinonimos do simbolo
@@ -181,7 +181,7 @@ if (!(function_exists("gerar_xml"))) {
 
                 $xml_resultante = $xml_resultante . "<lexico>\n";
 
-                $xml_resultante = $xml_resultante . "$nome\n";
+                $xml_resultante = $xml_resultante . "$name\n";
 
                 $xml_resultante = $xml_resultante . "$sinonimo\n";
 

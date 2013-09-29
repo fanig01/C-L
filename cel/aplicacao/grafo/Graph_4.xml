@@ -457,10 +457,10 @@ Utilidade: cria uma variável de índices.</TEXTO><REFERENCIA TO="auxiliar_bd.php"
 - $result
 - $id_conceito
 - $line
-- $verbo
-- $predicados
+- $verb
+- $predicates
 - $list
-- $aux</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$link">$link</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA><REFERENCIA TO="$id_conceito">$id_conceito</REFERENCIA><REFERENCIA TO="$line">$line</REFERENCIA><REFERENCIA TO="$predicados">$predicados</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA></SENTENCA></IMPACTO>
+- $aux</TEXTO><REFERENCIA TO="$idProject ">$idProject </REFERENCIA><REFERENCIA TO="$link">$link</REFERENCIA><REFERENCIA TO="$query">$query</REFERENCIA><REFERENCIA TO="$result">$result</REFERENCIA><REFERENCIA TO="$id_conceito">$id_conceito</REFERENCIA><REFERENCIA TO="$line">$line</REFERENCIA><REFERENCIA TO="$predicates">$predicates</REFERENCIA><REFERENCIA TO="$aux">$aux</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="addbcc">Addbcc</NOME_SIMBOLO>
@@ -643,7 +643,7 @@ Utilidade: armazena em qual linha estão o id_conceito.</TEXTO><REFERENCIA TO="au
 <IMPACTO><SENTENCA><TEXTO>recebe o resultado da variável $line['id_conceito']</TEXTO><REFERENCIA TO="$line">$line</REFERENCIA></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
-<NOME_SIMBOLO ID="$predicados">$predicados</NOME_SIMBOLO>
+<NOME_SIMBOLO ID="$predicates">$predicates</NOME_SIMBOLO>
 <SINONIMOS></SINONIMOS>
 <NOCAO><SENTENCA><TEXTO>Localização:
 - Arquivo:

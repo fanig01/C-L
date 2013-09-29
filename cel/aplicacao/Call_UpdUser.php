@@ -26,7 +26,7 @@ $commandSQL = "SELECT * FROM usuario WHERE id_usuario='$id_usuario'";
 $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
 
 $row = mysql_fetch_row($requestResultSQL);
-$nome = $row[1];
+$name = $row[1];
 $email = $row[2];
 $login = $row[3];
 $password = $row[4];
@@ -103,7 +103,7 @@ $password = $row[4];
         <form action="updUser.php" method="post">
             <table>
                 <tr>
-                    <td>Nome:</td><td colspan="3"><input name="nome" maxlength="255" size="48" type="text" value="<?= $nome ?>"></td>
+                    <td>Nome:</td><td colspan="3"><input name="nome" maxlength="255" size="48" type="text" value="<?= $name ?>"></td>
                 </tr>
                 <tr>
                     <td>E-mail:</td><td colspan="3"><input name="email" maxlength="64" size="48" type="text" value="<?= $email ?>" OnBlur="checkEmail(this)"></td>

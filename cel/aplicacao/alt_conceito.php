@@ -16,7 +16,7 @@ checkUserAuthentication("index.php"); // Checa se o usuario foi autenticado
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {       // Script chamado atraves do submit do formulario
-    inserirPedidoAlterarConceito($_SESSION['id_projeto_corrente'], $id_conceito, $nome, $descricao, $namespace, $justificativa, $_SESSION['id_usuario_corrente']);
+    inserirPedidoAlterarConceito($_SESSION['id_projeto_corrente'], $id_conceito, $name, $description, $namespace, $justificativa, $_SESSION['id_usuario_corrente']);
     ?>
 
     <script language="javascript1.3">

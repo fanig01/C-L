@@ -17,17 +17,17 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
     // ** Cenario "Inclusao de Usuario Independente" **
     // O sistema checa se todos os campos estao preenchidos. Se algum nao estiver, o
     // sistema avisa pro usuario que todos os campos devem ser preenchidos.
-    if ($nome == "" || $email == "" || $login == "" || $password == "" || $senha_conf == "") {
+    if ($name == "" || $email == "" || $login == "" || $password == "" || $senha_conf == "") {
         $p_style = "color: red; font-weight: bold";
         $p_text = "Por favor, preencha todos os campos.";
-        recarrega("?p_style=$p_style&p_text=$p_text&nome=$nome&email=$email&login=$login&senha=$password&senha_conf=$senha_conf&novo=$novo");
+        recarrega("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&login=$login&senha=$password&senha_conf=$senha_conf&novo=$novo");
     } else {
 
         // Testa se as senhas fornecidas pelo usuario sao iguais.
         if ($password != $senha_conf) {
             $p_style = "color: red; font-weight: bold";
             $p_text = "Senhas diferentes. Favor preencher novamente as senhas.";
-            recarrega("?p_style=$p_style&p_text=$p_text&nome=$nome&email=$email&login=$login&novo=$novo");
+            recarrega("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&login=$login&novo=$novo");
         } else {
 
             // ** Cenario "Inclusao de Usuario Independente" **
@@ -58,7 +58,7 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
             if (mysql_num_rows($requestResultSQL)) {        // Se ja existe algum usuario com este login
 //                $p_style = "color: red; font-weight: bold";
 //                $p_text = "Login j� existente no sistema. Favor escolher outro login.";
-//                recarrega("?p_style=$p_style&p_text=$p_text&nome=$nome&email=$email&senha=$senha&senha_conf=$senha_conf&novo=$novo");
+//                recarrega("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&senha=$senha&senha_conf=$senha_conf&novo=$novo");
 // Cen�rio - Adicionar Usu�rio
 // Objetivo:  Permitir ao Administrador criar novos usu�rios.
 // Contexto:  O Administrador deseja adicionar novos usu�rios (n�o cadastrados)
@@ -79,13 +79,13 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
                 recarrega("?novo=$novo");
             } else {    // Cadastro passou por todos os testes -- ja pode ser incluido na BD
                 /* Substitui todas as ocorrencias de ">" e "<" por " " */
-                $nome = str_replace(">", " ", str_replace("<", " ", $nome));
+                $name = str_replace(">", " ", str_replace("<", " ", $name));
                 $login = str_replace(">", " ", str_replace("<", " ", $login));
                 $email = str_replace(">", " ", str_replace("<", " ", $email));
 
                 // Criptografando a senha
                 $password = md5($password);
-                $commandSQL = "INSERT INTO usuario (nome, login, email, senha) VALUES ('$nome', '$login', '$email', '$password')";
+                $commandSQL = "INSERT INTO usuario (nome, login, email, senha) VALUES ('$name', '$login', '$email', '$password')";
                 mysql_query($commandSQL) or die("Erro ao cadastrar o usuario");
                 recarrega("?cadastrado=&novo=$novo&login=$login");
             }
@@ -163,7 +163,7 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
     if ($primeira_vez) {
         $email = "";
         $login = "";
-        $nome = "";
+        $name = "";
         $password = "";
         $senha_conf = "";
     }
@@ -213,7 +213,7 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
             <form action="?novo=<?= $novo ?>" method="post">
                 <table>
                     <tr>
-                        <td>Nome:</td><td colspan="3"><input name="nome" maxlength="255" size="48" type="text" value="<?= $nome ?>"></td>
+                        <td>Nome:</td><td colspan="3"><input name="nome" maxlength="255" size="48" type="text" value="<?= $name ?>"></td>
                     </tr>
                     <tr>
                         <td>E-mail:</td><td colspan="3"><input name="email" maxlength="64" size="48" type="text" value="<?= $email ?>" OnBlur="checkEmail(this)"></td>

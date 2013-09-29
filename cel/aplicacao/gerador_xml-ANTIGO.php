@@ -135,7 +135,7 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
     while ($row = mysql_fetch_row($tb_lexico)) {
         $id_lexico = "<ID>" . $row[0] . "</ID>";
         if (($id_temp != $id_lexico) or (primeiro)) {
-            $nome = '<nome_simbolo name="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . '<texto>' . ucwords(strip_tags($row[1])) . '</texto>' . '</nome_simbolo>';
+            $name = '<nome_simbolo name="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . '<texto>' . ucwords(strip_tags($row[1])) . '</texto>' . '</nome_simbolo>';
 
             $notion = "<nocao>" . "<sentenca>" . makeLinksXML(strip_tags($row[2]), $vetor_lex, $vetor_cen) . "<PT/>" . "</sentenca>" . "</nocao>";
 
@@ -145,7 +145,7 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
 
             // $xml_resultante = $xml_resultante . "$id_lexico\n" ;
 
-            $xml_resultante = $xml_resultante . "$nome\n";
+            $xml_resultante = $xml_resultante . "$name\n";
 
             $xml_resultante = $xml_resultante . "$notion\n";
 
