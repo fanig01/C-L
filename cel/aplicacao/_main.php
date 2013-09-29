@@ -204,7 +204,7 @@ if (isset($id) && isset($term)) {      // SCRIPT CHAMADO PELO PROPRIO MAIN.PHP (
                 <?php
             }
 
-            frame_inferior($SgbdConnect, $term, $id);
+            bottom_frame($SgbdConnect, $term, $id);
         } elseif (isset($idProject )) {         // SCRIPT CHAMADO PELO HEADING.PHP
             // Foi passada uma variavel $idProject . Esta variavel deve conter o id de um
             // projeto que o usuario esteja cadastrado. Entretanto, como a passagem eh

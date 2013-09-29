@@ -853,7 +853,7 @@ if (isset($id) && isset($term)) {
       ?>  
        <?php
     
-      frame_inferior($SgbdConnect, $term, $id);
+      bottom_frame($SgbdConnect, $term, $id);
 }
 elseif (isset($idProject )) {
     
