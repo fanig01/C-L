@@ -43,11 +43,11 @@ function mountsRelations($idProject ) {
         quicksort($vector_scenarios, 0, count($vector_scenarios) - 1, 'cenario');
 
         $title = $result['titulo'];
-        $temporaryTitle = cenario_para_lexico($idCurrentScenario, $title, $vector_lexicons);
+        $temporaryTitle = scenarioToLexicon($idCurrentScenario, $title, $vector_lexicons);
         addRelationships($idCurrentScenario, 'cenario', $temporaryTitle);
 
         $objective = $result['objetivo'];
-        $temporaryObjective = cenario_para_lexico($idCurrentScenario, $objective, $vector_lexicons);
+        $temporaryObjective = scenarioToLexicon($idCurrentScenario, $objective, $vector_lexicons);
         addRelationships($idCurrentScenario, 'cenario', $temporaryObjective);
 
         $context = $result['contexto'];
@@ -55,15 +55,15 @@ function mountsRelations($idProject ) {
         addRelationships($idCurrentScenario, 'cenario', $temporaryContext); 
 
         $actors = $result['atores'];
-        $temporaryActors = cenario_para_lexico($idCurrentScenario, $actors, $vector_lexicons);
+        $temporaryActors = scenarioToLexicon($idCurrentScenario, $actors, $vector_lexicons);
         addRelationships($idCurrentScenario, 'cenario', $temporaryActors);
 
         $resources = $result['recursos'];
-        $temporaryResources = cenario_para_lexico($idCurrentScenario, $resources, $vector_lexicons);
+        $temporaryResources = scenarioToLexicon($idCurrentScenario, $resources, $vector_lexicons);
         addRelationships($idCurrentScenario, 'cenario', $temporaryResources);
 
         $exception = $result['excecao'];
-        $temporaryException = cenario_para_lexico($idCurrentScenario, $exception, $vector_lexicons);
+        $temporaryException = scenarioToLexicon($idCurrentScenario, $exception, $vector_lexicons);
         addRelationships($idCurrentScenario, 'cenario', $temporaryException);
 
         $episodes = $result['episodios'];
@@ -124,7 +124,7 @@ function lexiconToLexicon($idLexicon, $text, $vector_lexicons) {
     
  }
 
-function cenario_para_lexico($id_cenario, $text, $vector_lexicons) {
+function scenarioToLexicon($id_cenario, $text, $vector_lexicons) {
     
     $i = 0;
     
