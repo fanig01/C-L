@@ -374,7 +374,7 @@ if (!mysql_num_rows($qrrVerifica)) {
                  VALUES ( '$idProject ', '$data_pesquisa', '$version', '" . mysql_real_escape_string($xml_resultante) . "')";
 
     mysql_query($commandSQL) or die("Erro ao enviar a query INSERT do XML no banco de dados! ");
-    recarrega("http://pes.inf.puc-rio.br/cel/aplicacao/mostraXML.php?id_projeto=" . $idProject  . "&versao=" . $version);
+    recharge("http://pes.inf.puc-rio.br/cel/aplicacao/mostraXML.php?id_projeto=" . $idProject  . "&versao=" . $version);
 } 
 else {
     
