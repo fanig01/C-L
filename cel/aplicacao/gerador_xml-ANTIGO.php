@@ -79,17 +79,17 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
         if (($id_temp != $id_cenario) or (primeiro)) {
             $title = '<titulo name="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . ucwords(strip_tags($row[1])) . '</titulo>';
 
-            $objective = "<objetivo>" . "<sentenca>" . faz_links_XML(strip_tags($row[2]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</objetivo>";
+            $objective = "<objetivo>" . "<sentenca>" . makeLinksXML(strip_tags($row[2]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</objetivo>";
 
-            $context = "<contexto>" . "<sentenca>" . faz_links_XML(strip_tags($row[3]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</contexto>";
+            $context = "<contexto>" . "<sentenca>" . makeLinksXML(strip_tags($row[3]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</contexto>";
 
-            $actors = "<atores>" . "<sentenca>" . faz_links_XML(strip_tags($row[4]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</atores>";
+            $actors = "<atores>" . "<sentenca>" . makeLinksXML(strip_tags($row[4]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</atores>";
 
-            $resources = "<recursos>" . "<sentenca>" . faz_links_XML(strip_tags($row[5]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</recursos>";
+            $resources = "<recursos>" . "<sentenca>" . makeLinksXML(strip_tags($row[5]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</recursos>";
 
-            $episodes = "<episodios>" . "<sentenca>" . faz_links_XML(strip_tags($row[6]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</episodios>";
+            $episodes = "<episodios>" . "<sentenca>" . makeLinksXML(strip_tags($row[6]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</episodios>";
 
-            $exception = "<excecao>" . "<sentenca>" . faz_links_XML(strip_tags($row[7]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</excecao>";
+            $exception = "<excecao>" . "<sentenca>" . makeLinksXML(strip_tags($row[7]), $vetor_lex, $vetor_cen) . "</sentenca>" . "<PT/>" . "</excecao>";
 
             $xml_resultante = $xml_resultante . "<cenario>\n";
 
@@ -137,9 +137,9 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
         if (($id_temp != $id_lexico) or (primeiro)) {
             $nome = '<nome_simbolo name="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . '<texto>' . ucwords(strip_tags($row[1])) . '</texto>' . '</nome_simbolo>';
 
-            $notion = "<nocao>" . "<sentenca>" . faz_links_XML(strip_tags($row[2]), $vetor_lex, $vetor_cen) . "<PT/>" . "</sentenca>" . "</nocao>";
+            $notion = "<nocao>" . "<sentenca>" . makeLinksXML(strip_tags($row[2]), $vetor_lex, $vetor_cen) . "<PT/>" . "</sentenca>" . "</nocao>";
 
-            $impact = "<impacto>" . "<sentenca>" . faz_links_XML(strip_tags($row[3]), $vetor_lex, $vetor_cen) . "<PT/>" . "</sentenca>" . "</impacto>";
+            $impact = "<impacto>" . "<sentenca>" . makeLinksXML(strip_tags($row[3]), $vetor_lex, $vetor_cen) . "<PT/>" . "</sentenca>" . "</impacto>";
 
             $xml_resultante = $xml_resultante . "<lexico>\n";
 

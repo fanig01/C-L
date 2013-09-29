@@ -1,26 +1,13 @@
 <?php
 
-/* * ******************************************************
- * Module created in 05/07/07
- * Group PES_07_1_1
- * Authors:
- *   BVF
- *   DFS
- *   TVD
- *   EMC
- * ****************************************************** */
-
-/* * ******************************************************* 
-  /* Module that put the tags of links into the archive XML
-  /******************************************************** */
-
+  // Module that put the tags of links into the archive XML
 
 include ("coloca_links.php");
 
-function poe_tag_xml($str) {
+function putsTagXML($str) {
 
-    $r = "<link ref=\"$str\">$str </link>";
-    return $r;
+    $reference = "<link ref=\"$str\">$str </link>";
+    return $reference;
 }
 
 function get_IdXml($string) {
@@ -38,9 +25,10 @@ function get_IdXml($string) {
     return implode('', $buffer);
 }
 
-function troca_chaves_xml($string) {
-    $conta_abertos = 0;
-    $conta_fehados = 0;
+function exchangeKeysXML($string) {
+    
+    $accountOpened = 0;
+    $accountClosed = 0;
     $begin;
     $end;
     
@@ -59,8 +47,13 @@ function troca_chaves_xml($string) {
     $sizeOfString = strlen($string);
 
     while ($index <= $sizeOfString) {
+        
         if ($string[$index] == '}') {
-            $conta_abertos = $conta_abertos + 1;
+            
+            $accountOpened = $accountOpened + 1;
+        }
+        else {
+            //Nothing should be done
         }
        
         $index++;
@@ -69,8 +62,13 @@ function troca_chaves_xml($string) {
     $index = 0;
     
     while ($index <= $sizeOfString) {
+        
         if ($string[$index] == '}') {
-            $conta_fechados = $conta_fechados + 1;
+           
+            $accountClosed = $accountClosed + 1;
+        }
+        else {
+            //Nothing should be done
         }
         
         $index++;    
@@ -78,8 +76,11 @@ function troca_chaves_xml($string) {
     
     $index = 0;
     
-    if ($conta_abertos == 0) {
+    if ($accountOpened == 0) {
         return $string;
+    }
+    else {
+        //Nothing should be done
     }
     
     $index = 0;
@@ -94,6 +95,12 @@ function troca_chaves_xml($string) {
                 
                 $realLinks++;
             }
+            else {
+                //Nothing should be done
+            }
+        }
+        else {
+            //Nothing should be done
         }
         
         if ($string[$index] == '}') {    
@@ -104,76 +111,81 @@ function troca_chaves_xml($string) {
                 
                 $y++;
             }
+            else {
+                //Nothing should be done
+            }
+        }
+        else {
+            //Nothing should be done
         }
         
         $index++;
-    };
+    }
     
     $index = 0;
 
     while ($index < $realLinks) { 
+       
         $link = substr($string, $begin[$index], $end[$index] - $begin[$index]);
-        $originalLink[$index] = $link;
-        
+        $originalLink[$index] = $link;        
         $link = str_replace('{', '', $link);
         $link = str_replace('}', '', $link);
         $buffer2 = 0;
-        $conta = 0;
-        $n = 0;
-       
-        //echo('aki - >'."$link".'<br>');
+        $account = 0;
+        $index2 = 0;
         $arrayId[$index] = get_IdXml($link);
         $link = '**' . $link;
-        $marcador = 0;
+        $marker = 0;
 
-        while ($n < $end[$index] - $begin[$index]) {
-            if ($link[$n] == '*' && $link[$n + 1] == '*' && $marcador == 1) {
-                $marcador = 0;
-                $link[$n] = '{';
-                $link[$n + 1] = '{';
-                $n++;
-                $n++;
+        while ($index2 < $end[$index] - $begin[$index]) {
+           
+            if ($link[$index2] == '*' && $link[$index2 + 1] == '*' && $marker == 1) {
+                $marker = 0;
+                $link[$index2] = '{';
+                $link[$index2 + 1] = '{';
+                $index2++;
+                $index2++;
                 continue;
             }
 
-            if ($link[$n] == '*' && $link[$n + 1] == '*') {
-                $marcador = 1;
-                $link[$n] = '{';
-                $n++;
+            if ($link[$index2] == '*' && $link[$index2 + 1] == '*') {
+                $marker = 1;
+                $link[$index2] = '{';
+                $index2++;
                 continue;
             }
 
-            if ($marcador == 1) {
-                $link[$n] = '{';
+            if ($marker == 1) {
+                $link[$index2] = '{';
             }
             
-            $n++;
+            $index2++;
         }
         
         $link = str_replace('{', '', $link);
-        $link = poe_tag_xml($link, $arrayId[$index]);
+        $link = putsTagXML($link, $arrayId[$index]);
         $newLink[$index] = $link;
         $index++;
     }
     
     $index = 0;
     
-    //echo("STRING INICAL -> $str<br/>");
     while ($index < $realLinks) {
+        
         $string = str_replace($originalLink[$index], $newLink[$index], $string);
        
         $index++;
     }
-    //echo("STRING FINAL -> $str<br/>");
+
     return $string;
 }
 
-function faz_links_XML($text, $vetor_lex, $vetor_cen) {
+function makeLinksXML($text, $vector_lexicon, $vector_scenario) {
 
-    marca_texto($text, $vetor_cen, "cenario");
-    marca_texto_cenario($text, $vetor_lex, $vetor_cen);
+    marca_texto($text, $vector_scenario, "cenario");
+    marca_texto_cenario($text, $vector_lexicon, $vector_scenario);
 
-    $str = troca_chaves_xml($text);
+    $str = exchangeKeysXML($text);
     return $str;
 }
 ?> 
