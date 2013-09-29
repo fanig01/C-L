@@ -5,7 +5,7 @@ include_once("coloca_links.php");
 
 // Assemble the relations used in the side menu
 
-function monta_relacoes($idProject ) {
+function mountsRelations($idProject ) {
 
     $DB = new PGDB ();
     $sql1 = new QUERY($DB);
@@ -44,31 +44,31 @@ function monta_relacoes($idProject ) {
 
         $title = $result['titulo'];
         $temporaryTitle = cenario_para_lexico($idCurrentScenario, $title, $vector_lexicons);
-        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryTitle);
+        addRelationships($idCurrentScenario, 'cenario', $temporaryTitle);
 
         $objective = $result['objetivo'];
         $temporaryObjective = cenario_para_lexico($idCurrentScenario, $objective, $vector_lexicons);
-        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryObjective);
+        addRelationships($idCurrentScenario, 'cenario', $temporaryObjective);
 
         $context = $result['contexto'];
-        $temporaryContext = cenario_para_lexico_cenario_para_cenario($idCurrentScenario, $context, $vector_lexicons, $vector_scenarios);
-        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryContext); 
+        $temporaryContext = scenarioToLexicon_ScenarioToScenario($idCurrentScenario, $context, $vector_lexicons, $vector_scenarios);
+        addRelationships($idCurrentScenario, 'cenario', $temporaryContext); 
 
         $actors = $result['atores'];
         $temporaryActors = cenario_para_lexico($idCurrentScenario, $actors, $vector_lexicons);
-        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryActors);
+        addRelationships($idCurrentScenario, 'cenario', $temporaryActors);
 
         $resources = $result['recursos'];
         $temporaryResources = cenario_para_lexico($idCurrentScenario, $resources, $vector_lexicons);
-        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryResources);
+        addRelationships($idCurrentScenario, 'cenario', $temporaryResources);
 
         $exception = $result['excecao'];
         $temporaryException = cenario_para_lexico($idCurrentScenario, $exception, $vector_lexicons);
-        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryException);
+        addRelationships($idCurrentScenario, 'cenario', $temporaryException);
 
         $episodes = $result['episodios'];
-        $temporaryEpisodes = cenario_para_lexico_cenario_para_cenario($idCurrentScenario, $episodes, $vector_lexicons, $vector_scenarios);
-        adiciona_relacionamento($idCurrentScenario, 'cenario', $temporaryEpisodes);
+        $temporaryEpisodes = scenarioToLexicon_ScenarioToScenario($idCurrentScenario, $episodes, $vector_lexicons, $vector_scenarios);
+        addRelationships($idCurrentScenario, 'cenario', $temporaryEpisodes);
     }
 
     $comandoSql = "SELECT *
@@ -83,23 +83,22 @@ function monta_relacoes($idProject ) {
         $idCurrentLexicon = $result['id_lexico'];
 
         // This function makes vector with name and synonyms of all lexical less current vector
-
         $vector_lexicons = carrega_vetor($idProject , $idCurrentLexicon);
 
         //// Sorts the levical's vector by the amount of words in name or synonym
         quicksort($vector_lexicons, 0, count($vector_lexicons) - 1, 'lexico');
 
         $notion = $result['nocao'];
-        $temporaryNotion = lexico_para_lexico($id_lexico, $notion, $vector_lexicons);
-        adiciona_relacionamento($idCurrentLexicon, 'lexico', $temporaryNotion);	
+        $temporaryNotion = lexiconToLexicon($id_lexico, $notion, $vector_lexicons);
+        addRelationships($idCurrentLexicon, 'lexico', $temporaryNotion);	
 
         $impact = $result['impacto'];
-        $temporaryImpact = lexico_para_lexico($id_lexico, $impact, $vector_lexicons);
-        adiciona_relacionamento($idCurrentLexicon, 'lexico', $temporaryImpact);
+        $temporaryImpact = lexiconToLexicon($id_lexico, $impact, $vector_lexicons);
+        addRelationships($idCurrentLexicon, 'lexico', $temporaryImpact);
     }
 }
 
-function lexico_para_lexico($id_lexico, $text, $vector_lexicons) {
+function lexiconToLexicon($idLexicon, $text, $vector_lexicons) {
     
     $i = 0;
     
@@ -147,7 +146,7 @@ function cenario_para_lexico($id_cenario, $text, $vector_lexicons) {
     return $text;
 }
 
-function cenario_para_cenario($id_cenario, $text, $vector_scenarios) {
+function scenarioToScenario($id_cenario, $text, $vector_scenarios) {
     
     $i = 0;
     
@@ -169,19 +168,19 @@ function cenario_para_cenario($id_cenario, $text, $vector_scenarios) {
     return $text;
 }
 
-function cenario_para_lexico_cenario_para_cenario($id_cenario, $text, $vector_lexicons, $vector_scenarios) {
+function scenarioToLexicon_ScenarioToScenario($idScenario, $text, $vector_lexicons, $vector_scenarios) {
  
-    $i = 0;
-    $j = 0;
-    $k = 0;
+    $index1 = 0;
+    $index2 = 0;
+    $index3 = 0;
     
     $total = count($vector_lexicons) + count($vector_scenarios);
     
-    while ($k < $total) {
-        if (strlen($vector_scenarios[$j]->titulo) < strlen($vector_lexicons[$i]->nome)) {
-            $regex = "/(\s|\b)(" . $vector_lexicons[$i]->nome . ")(\s|\b)/i";
-            $text = preg_replace($regex, "$1{l" . $vector_lexicons[$i]->id_lexico . "**$2" . "}$3", $text);
-            $i++;
+    while ($index3 < $total) {
+        if (strlen($vector_scenarios[$index2]->titulo) < strlen($vector_lexicons[$index1]->nome)) {
+            $regex = "/(\s|\b)(" . $vector_lexicons[$index1]->nome . ")(\s|\b)/i";
+            $text = preg_replace($regex, "$1{l" . $vector_lexicons[$index1]->id_lexico . "**$2" . "}$3", $text);
+            $index1++;
 
             /* Code to insert the relationship in the centolex's table
             
@@ -193,24 +192,23 @@ function cenario_para_lexico_cenario_para_cenario($id_cenario, $text, $vector_le
         }
         else {
              
-            $regex = "/(\s|\b)(" . $vector_scenarios[$j]->titulo . ")(\s|\b)/i";
-            $text = preg_replace($regex, "$1{c" . $vector_scenarios[$j]->id_cenario . "**$2" . "}$3", $text);
-            $j++;
+            $regex = "/(\s|\b)(" . $vector_scenarios[$index2]->titulo . ")(\s|\b)/i";
+            $text = preg_replace($regex, "$1{c" . $vector_scenarios[$index2]->id_cenario . "**$2" . "}$3", $text);
+            $index2++;
         }
         
-        $k++;
+        $index3++;
     }
     
     return $text;
 }
 
 // Function to add relationships in tables centocen, centolex and lextolex
-
-function adiciona_relacionamento($id_from, $tipo_from, $text) {
+function addRelationships($id_from, $typeFrom, $text) {
     
-    $i = 0; // text's index with placeholder
+    $i = 0; 
     $parser = 0; // checks when should be added tags
-    $novo_texto = "";
+    $newText = "";
     
     while ($i < strlen(&$text)) {
         
@@ -235,21 +233,24 @@ function adiciona_relacionamento($id_from, $tipo_from, $text) {
                 
                 if ($type == "l") {
                     
-                    if (strcasecmp($tipo_from, 'lexico') == 0) {
+                    if (strcasecmp($typeFrom, 'lexico') == 0) {
                         
                         echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'l&eacute;xico para l&eacute;xico")</script>';
            	
                     }
-                    else if (strcasecmp($tipo_from, 'cenario') == 0) {
+                    else if (strcasecmp($typeFrom, 'cenario') == 0) {
                        
                         echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'cen&aacute;rio para l&eacute;xico")</script>';
                       
                     }
                 }
+                else {
+                    //Nothing should be done
+                }
                 
                 if ($type == "c") {
                     
-                    if (strcasecmp($tipo_from, 'cenario') == 0) {
+                    if (strcasecmp($typeFrom, 'cenario') == 0) {
                         
                         echo '<script language="javascript">confirm(" ' . $id_from . ' - ' . $id_to . 'cen&aacute;rio para cen&aacute;rio")</script>';
 
@@ -262,11 +263,19 @@ function adiciona_relacionamento($id_from, $tipo_from, $text) {
                         */
                         
                     }
+                    else{
+                        //Nothing should be done
+                    }
+                }
+                else {
+                    //Nothing should be done
                 }
                 
                 $i + 1;
             }
-            
+            else {
+                //Nothing should be done
+            }         
         }
         elseif ($text[$i] == "}") {
           
