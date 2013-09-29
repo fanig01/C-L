@@ -26,7 +26,7 @@ Resources: System, XML and data registered the project database.
 Restrictions: Having a XML Generated project
  */
 
-$bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
+$recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 $commandSQL = "SELECT * FROM publicacao WHERE id_projeto = '$idProject '";
 $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
 

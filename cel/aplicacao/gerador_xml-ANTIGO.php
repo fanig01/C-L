@@ -180,14 +180,14 @@ if (!mysql_num_rows($qrrVerifica)) {
 
     mysql_query($commandSQL) or die("Erro ao enviar a query INSERT!");
 
-    $qq = "select * from publicacao where id_projeto = $idProject  ";
-    $requestResultSQL = mysql_query($qq) or die("Erro ao enviar a query");
+    $queryResult = "select * from publicacao where id_projeto = $idProject  ";
+    $requestResultSQL = mysql_query($queryResult) or die("Erro ao enviar a query");
     $row = mysql_fetch_row($requestResultSQL);
-    $xml_banco = $row[3];
+    $databaseXML = $row[3];
 
     // echo $xml_banco;
 
-    $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
+    $recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
     $qRecupera = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$versao'";
     $qrrRecupera = mysql_query($qRecupera) or die("Erro ao enviar a query de busca!");
     
@@ -211,9 +211,9 @@ if (!mysql_num_rows($qrrVerifica)) {
 
         xslt_free($xh);
 
-        $xml_banco = $row[3];
+        $databaseXML = $row[3];
 
-        echo $xml_banco;
+        echo $databaseXML;
 
         //echo $html ;
     }
@@ -227,7 +227,7 @@ if (!mysql_num_rows($qrrVerifica)) {
 
         <?
         
-        echo $xml_banco;
+        echo $databaseXML;
         //</body></html>
         
         ?>

@@ -7,7 +7,7 @@ include("httprequest.inc");
 
 checkUserAuthentication("index.php");       
 
-$bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
+$recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 
 /*
 Scenario - Generate XML report
@@ -21,13 +21,13 @@ Episodes: Generating the report from the registered data project,
 the system provides for the Administrator screen display XML report created.
  */
 
-$qq = "select * from publicacao where id_projeto = $idProject  AND versao = $versao";
+$queryResult = "SELECT * FROM publicacao WHERE id_projeto = $idProject  AND versao = $versao";
 
-$requestResultSQL = mysql_query($qq) or die("Erro ao enviar a query");
+$requestResultSQL = mysql_query($queryResult) or die("Erro ao enviar a query");
 
 $row = mysql_fetch_row($requestResultSQL);
 
-$xml_banco = $row[3];
+$databaseXML = $row[3];
 
-echo $xml_banco;
+echo $databaseXML;
 ?>

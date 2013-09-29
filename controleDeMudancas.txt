@@ -1,136 +1,3 @@
-Controle de Mudanças
-
-Arquivo: ver_pedido_lexico.php
-
-Variáveis:
-
-	Não alterei nome de variáveis.
-
-Comentários:
-
-
-	(1)Comentário anterior: /* ver_pedido_lexico.php: Esse script exibe os varios pedidos referentes
- 				ao lexico.O gerente tem a opcao de ver os pedidos
-				jah validados. O gerente tb podera validar e processar pedidos.
-				O gerente tera uma terceira opcao que eh a de remover o pedido
-				validado ou nao da lista de pedidos.O gerente podera responder
-				a um pedido via e-mail direto desta pagina.
- 				Arquivo chamador: heading.php
-			     */
-	(1)Comentário atual:  /* Ver_pedido_lexico.php: This script shows the different requests related
-  				the lexicon. The manager has the option to see the requests
-				already validated. The manager can validate and process requests.
-				The manager can remove the application (validated or not) from the list of requests. 
-				The manager can respond to a request by e-mail on this page.
-  				Archive caller: heading.php
-			     */
-	
-	(2)Comentário anterior: // Checa se o usuario foi autenticado
-	(2)Comentário atual: // Check if the user has been authenticated
-
-	(3)Comentário anterior:     /*
-      					Cen?rio: Verificar pedidos de altera??o de termos do l?xico
-     					Objetivo: Permitir ao administrador gerenciar os pedidos de altera??o de termos do l?xico.
-      					Contexto: Gerente deseja visualizar os pedidos de altera??o de termos do l?xico.
-      					Pr?-Condi??o: Login, projeto cadastrado.
-      					Atores:	Administrador
-      					Recursos: Sistema, banco de dados.
-      					Epis?dios: 1- O administrador clica na op??o de Verificar pedidos de altera??o de termos do l?xico.
-      					Restri??o: Somente o Administrador do projeto pode ter essa fun??o vis?vel.
-      					2- O sistema fornece para o administrador uma tela onde poder? visualizar o hist?rico
-      					de todas as altera??es pendentes ou n?o para os termos do l?xico.
-      					3- Para novos pedidos de inclus?o ou altera??o de termos do l?xico,
-      					O sistema permite que o administrador opte por Aprovar ou Remover.
-      					4- Para os pedidos de inclus?o ou altera??o j? aprovados,
-      					o sistema somente habilita a op??o remover para o administrador.
-      					5- Para efetivar as sele??es de aprova??o e remo??o, o administrador deve clicar em Processar.
-     				   */
-	(3)Comentário atual: 	   /*
-					Scenario - Check requests for changes in the terms of the lexicon.
-					Objective: Enable the administrator to control requests for changes in the terms of the lexicon.
-					Context: Manager want to view the change requests the terms of lexicon.
-					Precondition: Login and project registered.
-					Actors: Administrator
-					Features: System and database.
-					Episodes:
-					1 - The administrator clicks the option Check Requests changes in terms of the lexicon.
-					Restriction: Only the Project Manager may have this function visible.
-            				2 - The system provides for the Administrator a screen where he can view the history of all changes (pending or not) to the terms of the lexicon.
-            				3 - For new requests to include or modification of terms of the lexicon, the system allows the administrator to choose to Approve or Remove.
-            				4 - For requests to add or modification already approved, the system only enables the Remove option for the administrator.
-            				5 - To complete the selections approval and removal, the administrator must click Process.
-
-				   */
-
-
-
-Comentários:
-
-	Pensando em alterar o nome da função chkUser() para check_User_Authenticated() para podermos retirar os comentários explicando ela. 
-	Vocês acham que esse nome é muito grande?
-
-	Talvez tenhamos que desfazer a tabulação devido as consequências nos outputs. Aguardo confirmação se iremos desfazer ou não.
-
-	Meu inglês não é muito bom, então qualquer erro, podem corrigir. 
-
-	Eu considerei esses comentários que traduzi como importantes. Se alguém discordar, avise-me.
-
-
-
-Thaiane Braga
-
---------------------------------------------------------------------
-Arquivo: updUser.php
-
-Variáveis:
-
-	Não alterei nome de variáveis.
-
-Comentários:
-	(1)Comentário anterior: // Cen?rio - Alterar cadastro
-				//
-				//Objetivo:  Permitir ao usu?rio realizar altera??o nos seus dados cadastrais	
-				//Contexto:  Sistema aberto, Usu?rio ter acessado ao sistema e logado 
-				//           Usu?rio deseja alterar seus dados cadastrais 
-				//           Pr?-Condi??o: Usu?rio ter acessado ao sistema	
-				//Atores:    Usu?rio, Sistema.	
-				//Recursos:  Interface	
-				//Epis?dios: O usu?rio altera os dados desejados
-				// 	     Usu?rio clica no bot?o de atualizar
-
-	(1)Comentário atual: 
-				// Scenario - change cadastrate
-				//
-				//Objective: To allow to the user actualize changes in the his cadastral data	
-				//Context: Open system, User have acess to the system and logged
-				//         User desire change his cadastral data
-				//Precondition: User have acess to the system
-				//Actors:   User, System
-				//Resource: Interface
-				//Episodes: The user change the desired data
-				//          User click int the button of update
-
-Tomáz Martins
-
---------------------------------------------------------------------
-Arquivo main.php
-	(1)comentário anterior:
-				SCRIPT CHAMADO PELO HEADING.PHP 
-				Foi passada uma variavel $id_projeto. Esta variavel deve conter o id de um 
-				projeto que o usuario esteja cadastrado. Entretanto, como a passagem eh 
-				feita usando JavaScript (no heading.php), devemos checar se este id realmente 
-				corresponde a um projeto que o usuario tenha acesso (seguranca).
-	(2)Comentário atual:
-				Script called by heading.php
-				Was passed a variable $ id_projeto. This variable should contain the identifier
-				of a project that the user is registered. However, as the passage is
-				done using JavaScript (in heading.php), we should check if this identifier
-				corresponds to a project that the user has access (security).
-				Insert assertive.
-Thaiane Braga
------------------------------------------------------------------------------------
-
-
  Dicionário de Variáveis:
 
 1. $do_debug = $setLevelDebug
@@ -151,8 +18,8 @@ Thaiane Braga
 16. $rval             = $replyValue
 17.$qrr               = $resultadoRequisicaoSql
 18. $r                 = $SgbdConnectStatus
-19.$result           = $rowResult obs: pertence a função inclui_cenario(), ou seja,
-                                  é local, no arquivo copy(2) of funcoes_genericas
+19.$result           = $rowResult obs: pertence a função inclui_cenario(), ou 
+			é local, no arquivo copy(2) of funcoes_genericas
 20. $i                  = $index   obs: local no arquivo coloca_links.php
 21. $j                  = $indexAux_1 obs: local no arquivo coloca_links.php
 22. $a                 = $indexAux_2 obs: local no arquivo coloca_links.php
@@ -191,8 +58,7 @@ Thaiane Braga
 56.$vetorDeLexicos = $lexiconVector
 57.$l_id_projeto = $idLexiconProject
 58.$qSinonimo = $querySynonym 
-59.$id_projeto = $idProject 
-60.$tempS = $tempSynonym 
+59.$id_projeto = $idProject 60.$tempS = $tempSynonym 
 61.$id_cenario_atual = $idCurrentScenario
 62. $vetor_cenarios = $vector_scenarios
 63.$vetor_lexicos = $vector_lexicons
@@ -216,6 +82,58 @@ Thaiane Braga
 81. $impacto = $impact
 82. $tempImpacto = $temporaryImpact
 83. $texto = $text
+84. $nome_projeto = $nameProject
+85. $qrr_2= $requisitionResultSQL
+86. $queryLexicos = $queryLexicons
+87. $querySinonimos = $querySynonyms
+88. $resultadoQueryLexicos = $queryLexiconsResult
+89. $linhaLexico= $lexicalLine
+90. $resultadoQuerySinonimos = $querySynonymsResult
+91. $linhaSinonimo = $synonymousLine
+92. $semAtual = $noCurrent
+93. $queryCenarios = $queryScenarios
+94. $resultadoQueryCenarios = $queryScenariosResult
+95. $linhaCenario = $scenarioLine
+96. $ini = $initiation (local em coloca_links)
+97.$j = $index2  (local em coloca_links)
+98. $fim = $end  (local em coloca_links)
+99. $tipo = $type
+100. $vet = $vector
+101.$str_temp = $temporaryString
+102. $copiaTexto = $copyText
+103. $vetorAuxLexicos = $lexiconsAuxiliaryVector
+104.  $vetorAuxCenarios = $scenariosAuxiliaryVector
+105. $nomeLexico = $lexiconName
+106. $tamLexicos = $lexiconsSize
+107. $tamCenarios = $scenariosSize
+108. $tamanhoTotal = $totalSize
+109. $contador = $counter ( local em coloca_links.php)110. $tituloCenario = $scenarioName
+111. $vetorAux = $auxiliaryVector
+112. $vetorAuxCen = $scenariosAuxVector
+113. $linkLexico = $linkLexicon
+114. $linkCenario = $linkScenario
+115. $r = $reference
+116. $dia = $day117. $hora = $hour 
+118. $data = $date
+119. $relacao =  $relation
+120. $tabela = $table
+121. $rc =$relationBetweenConcepts
+122. $nome = $name
+123. $descricao = $description
+124.  $relacoes = $relations
+125. $subconceitos = $subconcepts
+126. $predicados = $predicates
+127. $verbo = $verb
+128. $nocao = $notion
+129. $impacto = $impact
+130.$qry_cenario = $queryScenario
+131. $tb_cenario = $tbScenario
+132. $qry_lexico = $queryLexicon
+133. $tb_lexico =$tbLexicon
+134. $bd_recupera = $recoverDatabase
+135. $qq = $queryResult
+136. $xml_banco = $databaseXML
+
 
 Dicionário de Funções:
 
@@ -245,7 +163,21 @@ Dicionário de Funções:
 24. geraOntologia = generateOntology
 25. geraDAML = generateDAML
 26. recuperaDAML = recuperateDAML
-
-
--------------------------------------------------------------------------------
-     
+27. carrega_vetor_cenario = loadScenariosVector
+28. divide_array = dividesArray
+29. monta_links = mountLinks
+30. poe_tag_xml = putsTagXML
+31. troca_chaves_xml = exchangeKeysXML
+32. faz_links_XML = makeLinksXML
+33. salva_daml = saveDAML
+34. grava_conceitos = recordsConcepts
+35. grava_relacoes = recordsRelations
+36. grava_axiomas = recordsAxioms
+37. TestarBranco = testWhite
+38. frame_inferior = bottom_frame
+39. monta_relacoes = mountsRelations
+40. lexico_para_lexico = lexiconToLexicon
+41. cenario_para_cenario = scenarioToScenario
+42. cenario_para_lexico_cenario_para_cenario = scenarioToLexicon_ScenarioToScenario
+43. adiciona_relacionamento = addRelationships
+44. cenario_para_lexico = scenarioToLexicon

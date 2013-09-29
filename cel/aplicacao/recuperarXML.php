@@ -31,7 +31,7 @@ Features: System, report data, data registered project and database.
 Restriction: Retrieve XML data from the database and transform them into an XSL for display.
 */
 
-$bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
+$recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($apaga)) {
    

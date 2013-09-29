@@ -17,7 +17,7 @@ include("funcoes_genericas.php");
 
 <?php
 
-$bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
+$recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 
 /*
 Scenario - Choose project

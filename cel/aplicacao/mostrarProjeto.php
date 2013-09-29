@@ -14,16 +14,16 @@ Episodes: If the user select from the list of projects a project of which he is 
 see ADMINISTRATOR CHOOSE PROJECT . Otherwise, see USER CHOOSE PROJECT.
 */
 
-$bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
+$recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 
-$qq = "SELECT * FROM publicacao WHERE id_projeto = $idProject  AND versao = $versao";
+$queryResult = "SELECT * FROM publicacao WHERE id_projeto = $idProject  AND versao = $versao";
 
-$requestResultSQL = mysql_query($qq) or die("Erro ao enviar a query");
+$requestResultSQL = mysql_query($queryResult) or die("Erro ao enviar a query");
 
 $row = mysql_fetch_row($requestResultSQL);
 
-$xml_banco = $row[3];
+$databaseXML = $row[3];
 
-echo $xml_banco;
+echo $databaseXML;
 
 ?>
