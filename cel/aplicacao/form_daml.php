@@ -22,7 +22,7 @@ $link = bd_connect();
         $today = getdate();
 
         $sql_user = "select nome from usuario where id_usuario='" . $_SESSION['id_usuario_corrente'] . "';";
-        $query_user = mysql_query($sql_user) or die("Erro ao verificar usu�rio!" . mysql_error());
+        $query_user = mysql_query($sql_user) or die("Erro ao verificar usu&aacute;rio!" . mysql_error());
         $resultArray = mysql_fetch_array($query_user);
         $usuario = $resultArray[0];
 
