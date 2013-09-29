@@ -69,7 +69,7 @@ session_start();
          * Verificar consistencia.
          */
 
-        function traduz_sujeito_objeto($lista_de_sujeito_e_objeto, $conceitos, $relacoes, $axiomas) {
+        function traduz_sujeito_objeto($lista_de_sujeito_e_objeto, $concepts, $relations, $axioms) {
 
             for (; $_SESSION["index1"] < count($lista_de_sujeito_e_objeto); ++$_SESSION["index1"]) {
 
@@ -100,8 +100,8 @@ session_start();
                     }
                     while (!$_SESSION["finish_insert"]) {
                         if (!isset($_SESSION["exist"])) {
-                            asort($relacoes);
-                            $_SESSION["lista"] = $relacoes;
+                            asort($relations);
+                            $_SESSION["lista"] = $relations;
                             $_SESSION["nome1"] = $imp;
                             $_SESSION["nome2"] = $sujeito;
                             $_SESSION["job"] = "exist";
@@ -126,18 +126,18 @@ session_start();
                                 continue;
                             }
                             $_SESSION["verbos_selecionados"][] = $nome;
-                            $i = array_search($nome, $relacoes);
+                            $i = array_search($nome, $relations);
                             if ($i === false) {
-                                $_SESSION["impact"][] = (array_push($relacoes, $nome) - 1);
+                                $_SESSION["impact"][] = (array_push($relations, $nome) - 1);
                             } else {
                                 $_SESSION["impact"][] = $i;
                             }
                         } else if ($_POST["indice"] != -1) {
                             session_unregister("exist");
-                            if ((count($_SESSION["verbos_selecionados"]) != 0) && array_search($relacoes[$_POST["indice"]], $_SESSION["verbos_selecionados"]) !== false) {
+                            if ((count($_SESSION["verbos_selecionados"]) != 0) && array_search($relations[$_POST["indice"]], $_SESSION["verbos_selecionados"]) !== false) {
                                 continue;
                             }
-                            $_SESSION["verbos_selecionados"][] = $relacoes[$_POST["indice"]];
+                            $_SESSION["verbos_selecionados"][] = $relations[$_POST["indice"]];
                             $_SESSION["impact"][] = $_POST["indice"];
                         } else {
                             $_SESSION["finish_insert"] = TRUE;
@@ -159,9 +159,9 @@ session_start();
                         $_SESSION["finish_relation"] = FALSE;
                         while (!$_SESSION["finish_relation"]) {
                             if (!isset($_SESSION["insert_relation"])) {
-                                asort($conceitos);
-                                $_SESSION["lista"] = $conceitos;
-                                $_SESSION["nome1"] = $relacoes[$indice];
+                                asort($concepts);
+                                $_SESSION["lista"] = $concepts;
+                                $_SESSION["nome1"] = $relations[$indice];
                                 $_SESSION["nome2"] = $sujeito->nome;
                                 $_SESSION["nome3"] = $imp;
                                 $_SESSION["job"] = "insert_relation";
@@ -203,7 +203,7 @@ session_start();
                                         $_SESSION["conceito"]->relacoes[] = new relacao_entre_conceitos($conceito, $_SESSION["nome1"]);
                                     }
                                 } else if ($_POST["indice"] != "-1") {
-                                    $conceito = $conceitos[$_POST["indice"]]->nome;
+                                    $conceito = $concepts[$_POST["indice"]]->nome;
                                     if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conceito, $_SESSION["predicados_selecionados"]) !== null)) {
                                         continue;
                                     }
@@ -243,7 +243,7 @@ session_start();
                         $_SESSION["axiomas_selecionados"] = array();
 
                     if (!isset($_SESSION["disjoint"])) {
-                        $_SESSION["lista"] = $conceitos;
+                        $_SESSION["lista"] = $concepts;
                         $_SESSION["nome1"] = $_SESSION["conceito"]->nome;
                         $_SESSION["job"] = "disjoint";
                         ?>
@@ -255,8 +255,8 @@ session_start();
                     }
                     if ($_POST["existe"] == "TRUE") {
                         $axiom = $_SESSION["conceito"]->nome . " disjoint " . strtolower($_POST["nome"]);
-                        if (array_search($axiom, $axiomas) === false) {
-                            $axiomas[] = $axiom;
+                        if (array_search($axiom, $axioms) === false) {
+                            $axioms[] = $axiom;
                             $_SESSION["axiomas_selecionados"][] = $axiom;
                         }
                         session_unregister("disjoint");
@@ -266,8 +266,8 @@ session_start();
                 }
                 $_SESSION["axiomas_selecionados"] = array();
 
-                $conceitos[] = $_SESSION["conceito"];
-                asort($conceitos);
+                $concepts[] = $_SESSION["conceito"];
+                asort($concepts);
 
                 if (!verifica_consistencia()) {
                     exit();
@@ -298,7 +298,7 @@ session_start();
          * Verificar consistencia.
          */
 
-        function traduz_verbos($verbos, $relacoes) {
+        function traduz_verbos($verbos, $relations) {
             for (; $_SESSION["index3"] < count($verbos); ++$_SESSION["index3"]) {
 
                 $verbo = $verbos[$_SESSION["index3"]];
@@ -306,8 +306,8 @@ session_start();
 
                 if (!isset($_SESSION["exist"])) {
                     $_SESSION["salvar"] = "TRUE";
-                    asort($relacoes);
-                    $_SESSION["lista"] = $relacoes;
+                    asort($relations);
+                    $_SESSION["lista"] = $relations;
                     $_SESSION["nome1"] = $verbo->nome;
                     $_SESSION["nome2"] = $verbo;
                     $_SESSION["job"] = "exist";
@@ -321,8 +321,8 @@ session_start();
 
                 if ($_POST["existe"] == "FALSE") {
                     $nome = strtolower($_POST["nome"]);
-                    if (array_search($nome, $relacoes) === false)
-                        array_push($relacoes, $nome);
+                    if (array_search($nome, $relations) === false)
+                        array_push($relations, $nome);
                 }
 
 
@@ -354,7 +354,7 @@ session_start();
          * Verificar consistencia.
          */
 
-        function traduz_estados($estados, $conceitos, $relacoes, $axiomas) {
+        function traduz_estados($estados, $concepts, $relations, $axioms) {
             for (; $_SESSION["index4"] < count($estados); ++$_SESSION["index4"]) {
 
                 $estado = $estados[$_SESSION["index4"]];
@@ -382,15 +382,15 @@ session_start();
                 if (!isset($_SESSION["translate"])) {
                     if ($_POST["main_subject"] == "TRUE") {
                         $_SESSION["translate"] = 1;
-                        traduz_sujeito_objeto($aux, &$conceitos, &$relacoes, &$axiomas);
+                        traduz_sujeito_objeto($aux, &$concepts, &$relations, &$axioms);
                     } else {
                         $_SESSION["translate"] = 2;
-                        traduz_verbos($aux, &$relacoes);
+                        traduz_verbos($aux, &$relations);
                     }
                 } else if ($_SESSION["translate"] == 1) {
-                    traduz_sujeito_objeto($aux, &$conceitos, &$relacoes);
+                    traduz_sujeito_objeto($aux, &$concepts, &$relations);
                 } else if ($_SESSION["translate"] == 2) {
-                    traduz_verbos($aux, &$relacoes);
+                    traduz_verbos($aux, &$relations);
                 }
 
 
@@ -430,13 +430,13 @@ session_start();
           - Restaurar lista de conceitos.
          */
 
-        function organizar_ontologia($conceitos, $relacoes, $axiomas) {
+        function organizar_ontologia($concepts, $relations, $axioms) {
             $_SESSION["salvar"] = "TRUE";
-            /* for( ; $_SESSION["index5"] < count($conceitos); ++$_SESSION["index5"] )
+            /* for( ; $_SESSION["index5"] < count($concepts); ++$_SESSION["index5"] )
               {
               $_SESSION["salvar"] = "TRUE";
 
-              $conc = $conceitos[$_SESSION["index5"]];
+              $conc = $concepts[$_SESSION["index5"]];
 
               if( count($conc->subconceitos) > 0 )
               {
@@ -452,12 +452,12 @@ session_start();
 
               $nova_lista_de_conceitos = array($conc);
 
-              for( $i = $key+1; $i < count($conceitos); ++$i )
+              for( $i = $key+1; $i < count($concepts); ++$i )
               {
-              if (compara_arrays($conc->relacoes, $conceitos[$i]->relacoes))
+              if (compara_arrays($conc->relacoes, $concepts[$i]->relacoes))
               {
-              $conceitos[$i]->subconceitos[0] = -1;
-              $nova_lista_de_conceitos[] = $conceitos[$i];
+              $concepts[$i]->subconceitos[0] = -1;
+              $nova_lista_de_conceitos[] = $concepts[$i];
               }
               }
              */
@@ -469,7 +469,7 @@ session_start();
 
                 if (!isset($_SESSION["reference"])) {
 
-                    $_SESSION["lista"] = $conceitos; //array($conc1, $nconc);
+                    $_SESSION["lista"] = $concepts; //array($conc1, $nconc);
                     //$_SESSION['nome1'] = $nova_lista_de_conceitos;//
                     $_SESSION["job"] = "reference";
                     ?>
@@ -489,16 +489,16 @@ session_start();
 
                     if (isset($_POST['pai'])) {
                         $pai_nome = $_POST['pai'];
-                        $key2 = existe_conceito($pai_nome, $conceitos);
+                        $key2 = existe_conceito($pai_nome, $concepts);
                         $filhos = array();
-                        foreach ($conceitos as $key3 => $filho) {
+                        foreach ($concepts as $key3 => $filho) {
                             $filho_nome = trim($filho->nome);
                             if (isset($_POST[$key3])) {
                                 $filhos[] = $filho_nome;
                             }
                         }
                         if (count($filhos) > 0) {
-                            montar_hierarquia(&$conceitos[$key2], $filhos, $conceitos);
+                            montar_hierarquia(&$concepts[$key2], $filhos, $concepts);
                             $achou = true;
                         }
                     } else {

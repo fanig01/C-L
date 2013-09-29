@@ -165,7 +165,7 @@ function importancia_central($termo, $impactos) {
                      */
 
 //function faz_referencia($con1, $con2)
-                    function faz_referencia($conceitos, $subconceitos) {
+                    function faz_referencia($concepts, $subconceitos) {
                         ?>
 
 
@@ -178,7 +178,7 @@ function importancia_central($termo, $impactos) {
                                 <tr>
                                     <td width="50%">
                         <?php
-                        foreach ($conceitos as $conc) {
+                        foreach ($concepts as $conc) {
                             $concsel = $conc; //trocar
                             print("<INPUT type='radio' name='pai' id='pai' value='$conc->nome' onFocus='Salvar()'> <b> $conc->nome </b> <br>\n");
                             foreach ($conc->subconceitos as $subc) {
@@ -189,7 +189,7 @@ function importancia_central($termo, $impactos) {
                                     </td>
                                     <td width="50%" align="left" valign="top">
                                         <?php
-                                        foreach ($conceitos as $key => $conc) {
+                                        foreach ($concepts as $key => $conc) {
                                             $sel = false;
                                             $existe = array_search($conc->nome, $concsel->subconceitos);
                                             if ($existe !== false)
@@ -251,7 +251,7 @@ function importancia_central($termo, $impactos) {
                                  else
                                  {*/
     <?php
-    foreach ($conceitos as $key => $conc) {
+    foreach ($concepts as $key => $conc) {
         print("var check = document.getElementById('$key');\n");
         print("check.checked = false;\n");
     }

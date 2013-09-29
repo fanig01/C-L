@@ -18,12 +18,12 @@ if (isset($submit)) {
     
     mysql_query($commandSQL) or die("Erro ao executar a query de DELETE");
 
-    $n_sel = count($usuarios);
+    $n_sel = count($users);
     
     for ($i = 0; $i < $n_sel; $i++) {
         
         $commandSQL = "INSERT INTO participa (id_usuario, id_projeto)
-                       VALUES (" . $usuarios[$i] . ", " . $_SESSION['id_projeto_corrente'] . ")";
+                       VALUES (" . $users[$i] . ", " . $_SESSION['id_projeto_corrente'] . ")";
         
         mysql_query($commandSQL) or die("Erro ao cadastrar usuario");   
         

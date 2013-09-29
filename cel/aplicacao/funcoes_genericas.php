@@ -859,7 +859,7 @@ if (!(function_exists("alteraLexico"))) {
                     // Verifica  se a relacao encontrada ja se encontra no banco de dados. Se tiver nao faz nada, senao cadastra uma nopva relacao
                     $qverif = "SELECT * FROM lextolex where id_lexico_from=" . $resultl['id_lexico'] . " and id_lexico_to=$id_lexico";
                     echo("Query: " . $qverif . "<br>");
-                    $resultado = mysql_query($qverif) or die("Erro ao enviar query de select no lextolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
+                    $result = mysql_query($qverif) or die("Erro ao enviar query de select no lextolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
                     if (!resultado) {
                         $comandoSql = "INSERT INTO lextolex (id_lexico_from, id_lexico_to)
 	                     VALUES (" . $resultl['id_lexico'] . ", $id_lexico)";
@@ -890,7 +890,7 @@ if (!(function_exists("alteraLexico"))) {
 
                 // Verifica  se a relacao encontrada ja se encontra no banco de dados. Se tiver nao faz nada, senao cadastra uma nopva relacao
                 $qv = "SELECT * FROM lextolex where id_lexico_from=$id_lexico and id_lexico_to=" . $rowSinonimo['id_lexico'];
-                $resultado = mysql_query($qv) or die("Erro ao enviar query de select no lextolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
+                $result = mysql_query($qv) or die("Erro ao enviar query de select no lextolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
                 if (!resultado) {
                     $comandoSql = "INSERT INTO lextolex (id_lexico_from, id_lexico_to)
 	                     VALUES ($id_lexico, " . $rowSinonimo['id_lexico'] . ")";

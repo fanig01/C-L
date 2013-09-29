@@ -6,7 +6,7 @@ class conceito {
 
     var $nome;
     var $descricao;
-    var $relacoes;
+    var $relations;
     var $subconceitos;
     var $namespace;
 

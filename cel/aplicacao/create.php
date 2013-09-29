@@ -84,10 +84,10 @@ $query = "show tables";
 
         while ($line = mysql_fetch_array($resultArray, MYSQL_BOTH)) {
             
-            $tabela = "show create table cel." . $line[0];
-            $atributos = mysql_query($tabela) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
+            $table = "show create table cel." . $line[0];
+            $attributes = mysql_query($table) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
             
-            while ($linha = mysql_fetch_array($atributos, MYSQL_BOTH)) {
+            while ($linha = mysql_fetch_array($attributes, MYSQL_BOTH)) {
                 print ("\$query = \"$linha[1] ;\";<br>");
                 print ("\$result = mysql_query(\$query) or die(\"A consulta ao BD falhou : \" . mysql_error() . __LINE__);<br>");
                 print ("<br>");
