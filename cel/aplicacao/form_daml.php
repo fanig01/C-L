@@ -4,12 +4,11 @@ session_start();
 include_once("bd.inc");
 
 $link = bd_connect();
+
 ?> 
 
-<html> 
-
-    <body> 
-
+<html>   
+    <body>    
     <head> 
         <title>Gerar DAML</title> 
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
@@ -19,8 +18,6 @@ $link = bd_connect();
 
         <h2>Propriedades da ontologia:</h2> 
         <?php
-        
-        // Objective: Generate DAML reports
 
         $today = getdate();
 
@@ -33,18 +30,18 @@ $link = bd_connect();
         
         ?> 
 
-        &nbsp;Data da Vers�o: <?= $today['mday']; ?>/<?= $today['mon']; ?>/<?= $today['year']; ?> 
+        &nbsp;Data da Vers&atilde;o: <?= $today['mday']; ?>/<?= $today['mon']; ?>/<?= $today['year']; ?> 
         <input type="hidden" name="data_dia" size="3" value="<?= $today['mday']; ?>"> 
         <input  type="hidden" name="data_mes" size="3" value="<?= $today['mon']; ?>"> 
         <input type="hidden" name="data_ano" size="6" value="<?= $today['year']; ?>"> 
 
         <p>
         <table>
-            <tr><td>T�tulo: </td><td><input type="text" name="title" size="15">              </td></tr>
+            <tr><td>T&iacute;tulo: </td><td><input type="text" name="title" size="15">              </td></tr>
             <tr><td>Assunto: </td><td><input type="text" name="subject" size="50">       </td></tr>
-            <tr><td>Descri��o: </td><td><input type="text" name="description" size="50">  </td></tr>   
-            <tr><td>Usu�rio: </td><td><input type="text" name="user" value= "<?= $usuario ?>" size="50">  </td></tr>   
-            <tr><td>Vers�o: </td><td><input type="text" name="versionInfo" size="15">   </td></tr>
+            <tr><td>Descri&ccedil;&atilde;o: </td><td><input type="text" name="description" size="50">  </td></tr>   
+            <tr><td>Usu&aacute;rio: </td><td><input type="text" name="user" value= "<?= $usuario ?>" size="50">  </td></tr>   
+            <tr><td>Vers&atilde;o: </td><td><input type="text" name="versionInfo" size="15">   </td></tr>
         </table>
         <p>
             <input type="submit" value="Gerar DAML"> 
@@ -52,7 +49,7 @@ $link = bd_connect();
         </p> 
 
     </form> 
-    <br><i><a href="showSource.php?file=form_daml.php">Veja o c�digo fonte!</a></i> 
+    <br><i><a href="showSource.php?file=form_daml.php">Veja o c&oacute;digo fonte!</a></i> 
 </body> 
 
 </html> 
