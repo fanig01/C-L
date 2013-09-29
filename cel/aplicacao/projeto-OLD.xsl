@@ -113,13 +113,13 @@ P
 				</td>
 			</tr>
 			<tr valign="top">
-				<th>Episódios</th>
+				<th>Epis&oacute;dios</th>
                                 <td>
 					<xsl:value-of select="episodios" disable-output-escaping="yes" />
 				</td>
 			</tr>
 			<tr valign="top">
-				<th>Exceção</th>
+				<th>Exce&ccedil;&atilde;o</th>
 				<td>
 					<xsl:value-of select="excecao" />
 				</td>
@@ -137,7 +137,7 @@ P
 		</h3>
 		<table border="0" cellspacing="2">
 			<tr>
-				<th width="100">Noção</th>
+				<th width="100">No&ccedil;&atilde;o</th>
 				<td>
 					<xsl:value-of select="nocao" />
 				</td>

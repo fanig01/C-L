@@ -10,7 +10,6 @@
    the license through the WWW at http://www.treemenu.com/license.txt
 */
 
-
 // Define the MenuItem object.                                                 
 
 function MTMenuItem(text, url, target, tooltip, icon, openIcon) {
@@ -180,6 +179,9 @@ function MTMBrowser() {
             this.MTMable = true;		
             this.browserType = "O";	
         }
+        else {
+            //Nothing should be done
+        }
     }
     else if(navigator.appName == "Netscape" && navigator.userAgent.indexOf("WebTV") == -1) {
 		
@@ -198,6 +200,9 @@ function MTMBrowser() {
             if(this.majVersion >= 5) {
                 this.DOMable = true;
             }
+            else {
+                //Nothing should be done
+            }
 	}
     }
     else if(navigator.appName == "Microsoft Internet Explorer" && parseInt(navigator.appVersion) >= 4) {
@@ -209,6 +214,9 @@ function MTMBrowser() {
         if(this.majVersion >= 5) {
             this.DOMable = true;
 	}
+        else {
+            //Nothing should be done
+        }
     }
 	
     this.preHREF = location.href.substring(0, location.href.lastIndexOf("/") +1)
@@ -244,11 +252,17 @@ function MTMresolveURL(thisURL, testLocal) {
             tempString = thisURL;
             break;
 	}
+        else {
+            //Nothing should be done
+        }
     }
 	
     if(testLocal) {
 	
         return(tempString == "" ? true : false);
+    }
+    else{
+        //Nothing should be done
     }
 
     if(!tempString) {
@@ -272,6 +286,9 @@ function MTMresolveURL(thisURL, testLocal) {
 			
             tempString = this.preHREF + thisURL;
 	}
+    }
+    else {
+        //Nothing should be done
     }
 	
     return(tempString);
@@ -338,7 +355,13 @@ function MTMgetFrames() {
             if(parent.frames[i].name == MTMenuFrame) {
                 this.setDocument(parent.frames[i]);
             }
+            else {
+                //Nothing should be done
+            }
 	}
+    }
+    else {
+        //Nothing should be done
     }
 }
 
@@ -352,12 +375,18 @@ function MTMSubAction(SubItem) {
 		
         MTMExpansion = true;
     }
+    else {
+        //Nothing should be done
+    }
 
     MTMClickedItem = SubItem;
 
     if(MTMTrackedItem && MTMTrackedItem != SubItem.number) {
 		
         MTMTrackedItem = false;
+    }
+    else {
+        //Nothing should be done
     }
 
     if(MTMEmulateWE || SubItem.url == "" || !SubItem.expanded) {
@@ -370,6 +399,9 @@ function MTMSubAction(SubItem) {
 	
         if(SubItem.target == "_blank" || !MTMUA.resolveURL(SubItem.url, true) || (SubItem.target.indexOf("_") != 0 && MTMTrackTarget(SubItem.target) == false)) {
 	setTimeout("MTMDisplayMenu()", 10);
+        }
+        else {
+            //Nothing should be done
         }
 		 
         return true;
@@ -386,12 +418,19 @@ function MTMStartMenu(thisEvent) {
 			
             return;
 	}
-}
+        else {
+            //Nothing should be done
+        }
+    }
+    else {
+        //Nothing should be done
+    }
 	
     MTMLoaded = true;
 	
     if(MTMFirstRun) {
-	if(MTMCurrentTime++ == MTMTimeOut) { // notice the post-increment
+	
+        if(MTMCurrentTime++ == MTMTimeOut) { // notice the post-increment
 			
             setTimeout("MTMDisplayMenu()",10);
 		
@@ -402,7 +441,10 @@ function MTMStartMenu(thisEvent) {
 		
         }
 	
-    } 
+    }
+    else {
+        //Nothing should be done
+    }
 }
 
 function MTMDisplayMenu() {
@@ -430,20 +472,38 @@ function MTMDisplayMenu() {
                         parent.frames[MTMTCArray[1]].location = MTMTCArray[2];
 					
                     }
+                    else {
+                        //Nothing should be done
+                    }
 					
                     MTMTCArray = null;
-                }		
-            }	
+                }
+                else {
+                    //Nothing should be done
+                }
+            }
+            else {
+                //Nothing should be done
+            }
+        }
+        else {
+            //Nothing should be done
         }
 		
         if(MTMTrack) { 
         
             MTMTrackedItem = MTMTrackExpand(menu); 
         }
+        else {
+            //Nothing should be done
+        }
 		
         if(MTMExpansion && MTMSubsAutoClose) {
 
             MTMCloseSubs(menu); 
+        }
+        else {
+            //Nothing should be done
         }
 	
         if(MTMUA.DOMable) {
@@ -451,6 +511,9 @@ function MTMDisplayMenu() {
             if(MTMFirstRun) {
 				
                 MTMinitializeDOMDocument();		
+            }
+            else {
+                //Nothing should be done
             }
 	}
         else if(MTMFirstRun || MTMUA.browserType != "IE") {
@@ -460,6 +523,9 @@ function MTMDisplayMenu() {
 			
             if(MTMcontentType) {
 		MTMOutputString += '<meta http-equiv="Content-Type" content="' + MTMcontentType + '">\n';
+            }
+            else {
+                //Nothing should be done
             }
 			
             if(MTMLinkedSS) {
@@ -481,12 +547,18 @@ function MTMDisplayMenu() {
                 MTMOutputString += '<\/scr' + 'ipt>\n';
 			
             }
+            else {
+                //Nothing should be done
+            }
 			
             MTMOutputString += '</head>\n<body ';
 			
             if(MTMBackground != "") {
 				
                 MTMOutputString += 'background="' + MTMUA.preHREF + MTMenuImageDirectory + MTMBackground + '" ';			
+            }
+            else {
+                //Nothing should be done
             }
 			
             MTMOutputString += 'bgcolor="' + MTMBGColor + '" text="' + MTMTextColor + '" link="' + MTMLinkColor + '" vlink="' + MTMLinkColor + '" alink="' + MTMLinkColor + '">\n';			
@@ -500,12 +572,18 @@ function MTMDisplayMenu() {
 				
                 MTMUA.menuTable = MTMUA.document.all('mtmtable');
             }
+            else {
+                //Nothing should be done
+            }
 
             while(MTMUA.menuTable.rows.length > 1) {
 				
                 MTMUA.menuTable.deleteRow(1);		
             }
 	}
+        else {
+            //Nothing should be done
+        }
 
 		
         MTMOutputString = '<img src="' + MTMUA.preHREF + MTMenuImageDirectory + MTMRootIcon + '" align="left" border="0" vspace="0" hspace="0">';
@@ -525,6 +603,9 @@ function MTMDisplayMenu() {
 			
             MTMAddCell(MTMOutputString);	
         }
+        else {
+            //Nothing should be done
+        }
 		
         MTMListItems(menu);
 	
@@ -536,10 +617,16 @@ function MTMDisplayMenu() {
 				
                 MTMUA.document.writeln('<scr' + 'ipt defer type="text/javascript" src="' + MTMUA.preHREF + MTMLinkedJSURL + '"></scr' + 'ipt>');		
             }
+            else {
+                //Nothing should be done
+            }
 			
             MTMUA.document.writeln('\n</body>\n</html>');		
             MTMUA.document.close();
 	}
+        else {
+            //Nothing should be done
+        }
 	
         if((MTMClickedItem || MTMTrackedItem) && !(MTMUA.browserType == "NN" && MTMUA.majVersion == 3)) {
 			
@@ -557,6 +644,9 @@ function MTMDisplayMenu() {
 			break;
                         
                     }
+                    else {
+                        //Nothing should be done
+                    }
 		}
 				
                 MTMWinSize = MTMUA.menuFrame.innerHeight;
@@ -568,6 +658,9 @@ function MTMDisplayMenu() {
 					
                     MTMUA.document.all = MTMUA.document.getElementsByTagName("*");
 		}
+                else {
+                    //Nothing should be done
+                }
 				
                 MTMyval = MTMGetYPos(MTMUA.document.all[MTMItemName]);		
                 MTMUA.document.all[MTMItemName].focus();
@@ -577,7 +670,10 @@ function MTMDisplayMenu() {
             if(MTMyval > (MTMWinSize - 60)) {
 				
                 MTMUA.menuFrame.scrollTo(0, parseInt(MTMyval - (MTMWinSize * 1/3)));
-            }		
+            }
+            else {
+                //Nothing should be done
+            }
         }	
         if(!MTMFirstRun && MTMUA.cookieEnabled) { 
 			
@@ -595,17 +691,26 @@ function MTMDisplayMenu() {
 						
                         setCookie(MTMTrackedCookieName, "", -1);		
                     }		
-                }			
+                }
+                else {
+                    //Nothing should be done
+                }
             }
             else {
 				
                 setCookie(MTMCookieName, "", -1);	
             }	
         }
+        else {
+            //Nothing should be done
+        }
 		
         if(MTMLinkedJSURL && MTMLinkedInitFunction && !(MTMUA.browserType == "IE" && MTMUA.majVersion == 4)) {
 			
             setTimeout('MTMUA.menuFrame.' + MTMLinkedInitFunction + '()', 10);	
+        }
+        else {
+            //Nothing should be done
         }
 	
         MTMFirstRun = false;
@@ -626,6 +731,9 @@ function MTMinitializeDOMDocument() {
 		
         MTMUA.appendElement('head', 'meta', 'httpEquiv', 'Content-Type', 'content', MTMcontentType);
     }
+    else {
+        //Nothing should be done
+    }
 	
     MTMdisableStyleSheets();
 	
@@ -641,6 +749,9 @@ function MTMinitializeDOMDocument() {
     if(MTMLinkedJSURL) {
         
 	MTMUA.appendElement('head', 'script', 'src', (MTMUA.preHREF + MTMLinkedJSURL), 'type', 'text/javascript', 'defer', true);
+    }
+    else {
+        //Nothing should be done
     }
 	
     while(MTMUA.document.body.childNodes.length > 0) {
@@ -661,6 +772,9 @@ function MTMinitializeDOMDocument() {
             MTMUA.document.body.appendChild(parsedHTML);
         }
     }
+    else {
+        //Nothing should be done
+    }
 	
     MTMUA.appendElement('body', 'table', 'border', '0', 'cellPadding', '0', 'cellSpacing', '0', 'width', MTMTableWidth, 'id', 'mtmtable');	
     MTMUA.menuTable = MTMUA.document.getElementById('mtmtable');
@@ -678,6 +792,9 @@ function MTMinitializeDOMDocument() {
             var parsedHTML = myRange.createContextualFragment(MTMFooter);
             MTMUA.document.body.appendChild(parsedHTML);
 	}
+    }
+    else {
+        //Nothing should be done
     }
 }
 
@@ -733,6 +850,9 @@ function MTMDisplayItem(item, last) {
             MTMref += ".submenu.items[" + MTMIndices[i] + "]";
 	}
     }
+    else {
+        //Nothing should be done
+    }
 
     if(MTMUA.cookieEnabled) {
 		
@@ -744,6 +864,9 @@ function MTMDisplayItem(item, last) {
 			
             MTMCookieString += (item.expanded) ? "1" : "0";
 	}
+    }
+    else {
+        //Nothing should be done
     }
 
     if(item.submenu) {
@@ -777,6 +900,9 @@ function MTMDisplayItem(item, last) {
             
             MTMOutputString += (MTMBar[i]) ? MTMakeImage("menu_bar.gif") : MTMakeImage("menu_pixel.gif");
 	}
+    }
+    else {
+        //Nothing should be done
     }
 	
     if(item.submenu && usePlusMinus) {
@@ -1247,6 +1373,9 @@ function MTMdisableStyleSheets() {
 	
                 myCollection.item(i).disabled = true;
             }
+            else {
+                //Nothing should be done
+            }
         }
     }
 }
@@ -1262,12 +1391,18 @@ function MTMFetchCookies() {
         MTMUA.cookieEnabled = (cookieString == null) ? false : true;
 	return;
     }
+    else {
+        //Nothing should be done
+    }
 
     MTMCookieString = cookieString;	
     if(MTMTrackedCookieName) {
         
         MTMTrackedCookie = getCookie(MTMTrackedCookieName); 
-    }	
+    }
+    else {
+        //Nothing should be done
+    }
     MTMUA.cookieEnabled = true;
 }
 
@@ -1292,9 +1427,18 @@ function getCookie(Name) {
             if (end == -1){
                 end = document.cookie.length;
             }
+            else {
+                //Nothing should be done
+            }
 			
             return unescape(document.cookie.substring(offset, end));
 	}
+        else {
+            //Nothing should be done
+        }
+    }
+    else {
+        //Nothing should be done
     }
 }
 
@@ -1305,6 +1449,9 @@ function setCookie(name, value, daysExpire) {
         var expires = new Date();
 		
         expires.setTime(expires.getTime() + 1000*60*60*24*daysExpire);
+    }
+    else{
+        //Nothing should be done
     }
 	
     document.cookie = name + "=" + escape(value) + (daysExpire == null ? "" : (";expires=" + expires.toGMTString())) + ";path=/";

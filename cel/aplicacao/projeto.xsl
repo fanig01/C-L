@@ -64,7 +64,7 @@ P
    <xsl:apply-templates select="//cenario"> 
     <xsl:sort select="titulo" order="ascending" /> 
    </xsl:apply-templates><br/> 
-   <h2>Léxicos</h2><br/> 
+   <h2>L&eacute;xicos</h2><br/> 
    <xsl:apply-templates select="//lexico"> 
     <xsl:sort select="nome_simbolo" order="ascending" /> 
    </xsl:apply-templates> 
@@ -87,7 +87,7 @@ P
     <xsl:for-each select="objetivo/sentenca/texto"> 
      <xsl:choose> 
       <xsl:when test="@referencia_lexico"> 
-       <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">L&eacute;xico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
 	  </xsl:when> 
       <xsl:otherwise> 
        <xsl:value-of select="." /> 
@@ -102,7 +102,7 @@ P
     <xsl:for-each select="contexto/sentenca/texto"> 
      <xsl:choose> 
       <xsl:when test="@referencia_lexico"> 
-       <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">L&eacute;xico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
       </xsl:when>
 	  <xsl:when test="@referencia_cenario"> 
        <xsl:element name="a"><xsl:attribute name="title">Cen&aacute;rio</xsl:attribute><xsl:attribute name="HREF">#cenario_<xsl:value-of select="@referencia_cenario" /></xsl:attribute><xsl:element name="span"><xsl:attribute name="style">font-variant: small-caps</xsl:attribute><xsl:value-of select="." /></xsl:element></xsl:element> 
@@ -120,7 +120,7 @@ P
     <xsl:for-each select="atores/sentenca/texto"> 
      <xsl:choose> 
       <xsl:when test="@referencia_lexico"> 
-       <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">L&eacute;xico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
       </xsl:when> 
       <xsl:otherwise> 
        <xsl:value-of select="." /> 
@@ -135,7 +135,7 @@ P
     <xsl:for-each select="recursos/sentenca/texto"> 
      <xsl:choose> 
       <xsl:when test="@referencia_lexico"> 
-       <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">L&eacute;xico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
       </xsl:when> 
       <xsl:otherwise> 
        <xsl:value-of select="." /> 
@@ -145,12 +145,12 @@ P
    </td> 
   </tr> 
   <tr valign="top"> 
-   <th>Episódios</th> 
+   <th>Epis&oacute;dios</th> 
    <td> 
     <xsl:for-each select="episodios/sentenca/texto"> 
      <xsl:choose> 
       <xsl:when test="@referencia_lexico"> 
-       <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." disable-output-escaping="yes" /></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">L&eacute;xico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." disable-output-escaping="yes" /></xsl:element> 
       </xsl:when> 
 	  <xsl:when test="@referencia_cenario"> 
        <xsl:element name="a"><xsl:attribute name="title">Cen&aacute;rio</xsl:attribute><xsl:attribute name="HREF">#cenario_<xsl:value-of select="@referencia_cenario" /></xsl:attribute><xsl:element name="span"><xsl:attribute name="style">font-variant: small-caps</xsl:attribute><xsl:value-of select="." /></xsl:element></xsl:element> 
@@ -168,7 +168,7 @@ P
     <xsl:for-each select="excecao/sentenca/texto"> 
      <xsl:choose> 
       <xsl:when test="@referencia_lexico"> 
-       <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">L&eacute;xico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
       </xsl:when> 
       <xsl:otherwise> 
        <xsl:value-of select="." /> 
@@ -190,7 +190,7 @@ P
  </h3> 
  <table border="0" cellspacing="2"> 
   <tr> 
-   <th width="115">Sinônimo(s)</th> 
+   <th width="115">Sin&ocirc;nimo(s)</th> 
    <td> 
     <xsl:for-each select="sinonimos">
 	 <xsl:choose> 
@@ -207,12 +207,12 @@ P
    </td> 
   </tr>
   <tr> 
-   <th width="115">Noção</th> 
+   <th width="115">No&ccedil;&atilde;o</th> 
    <td> 
     <xsl:for-each select="nocao/sentenca/texto"> 
      <xsl:choose> 
       <xsl:when test="@referencia_lexico"> 
-       <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element>&#32;
+       <xsl:element name="a"><xsl:attribute name="title">L&eacute;xico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element>&#32;
       </xsl:when> 
       <xsl:otherwise> 
        <xsl:value-of select="." /> 
@@ -227,7 +227,7 @@ P
     <xsl:for-each select="impacto/sentenca/texto"> 
      <xsl:choose> 
       <xsl:when test="@referencia_lexico"> 
-       <xsl:element name="a"><xsl:attribute name="title">Léxico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
+       <xsl:element name="a"><xsl:attribute name="title">L&eacute;xico</xsl:attribute><xsl:attribute name="HREF">#lexico_<xsl:value-of select="@referencia_lexico" /></xsl:attribute><xsl:value-of select="." /></xsl:element> 
       </xsl:when> 
       <xsl:otherwise> 
        <xsl:value-of select="." /> 
