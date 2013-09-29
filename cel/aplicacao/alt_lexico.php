@@ -79,7 +79,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
             <body>
                 <script language="JavaScript">
                 <!--
-                    function TestarBranco(form)
+                    function testWhite(form)
                     {
                         nocao = form.nocao.value;
 
@@ -220,7 +220,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
                                     </tr>
                                     <tr>
                                         <td align="center" colspan="2" height="60">
-                                            <input name="submit" type="submit" onClick="return TestarBranco(this.form);" value="Alterar S�mbolo">
+                                            <input name="submit" type="submit" onClick="return testWhite(this.form);" value="Alterar S�mbolo">
                                         </td>
                                     </tr>
                                     </table>

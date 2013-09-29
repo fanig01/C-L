@@ -68,7 +68,7 @@ if (isset($submit)) {
         <body>
             <script language="JavaScript">
             <!--
-                function TestarBranco(form)
+                function testWhite(form)
                 {
                     nome = form.nome.value;
                     nocao = form.nocao.value;
@@ -223,7 +223,7 @@ if (isset($submit)) {
                     </tr>
                     <tr>
                         <td align="center" colspan="2" height="60">
-                            <input name="submit" type="submit" onClick="return TestarBranco(this.form);" value="Adicionar S�mbolo"><BR><BR>
+                            <input name="submit" type="submit" onClick="return testWhite(this.form);" value="Adicionar S�mbolo"><BR><BR>
                             </script>
                             <!--            <A HREF="RegrasLAL.html" TARGET="new">Ver Regras do LAL</A><BR>   -->
                             <A HREF="#" OnClick="javascript:open('RegrasLAL.html', '_blank', 'dependent,height=380,width=520,titlebar');"> Veja as regras do <i>LAL</i></A>

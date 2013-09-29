@@ -39,7 +39,7 @@ $password = $row[4];
 
     <script language="JavaScript">
 <!--
-        function TestarBranco(form)
+        function testWhite(form)
         {
             login = form.login.value;
             senha = form.senha.value;
@@ -118,7 +118,7 @@ $password = $row[4];
                     <td>Senha (confirmação):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="4" height="40" valign="bottom"><input name="submit" onClick="return TestarBranco(this.form);" type="submit" value="Atualizar"></td>
+                    <td align="center" colspan="4" height="40" valign="bottom"><input name="submit" onClick="return testWhite(this.form);" type="submit" value="Atualizar"></td>
                 </tr>
             </table>
         </form>

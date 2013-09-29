@@ -79,7 +79,7 @@ if (isset($submit)) {
         <body>
             <script language="JavaScript">
             <!--
-                function TestarBranco(form)
+                function testWhite(form)
                 {
                     titulo = form.titulo.value;
                     objetivo = form.objetivo.value;
@@ -183,7 +183,7 @@ if (isset($submit)) {
                         <td><textarea cols="51" name="episodios" rows="5" WRAP="SOFT"></textarea></td>
                     </tr>
                     <tr>
-                        <td align="center" colspan="2" height="60"><input name="submit" type="submit" onClick="return TestarBranco(this.form);" value="Adicionar Cen�rio"></td>
+                        <td align="center" colspan="2" height="60"><input name="submit" type="submit" onClick="return testWhite(this.form);" value="Adicionar Cen�rio"></td>
                     </tr>
                 </table>
             </form>
