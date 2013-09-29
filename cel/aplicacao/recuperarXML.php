@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 include("funcoes_genericas.php");
@@ -33,45 +34,51 @@ Restriction: Retrieve XML data from the database and transform them into an XSL 
 
 $recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 
-if (isset($apaga)) {
+
+if (isset($delete)) {
    
-    if ($apaga) {
-        $qApaga = "DELETE FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$version' ";
-        $qrrApaga = mysql_query($qApaga);
+    if ($delete) {
+        $queryDelete = "DELETE FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$version' ";
+        $requestResultSQLDelete = mysql_query($queryDelete);
     }
-    
+    else {
+        //Nothing should be done
+    }    
+}
+else {
+    //Nothing should be done
 }
 
 $commandSQL = "SELECT * FROM publicacao WHERE id_projeto = '$idProject '";
 $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
 ?>
-    
+        
     <h2>Recupera XML/XSL</h2><br>
     <?php
-
-    while ($resultArray = mysql_fetch_row($requestResultSQL)) {
     
-        $date = $resultArray[1];
-        $version = $resultArray[2];
-        $XML = $resultArray[3];
-        
-        ?>
-        <table>
-            <tr>
-                <th>Versão:</th><td><?= $version ?></td>
-                <th>Data:</th><td><?= $date ?></td>
-                <th><a href="mostraXML.php?id_projeto=<?= $idProject  ?>&versao=<?= $version ?>">XML</a></th>
-                <th><a href="recuperarXML.php?id_projeto=<?= $idProject  ?>&versao=<?= $version ?>&apaga=true">Apaga XML</a></th>
-
-            </tr>
-
-        </table>
-
-    <?php
-    }
+while ($resultArray = mysql_fetch_row($requestResultSQL)) {
+            
+    $date = $resultArray[1];
+    $version = $resultArray[2];
+    $XML = $resultArray[3];
+               
     ?>
+        
+    <table>          
+        <tr>                
+            <th>Vers&atilde;o:</th><td><?= $version ?></td>                
+            <th>Data:</th><td><?= $date ?></td>                
+            <th><a href="mostraXML.php?id_projeto=<?= $idProject  ?>&versao=<?= $version ?>">XML</a></th>               
+            <th><a href="recuperarXML.php?id_projeto=<?= $idProject  ?>&versao=<?= $version ?>&apaga=true">Apaga XML</a></th>           
+        </tr>
+       
+    </table>
 
-    <br><i><a href="showSource.php?file=recuperarXML.php">Veja o código fonte!</a></i>
+    <?php    
+}
+    ?>
+   
+    <br><i><a href="showSource.php?file=recuperarXML.php">Veja o c&oacute;digo fonte!</a></i>
 
 </body>
 
