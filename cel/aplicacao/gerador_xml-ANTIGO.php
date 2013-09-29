@@ -5,36 +5,35 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
-checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
-// Testa se o usuario quer uma visualiza��o formatada ou n�o
+checkUserAuthentication("index.php");
 
 if (isset($_POST['flag'])) {
     $flag_formatado = "ON";
-} else {
+} 
+else {
     $flag_formatado = "OFF";
 }
 ?>
 
 <?php
 
-// gerador_xml.php
-// Dada a base e o id do projeto, gera-se o xml dos cen�rios e l�xicos.
-// Cen�rio - Gerar Relat�rios XML 
-// Objetivo:    Permitir ao administrador gerar relat�rios em formato XML de um projeto, identificados por data.     
-// Contexto:    Gerente deseja gerar um relat�rio para um dos projetos da qual � administrador.
-//          Pr�-Condi��o: Login, projeto cadastrado.
-// Atores:    Administrador     
-// Recursos:    Sistema, dados do relat�rio, dados cadastrados do projeto, banco de dados.     
-// Epis�dios:O sistema fornece para o administrador uma tela onde dever� fornecer os dados
-//          do relat�rio para sua posterior identifica��o, como data e vers�o. 
-//          Para efetivar a gera��o do relat�rio, basta clicar em Gerar. 
-//          Restri��o: O sistema executar� duas valida��es: 
-//                      - Se a data � v�lida.
-//                      - Se existem cen�rios e l�xicos em datas iguais ou anteriores.
-//          Gerando com sucesso o relat�rio a partir dos dados cadastrados do projeto,
-//          o sistema fornece ao administrador a tela de visualiza��o do relat�rio XML criado, 
-//          incluindo os tags de links internos entre lexicos e cenarios.
-//          Restri��o: Recuperar os dados em XML do Banco de dados e os transformar por uma XSL para a exibi��o.      
+// Scenario - To generate XML reports
+// Objective: Allow the administrator generate reports in XML format of a project,
+//            identified for date.
+// Context:  Manager wants generate a report to one projects which is administrator.
+// Pre-Condition: Login, registered project.
+// Actors: Administrator
+// Resource: System, report's data, report's registered data, database.
+// Episodes: System provides to a administrator a view where should provide the data
+//           of the report for later identification, as data and version.
+//           To actualize the generate, enough click in Generate.
+// Restriction: System execute two validations
+//              - If the date is validates.
+//              - If there are scenarios and lexicons in dates equals or previous.
+//              Generating with sucess the report from the registered data of the project
+//              the system provide to the administrator a preview of report generatd XML
+//              including the tags of internal links between lexicons and scenarios
+/// Restriction: Recover the data in XML database and transform him in XSL to display.
 
 function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
     if ($flag_formatado == "ON") {
@@ -43,29 +42,20 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
 
     $xml_resultante = $xml_resultante . "<projeto>\n";
 
-    // Seleciona o nome do projeto
-
     $qry_nome = "SELECT nome
-	                 FROM projeto
-                     WHERE id_projeto = " . $idProject ;
+	         FROM projeto
+                 WHERE id_projeto = " . $idProject ;
+    
     $tb_nome = mysql_query($qry_nome) or die("Erro ao enviar a query de selecao.");
 
     $xml_resultante = $xml_resultante . "<nome>" . mysql_result($tb_nome, 0) . "</nome>\n";
 
-    // Seleciona os cen�rios de um projeto.
-
-    $qry_cenario = "SELECT id_cenario ,
-                               titulo ,
-                               objetivo ,
-                               contexto ,
-                               atores ,
-                               recursos ,
-                               episodios ,
-                               excecao
-                        FROM cenario
-                        WHERE  (id_projeto = " . $idProject  . ")
-                        AND (data <=" . " '" . $data_pesquisa . "'" . ")
-                        ORDER BY id_cenario,data DESC";
+    $qry_cenario = "SELECT id_cenario, titulo, objetivo, contexto , atores ,
+                           recursos, episodios, excecao
+                    FROM cenario
+                    WHERE (id_projeto = " . $idProject  . ")
+                    AND (data <=" . " '" . $data_pesquisa . "'" . ")
+                    ORDER BY id_cenario,data DESC";
 
     $tb_cenario = mysql_query($qry_cenario) or die("Erro ao enviar a query de selecao.");
     $primeiro = true;
@@ -76,6 +66,7 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
 
     while ($row = mysql_fetch_row($tb_cenario)) {
         $id_cenario = "<ID>" . $row[0] . "</ID>";
+     
         if (($id_temp != $id_cenario) or (primeiro)) {
             $title = '<titulo name="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . ucwords(strip_tags($row[1])) . '</titulo>';
 
@@ -116,16 +107,13 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
             //??$id_temp = id_cenario;
         }
     } // while
-    // Seleciona os lexicos de um projeto.
 
-    $qry_lexico = "SELECT id_lexico ,
-		                        nome ,
-                                nocao ,
-                                impacto
-                        FROM   lexico
-                        WHERE  (id_projeto = " . $idProject  . ")
-                        AND (data <=" . " '" . $data_pesquisa . "'" . ")
-                        ORDER BY id_lexico,data DESC";
+    $qry_lexico = "SELECT id_lexico, nome, nocao, impacto
+                   FROM lexico
+                   WHERE (id_projeto = " . $idProject  . ")
+                   AND (data <=" . " '" . $data_pesquisa . "'" . ")
+                   ORDER BY id_lexico,data DESC";
+    
     $tb_lexico = mysql_query($qry_lexico) or die("Erro ao enviar a query de selecao.");
 
     $primeiro = true;
@@ -134,6 +122,7 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
 
     while ($row = mysql_fetch_row($tb_lexico)) {
         $id_lexico = "<ID>" . $row[0] . "</ID>";
+       
         if (($id_temp != $id_lexico) or (primeiro)) {
             $name = '<nome_simbolo name="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . '<texto>' . ucwords(strip_tags($row[1])) . '</texto>' . '</nome_simbolo>';
 
@@ -168,11 +157,11 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
 ?>
 
 <?php
+
 $idProject  = $_SESSION['id_projeto_corrente'];
 $data_pesquisa = $data_ano . "-" . $data_mes . "-" . $data_dia;
 $flag_formatado = $flag;
 
-// Abre base de dados.
 $bd_trabalho = bd_connect() or die("Erro ao conectar ao SGBD");
 
 $qVerifica = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$versao' ";
@@ -201,6 +190,7 @@ if (!mysql_num_rows($qrrVerifica)) {
     $bd_recupera = bd_connect() or die("Erro ao conectar ao SGBD");
     $qRecupera = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$versao'";
     $qrrRecupera = mysql_query($qRecupera) or die("Erro ao enviar a query de busca!");
+    
     $row = mysql_fetch_row($qrrRecupera);
 
     if ($flag_formatado == "ON") {
@@ -209,10 +199,15 @@ if (!mysql_num_rows($qrrVerifica)) {
 
         $args = array('/_xml' => $str_xml);
 
-        $html = @xslt_process($xh, 'arg:/_xml', 'projeto.xsl', NULL, $args); //retirado o endere�o f�sico para o arquivo .xsl
+        $html = @xslt_process($xh, 'arg:/_xml', 'projeto.xsl', NULL, $args);
 
         if (!( $html ))
+        {
             die("Erro ao processar o arquivo XML: " . xslt_error($xh));
+        }
+        else {
+            // Nothing should be done
+        }
 
         xslt_free($xh);
 
@@ -229,10 +224,14 @@ if (!mysql_num_rows($qrrVerifica)) {
 
         //<html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
         ?>
+
         <?
+        
         echo $xml_banco;
         //</body></html>
+        
         ?>
+
         <?php
     }
 } else {
@@ -246,4 +245,5 @@ if (!mysql_num_rows($qrrVerifica)) {
 
     <?php
 }
+
 ?>

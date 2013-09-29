@@ -5,22 +5,22 @@ include_once("bd.inc");
 
 session_start();
 
-
 $link = bd_connect();
 
-if ($_POST['user'] == "") {
-// Recupera nome do usu�rio 
+if ($_POST['user'] == "") {   
+     
     $sql_user = "select nome from usuario where id_usuario='" . $_SESSION['id_usuario_corrente'] . "';";
-    $query_user = mysql_query($sql_user) or die("Erro ao verificar usu�rio!" . mysql_error());
+    $query_user = mysql_query($sql_user) or die("Erro ao verificar usu&aacute;rio!" . mysql_error());
     $resultArray = mysql_fetch_array($query_user);
     $usuario = $resultArray[0];
-} else {
+    
+} 
+else {
     $usuario = $_POST['user'];
 }
 
-// Recupera nome do projeto 
 $sql_project = "select nome from projeto where id_projeto='" . $_SESSION['id_projeto_corrente'] . "';";
-$query_project = mysql_query($sql_project) or die("Erro ao verificar usu�rio!" . mysql_error());
+$query_project = mysql_query($sql_project) or die("Erro ao verificar usu&aacute;rio!" . mysql_error());
 $resultArray = mysql_fetch_array($query_project);
 $project = $resultArray[0];
 
@@ -51,7 +51,8 @@ mysql_close($link);
 <?php
 if (!$daml) {
     print 'Erro ao exportar ontologia para DAML!';
-} else {
+} 
+else {
 
     print 'Ontologia exportada para DAML com sucesso! <br>';
     print 'Arquivo criado: ';
