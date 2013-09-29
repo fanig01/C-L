@@ -26,7 +26,7 @@ $project = $resultArray[0];
 
 $site = $_SESSION['site'];
 $dir = $_SESSION['diretorio'];
-$arquivo = strtr($project, "������", "aaaooo") . "__" . date("j-m-Y_H-i-s") . ".daml";
+$archive = strtr($project, "������", "aaaooo") . "__" . date("j-m-Y_H-i-s") . ".daml";
 
 $i = array("title" => $_POST['title'],
     "creator" => $usuario,
@@ -39,7 +39,7 @@ $lista_conceitos = get_lista_de_conceitos();
 $relationsList = get_lista_de_relacoes();
 $lista_axiomas = get_lista_de_axiomas();
 
-$daml = saveDAML($site, $dir, $arquivo, $i, $lista_conceitos, $relationsList, $lista_axiomas);
+$daml = saveDAML($site, $dir, $archive, $i, $lista_conceitos, $relationsList, $lista_axiomas);
 
 mysql_close($link);
 ?>   
