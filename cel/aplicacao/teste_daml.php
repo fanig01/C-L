@@ -22,7 +22,7 @@ $list_relationship = get_lista_de_relacoes();
 $list_axiom = get_lista_de_axiomas();
 
 
-$daml = salva_daml($site, $dir, $file, $input, $list_concept, $list_relationship, $list_axiom);
+$daml = saveDAML($site, $dir, $file, $input, $list_concept, $list_relationship, $list_axiom);
 
 if (!$daml) {
     print 'Erro ao exportar ontologia para DAML!';

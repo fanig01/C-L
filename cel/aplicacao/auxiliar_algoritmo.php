@@ -1,8 +1,8 @@
 <?php
 
 function existe_relacao($rel, $list) {
-    foreach ($list as $key => $relacao) {
-        if (@$relacao->verbo == $rel) {
+    foreach ($list as $key => $relation) {
+        if (@$relation->verbo == $rel) {
             return $key;
         }
     }

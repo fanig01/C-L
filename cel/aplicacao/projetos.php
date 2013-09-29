@@ -39,7 +39,7 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de b
     while ($resultArray = mysql_fetch_row($requestResultSQL)) {
        
         $idProject  = $resultArray[0];
-        $data = $resultArray[1];
+        $date = $resultArray[1];
         $versao = $resultArray[2];
         $XML = $resultArray[3];
 
@@ -53,7 +53,7 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de b
             <tr>
 
                 <th height="29" width="140"><a href="mostrarProjeto.php?id_projeto=<?= $idProject  ?>&versao=<?= $versao ?>"><?= $nameProject ?></a></th>
-                <th height="29" width="140">Data: <?= $data ?></th>
+                <th height="29" width="140">Data: <?= $date ?></th>
                 <th height="29" width="100">Versão: <?= $versao ?></th>
 
             </tr>

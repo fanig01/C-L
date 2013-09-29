@@ -23,10 +23,10 @@
         function extrair_data($nome_arquivo) {
             
             list($projeto, $resto) = split("__", $nome_arquivo);
-            list($dia, $mes, $ano, $hora, $minuto, $segundo, $extensao) = split('[_-.]', $resto);
+            list($day, $mes, $ano, $hour, $minuto, $segundo, $extensao) = split('[_-.]', $resto);
 
             
-            if (!is_numeric($dia) || !is_numeric($mes) || !is_numeric($ano) || !is_numeric($hora) || !is_numeric($minuto) || !is_numeric($segundo)){
+            if (!is_numeric($day) || !is_numeric($mes) || !is_numeric($ano) || !is_numeric($hour) || !is_numeric($minuto) || !is_numeric($segundo)){
                         
                 return "-";  
             }
@@ -72,7 +72,7 @@
                     break;
             }
 
-            return $dia . " de " . $mes_por_extenso . " de " . $ano . " às " . $hora . ":" . $minuto . "." . $segundo . "\n";
+            return $day . " de " . $mes_por_extenso . " de " . $ano . " às " . $hour . ":" . $minuto . "." . $segundo . "\n";
         }
 
         function extrair_projeto($nome_arquivo) {
@@ -81,13 +81,13 @@
             return $projeto;
         }
 
-        $diretorio = $_SESSION['diretorio'];
+        $directory = $_SESSION['diretorio'];
         $site = $_SESSION['site'];
 
-        if ($diretorio == "") {
+        if ($directory == "") {
             
-        //    $diretorio = "teste"; 
-            $diretorio = CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
+        //    $directory = "teste"; 
+            $directory = CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
         }
 
         if ($site == "") {
@@ -108,11 +108,11 @@
         print( "<CENTER><TABLE WIDTH=\"80%\">\n");
         print( "<TR>\n\t<Th><STRONG>Projeto</STRONG></Th>\n\t<Th><STRONG>Gerado em</STRONG></Th>\n</TR>\n");
        
-        if ($dir_handle = @opendir($diretorio)) {
+        if ($dir_handle = @opendir($directory)) {
             
             while (( $arquivo = readdir($dir_handle) ) !== false) {
                 
-                if (is_file($diretorio . "/" . $arquivo) && $arquivo != "." && $arquivo != "..") {
+                if (is_file($directory . "/" . $arquivo) && $arquivo != "." && $arquivo != "..") {
                     
                     print( "<TR>\n");
                     print( "\t<TD WIDTH=\"25%\" CLASS=\"Estilo\"><B>" . extrair_projeto($arquivo) . "</B></TD>\n");

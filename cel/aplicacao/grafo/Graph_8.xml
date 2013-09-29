@@ -656,7 +656,7 @@ salvar_algoritmo
 Tipo: Sring
 Escopo: Local
 Utilidade: armazena os predicados de uma relação.</TEXTO><REFERENCIA TO="auxiliar_bd.php">auxiliar_bd.php</REFERENCIA><REFERENCIA TO="salvar_algoritmo">salvar_algoritmo</REFERENCIA></SENTENCA></NOCAO>
-<IMPACTO><SENTENCA><TEXTO>recebe o resultado da variável $relacao->predicados</TEXTO></SENTENCA></IMPACTO>
+<IMPACTO><SENTENCA><TEXTO>recebe o resultado da variável $relation->predicados</TEXTO></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
 <NOME_SIMBOLO ID="$link">$link</NOME_SIMBOLO>

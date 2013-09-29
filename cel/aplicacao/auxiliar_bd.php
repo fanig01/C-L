@@ -308,8 +308,8 @@ function salvar_algoritmo() {
     $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
 
     if (isset($_SESSION["lista_de_relacoes"])) {
-        foreach ($_SESSION["lista_de_relacoes"] as $relacao) {
-            $query = "insert into relacao (nome, id_projeto) values ('$relacao', '$idProject ');";
+        foreach ($_SESSION["lista_de_relacoes"] as $relation) {
+            $query = "insert into relacao (nome, id_projeto) values ('$relation', '$idProject ');";
             $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
         }
     }
@@ -333,13 +333,13 @@ function salvar_algoritmo() {
             }
 
 
-            foreach ($conc->relacoes as $relacao) {
-                $verbo = $relacao->verbo;
+            foreach ($conc->relacoes as $relation) {
+                $verbo = $relation->verbo;
                 $query = "select id_relacao from relacao where nome = '$verbo' and id_projeto='$idProject ';";
                 $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
                 $line = mysql_fetch_array($result, MYSQL_BOTH);
                 $id_relacao = $line['id_relacao'];
-                $predicados = $relacao->predicados;
+                $predicados = $relation->predicados;
                 foreach ($predicados as $pred) {
                     $query = "insert into relacao_conceito (id_conceito,id_relacao,predicado,id_projeto) values ('$id_conceito', '$id_relacao', '$pred', '$idProject ');";
                     $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
@@ -367,8 +367,8 @@ function salvar_algoritmo() {
         }
     }
     if (isset($_SESSION["lista_de_axiomas"])) {
-        foreach ($_SESSION["lista_de_axiomas"] as $axioma) {
-            $query = "insert into axioma (axioma,id_projeto) values ( '$axioma','$idProject ' );";
+        foreach ($_SESSION["lista_de_axiomas"] as $axiom) {
+            $query = "insert into axioma (axioma,id_projeto) values ( '$axiom','$idProject ' );";
             $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
         }
     }

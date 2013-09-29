@@ -254,10 +254,10 @@ session_start();
                         exit();
                     }
                     if ($_POST["existe"] == "TRUE") {
-                        $axioma = $_SESSION["conceito"]->nome . " disjoint " . strtolower($_POST["nome"]);
-                        if (array_search($axioma, $axiomas) === false) {
-                            $axiomas[] = $axioma;
-                            $_SESSION["axiomas_selecionados"][] = $axioma;
+                        $axiom = $_SESSION["conceito"]->nome . " disjoint " . strtolower($_POST["nome"]);
+                        if (array_search($axiom, $axiomas) === false) {
+                            $axiomas[] = $axiom;
+                            $_SESSION["axiomas_selecionados"][] = $axiom;
                         }
                         session_unregister("disjoint");
                     } else {

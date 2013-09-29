@@ -198,7 +198,7 @@ function endElement($parser, $name) {
  * Fun��o chamada quando texto fora dos tags est� sendo lido *
  * *********************************************************** */
 
-function characterData($parser, $data) {
+function characterData($parser, $date) {
     global $out;
     global $openText;
     global $edgeWord;
@@ -210,13 +210,13 @@ function characterData($parser, $data) {
     if ($openText && $readText) {
 
         // Guardar em mem�ria a palavra (caso seja uma refer�ncia)
-        $edgeWord = $data;
+        $edgeWord = $date;
 
         // Adicionar ao texto total o texto lido
-        $textTotal .= $data;
+        $textTotal .= $date;
     } else {
         // No caso geral, simplesmente reescrever o que foi lido
-        output($data);
+        output($date);
     }
 }
 
@@ -272,8 +272,8 @@ if (!($out = fopen($fileout, "w"))) {
 output("<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>");
 
 // Percorre o arquivo XML 4kB por 4kB.
-while ($data = fread($in, 4096)) {
-    if (!xml_parse($xml_parser, $data, feof($in))) {
+while ($date = fread($in, 4096)) {
+    if (!xml_parse($xml_parser, $date, feof($in))) {
         die(sprintf("error XML : %s on line %d", xml_error_string(xml_get_error_code($xml_parser)), xml_get_current_line_number($xml_parser)));
     }
 }

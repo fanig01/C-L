@@ -93,12 +93,12 @@ foreach ($tree as $conceito) {
 
     //Rela��es 
     //Verbos 
-    foreach ($conceito->relacoes as $relacao) {
-        echo " mC.addItem(\"$relacao->verbo\",\"\");\n";
+    foreach ($conceito->relacoes as $relation) {
+        echo " mC.addItem(\"$relation->verbo\",\"\");\n";
         echo " var mV = new MTMenu();\n";
 
         //Predicados 
-        foreach ($relacao->predicados as $predicado) {
+        foreach ($relation->predicados as $predicado) {
             echo " mV.addItem(\"$predicado\",\"blank.html\",\"enganaarvore\");\n";
         }
 

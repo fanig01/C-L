@@ -51,7 +51,7 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
 
     while ($resultArray = mysql_fetch_row($requestResultSQL)) {
     
-        $data = $resultArray[1];
+        $date = $resultArray[1];
         $versao = $resultArray[2];
         $XML = $resultArray[3];
         
@@ -59,7 +59,7 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
         <table>
             <tr>
                 <th>Versão:</th><td><?= $versao ?></td>
-                <th>Data:</th><td><?= $data ?></td>
+                <th>Data:</th><td><?= $date ?></td>
                 <th><a href="mostraXML.php?id_projeto=<?= $idProject  ?>&versao=<?= $versao ?>">XML</a></th>
                 <th><a href="recuperarXML.php?id_projeto=<?= $idProject  ?>&versao=<?= $versao ?>&apaga=true">Apaga XML</a></th>
 

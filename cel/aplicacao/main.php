@@ -884,10 +884,10 @@ Insert assertive.
                         <?php
                         
                         
-     $data = simple_query("data_criacao", "projeto", "id_projeto = $idProject ");
+     $date = simple_query("data_criacao", "projeto", "id_projeto = $idProject ");
                 
                         ?>    
-                    <td CLASS="Estilo"><?= formataData($data) ?></td> 
+                    <td CLASS="Estilo"><?= formataData($date) ?></td> 
 
                 </tr> 
                 <tr> 

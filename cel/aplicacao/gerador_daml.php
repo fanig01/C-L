@@ -36,10 +36,10 @@ $i = array("title" => $_POST['title'],
 
 $_SESSION['id_projeto'] = $_SESSION['id_projeto_corrente'];
 $lista_conceitos = get_lista_de_conceitos();
-$lista_relacoes = get_lista_de_relacoes();
+$relationsList = get_lista_de_relacoes();
 $lista_axiomas = get_lista_de_axiomas();
 
-$daml = salva_daml($site, $dir, $arquivo, $i, $lista_conceitos, $lista_relacoes, $lista_axiomas);
+$daml = saveDAML($site, $dir, $arquivo, $i, $lista_conceitos, $relationsList, $lista_axiomas);
 
 mysql_close($link);
 ?>   

@@ -46,10 +46,10 @@ if (!(function_exists("inclui_cenario"))) {
     function inclui_cenario($idProject , $title, $objective, $context, $actors, $resources, $exception, $episodes) {
         //global $reference;      // Conexao com a base de dados
         $reference = bd_connect() or die("Erro ao conectar ao SGBD<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
-        $data = date("Y-m-d");
+        $date = date("Y-m-d");
 
         $comandoSql = "INSERT INTO cenario (id_projeto,data, titulo, objetivo, contexto, atores, recursos, excecao, episodios) 
-		VALUES ($idProject ,'$data', '" . prepara_dado(strtolower($title)) . "', '" . prepara_dado($objective) . "',
+		VALUES ($idProject ,'$date', '" . prepara_dado(strtolower($title)) . "', '" . prepara_dado($objective) . "',
 		'" . prepara_dado($context) . "', '" . prepara_dado($actors) . "', '" . prepara_dado($resources) . "',
 		'" . prepara_dado($exception) . "', '" . prepara_dado($episodes) . "')";
 
@@ -73,11 +73,11 @@ if (!(function_exists("inclui_lexico"))) {
 
     function inclui_lexico($idProject , $nome, $notion, $impact, $sinonimos, $classificacao) {
         $reference = bd_connect() or die("Erro ao conectar ao SGBD<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
-        $data = date("Y-m-d");
+        $date = date("Y-m-d");
 
 
         $comandoSql = "INSERT INTO lexico (id_projeto, data, nome, nocao, impacto, tipo)
-              VALUES ($idProject , '$data', '" . prepara_dado(strtolower($nome)) . "',
+              VALUES ($idProject , '$date', '" . prepara_dado(strtolower($nome)) . "',
 			  '" . prepara_dado($notion) . "', '" . prepara_dado($impact) . "', '$classificacao')";
 
         mysql_query($comandoSql) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
@@ -148,10 +148,10 @@ if (!(function_exists("inclui_projeto"))) {
         } else {
             $result[0]++;
         }
-        $data = date("Y-m-d");
+        $date = date("Y-m-d");
 
         $qr = "INSERT INTO projeto (id_projeto, nome, data_criacao, descricao)
-                  VALUES ($result[0],'" . prepara_dado($nome) . "','$data' , '" . prepara_dado($descricao) . "')";
+                  VALUES ($result[0],'" . prepara_dado($nome) . "','$date' , '" . prepara_dado($descricao) . "')";
 
         mysql_query($qr) or die("Erro ao enviar a query INSERT<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 
@@ -1532,8 +1532,8 @@ if (!(function_exists("inserirPedidoRemoverRelacao"))) {
         $select = new QUERY($DB);
         $select2 = new QUERY($DB);
         $select->execute("SELECT * FROM relacao WHERE id_relacao = $id_relacao");
-        $relacao = $select->gofirst();
-        $nome = $relacao['nome'];
+        $relation = $select->gofirst();
+        $nome = $relation['nome'];
 
         $insere->execute("INSERT INTO pedidorel (id_projeto,id_relacao,nome,id_usuario,tipo_pedido,aprovado) VALUES ($idProject ,$id_relacao,'$nome',$id_usuario,'remover',0)");
         $select->execute("SELECT * FROM usuario WHERE id_usuario = $id_usuario");
@@ -1783,11 +1783,11 @@ if (!(function_exists("verificaGerente"))) {
 #############################################
 if (!(function_exists("formataData"))) {
 
-    function formataData($data) {
+    function formataData($date) {
 
-        $novaData = substr($data, 8, 9) .
-                substr($data, 4, 4) .
-                substr($data, 0, 4);
+        $novaData = substr($date, 8, 9) .
+                substr($date, 4, 4) .
+                substr($date, 0, 4);
         return $novaData;
     }
 

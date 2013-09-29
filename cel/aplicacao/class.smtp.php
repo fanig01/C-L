@@ -1086,12 +1086,12 @@ class SMTP {
 
     function get_lines() {
 
-        $data = "";
+        $date = "";
         
         while ($str = fgets($this->networkSocketSmtp, 515)) {
         
             if ($this->setLevelDebug >= 4) {
-                echo "SMTP -> get_lines(): \$data was \"$data\"" .
+                echo "SMTP -> get_lines(): \$date was \"$date\"" .
                 $this->endLine;
                 echo "SMTP -> get_lines(): \$str is \"$str\"" .
                 $this->endLine;
@@ -1100,10 +1100,10 @@ class SMTP {
                 //Nothing should be done
             }
             
-            $data .= $str;
+            $date .= $str;
            
             if ($this->setLevelDebug >= 4) {
-                echo "SMTP -> get_lines(): \$data is \"$data\"" . $this->endLine;
+                echo "SMTP -> get_lines(): \$date is \"$date\"" . $this->endLine;
             }
             else {
                 //Nothing should be done
@@ -1118,7 +1118,7 @@ class SMTP {
             }
         }
         
-        return $data;
+        return $date;
     }
 
 }

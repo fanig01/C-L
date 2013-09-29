@@ -455,8 +455,8 @@ function disjuncao($nome, $list) {
 
     if (count($_SESSION["axiomas_selecionados"]) != 0) {
         echo "Termos disjunos j� discriminados para esse conceito:<p>";
-        foreach ($_SESSION["axiomas_selecionados"] as $axioma) {
-            echo "- " . $axioma . "<br>";
+        foreach ($_SESSION["axiomas_selecionados"] as $axiom) {
+            echo "- " . $axiom . "<br>";
         }
         echo "</p>";
     }

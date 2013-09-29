@@ -658,7 +658,7 @@ Utilidade: armazena em qual linha estão o id_conceito.</texto><PT/></sentenca></
 Tipo: Sring
 Escopo: Local
 Utilidade: armazena os predicados de uma relação.</texto><PT/></sentenca></nocao>
-<impacto><sentenca><texto>recebe o resultado da variável $relacao->predicados</texto><PT/></sentenca></impacto>
+<impacto><sentenca><texto>recebe o resultado da variável $relation->predicados</texto><PT/></sentenca></impacto>
 </lexico>
 <lexico>
 <nome_simbolo id="$link"><texto>$link</texto></nome_simbolo>
