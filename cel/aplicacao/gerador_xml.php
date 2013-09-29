@@ -360,7 +360,7 @@ $flag_formatado = $flag;
 
 $bd_trabalho = bd_connect() or die("Erro ao conectar ao SGBD");
 
-$qVerifica = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$versao' ";
+$qVerifica = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$version' ";
 $qrrVerifica = mysql_query($qVerifica);
 
 
@@ -371,10 +371,10 @@ if (!mysql_num_rows($qrrVerifica)) {
     $xml_resultante = "<?xml version='1.0' encoding='ISO-8859-1' ?>\n" . $str_xml;
 
     $commandSQL = "INSERT INTO publicacao ( id_projeto, data_publicacao, versao, XML)
-                 VALUES ( '$idProject ', '$data_pesquisa', '$versao', '" . mysql_real_escape_string($xml_resultante) . "')";
+                 VALUES ( '$idProject ', '$data_pesquisa', '$version', '" . mysql_real_escape_string($xml_resultante) . "')";
 
     mysql_query($commandSQL) or die("Erro ao enviar a query INSERT do XML no banco de dados! ");
-    recarrega("http://pes.inf.puc-rio.br/cel/aplicacao/mostraXML.php?id_projeto=" . $idProject  . "&versao=" . $versao);
+    recarrega("http://pes.inf.puc-rio.br/cel/aplicacao/mostraXML.php?id_projeto=" . $idProject  . "&versao=" . $version);
 } 
 else {
     

@@ -164,7 +164,7 @@ $flag_formatado = $flag;
 
 $bd_trabalho = bd_connect() or die("Erro ao conectar ao SGBD");
 
-$qVerifica = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$versao' ";
+$qVerifica = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$version' ";
 $qrrVerifica = mysql_query($qVerifica);
 
 if (!mysql_num_rows($qrrVerifica)) {
@@ -174,7 +174,7 @@ if (!mysql_num_rows($qrrVerifica)) {
     $str_xml = "<?xml version='1.0' encoding='ISO-8859-1' ?>\n" . $str_xml;
 
     $commandSQL = "INSERT INTO publicacao ( id_projeto, data_publicacao, versao, XML)
-                 VALUES ( '$idProject ', '$data_pesquisa', '$versao', '$xml_resultante')";
+                 VALUES ( '$idProject ', '$data_pesquisa', '$version', '$xml_resultante')";
 
     //echo $comandoSql;
 
@@ -188,7 +188,7 @@ if (!mysql_num_rows($qrrVerifica)) {
     // echo $xml_banco;
 
     $recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
-    $qRecupera = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$versao'";
+    $qRecupera = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND versao = '$version'";
     $qrrRecupera = mysql_query($qRecupera) or die("Erro ao enviar a query de busca!");
     
     $row = mysql_fetch_row($qrrRecupera);

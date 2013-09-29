@@ -16,7 +16,7 @@ see ADMINISTRATOR CHOOSE PROJECT . Otherwise, see USER CHOOSE PROJECT.
 
 $recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 
-$queryResult = "SELECT * FROM publicacao WHERE id_projeto = $idProject  AND versao = $versao";
+$queryResult = "SELECT * FROM publicacao WHERE id_projeto = $idProject  AND versao = $version";
 
 $requestResultSQL = mysql_query($queryResult) or die("Erro ao enviar a query");
 

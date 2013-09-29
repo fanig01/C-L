@@ -12,7 +12,7 @@ extract($_GET);
 
 $recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 
-$queryResult = "select * from publicacao where id_projeto = $idProject  AND versao = $versao";
+$queryResult = "select * from publicacao where id_projeto = $idProject  AND versao = $version";
 $requestResultSQL = mysql_query($queryResult) or die("Erro ao enviar a query ao BD");
 $row = mysql_fetch_row($requestResultSQL);
 $databaseXML = $row[3];

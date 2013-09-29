@@ -40,21 +40,21 @@ $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query de b
        
         $idProject  = $resultArray[0];
         $date = $resultArray[1];
-        $versao = $resultArray[2];
+        $version = $resultArray[2];
         $XML = $resultArray[3];
 
-        $qProcuraNomeProjeto = "SELECT * FROM projeto WHERE id_projeto = '$idProject '";
-        $qrrProcura = mysql_query($qProcuraNomeProjeto) or die("Erro ao enviar a query de busca de projeto");
-        $resultNome = mysql_fetch_row($qrrProcura);
-        $nameProject = $resultNome[1];
+        $querySearchProjectName = "SELECT * FROM projeto WHERE id_projeto = '$idProject '";
+        $requestResultSQLSearch = mysql_query($querySearchProjectName) or die("Erro ao enviar a query de busca de projeto");
+        $resultName = mysql_fetch_row($requestResultSQLSearch);
+        $nameProject = $resultName[1];
         
         ?>
         <table border='0'>
             <tr>
 
-                <th height="29" width="140"><a href="mostrarProjeto.php?id_projeto=<?= $idProject  ?>&versao=<?= $versao ?>"><?= $nameProject ?></a></th>
+                <th height="29" width="140"><a href="mostrarProjeto.php?id_projeto=<?= $idProject  ?>&versao=<?= $version ?>"><?= $nameProject ?></a></th>
                 <th height="29" width="140">Data: <?= $date ?></th>
-                <th height="29" width="100">Versão: <?= $versao ?></th>
+                <th height="29" width="100">Vers&atilde;o: <?= $version ?></th>
 
             </tr>
         </table>
