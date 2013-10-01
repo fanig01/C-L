@@ -4,7 +4,7 @@ include_once("bd.inc");
 include_once("bd_class.php");
 include_once("seguranca.php");
 
-if (!(function_exists("chkUser"))) {
+if (!(function_exists("checkUserAuthentication"))) {
 
     function checkUserAuthentication($url) {
 
@@ -37,7 +37,7 @@ else {
   Returns the id_cenario. (1.4)
 */
 
-if (!(function_exists("inclui_cenario"))) {
+if (!(function_exists("scenarioIncludes"))) {
 
     function scenarioIncludes($idProject , $title, $objective, $context, $actors, $resources, $exception, $episodes) {
         
@@ -72,7 +72,7 @@ else {
   Returns the id_lexico. (1.4)
  */
 
-if (!(function_exists("inclui_lexico"))) {
+if (!(function_exists("lexiconIncludes"))) {
 
     function lexiconIncludes($idProject , $name, $notion, $impact, $synonyms, $classification) {
         
@@ -121,7 +121,7 @@ if (!(function_exists("inclui_lexico"))) {
   Returns the id_cprojeto. (1.4)
  */
 
-if (!(function_exists("inclui_projeto"))) {
+if (!(function_exists("projectIncludes"))) {
 
     function projectIncludes($name, $description) {
        
@@ -185,7 +185,7 @@ else {
 }
 
 
-if (!(function_exists("recarrega"))) {
+if (!(function_exists("recharge"))) {
 
     function recharge($url) {
         ?>
@@ -262,7 +262,7 @@ else {
        3.2.1. Include table entry 'centolex';
 */
 
-if (!(function_exists("adicionar_cenario"))) {
+if (!(function_exists("addScenario"))) {
 
     function addScenario($idProject , $title, $objective, $context, $actors, $resources, $exception, $episodes) {
 
@@ -435,7 +435,7 @@ else {
                3.4.1. Include entry in table 'lextolex';
  */
 
-if (!(function_exists("adicionar_lexico"))) {
+if (!(function_exists("addLexicon"))) {
 
     function addLexicon($idProject , $name, $notion, $impact, $synonyms, $classification) {
         
@@ -631,7 +631,7 @@ else {
    links and relationships that exist.
 */
 
-if (!(function_exists("removeCenario"))) {
+if (!(function_exists("removeScenario"))) {
 
     function removeScenario($idProject , $id_Scenario) {
         
