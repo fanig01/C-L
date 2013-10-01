@@ -624,7 +624,7 @@ if (isset($id) && isset($term)) {
 
                        </td> 
        </tr> 
-       </table> 
+       </TABLE> 
           <BR> 
              <TABLE> 
                 <tr> 
@@ -642,7 +642,7 @@ if (isset($id) && isset($term)) {
                 <?php
     }
     
-    elseif ($term == "l") {
+    else if ($term == "l") {
 
         $commandSQL = "SELECT id_lexico, nome, nocao, impacto, tipo, id_projeto    
                        FROM lexico    
