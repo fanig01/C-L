@@ -827,14 +827,12 @@ else {
     //Nothing should be done
 }
 
-
-
-# Essa funcao recebe um id de lexico e remove todos os seus
-# links e relacionamentos existentes em todas as tabelas do banco.
+// This function receives an id of lexical and removes all its
+// Links and relationships existing in all the database tables.
 
 if (!(function_exists("removeLexico"))) {
 
-    function removeLexico($idProject , $id_lexico) {
+    function removeLexicon($idProject , $id_lexico) {
         $DB = new PGDB ();
         $delete = new QUERY($DB);
 
@@ -1559,7 +1557,7 @@ if (!(function_exists("inserirPedidoRemoverLexico"))) {
                 }
             }
         } else { // e gerente
-            removeLexico($idProject , $id_lexico);
+            removeLexicon($idProject , $id_lexico);
         }
     }
 
@@ -1774,7 +1772,7 @@ if (!(function_exists("tratarPedidoLexico"))) {
             if (!strcasecmp($tipoPedido, 'remover')) {
                 $id_lexico = $record['id_lexico'];
                 $idProject  = $record['id_projeto'];
-                removeLexico($idProject , $id_lexico);
+                removeLexicon($idProject , $id_lexico);
             } else {
                 $idProject  = $record['id_projeto'];
                 $name = $record['nome'];

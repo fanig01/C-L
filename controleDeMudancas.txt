@@ -133,7 +133,20 @@
 134. $bd_recupera = $recoverDatabase
 135. $qq = $queryResult
 136. $xml_banco = $databaseXML
-
+138. $versao = $version
+139. $qrrProcura = $requestResultSQLSearch
+140. $qProcuraNomeProjeto = $querySearchProjectName
+141. $resultNome = $resultName
+142. $nome_arquivo = $fileName (local em recuperaDAML.php)
+143. $arquivo = $archive
+144. $apaga = $delete
+145. $qApaga = $queryDelete
+146. $qrrApaga = $requestResultSQLDelete
+147. $n_sel = $selectedNumber
+148. $subq = $subQuery
+149. $subqrr = $subRequestResultSQL
+150. $resultadosubq = $resultSubQuery
+ 
 
 Dicionário de Funções:
 
@@ -181,3 +194,14 @@ Dicionário de Funções:
 42. cenario_para_lexico_cenario_para_cenario = scenarioToLexicon_ScenarioToScenario
 43. adiciona_relacionamento = addRelationships
 44. cenario_para_lexico = scenarioToLexicon
+45. extrair_data = extractDate
+46. extrair_projeto = extractProject
+47. inclui_cenario = scenarioIncludes
+48. inclui_lexico = lexiconIncludes
+49. inclui_projeto= projectIncludes
+50. recarrega = recharge
+51. adicionar_cenario = addScenario
+52. adicionar_lexico= addLexicon
+53. removeCenario = removeScenario
+54. alteraCenario = changeScenario
+55. removeLexico = removeLexicon
