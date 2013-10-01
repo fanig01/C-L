@@ -20,14 +20,14 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
     if ($name == "" || $email == "" || $login == "" || $password == "" || $senha_conf == "") {
         $p_style = "color: red; font-weight: bold";
         $p_text = "Por favor, preencha todos os campos.";
-        recarrega("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&login=$login&senha=$password&senha_conf=$senha_conf&novo=$novo");
+        recharge("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&login=$login&senha=$password&senha_conf=$senha_conf&novo=$novo");
     } else {
 
         // Testa se as senhas fornecidas pelo usuario sao iguais.
         if ($password != $senha_conf) {
             $p_style = "color: red; font-weight: bold";
             $p_text = "Senhas diferentes. Favor preencher novamente as senhas.";
-            recarrega("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&login=$login&novo=$novo");
+            recharge("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&login=$login&novo=$novo");
         } else {
 
             // ** Cenario "Inclusao de Usuario Independente" **
@@ -76,7 +76,7 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
                 </script>
 
                 <?php
-                recarrega("?novo=$novo");
+                recharge("?novo=$novo");
             } else {    // Cadastro passou por todos os testes -- ja pode ser incluido na BD
                 /* Substitui todas as ocorrencias de ">" e "<" por " " */
                 $name = str_replace(">", " ", str_replace("<", " ", $name));
@@ -87,7 +87,7 @@ if (isset($submit)) {   // Se chamado pelo botao de submit
                 $password = md5($password);
                 $commandSQL = "INSERT INTO usuario (nome, login, email, senha) VALUES ('$name', '$login', '$email', '$password')";
                 mysql_query($commandSQL) or die("Erro ao cadastrar o usuario");
-                recarrega("?cadastrado=&novo=$novo&login=$login");
+                recharge("?cadastrado=&novo=$novo&login=$login");
             }
         }   // else
     }   // else

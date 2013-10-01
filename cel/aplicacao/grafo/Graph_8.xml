@@ -17,7 +17,7 @@ Número de linhas de código: 113</TEXTO></SENTENCA></NOCAO>
 - main.php</TEXTO></SENTENCA></IMPACTO>
 </LEXICO>
 <LEXICO>
-<NOME_SIMBOLO ID="$reference">$reference</NOME_SIMBOLO>
+<NOME_SIMBOLO ID="$SgbdConnectStatus">$SgbdConnectStatus</NOME_SIMBOLO>
 <SINONIMOS></SINONIMOS>
 <NOCAO><SENTENCA><TEXTO>Localização:
 - Arquivo: alt_cenario.php
