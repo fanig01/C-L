@@ -200,8 +200,8 @@ function prjInfo(idprojeto) {
 
 if (isset($idProject )) {
 
-    $id_usuario = $_SESSION['id_usuario_corrente'];
-    $returnCheck = verificaGerente($id_usuario, $idProject );
+    $id_user = $_SESSION['id_usuario_corrente'];
+    $returnCheck = verificaGerente($id_user, $idProject );
 
     if ($returnCheck != 0) {
         
@@ -324,8 +324,8 @@ Episodes: The administrator clicks the Remove Project in the top menu.
 
 if (isset($idProject )) {
 
-        $id_usuario = $_SESSION['id_usuario_corrente'];
-        $returnCheck = verificaGerente($id_usuario, $idProject );
+        $id_user = $_SESSION['id_usuario_corrente'];
+        $returnCheck = verificaGerente($id_user, $idProject );
       
         if ($returnCheck != 0) {
                         

@@ -31,7 +31,7 @@ The system calls the page to remove the project from the database.
         <?php
 
 $idProject  = $_SESSION['id_projeto_corrente'];
-$id_usuario = $_SESSION['id_usuario_corrente'];
+$id_user = $_SESSION['id_usuario_corrente'];
 
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 

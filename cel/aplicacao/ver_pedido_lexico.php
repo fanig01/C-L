@@ -94,14 +94,14 @@ else {
 
         while ($record != 'LAST_RECORD_REACHED') {
            
-            $id_usuario = $record['id_usuario'];
+            $id_user = $record['id_usuario'];
             $id_pedido = $record['id_pedido'];
             $tipo_pedido = $record['tipo_pedido'];
             $aprovado = $record['aprovado'];
 
             
             $select3->execute("SELECT nome FROM sinonimo WHERE id_pedidolex = $id_pedido");
-            $select2->execute("SELECT * FROM usuario WHERE id_usuario = $id_usuario");
+            $select2->execute("SELECT * FROM usuario WHERE id_usuario = $id_user");
             $usuario = $select2->gofirst();
 
             if (strcasecmp($tipo_pedido, 'remover')) {
