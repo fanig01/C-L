@@ -711,12 +711,12 @@ if (isset($id) && isset($term)) {
                                 
            if ($i == $count - 1) {
                                     
-               echo $tempSynonym[$i] . ".";
+               echo $tempSynonym[$i].".";
                                 
            }
            else {
                                     
-               echo $tempSynonym[$i] . ", ";
+               echo $tempSynonym[$i].", ";
                                 
                
            }
@@ -729,9 +729,9 @@ if (isset($id) && isset($term)) {
 
                     
              </tr>    
-             </table>                
+             </TABLE>                
           <BR>                 
-          <table>                     
+          <TABLE>                     
               <tr> 
                   
                   <td CLASS="Estilo" height="40" valign="middle">                             
@@ -749,7 +749,7 @@ if (isset($id) && isset($term)) {
         <?php
     }
     
-    elseif ($term == "oc") {        
+    else if ($term == "oc") {        
         
         $commandSQL = "SELECT id_conceito, nome, descricao   
                        FROM   conceito   
@@ -770,9 +770,9 @@ if (isset($id) && isset($term)) {
                   <th>Descri&ccedil;&atilde;o:</th><td CLASS="Estilo"><?= nl2br($resultArray['descricao']) ?></td>                    
               </tr> 
                 
-          </table>                
+          </TABLE>                
           <BR>                
-          <table> 
+          <TABLE> 
                     
               <tr>                       
                   <td CLASS="Estilo" height="40" valign=MIDDLE>                                                 
@@ -804,9 +804,9 @@ if (isset($id) && isset($term)) {
                   <th>Nome:</th><td CLASS="Estilo"><?= $resultArray['nome'] ?></td>                     
               </tr> 
                 
-          </table>                
+          </TABLE>                
           <BR>                 
-          <table> 
+          <TABLE> 
                     
               <tr>                        
                   <td CLASS="Estilo" height="40" valign=MIDDLE>                                              
@@ -820,6 +820,9 @@ if (isset($id) && isset($term)) {
       
                   <?php
      }
+     else   {
+         //Nothing to do
+     }
                     
      ?>   
 
@@ -827,7 +830,7 @@ if (isset($id) && isset($term)) {
             
           <br> 
                   
-              <?php
+                <?php
       
       switch ($term){
           
@@ -855,7 +858,7 @@ if (isset($id) && isset($term)) {
     
       bottom_frame($SgbdConnect, $term, $id);
 }
-elseif (isset($idProject )) {
+else if (isset($idProject )) {
     
 /*
 Script called by heading.php
@@ -941,86 +944,86 @@ Showing on-screen options:
                     
                       ?>    
                     
-              </tr>               
-              <tr>                        
+              </TR>               
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="addUser();">Adicionar usu&aacute;rio (n&atilde;o cadastrado) neste projeto</a></td>                    
-              </tr> 
+              </TR> 
                     
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="relateUsers();">Adicionar usu&aacute;rios j&aacute; existentes neste projeto</a></td>                    
-              </tr>   
+              </TR>   
                   
-              <tr>                      
+              <TR>                      
                   <td CLASS="Estilo">&nbsp;</td>                    
-              </tr> 
+              </TR> 
                    
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="requestScenario();">Verificar pedidos de altera&ccedil;&atilde;o de Cen&aacute;rios</a></td>                    
-              </tr> 
+              </TR> 
                     
-              <tr>                       
+              <TR>                       
                   <td CLASS="Estilo"><a href="#" onClick="requestLexicon();">Verificar pedidos de altera&ccedil;&atilde;o de termos do L&eacute;xico</a></td>                     
-              </tr>
+              </TR>
                     
-              <tr>                       
+              <TR>                       
                   <td CLASS="Estilo"><a href="#" onClick="requestConcept();">Verificar pedidos de altera&ccedil;&atilde;o de Conceitos</a></td>                  
-              </tr> 
+              </TR> 
                    
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="requestRelationship();">Verificar pedidos de altera&ccedil;&atilde;o de Rela&ccedil;&otilde;es</a></td>                    
-              </tr>
+              </TR>
                    
-              <tr>                       
+              <TR>                       
                   <td CLASS="Estilo">&nbsp;</td>                    
-              </tr> 
+              </TR> 
                    
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="generateGraph();" >Gerar grafo deste projeto</a></td>                   
-              </tr>       
+              </TR>       
                     
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="generateXML();">Gerar XML deste projeto</a></td>                   
-              </tr> 
+              </TR> 
                     
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="recuperateXML();">Recuperar XML deste projeto</a></td>                    
-              </tr> 
+              </TR> 
               
-              <tr>                         
+              <TR>                         
                   <td CLASS="Estilo">&nbsp;</td>                    
-              </tr> 
+              </TR> 
                    
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="generateOntology();">Gerar ontologia deste projeto</a></td>                     
-              </tr>            
+              </TR>            
                     
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><a href="#" onClick="generateDAML();">Gerar DAML da ontologia do projeto</a></td>                     
-              </tr> 
+              </TR> 
                     
-              <tr>                      
+              <TR>                      
                   <td CLASS="Estilo"><a href="#" onClick="recuperateDAML();">Hist&oacute;rico em DAML da ontologia do projeto</a></td>                    
-              </tr>           
+              </TR>           
                     
-              <tr>                         
+              <TR>                         
                   <td CLASS="Estilo"><a href="http://www.daml.org/validator/" target="new">*Validador de Ontologias na Web</a></td>                    
-              </tr>
+              </TR>
                     
-              <tr>                         
+              <TR>                         
                   <td CLASS="Estilo"><a href="http://www.daml.org/2001/03/dumpont/" target="new">*Visualizador de Ontologias na Web</a></td>                    
-              </tr>
+              </TR>
                     
-              <tr>                         
+              <TR>                         
                   <td CLASS="Estilo">&nbsp;</td>                     
-              </tr>
+              </TR>
                     
-              <tr>                        
+              <TR>                        
                   <td CLASS="Estilo"><font size="1">*Para usar Ontologias Geradas pelo C&L: </font></td>                                   
-              </tr>
+              </TR>
                     
-              <tr>                         
+              <TR>                         
                   <td CLASS="Estilo">   <font size="1">Hist&oacute;rico em DAML da ontologia do projeto -> Botao Direito do Mouse -> Copiar Atalho</font></td>                                
-              </tr>
+              </TR>
                 
           </table>
            

@@ -659,7 +659,7 @@ else {
    //Nothing should be done 
 }
 
-if (!(function_exists("alteraCenario"))) {
+if (!(function_exists("changeScenario"))) {
 
     function changeScenario($idProject , $idScenario, $title, $objective, $context, $actors, $resources, $exception, $episodes) {
         
@@ -830,7 +830,7 @@ else {
 // This function receives an id of lexical and removes all its
 // Links and relationships existing in all the database tables.
 
-if (!(function_exists("removeLexico"))) {
+if (!(function_exists("removeLexicon"))) {
 
     function removeLexicon($idProject , $id_lexico) {
         $database = new PGDB ();
@@ -853,9 +853,9 @@ else {
 // links and relationships existing in all the database tables.
 
 
-if (!(function_exists("change_Lexicon"))) {
+if (!(function_exists("changeLexicon"))) {
 
-    function change_Lexicon($idProject , $id_lexico, $name, $notion, $impact, $sinonimos, $classificacao) {
+    function changeLexicon($idProject , $id_lexico, $name, $notion, $impact, $sinonimos, $classificacao) {
         
         $database = new PGDB ();
         $delete = new QUERY($database);
@@ -1083,9 +1083,9 @@ else {
 # Essa funcao recebe um id de conceito e remove todos os seus
 # links e relacionamentos existentes.
 ###################################################################
-if (!(function_exists("removeConceito"))) {
+if (!(function_exists("removeConcept"))) {
 
-    function removeConceito($idProject , $id_conceito) {
+    function removeConcept($idProject , $id_conceito) {
         $DB = new PGDB ();
         $sql = new QUERY($DB);
         $sql2 = new QUERY($DB);
@@ -1161,9 +1161,9 @@ else {
 # Essa funcao recebe um id de relacao e remove todos os seus
 # links e relacionamentos existentes.
 ###################################################################
-if (!(function_exists("removeRelacao"))) {
+if (!(function_exists("removeRelationship"))) {
 
-    function removeRelacao($idProject , $id_relacao) {
+    function removeRelationship($idProject , $id_relacao) {
         $DB = new PGDB ();
 
         $sql6 = new QUERY($DB);
@@ -1565,7 +1565,7 @@ if (!(function_exists("inserirPedidoAlterarLexico"))) {
             }
         } 
         else { //Eh gerente
-            change_Lexicon($idProject , $id_lexico, $name, $notion, $impact, $sinonimos, $classificacao);
+            changeLexicon($idProject , $id_lexico, $name, $notion, $impact, $sinonimos, $classificacao);
         }
     }
 
@@ -1673,7 +1673,7 @@ if (!(function_exists("inserirPedidoAlterarCenario"))) {
             }
         }
         else { //Eh gerente
-            removeConceito($idProject , $id_conceito);
+            removeConcept($idProject , $id_conceito);
             adicionar_conceito($idProject , $name, $description, $namespace);
         }
     }
@@ -1885,7 +1885,7 @@ if (!(function_exists("tratarPedidoLexico"))) {
 
                 if (!strcasecmp($tipoPedido, 'alterar')) {
                     $id_lexico = $record['id_lexico'];
-                    change_Lexicon($idProject , $id_lexico, $name, $notion, $impact, $sinonimos, $classificacao);
+                    changeLexicon($idProject , $id_lexico, $name, $notion, $impact, $sinonimos, $classificacao);
                 } 
                 else if (($idLexicoConflitante = addLexicon($idProject , $name, $notion, $impact, $sinonimos, $classificacao)) <= 0) {
                     $idLexicoConflitante = -1 * $idLexicoConflitante;
@@ -1935,7 +1935,7 @@ if (!(function_exists("tratarrequestConcept"))) {
             if (!strcasecmp($tipoPedido, 'remover')) {
                 $id_conceito = $record['id_conceito'];
                 $idProject  = $record['id_projeto'];
-                removeConceito($idProject , $id_conceito);
+                removeConcept($idProject , $id_conceito);
             } 
             else {
 
@@ -1946,7 +1946,7 @@ if (!(function_exists("tratarrequestConcept"))) {
 
                 if (!strcasecmp($tipoPedido, 'alterar')) {
                     $id_cenario = $record['id_conceito'];
-                    removeConceito($idProject , $id_conceito);
+                    removeConcept($idProject , $id_conceito);
                 }
                 else {
                     //Nothing should be done
@@ -1986,7 +1986,7 @@ if (!(function_exists("tratarPedidoRelacao"))) {
             if (!strcasecmp($tipoPedido, 'remover')) {
                 $id_relacao = $record['id_relacao'];
                 $idProject  = $record['id_projeto'];
-                removeRelacao($idProject , $id_relacao);
+                removeRelationship($idProject , $id_relacao);
             } 
             else {
 
@@ -1995,7 +1995,7 @@ if (!(function_exists("tratarPedidoRelacao"))) {
 
                 if (!strcasecmp($tipoPedido, 'alterar')) {
                     $id_relacao = $record['id_relacao'];
-                    removeRelacao($idProject , $id_relacao);
+                    removeRelationship($idProject , $id_relacao);
                 }
                 else {
                     //Nothing should be done
@@ -2080,7 +2080,7 @@ else {
 }
 
 // Retorna TRUE ssse $id_usuario tem permissao sobre $idProject 
-if (!(function_exists("check_proj_perm"))) {
+if (!(function_exists("permissionCheckToProject"))) {
 
     function  permissionCheckToProject($id_usuario, $idProject ) {
         $SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
