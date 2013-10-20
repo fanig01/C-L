@@ -1,114 +1,125 @@
 <?php
+session_start();
+
 include_once "estruturas.php";
 include_once 'auxiliar_algoritmo.php';
 //include "auxiliar_bd.php";
-session_start();
+
 ?>
 <html>
-    <head>
+    <head>       
         <title>Algoritmo de Gera&ccedil;&atilde;o de Ontologias</title>
         <style>
-
         </style>
     </head>
-
-
     <body>
         <table height=100% width=100% border=0>
             <tr>
-
                 <td width='200'>
                     <iframe src='arv_frameset.htm' height="100%" width='200'>
                     </iframe>
-                </td>
-
+                </td>           
                 <td align='left' valign='top'>
                     <?php
+                    
                     /*
-                      Cenario:     Verificar com o usuario a existencia de um nome numa lista.
-                      Objetivo:    Verificar com o usuario a existencia de um nome numa lista.
-                      Contexto:    Algoritmo de traduc�o iniciado.
-                      Atores:      Usuario.
-                      Recursos:    Sistema, nome, lista.
-                      Episodios:
-                      - Posta true ou false, caso true posta o indice junto, caso false o indice e ignorado.
+                     Scenario: Verify the existence of a name on a list with the user.
+                     Objective: To verify the existence of a name on a list with the user.
+                     Context: translation algorithm started.
+                     Actors: User.
+                     Features: System name and list.
+                     Episodes:
+                            - Update true or false, if true put the index together, 
+                              if false, the index and ignored. - Posta true ou false, caso true 
+                              posta o indice junto, caso false o indice e ignorado.
                      */
-
+                                    
                     function exist($name, $list) {
+                        
                         $indice = -1;
-                        foreach ($list as $key => $palavra) {
+                        foreach ($list as $key => $palavra) {                            
                             if (strstr($name, $palavra)) {
                                 $indice = $key;
                                 break;
                             }
+                            else {
+                                //Nothing should be done
+                            }
                         }
+                        
                         ?>
                         <form method="POST" action="algoritmo.php" id="exist_form">
-
                         <?php
+                                                
                         if (count($_SESSION["verbos_selecionados"]) != 0) {
-                            echo "Propriedades j� cadastradas para esse impacto:<p>";
+                            
+                            echo "Propriedades j&aacute; cadastradas para esse impacto:<p>";
                             foreach ($_SESSION["verbos_selecionados"] as $verb) {
                                 echo "   - " . $verb . "<br>";
                             }
                         }
+                        else {
+                            //Nothing should be done
+                        }
+                       
                         ?>
+                            
                             <b>Impacto:</b> <code>"<?= $name ?>"</code><br><br>
-                            <b>A propriedade j� est� cadastrada na lista abaixo?</b><br>
+                            <b>A propriedade j&aacute; est&aacute; cadastrada na lista abaixo?</b><br>
                             <SELECT id='indice' name='indice' size=10 width="300">
                             <?php
                             foreach ($list as $key => $termo) {
                                 ?>
-                                    <OPTION value='<?= $key ?>' <?php if ($indice == $key) echo "selected" ?> > <?php echo $termo ?></OPTION>
-        <?php
-    }
+                                    
+                                <OPTION value='<?= $key ?>' <?php if ($indice == $key) echo "selected" ?> > <?php echo $termo ?></OPTION>
+        
+                                    <?php                                   
+                            }
     ?>
-                                <OPTION value="-1"></OPTION>
+                                <OPTION value="-1"></OPTION>                           
                             </SELECT><br>
                             <input type="radio" onClick="seExiste('TRUE')" value="TRUE" id="existe" name="existe" size="20" <?php if ($indice != -1) echo"checked" ?>> sim
-                            <input type="radio" onClick="seExiste('FALSE')" value="FALSE" id="existe" name="existe" size="20" <?php if ($indice == -1) echo"checked" ?> > n�o <BR>
+                            <input type="radio" onClick="seExiste('FALSE')" value="FALSE" id="existe" name="existe" size="20" <?php if ($indice == -1) echo"checked" ?> > n&atilde;o <BR>
                             <input type="text" value="<?php print strip_tags($name) ?>" id="nome" name="nome" size="20">
                             <input type="submit" value="Inserir Propriedade" id="B1" name="B1" disabled><BR>
-                            <INPUT type="button" value="Pr�ximo Passo >>" name="B2" onClick="fim()">
+                            <INPUT type="button" value="Pr&oacute;ximo Passo >>" name="B2" onClick="fim()">
                             </p>
                             <script language="JavaScript">
-                                            function seExiste(valor)
-                                            {
-                                                var nome = document.all.nome;
-                                                var indice = document.all.indice;
-                                                if (valor == 'TRUE')
-                                                {
-                                                    nome.disabled = true;
-                                                    indice.disabled = false;
-                                                }
-                                                else
-                                                {
-                                                    nome.disabled = false;
-                                                    indice.disabled = true;
-                                                }
-                                            }
+                                            
+                                            
+                           function seExiste(valor) {
+                                                
+                                    var nome = document.all.nome;
+                                    var indice = document.all.indice;
+                                    if (valor == 'TRUE'){
+                                            nome.disabled = true;
+                                            indice.disabled = false;
+                                    }
+                                    else{
+                                            nome.disabled = false;
+                                            indice.disabled = true;
+                                    }
+                            }
     <?php
+    
     if ($indice != -1)
         echo "seExiste('TRUE');";
     else
         echo "seExiste('FALSE');";
     ?>
 
-                                            function fim()
-                                            {
-                                                if (<?= count($_SESSION["verbos_selecionados"]) ?> != 0)
-                                                {
-                                                    document.all.indice.disabled = false;
-                                                    document.all.indice.selectedIndex =<?= count($list) ?>;
-                                                    document.all.existe[0].checked = true;
-                                                    var form = document.getElementById("exist_form");
-                                                    form.submit();
-                                                }
-                                                else
-                                                    alert("� necessario ao menos um verbo para cada impacto.");
-
-                                            }
-
+                              function fim(){
+                                     if (<?= count($_SESSION["verbos_selecionados"]) ?> != 0){
+                                              document.all.indice.disabled = false;
+                                              document.all.indice.selectedIndex =<?= count($list) ?>;
+                                              document.all.existe[0].checked = true;
+                                              var form = document.getElementById("exist_form");
+                                              form.submit();
+                                      }
+                                      else{
+                                              alert("&Eacute; necessario ao menos um verbo para cada impacto.");
+                                      }
+                               }
 
                             </script>
                             <SCRIPT language="JavaScript">
@@ -117,23 +128,26 @@ session_start();
                             </SCRIPT>
                         </form>
     <?php
-    //Registra a variavel de controle.
+    //Registers the control variable.
     $_SESSION["exist"] = 1;
-}
+
+    
+                     }
 
 /*
-  Cenario:    Verificar a importancia de um termo com ajuda do usuario.
-  Objetivo:    Verificar a importancia de um termo com ajuda do usuario.
-  Contexto:    Algoritmo de traduc�o iniciado.
-  Atores:        Usuario.
-  Recursos:    Sistema, termo.
-  Episodios:
-  - Retorna TRUE se a importancia e central.
+   Scenario: Checking the importance of a term with the help of the User.
+   Objective: To evaluate the importance of a term with the help of the User.
+   Context: translation algorithm started.
+   Actors: User.
+   Features: System and term.
+   Episodes:
+        - Returns TRUE if the importance and central.
  */
 
 function importancia_central($termo, $impactos) {
     ?>
-                        <h3>Termo: <?= $termo ?></h3><br>
+                        
+                    <h3>Termo: <?= $termo ?></h3><br>
                         <?php
                         print("Impactos:<br>");
 
@@ -154,14 +168,14 @@ function importancia_central($termo, $impactos) {
                         $_SESSION["main_subject"] = 1;
                     }
 
-                    /* -------- INCERTO --------
-                      Cenario:    Verificar se um conceito referencia outro.
-                      Objetivo:   Verificar se um conceito referencia outro.
-                      Contexto:   Algoritmo de traduc�o iniciado.
-                      Atores:     Usuario.
-                      Recursos:   Conceito1, conceito2.
-                      Episodios:
-                      - Retorna TRUE se referencia.
+                    /* -------- UNCERTAIN --------
+                      Scenario: Check if a concept references another.
+                      Objective: To determine if a concept references another.
+                      Context: translation algorithm started.
+                      Actors: User.
+                      Resources: Concept 1 Concept 2.
+                      Episodes:
+                            - Returns TRUE if references.
                      */
 
 //function faz_referencia($con1, $con2)
@@ -179,7 +193,7 @@ function importancia_central($termo, $impactos) {
                                     <td width="50%">
                         <?php
                         foreach ($concepts as $conc) {
-                            $concsel = $conc; //trocar
+                            $concsel = $conc; 
                             print("<INPUT type='radio' name='pai' id='pai' value='$conc->nome' onFocus='Salvar()'> <b> $conc->nome </b> <br>\n");
                             foreach ($conc->subconceitos as $subc) {
                                 print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-$subc<br>");
@@ -192,8 +206,12 @@ function importancia_central($termo, $impactos) {
                                         foreach ($concepts as $key => $conc) {
                                             $sel = false;
                                             $existe = array_search($conc->nome, $concsel->subconceitos);
-                                            if ($existe !== false)
+                                            if ($existe !== false){
                                                 $sel = true;
+                                            }
+                                            else {
+                                                //Nothing should be done
+                                            }
 
                                             print("<INPUT type='checkbox' id='$key' name='$key' value='$conc->nome' if($sel)checked> <b> $conc->nome </b> <br>\n");
                                         }
@@ -207,25 +225,29 @@ function importancia_central($termo, $impactos) {
 
                         <script>
                             document.reference_form.pai[0].checked = true;
-                            function Sair()
-                            {
+                            function Sair(){
                                 var salvar = window.confirm("Voce deseja salvar os subconceitos selecionados?");
-                                if (!salvar)
-                                {
+                                if (!salvar){
                                     for (var i = 0; i < document.reference_form.pai.length; i++)
                                     {
                                         if (document.reference_form.pai[i].checked)
                                         {
                                             document.reference_form.pai[i].checked = false;
                                         }
+                                        else {
+                                            //Nothing should be done
+                                        }
                                     }
                                     var form = document.getElementById("reference_form");
                                     form.submit();
                                 }
+                                else {
+                                    //Nothing should be done
+                                }
                             }
 
-                            function Salvar()
-                            {
+                            function Salvar() {
+                               
                                 /*
                                  var radio = document.getElementById('pai');
                                  var i = 0;
@@ -256,9 +278,7 @@ function importancia_central($termo, $impactos) {
         print("check.checked = false;\n");
     }
     ?>
-                                /*}
-                                 }
-                                 */
+
                             }
                         </script>
 
@@ -342,7 +362,7 @@ function insere_tipo($list) {
                         print "<H3>Conceito: $conc</H3>";
                         print "<H4>Propriedade:	 $rel </H4><BR>";
                         if (count($_SESSION["predicados_selecionados"]) != 0) {
-                            echo "Predicados j� cadastrados para essa propriedade:<p>";
+                            echo "Predicados j&aacute; cadastrados para essa propriedade:<p>";
                             foreach ($_SESSION["predicados_selecionados"] as $verb) {
                                 echo "- " . $verb . "<br>";
                             }
@@ -352,7 +372,7 @@ function insere_tipo($list) {
                             <B>Impacto:</B><CODE> <?= $imp ?></CODE><br>
 
                             <BR>
-                            <b>O predicado da rela��o j� est� cadastrado na lista abaixo?</b><br>
+                            <b>O predicado da rela&ccedil;&atilde;o j&aacute; est&aacute; cadastrado na lista abaixo?</b><br>
 
                             <SELECT id='indice' name='indice' size=10 width="300">
                         <?php
@@ -366,11 +386,11 @@ function insere_tipo($list) {
                             </SELECT><br>
 
                             <input type="radio" onClick="seExiste('TRUE')" value="TRUE" id="existe" name="existe" size="20" <?php if ($indexAux_4 !== -1) echo"checked" ?>> sim
-                            <input type="radio" onClick="seExiste('FALSE')" value="FALSE" id="existe" name="existe" size="20" <?php if ($indexAux_4 === -1) echo"checked" ?> > n�o <BR>
+                            <input type="radio" onClick="seExiste('FALSE')" value="FALSE" id="existe" name="existe" size="20" <?php if ($indexAux_4 === -1) echo"checked" ?> > n&atilde;o <BR>
 
                             <DIV id=naoExiste>
                                 <BR>
-                                <b>Se n�o existe, ele pertence � lista de elementos do nosso namespace(abaixo)?</b><br>
+                                <b>Se n&atilde;o existe, ele pertence a lista de elementos do nosso namespace(abaixo)?</b><br>
                                 <SELECT onChange='seleciona(this[this.selectedIndex].text)' size=10 width="300">
                             <?php
                             $selected = false;
@@ -396,7 +416,7 @@ function insere_tipo($list) {
 
                             </div>
                             <input type="submit" value="Inserir Predicado" id="B1" name="B1" size="20">
-                            <INPUT type="button" value="Pr�ximo Passo >>" name="B2" onClick="fim()">
+                            <INPUT type="button" value="Pr&oacute;ximo Passo >>" name="B2" onClick="fim()">
                             </p>
                             <script language='javascript'>
                                     function seleciona(valor)
@@ -416,7 +436,7 @@ function insere_tipo($list) {
                                             form.submit();
                                         }
                                         else
-                                            alert('� necess�rio ao menos um predicado para cada verbo');
+                                            alert('&Eacute; necess&aacute;rio ao menos um predicado para cada verbo');
                                     }
 
                                     function seExiste(valor)
@@ -454,14 +474,14 @@ function disjuncao($name, $list) {
     $_SESSION["disjoint"] = 1;
 
     if (count($_SESSION["axiomas_selecionados"]) != 0) {
-        echo "Termos disjunos j� discriminados para esse conceito:<p>";
+        echo "Termos disjunos j&aacute; discriminados para esse conceito:<p>";
         foreach ($_SESSION["axiomas_selecionados"] as $axiom) {
             echo "- " . $axiom . "<br>";
         }
         echo "</p>";
     }
 
-    print "Existe algum termo disjunto do conceito <b>$name</b> na lista abaixo ou no vocabul�rio m�nimo?";
+    print "Existe algum termo disjunto do conceito <b>$name</b> na lista abaixo ou no vocabul&aacute;rio m&iacute;nimo?";
     ?>
                         <form id='rel_form' name='rel_form'  method="POST" action="algoritmo.php">
                             <p>
@@ -486,7 +506,7 @@ function disjuncao($name, $list) {
                                 </tr>
                             </table>
                             <input type="radio" onClick="seExiste('TRUE')" value="TRUE" name="existe" size="20"> sim
-                            <input type="radio" onClick="seExiste('FALSE')" value="FALSE" name="existe" size="20" checked> n�o<br>
+                            <input type="radio" onClick="seExiste('FALSE')" value="FALSE" name="existe" size="20" checked> n&atilde;o<br>
                             <input type="button" value="Inserir Axioma" id="B1" name="B1" onClick="insere()">
                             <INPUT type="button" value="Pr�ximo Passo >>" name="B2" onClick="fim()">
                             </p>
@@ -548,23 +568,30 @@ if (isset($_SESSION["job"])) {
             ?>
                                 <h3>Conceito: <?= $_SESSION["nome2"]->nome ?></h3><br>
             <?php
-        } else if ($_SESSION['funcao'] == 'verbo') {
+        }
+        else if ($_SESSION['funcao'] == 'verbo') {
             ?>
                                 <h3>Verbo: <?= $_SESSION["nome2"]->nome ?></h3><br>
             <?php
-        } else if (isset($_SESSION["translate"])) {
+        }
+        else if (isset($_SESSION["translate"])) {
             if ($_SESSION["translate"] == 1) {
                 ?>
                                     <h3>Conceito: <?= $_SESSION["nome2"]->nome ?></h3><br>
                 <?php
-            } else {
+            }
+            else {
                 ?>
                                     <h3>Verbo: <?= $_SESSION["nome2"]->nome ?></h3><br>
                 <?php
             }
         }
+        else {
+            //Nothing should be done
+        }
         exist($_SESSION["nome1"], &$_SESSION["lista"]);
-    } else if ($_SESSION["job"] == "insert") {
+    } 
+    else if ($_SESSION["job"] == "insert") {
         insert($_SESSION["nome1"], &$_SESSION["lista"]);
     } else if ($_SESSION["job"] == "main_subject") {
         importancia_central($_SESSION["nome1"], $_SESSION['nome2']->impacto);
@@ -588,20 +615,21 @@ if (isset($_SESSION["job"])) {
 
 
                         <?php
-                    }
-                    else {
+                                          
+    }                 
+    else {
                         ?>
                         <form method="POST" action="algoritmo_inicio.php">
                             <p>
                                 <font size="4">Carregar Ontologia?</font></p>
                             <p>
                                 <input type="radio" value="TRUE" name="load" size="20"> sim
-                                <input type="radio" value="FALSE" name="load" size="20"> n�o
+                                <input type="radio" value="FALSE" name="load" size="20"> n&atilde;o
                                 <input type="submit" value="Enviar" name="B1" size="20">
                             </p>
                         </form>
-                        <?php
-                    }
+                        <?php                                          
+    }
                     ?>
 
                     <p><a href="inicio.php">Reiniciar Ontologia</a></p>
