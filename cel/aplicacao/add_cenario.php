@@ -10,6 +10,35 @@ include_once("bd.inc");
    should be inserted the new scenario.
 */
 
+/*
+ Scenario - Include Scenario
+ Objective : Allow user to include a new scenario
+ Context : User to include a new scenario.
+ Precondition : Login and scenario not registered
+ Actors : User and System
+ Resources : Data to be registered
+ Episodes : The system provides the user a screen with the following text fields :
+    - Scenario Name
+    - Objective.
+           Restriction: Text box with at least 5 lines of writing visible
+    - Context. 
+           Restriction: Text box with at least 5 lines of writing visible
+    - Actors.
+           Restriction: Text box with at least 5 lines of writing visible
+    - Resources.
+           Restriction: Text box with at least 5 lines of writing visible
+    - Exception.
+           Restriction: Text box with at least 5 lines of writing visible
+    - Episodes.
+           Restriction: Text box with at least 16 lines of writing visible
+    - Button to confirm the inclusion of the new cen River
+ Restrictions : After clicking the confirmation button , the system checks whether all 
+ fields have been filled .
+ Exception : If all fields are empty , returns to the user a message that all fields
+ must be completed and a button to return to the previous page .
+ */
+
+
 checkUserAuthentication("index.php");   
 if (!isset($sucesso)) {
     $sucesso = "n";
@@ -21,18 +50,21 @@ else {
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
+    
     $returnCheck = checarCenarioExistente($_SESSION['id_projeto_corrente'], $title);
-    ?>  <!-- ADICIONEI ISTO PARA TESTES -->
+    ?> 
     <!--
        RET = <?= $returnCheck ?> => RET = <?PHP $returnCheck ? print("TRUE")  : print("FALSE") ; ?><BR>
     $sucesso        = <?= $sucesso ?><BR>
     _GET["sucesso"] = <?= $_GET["sucesso"] ?><BR>   
     -->
     <?PHP
+    
     if ($returnCheck == true) {
+       
         print("<!-- Tentando Inserir Cenario --><BR>");
 
-        /* Substitui todas as ocorrencias de ">" e "<" por " " */
+        // Replaces all occurrences of ">" and "<" with " ". 
         $title = str_replace(">", " ", str_replace("<", " ", $title));
         $objective = str_replace(">", " ", str_replace("<", " ", $objective));
         $context = str_replace(">", " ", str_replace("<", " ", $context));
@@ -40,7 +72,10 @@ if (isset($submit)) {
         $resources = str_replace(">", " ", str_replace("<", " ", $resources));
         $exception = str_replace(">", " ", str_replace("<", " ", $exception));
         $episodes = str_replace(">", " ", str_replace("<", " ", $episodes));
-        inserirPedidoAdicionarCenario($_SESSION['id_projeto_corrente'], $title, $objective, $context, $actors, $resources, $exception, $episodes, $_SESSION['id_usuario_corrente']);
+        
+        inserirPedidoAdicionarCenario($_SESSION['id_projeto_corrente'], $title, $objective, 
+                $context, $actors, $resources, $exception, $episodes, $_SESSION['id_usuario_corrente']);
+        
         print("<!-- Cenario Inserido Com Sucesso! --><BR>");
     } 
     else {
@@ -70,7 +105,7 @@ if (isset($submit)) {
 
     <?php
 } 
-else {    // Script chamado atraves do menu superior
+else {    // Script called through the top menu
     $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
     ?>
 
@@ -126,25 +161,7 @@ else {    // Script chamado atraves do menu superior
             //-->
 
     <?php
-    // Cen�rio -  Incluir Cen�rio 
-    //Objetivo:        Permitir ao usu�rio a inclus�o de um novo cen�rio
-    //Contexto:        Usu�rio deseja incluir um novo cen�rio.
-    //              Pr�-Condi��o: Login, cen�rio ainda n�o cadastrado
-    //Atores:        Usu�rio, Sistema
-    //Recursos:        Dados a serem cadastrados
-    //Epis�dios:    O sistema fornecer� para o usu�rio uma tela com os seguintes campos de texto:
-    //                - Nome Cen�rio
-    //                - Objetivo.  Restri��o: Caixa de texto com pelo menos 5 linhas de escrita vis�veis
-    //                - Contexto.  Restri��o: Caixa de texto com pelo menos 5 linhas de escrita vis�veis
-    //                - Atores.    Restri��o: Caixa de texto com pelo menos 5 linhas de escrita vis�veis
-    //                - Recursos.  Restri��o: Caixa de texto com pelo menos 5 linhas de escrita vis�veis
-    //                - Exce��o.   Restri��o: Caixa de texto com pelo menos 5 linhas de escrita vis�veis
-    //                - Epis�dios. Restri��o: Caixa de texto com pelo menos 16 linhas de escrita vis�veis
-    //                - Bot�o para confirmar a inclus�o do novo cen�rio
-    //              Restri��es: Depois de clicar no bot�o de confirma��o,
-    //                          o sistema verifica se todos os campos foram preenchidos. 
-    // Exce��o:        Se todos os campos n�o foram preenchidos, retorna para o usu�rio uma mensagem avisando
-    //              que todos os campos devem ser preenchidos e um bot�o de voltar para a pagina anterior.
+
     ?>
 
             </SCRIPT>
