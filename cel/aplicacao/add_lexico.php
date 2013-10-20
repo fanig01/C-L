@@ -12,6 +12,9 @@ session_start();
 if (!isset($sucesso)) {
     $sucesso = 'n';
 }
+else {
+    //Nothing should be done
+}
 
 // Checa se o usu�rio foi autenticado
 checkUserAuthentication("index.php");
@@ -23,15 +26,20 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 if (isset($submit)) {
 
     $returnCheck = checarLexicoExistente($_SESSION['id_projeto_corrente'], $name);
-    if (!isset($listSinonimo))
+    if (!isset($listSinonimo)){
         $listSinonimo = array();
+    }
+    else {
+        //Nothing should be done
+    }
 
     $returnCheckTheSynonym = checarSinonimo($_SESSION['id_projeto_corrente'], $listSinonimo);
 
     if (($returnCheck == true) AND ($returnCheckTheSynonym == true )) {
         $id_usuario_corrente = $_SESSION['id_usuario_corrente'];
         inserirPedidoAdicionarLexico($idProject , $name, $notion, $impact, $id_usuario_corrente, $listSinonimo, $classificacao);
-    } else {
+    }
+    else {
         ?>
         <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
                 <p style="color: red; font-weight: bold; text-align: center">Este s&iacute;mbolo ou sin&ocirc;nimo j&aacute; existe!</p>
@@ -54,7 +62,8 @@ if (isset($submit)) {
     </script>   
     <?php
 // Script chamado atrav�s do menu superior
-} else {
+} 
+else {
     $commandSQL = "SELECT nome FROM projeto WHERE id_projeto = $idProject ";
     $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
     $resultArray = mysql_fetch_array($requestResultSQL);
@@ -73,27 +82,31 @@ if (isset($submit)) {
                     nome = form.nome.value;
                     nocao = form.nocao.value;
 
-                    if (nome == "")
-                    {
+                    if (nome == ""){
                         alert(" Por favor, forne&ccedil;a o NOME do l&eacute;xico.\n O campo NOME &eacute; de preenchimento obrigat&oacute;rio.");
                         form.nome.focus();
                         return false;
-                    } else {
+                    } 
+                    else {
                         padrao = /[\\\/\?"<>:|]/;
                         nOK = padrao.exec(nome);
-                        if (nOK)
-                        {
+                        if (nOK){
                             window.alert("O nome do l&eacute;xico n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
                             form.nome.focus();
                             return false;
                         }
+                        else {
+                            //Nothing should be done
+                        }
                     }
 
-                    if (nocao == "")
-                    {
+                    if (nocao == ""){
                         alert(" Por favor, forne&ccedil;a a NO&Ccedil;&Atilde;O do l&eacute;xico.\n O campo NO&Ccedil;&Atilde;O &eacute; de preenchimento obrigat&oacute;rio.");
                         form.nocao.focus();
                         return false;
+                    }
+                    else {
+                        //Nothing should be done
                     }
 
                 }
@@ -107,11 +120,13 @@ if (isset($submit)) {
                     sinonimo = document.forms[0].sinonimo.value;
                     padrao = /[\\\/\?"<>:|]/;
                     nOK = padrao.exec(sinonimo);
-                    if (nOK)
-                    {
+                    if (nOK) {
                         window.alert("O sin&ocirc;nimo do l&eacute;xico n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
                         document.forms[0].sinonimo.focus();
                         return;
+                    }
+                    else {
+                        //Nothing should be done
                     }
 
                     listSinonimo.options[listSinonimo.length] = new Option(document.forms[0].sinonimo.value, document.forms[0].sinonimo.value);
@@ -126,10 +141,12 @@ if (isset($submit)) {
                 {
                     listSinonimo = document.forms[0].elements['listSinonimo[]'];
 
-                    if (listSinonimo.selectedIndex == -1)
+                    if (listSinonimo.selectedIndex == -1){
                         return;
-                    else
+                    }
+                    else{
                         listSinonimo.options[listSinonimo.selectedIndex] = null;
+                    }
 
                     delSinonimo();
                 }
@@ -173,6 +190,9 @@ if (isset($submit)) {
         ?>
                 <p style="color: blue; font-weight: bold; text-align: center">S&iacute;mbolo inserido com sucesso!</p>
         <?php
+    }
+    else {
+        //Nothing should be done
     }
     ?>       
             <form action="?id_projeto=<?= $idProject  ?>" method="post" onSubmit="return(doSubmit());">
