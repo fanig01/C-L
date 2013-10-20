@@ -41,7 +41,7 @@ if (isset($submit)) {
     ?>
     <html>
         <head>
-            <title>Alterar L�xico</title>
+            <title>Alterar L&eacute;xico</title>
         </head>
         <body>
             <script language="javascript1.3">
@@ -51,7 +51,7 @@ if (isset($submit)) {
 
             </script>
 
-            <h4>Opera��o efetuada com sucesso!</h4>
+            <h4>Opera&ccedil;&atilde;o efetuada com sucesso!</h4>
 
             <script language="javascript1.3">
 
@@ -79,7 +79,7 @@ if (isset($submit)) {
     ?>
         <html>
             <head>
-                <title>Alterar L�xico</title>
+                <title>Alterar L&eacute;xico</title>
             </head>
             <body>
                 <script language="JavaScript">
@@ -90,7 +90,7 @@ if (isset($submit)) {
 
                         if (nocao == "") {
                             
-                            alert(" Por favor, forne�a a NO��O do l�xico.\n O campo NO��O � de preenchimento obrigat�rio.");
+                            alert(" Por favor, forne&ccedil;a a NO&Ccedil;&Atilde;O do l&eacute;xico.\n O campo NO&Ccedil;&Atilde;O &eacute; de preenchimento obrigat&oacute;rio.");
                             form.nocao.focus();
                             return false;  
                         }
@@ -167,7 +167,7 @@ if (isset($submit)) {
 
                 </SCRIPT>
 
-                <h4>Alterar S�mbolo</h4>
+                <h4>Alterar S&iacute;mbolo</h4>
                 <br>
                 <form action="?id_projeto=<?= $idProject  ?>" method="post" onSubmit="return(doSubmit());">
                     <table>
@@ -185,7 +185,7 @@ if (isset($submit)) {
                         </tr>
 
                         <tr valign="top">
-                            <td>Sin�nimos:</td>
+                            <td>Sin&ocirc;nimos:</td>
                             <td width="0%">
                                 <input name="sinonimo" size="15" type="text" maxlength="50">             
                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Adicionar" onclick="addSinonimo()">
@@ -209,7 +209,7 @@ if (isset($submit)) {
                                     </tr>
 
                                     <tr>
-                                        <td>No��o:</td>
+                                        <td>No&ccedil;&atilde;o:</td>
                                         <td>
                                             <textarea name="nocao" cols="48" rows="3" ><?= $resultArray['nocao']; ?></textarea>
                                         </td>
@@ -221,7 +221,7 @@ if (isset($submit)) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Classifica�ao:</td>
+                                        <td>Classifica&ccedil;ao:</td>
                                         <td>
                                             <SELECT id='classificacao' name='classificacao' size=1 width="300">
                                                 <OPTION value='sujeito' <?php if ($resultArray['tipo'] == 'sujeito') echo "selected" ?>>Sujeito</OPTION>
@@ -237,13 +237,13 @@ if (isset($submit)) {
                                     </tr>
                                     <tr>
                                         <td align="center" colspan="2" height="60">
-                                            <input name="submit" type="submit" onClick="return testWhite(this.form);" value="Alterar S�mbolo">
+                                            <input name="submit" type="submit" onClick="return testWhite(this.form);" value="Alterar S&iacute;mbolo">
                                         </td>
                                     </tr>
                                     </table>
                                     </form>
                                     <center><a href="javascript:self.close();">Fechar</a></center>
-                                    <br><i><a href="showSource.php?file=alt_lexico.php">Veja o c�digo fonte!</a></i>
+                                    <br><i><a href="showSource.php?file=alt_lexico.php">Veja o c&oacute;digo fonte!</a></i>
                                     </body>
                                     </html>
 
