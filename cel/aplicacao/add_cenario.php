@@ -1,17 +1,21 @@
 <?php
 session_start();
 
-// add_cenario.php: Este script cadastra um novo cenario do projeto. Eh
-//                  passada, atraves da URL, uma variavel $idProject , que
-//                  indica em que projeto deve ser inserido o novo cenario.
-
 include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
+/* add_cenario.php: This script registers a new scenario project. 
+   Through the URL is passed a variable $idProject indicating that the project
+   should be inserted the new scenario.
+*/
+
 checkUserAuthentication("index.php");   
 if (!isset($sucesso)) {
     $sucesso = "n";
+}
+else {
+    //Nothing should be done
 }
 
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
@@ -38,7 +42,8 @@ if (isset($submit)) {
         $episodes = str_replace(">", " ", str_replace("<", " ", $episodes));
         inserirPedidoAdicionarCenario($_SESSION['id_projeto_corrente'], $title, $objective, $context, $actors, $resources, $exception, $episodes, $_SESSION['id_usuario_corrente']);
         print("<!-- Cenario Inserido Com Sucesso! --><BR>");
-    } else {
+    } 
+    else {
         ?>
         <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
                 <p style="color: red; font-weight: bold; text-align: center">Este cen&aacute;rio j&aacute; existe!</p>
@@ -64,7 +69,8 @@ if (isset($submit)) {
     </script>
 
     <?php
-} else {    // Script chamado atraves do menu superior
+} 
+else {    // Script chamado atraves do menu superior
     $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
     ?>
 
@@ -81,34 +87,40 @@ if (isset($submit)) {
                     objetivo = form.objetivo.value;
                     contexto = form.contexto.value;
 
-                    if ((titulo == ""))
-                    {
+                    if ((titulo == "")){
                         alert("Por favor, digite o titulo do cen&aacute;rio.")
                         form.titulo.focus()
                         return false;
-                    } else {
+                    }
+                    else {
                         padrao = /[\\\/\?"<>:|]/;
                         OK = padrao.exec(titulo);
-                        if (OK)
-                        {
+                        if (OK){
                             window.alert("O t&iacute;tulo do cen&aacute;rio n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
                             form.titulo.focus();
                             return false;
                         }
+                        else {
+                            //Nothing should be done
+                        }
                     }
 
-                    if ((objetivo == ""))
-                    {
+                    if ((objetivo == "")){
                         alert("Por favor, digite o objetivo do cen&aacute;rio.")
                         form.objetivo.focus()
                         return false;
                     }
+                    else {
+                        //Nothing should be done
+                    }
 
-                    if ((contexto == ""))
-                    {
+                    if ((contexto == "")){
                         alert("Por favor, digite o contexto do cen&aacute;rio.")
                         form.contexto.focus()
                         return false;
+                    }
+                    else{
+                        //Nothing should be done
                     }
                 }
             //-->
@@ -145,6 +157,9 @@ if (isset($submit)) {
                 <p style="color: blue; font-weight: bold; text-align: center">Cen&aacute;rio inserido com sucesso!</p>
         <?php
     }
+    else {
+        //Nothing should be done
+    }
     ?>    
             <form action="" method="post">
                 <table>
@@ -152,7 +167,7 @@ if (isset($submit)) {
                         <td>Projeto:</td>
                         <td><input disabled size="51" type="text" value="<?= $nameProject ?>"></td>
                     </tr>
-                    <td>T�tulo:</td>
+                    <td>T&iacute;tulo:</td>
                     <td><input size="51" name="titulo" type="text" value=""></td>                
                     <tr>
                         <td>Objetivo:</td>
