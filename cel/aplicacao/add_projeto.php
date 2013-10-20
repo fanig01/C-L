@@ -4,31 +4,31 @@ session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
-// Cen�rio controle de acesso
+// Scenario acess control
 checkUserAuthentication("index.php");
 
-// Este script eh chamado quando ocorre uma solicitacao de inclusao
-// de novo projeto, ou quando um novo usuario se cadastra no sistema
-//Cen�rio  -  Cadastrar Novo Projeto 
-//Objetivo:	   Permitir ao usu�rio cadastrar um novo projeto
-//Contexto:	   Usu�rio deseja incluir um novo projeto na base de dados
-//              Pr�-Condi��o: Login  
-//Atores:	   Usu�rio
-//Recursos:	   Sistema, dados do projeto, base de dados
-//Epis�dios:   O Usu�rio clica na op��o �adicionar projeto� encontrada no menu superior.
-//             O sistema disponibiliza uma tela para o usu�rio especificar os dados do novo projeto,
-//              como o nome do projeto e sua descri��o.
-//             O usu�rio clica no bot�o inserir.
-//             O sistema grava o novo projeto na base de dados e automaticamente constr�i a Navega��o
-//              para este novo projeto.
-//Exce��o:	   Se for especificado um nome de projeto j� existente e que perten�a ou tenha a participa��o
-//                 deste usu�rio, o sistema exibe uma mensagem de erro.
-// Chamado atraves do botao de submit
+/*
+ * This script is call when happen a request of inclusion of new project,
+ * or when a new user sign-up in system
+ * Scenario: Register a New project
+ * Objetive: Allow the user register a new project
+ * Context: User want include a new project in database
+ * Pre condition: login
+ * Actors: user
+ * Resources: System, project data, database
+ * Episode: user click in option "add project" found in top menu
+ *          The system avaiable a screen to user specify the dataof the new
+ *          project whit the project name and it description.
+ *          User click in button "insert".
+ *          System records the new project in database and automatically
+ *          builds a navegation for the new project
+ * Exception: if is specified a project name already exist and that belonging
+ *            or had a participation of this user, the system display a error
+ *            message
+ */
 if (isset($submit)) {
 
     $id_projeto_incluido = projectIncludes($name, $description);
-
-    // Inserir na tabela participa
 
     if ($id_projeto_incluido != -1) {
         $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
@@ -57,7 +57,7 @@ if (isset($submit)) {
     </script>
 
     <?php
-// Chamado normalmente
+    
 } else {
     ?>
 
@@ -67,7 +67,7 @@ if (isset($submit)) {
             <script language="javascript1.3">
 
                 function chkFrmVals() {
-                    if (document.forms[0].nome.value == "") {
+                    if (document.forms[0].nome.value === "") {
                         alert('Preencha o campo "Nome"');
                         document.forms[0].nome.focus();
                         return false;
