@@ -1,11 +1,5 @@
 <?php
 
-// alt_cenario.php: Este script faz um pedido de alteracao de um cenario do projeto.
-// O usuario recebe um form com o cenario corrente (ou seja com seus campos preenchidos)
-// e podera fazer	alteracoes em todos os campos menos no titulo.Ao final a tela principal
-// retorna para a tela de inicio e a arvore e fechada.O form de alteracao tb e fechado.
-// Arquivo chamador: main.php
-
 session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
@@ -48,19 +42,30 @@ if (isset($submit)) {
     $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
     $resultArray = mysql_fetch_array($requestResultSQL);
 
-// Cen�rio -    Alterar Cen�rio 
-//Objetivo:	    Permitir a altera��o de um cen�rio por um usu�rio
-//Contexto:	    Usu�rio deseja alterar cen�rio previamente cadastrado
-//              Pr�-Condi��o: Login, Cen�rio cadastrado no sistema
-//Atores:	    Usu�rio
-//Recursos:	    Sistema, dados cadastrados
-//Excess�es:    O nome do cen�rio sendo alterado � modificado para o nome de um cen�rio j� existente.
-//Epis�dios:	O sistema fornecer� para o usu�rio a mesma tela de INCLUIR CEN�RIO,
-//              por�m com os seguintes dados do cen�rio a ser alterado preenchidos
-//              e edit�veis nos seus respectivos campos: Objetivo, Contexto, Atores, Recursos e Epis�dios.
-//              Os campos Projeto e T�tulo estar�o preenchidos, mas n�o edit�veis.
-//              Ser� exibido um campo Justificativa para o usu�rio colocar uma
-//              justificativa para a altera��o feita.
+/*
+ * Scenario: Change Scenairo
+ * 
+ * Objetive: Allow the alteration of a scenario for a user
+ * 
+ * Context: User want to change scenario previously registered
+ * 
+ * Pre condition: Login, Scenario registered in the system
+ * 
+ * Actors: User
+ * 
+ * Resoucers: system, data registered
+ * 
+ * Exceptions: The name of the scenario being modified to change the name of 
+ *             a scenario already exists.
+ * 
+ * Episode: The system will provide to the user the same screen INCLUDE scenario,
+ *          Detailed with the following data to be changed scenario filled
+ *          And editable in their respective fields: Purpose, Context, Actors,
+ *          Resources and episodes.
+ *          Fields Project title and estaro filled, but editable.
+ *          Be shown a field rationale for the user to place a justification for
+ *          the alteration made.
+ */
     
     ?>
 
