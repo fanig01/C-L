@@ -44,7 +44,7 @@ if (isset($submit)) {
         <html>
             <title>Erro</title>
             <body>
-                <p style="color: red; font-weight: bold; text-align: center">Nome de projeto j� existente!</p>
+                <p style="color: red; font-weight: bold; text-align: center">Nome de projeto j&aacute; existente!</p>
             <center><a href="JavaScript:window.history.go(-1)">Voltar</a></center>
         </body>
         </html>   
@@ -84,7 +84,7 @@ if (isset($submit)) {
                         
                         if (nOK) {
                             
-                            window.alert("O nome do projeto n�o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
+                            window.alert("O nome do projeto n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
                             document.forms[0].nome.focus();
                             return false;
                         }
@@ -105,14 +105,14 @@ if (isset($submit)) {
                         <td><input maxlength="128" name="nome" size="48" type="text"></td>
                     </tr>
                     <tr>
-                        <td>Descri��o:</td>
+                        <td>Descri&ccedil;&atilde;o:</td>
                         <td><textarea cols="48" name="descricao" rows="4"></textarea></td>
                     <tr>
                         <td align="center" colspan="2" height="60"><input name="submit" type="submit" value="Adicionar Projeto"></td>
                     </tr>
                 </table>
             </form>
-            <br><i><a href="showSource.php?file=add_projeto.php">Veja o c�digo fonte!</a></i>
+            <br><i><a href="showSource.php?file=add_projeto.php">Veja o c&oacute;digo fonte!</a></i>
         </body>
     </html>
 
