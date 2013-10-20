@@ -32,27 +32,32 @@ if (isset($submit)) {
             
         } else {
 
-            // ** Cenario "Inclusao de Usuario Independente" **
-            // Todos os campos estao preenchidos. O sistema deve agora verificar
-            // se ja nao existe alguem cadastrado com o mesmo login informado pelo usuario.
-// Cen�rio - Incluir usu�rio independente 
-// Objetivo:  Permitir um usu�rio, que n�o esteja cadastrado como administrador, se cadastrar 
-//            com o perfil de administrador	
-// Contexto:  Sistema aberto Usu�rio deseja cadastrar-se ao sistema como administrador. 
-//            Usu�rio na tela de cadastro de usu�rio 
-//            Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-// Atores:    Usu�rio, Sistema	
-// Recursos:  Interface, Banco de Dados	
-// Epis�dios: O sistema retorna para o usu�rio uma interface com campos para entrada de
-//            um Nome, email, login, uma senha e a confirma��o da senha.
-//            O usu�rio preenche os campos e clica em cadastrar 
-//            O sistema ent�o checa para ver se todos os campos est�o preenchidos.
-//              Caso algum campo deixar de ser preenchido, o sistema avisa que todos
-//               os campos devem ser preenchidos.
-//              Caso todos os campos estiverem preenchidos, o sistema checa no banco
-//               de dados para ver se esse login j� existe..
-//              Caso aquele login digitado j� exista, o sistema retorna a mesma p�gina
-//               para o usu�rio avisando que o usu�rio deve escolher outro login,.
+/*
+ *  Scenario: Inclusion of independent user
+ * 
+ * Objective: Allow a user, it is not registered as administrator, sign-up with
+ *            a profile of administrator.
+ * 
+ * Context: Open system and the user want sign-up in system as administrator.
+ *          User in registered user's screen
+ * 
+ * Pre condition: user have acess to the system
+ * 
+ * Actors: user, system
+ * 
+ * Resoucers: Interface, database
+ * 
+ * Episode: The system return to the user a interface with fields for nome,
+ *          email, login, password and the password confirmation entry.
+ *          The user filled the fields and click in sign-up
+ *          The system check to see if all fields were filled.
+ *          If some field fail to be filled, the system warning that all fields
+ *          must be filled.
+ *          If al fields are filled, the system check in database to see if
+ *          this login already exist.
+ *          If that typed login already exist, the systme return the same page
+ *          to warning to the user that must choose other login.
+ */
 
             $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
             $commandSQL = "SELECT id_usuario FROM usuario WHERE login = '$login'";
@@ -60,21 +65,33 @@ if (isset($submit)) {
             
             if (mysql_num_rows($requestResultSQL)) {
                 
-//                $p_style = "color: red; font-weight: bold";
-//                $p_text = "Login j� existente no sistema. Favor escolher outro login.";
-//                recarrega("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&senha=$senha&senha_conf=$senha_conf&novo=$novo");
-// Cen�rio - Adicionar Usu�rio
-// Objetivo:  Permitir ao Administrador criar novos usu�rios.
-// Contexto:  O Administrador deseja adicionar novos usu�rios (n�o cadastrados)
-//            criando novos  usu�rios ao projeto selecionado.
-//            Pr�-Condi��es: Login
-// Atores:    Administrador
-// Recursos:  Dados do usu�rio
-// Epis�dios: O Administrador clica no link �Adicionar usu�rio (n�o existente) neste projeto�,
-//            entrando com as informa��es do novo usu�rio: nome, email, login e senha.
-//            Caso o login j� exista, aparecer� uma mensagem de erro na tela informando que
-//            este login j� existe.
-                ?>
+/* $p_style = "color: red; font-weight: bold";
+ * $p_text = "Login j� existente no sistema. Favor escolher outro login.";
+ * recarrega("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&senha=$senha&senha_conf=$senha_conf&novo=$novo"
+ */ 
+
+                
+/*
+ * Scenario: Add user
+ * 
+ * Objective: Allow to the administrator create new users.
+ * 
+ * Context: The administrator want add new users (not registered)
+ * 
+ * Pre condition: Login
+ * 
+ * Actors: administrator
+ * 
+ * Resoucers: user's data
+ * 
+ * Episode: administrator click in link "add user (not registered) in this project
+ *          entering with information of new user: nome, email, login and password
+ *          If the login already exist, appear a eoor message on the screen
+ *          informing that login already existe.
+ */
+ 
+                
+                ?> 
                 <script language="JavaScript">
                     alert("Login j� existente no sistema. Favor escolher outro login.")
                 </script>
@@ -83,46 +100,45 @@ if (isset($submit)) {
                 
                 recharge("?novo=$novo");
                 
-            } else {    // Cadastro passou por todos os testes -- ja pode ser incluido na BD
+            } else {
                 
-                /* Substitui todas as ocorrencias de ">" e "<" por " " */
                 $name = str_replace(">", " ", str_replace("<", " ", $name));
                 $login = str_replace(">", " ", str_replace("<", " ", $login));
                 $email = str_replace(">", " ", str_replace("<", " ", $email));
 
-                // Criptografando a senha
                 $password = md5($password);
                 $commandSQL = "INSERT INTO usuario (nome, login, email, senha) VALUES ('$name', '$login', '$email', '$password')";
                 mysql_query($commandSQL) or die("Erro ao cadastrar o usuario");
                 recharge("?cadastrado=&novo=$novo&login=$login");
             }
             
-        }   // else
+        }
         
-    }   // else
+    }
     
 } else if (isset($cadastrado)) {
 
-    // Cadastro concluido. Dependendo de onde o usuario veio,
-    // devemos manda-lo para um lugar diferente.
+    if ($novo == "true") {
 
-    if ($novo == "true") {      // Veio da tela inicial de login
-
-        // ** Cenario "Inclusao de Usuario Independente" **
-        // O usuario acabou de cadastrar-se no sistema, devemos
-        // redireciona-lo para a parte de inclusao de projetos
-        // Registra que o usuario esta logado com o login recem-cadastrado
-// Cen�rio - Incluir usu�rio independente 
-// Objetivo:  Permitir um usu�rio, que n�o esteja cadastrado como administrador, se cadastrar 
-//            com o perfil de administrador	
-// Contexto:  Sistema aberto Usu�rio deseja cadastrar-se ao sistema como administrador. 
-//            Usu�rio na tela de cadastro de usu�rio 
-//            Pr�-Condi��o: Usu�rio ter acessado ao sistema	
-// Atores:    Usu�rio, Sistema	
-// Recursos:  Interface, Banco de Dados	
-// Epis�dios:  Caso aquele login digitado n�o exista, o sistema cadastra esse usu�rio 
-//               como administrador no banco de dados,  possibilitando:
-//              - Redirecion�-lo  para a interface de CADASTRAR NOVO PROJETO;
+/*
+ * Scenario: Inclusion of independent user
+ * 
+ * Objetive: Allow a user who isn't registered as administrator, register with
+ *           a profile of administrator.
+ * 
+ * Context: Open system and user want sing-up in system as administrator
+ *          User in registered user's screen
+ * 
+ * Pre condition: user have acess to the system
+ * 
+ * Actors: user, system
+ * 
+ * Resoucers: Interface, database
+ * 
+ * Episode:  If that login typed in there, the system registers this user as an
+ *           administrator in the database, enabling:
+ *              - Redirect him to interface REGISTER NEW PROJECT
+ */
         
         $id_usuario_corrente = simple_query("id_usuario", "usuario", "login = '$login'");
         session_register("id_usuario_corrente");
@@ -130,7 +146,6 @@ if (isset($submit)) {
 
         <script language="javascript1.3">
 
-        // Redireciona o usuario para a parte de inclusao de projetos
             opener.location.replace('index.php');
             open('add_projeto.php', '', 'dependent,height=300,width=550,resizable,scrollbars,titlebar');
             self.close();
@@ -141,14 +156,11 @@ if (isset($submit)) {
         <?php
         
     } else {
-
-        // ** Cenario "Edicao de Usuario" **
-        // O administrador do projeto acabou de incluir o usuario.
-        // Devemos agora adicionar o usuario incluido no projeto
-        // do administrador.
-        // Conexao com a base de dados
+        
         $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
+        
         // $login eh o login do usuario incluido, passado na URL
+        
         $id_usuario_incluido = simple_query("id_usuario", "usuario", "login = '$login'");
         
         $commandSQL = "INSERT INTO participa (id_usuario, id_projeto)
@@ -170,7 +182,7 @@ if (isset($submit)) {
         <?php
     }
     
-} else {    // Script chamado normalmente
+} else {
     
     if (empty($p_style)) {
         
@@ -200,7 +212,7 @@ if (isset($submit)) {
                 function verifyEmail(form) {
                     
                     email = form.email.value;
-                    //verifica se o email contem um @
+
                     i = email.indexOf("@");
                     
                     if (i == -1) {
@@ -208,7 +220,7 @@ if (isset($submit)) {
                         alert('Aten��o: o E-mail digitado n�o � v�lido.');
                         return false;
                     }
-                    
+               
                 }
 
                 function checkEmail(email) {
@@ -250,16 +262,28 @@ if (isset($submit)) {
                     <tr>
 
     <?php
-// Cen�rio - Adicionar Usu�rio
-// Objetivo:  Permitir ao Administrador criar novos usu�rios.
-// Contexto:  O Administrador deseja adicionar novos usu�rios (n�o cadastrados) criando novos
-//              usu�rios ao projeto selecionado.
-//            Pr�-Condi��es: Login
-// Atores:    Administrador
-// Recursos:  Dados do usu�rio
-// Epis�dios: Clicando no bot�o Cadastrar para confirmar a adi��o do novo
-//             usu�rio ao projeto selecionado.
-//            O novo usu�rio criado receber� uma mensagem via email com seu login e senha.
+    
+/*
+ * Scenario: Inclusion of independent user
+ * 
+ * Objetive: Allow a user who isn't registered as administrator, register with
+ *           a profile of administrator.
+ * 
+ * Context: Open system and user want sing-up in system as administrator
+ *          User in registered user's screen
+ * 
+ * Pre condition: user have acess to the system
+ * 
+ * Actors: administrator
+ * 
+ * Resoucers: user's data
+ * 
+ * Episode: By clicking the Register button to confirm the addition of the new
+ *          user to the selescted  project.
+ *          The new user created will receive a message by email with login and
+ *          password.
+ */
+    
     ?>
 
                         <td align="center" colspan="4" height="40" valign="bottom"><input name="submit" onClick="return verifyEmail(this.form);" type="submit" value="Cadastrar"></td>
