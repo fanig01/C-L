@@ -78,17 +78,17 @@ if ($_POST["load"] == "FALSE") {
     
     if (count($indices) == 5) {
         
-        $_SESSION["index1"] = $indices['index1']; //Sujeito
-        $_SESSION["index3"] = $indices['index3']; //Verbo
-        $_SESSION["index4"] = $indices['index4']; //Estado
-        $_SESSION["index5"] = $indices['index5']; //Organizacao
+        $_SESSION["index1"] = $indices['index1']; //Subject
+        $_SESSION["index3"] = $indices['index3']; //Verb
+        $_SESSION["index4"] = $indices['index4']; //State
+        $_SESSION["index5"] = $indices['index5']; //Organization
         
     } else {
         
-        $_SESSION["index1"] = 0; //Sujeito
-        $_SESSION["index3"] = 0; //Verbo
-        $_SESSION["index4"] = 0; //Estado
-        $_SESSION["index5"] = 0; //Organizacao
+        $_SESSION["index1"] = 0; //Subject
+        $_SESSION["index3"] = 0; //Verb
+        $_SESSION["index4"] = 0; //State
+        $_SESSION["index5"] = 0; //Organization
         
     }
     
