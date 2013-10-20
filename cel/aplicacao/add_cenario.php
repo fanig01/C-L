@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-/* vim: set expandtab tabstop=4 shiftwidth=4: */
-
 // add_cenario.php: Este script cadastra um novo cenario do projeto. Eh
 //                  passada, atraves da URL, uma variavel $idProject , que
 //                  indica em que projeto deve ser inserido o novo cenario.
@@ -11,13 +9,11 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
-checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
-
+checkUserAuthentication("index.php");   
 if (!isset($sucesso)) {
     $sucesso = "n";
 }
 
-// Conecta ao SGBD
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
@@ -45,7 +41,7 @@ if (isset($submit)) {
     } else {
         ?>
         <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
-                <p style="color: red; font-weight: bold; text-align: center">Este cen�rio j� existe!</p>
+                <p style="color: red; font-weight: bold; text-align: center">Este cen&aacute;rio j&aacute; existe!</p>
                 <br>
                 <br>
             <center><a href="JavaScript:window.history.go(-1)">Voltar</a></center>
@@ -74,7 +70,7 @@ if (isset($submit)) {
 
     <html>
         <head>
-            <title>Adicionar Cen�rio</title>
+            <title>Adicionar Cen&aacute;rio</title>
         </head>
         <body>
             <script language="JavaScript">
@@ -87,7 +83,7 @@ if (isset($submit)) {
 
                     if ((titulo == ""))
                     {
-                        alert("Por favor, digite o titulo do cen�rio.")
+                        alert("Por favor, digite o titulo do cen&aacute;rio.")
                         form.titulo.focus()
                         return false;
                     } else {
@@ -95,7 +91,7 @@ if (isset($submit)) {
                         OK = padrao.exec(titulo);
                         if (OK)
                         {
-                            window.alert("O t�tulo do cen�rio n�o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
+                            window.alert("O t&iacute;tulo do cen&aacute;rio n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
                             form.titulo.focus();
                             return false;
                         }
@@ -103,14 +99,14 @@ if (isset($submit)) {
 
                     if ((objetivo == ""))
                     {
-                        alert("Por favor, digite o objetivo do cen�rio.")
+                        alert("Por favor, digite o objetivo do cen&aacute;rio.")
                         form.objetivo.focus()
                         return false;
                     }
 
                     if ((contexto == ""))
                     {
-                        alert("Por favor, digite o contexto do cen�rio.")
+                        alert("Por favor, digite o contexto do cen&aacute;rio.")
                         form.contexto.focus()
                         return false;
                     }
@@ -141,12 +137,12 @@ if (isset($submit)) {
 
             </SCRIPT>
 
-            <h4>Adicionar Cen�rio</h4>
+            <h4>Adicionar Cen&aacute;rio</h4>
             <br>
     <?php
     if ($sucesso == "s") {
         ?>
-                <p style="color: blue; font-weight: bold; text-align: center">Cen�rio inserido com sucesso!</p>
+                <p style="color: blue; font-weight: bold; text-align: center">Cen&aacute;rio inserido com sucesso!</p>
         <?php
     }
     ?>    
@@ -175,20 +171,20 @@ if (isset($submit)) {
                         <td><textarea cols="51" name="recursos" rows="3" WRAP="SOFT"></textarea></td>
                     </tr>
                     <tr>
-                        <td>Exce��o:</td>
+                        <td>Exce&ccedil;&atilde;o:</td>
                         <td><textarea cols="51" name="excecao" rows="3" WRAP="SOFT"></textarea></td>
                     </tr>
                     <tr>
-                        <td>Epis�dios:</td>
+                        <td>Epis&oacute;dios:</td>
                         <td><textarea cols="51" name="episodios" rows="5" WRAP="SOFT"></textarea></td>
                     </tr>
                     <tr>
-                        <td align="center" colspan="2" height="60"><input name="submit" type="submit" onClick="return testWhite(this.form);" value="Adicionar Cen�rio"></td>
+                        <td align="center" colspan="2" height="60"><input name="submit" type="submit" onClick="return testWhite(this.form);" value="Adicionar Cenario"></td>
                     </tr>
                 </table>
             </form>
         <center><a href="javascript:self.close();">Fechar</a></center>
-        <br><i><a href="showSource.php?file=add_cenario.php">Veja o c�digo fonte!</a></i>
+        <br><i><a href="showSource.php?file=add_cenario.php">Veja o c&oacute;digo fonte!</a></i>
     </body>
     </html>
 
