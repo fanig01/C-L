@@ -19,24 +19,22 @@ if (isset($_POST['flag'])) {
 <?php
 
 /* gerador_xml.php
- Dada a base e o id do projeto, gera-se o xml
- dos cen�rios e l�xicos.
-Cenário - Gerar Relat�rios XML 
-Objetivo:    Permitir ao administrador gerar relat�rios em formato XML de um projeto, identificados por data.     
-Contexto:    Gerente deseja gerar um relat�rio para um dos projetos da qual � administrador.
-          Pr�-Condi��o: Login, projeto cadastrado.
-Atores:    Administrador     
-Recursos:    Sistema, dados do relat�rio, dados cadastrados do projeto, banco de dados.     
-Epis�dios:O sistema fornece para o administrador uma tela onde dever� fornecer os dados
-          do relat�rio para sua posterior identifica��o, como data e vers�o. 
-          Para efetivar a gera��o do relat�rio, basta clicar em Gerar. 
-          Restri��o: O sistema executar� duas valida��es: 
-                      - Se a data � v�lida.
-                      - Se existem cen�rios e l�xicos em datas iguais ou anteriores.
-          Gerando com sucesso o relat�rio a partir dos dados cadastrados do projeto,
-          o sistema fornece ao administrador a tela de visualiza��o do relat�rio XML criado. 
-          Restri��o: Recuperar os dados em XML do Banco de dados e os transformar por uma XSL para a exibi��o.      
-*/
+Given the base and the id of the project , it generates the xml scenarios and lexicons .
+Scenario - Generate XML Reports
+Objective : Allow the administrator to generate reports in XML format to a project , identified by date .
+Context : Manager to generate a report for a project which is administrator.
+Precondition : Login and registered design .
+Actors : Administrator
+Features : System , report data and data registered the project database.
+Episodes : The system provides the administrator must provide a screen where data
+          the report for later identificção such as date and version .
+          To effect the generation of the report , just click Generate .
+          Restriction : The system executes two validations :
+                      - If the date is valid .
+                      - If there are scenarios and lexicons on dates equal to or earlier .
+          Successfully generating the report from the data registered design ,
+          the system gives the administrator the viewing screen of the report created XML .
+          Restriction: Retrieve XML data from the database and by an XSL transform to display .*/
 
 if (!(function_exists("gerar_xml"))) {
 
@@ -183,107 +181,98 @@ if (!(function_exists("gerar_xml"))) {
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//Cen�rio - Gerar links nos Relat�rios XML criados
-//
-//Objetivo:    Permitir que os relat�rios gerados em formato XML possuam termos com links 
-//          para os seus respectivos l�xicos
-//
-//Contexto:    Gerente deseja gerar um relat�rio em XML para um dos projetos da qual � administrador.
-//          Pr�-Condi��o: Login, projeto cadastrado, acesso ao banco de dados.
-//
-//Atores:    Sistema    
-//
-//Recursos:    Sistema, senten�as a serem linkadas, dados cadastrados do projeto, banco de dados. 
-//    
-//Epis�dios:O sistema recebe a senten�a com os tags pr�prios do C&L e retorna o c�digo do link HTML
-//            equivalente para os l�xicos cadatrados no sistema. 
-//     
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//L�xicos:
-//
-//     Fun��o:            gera_xml_links
-//     Descri��o:         Analisa uma senten�a recebida afim de identificar as tags utilizadas no C&L
-//                        para linkar os l�xicos e transformar em links XML.
-//     Sin�nimos:         -
-//     Exemplo: 
-//        ENTRADA: <!--CL:tam:2--><a title="Lexico" href="main.php?t=l&id=228">software livre</a>
-//                 <!--/CL-->
-//        SA�DA:  <a title="Lexico" href="main.php?t=l&id=228"><texto referencia_lexico=software 
-//                livre>software livre</texto></a>
-//
-//     Vari�vel:            $sentenca
-//     Descri��o:         Armazena a express�o passada por argumento a ser tranformada em link.
-//     Sin�nimos:         -
-//     Exemplo:             <!--CL:tam:2--><a title="Lexico" href="main.php?t=l&id=228">software livre
-//                        </a><!--/CL-->
-//
-//     Vari�vel:            $regex
-//     Descri��o:            Armazena o pattern a ser utilizado ao se separar a senten�a.
-//     Sin�nimos:            -
-//     Exemplo:            "/(<!--CL:tam:\d+-->(<a[^>]*?\>)([^<]*?)<\/a><!--\/CL-->)/mi"
-//
-//     Vari�vel:            $vetor_texto
-//     Descri��o:         Array que armazena palavra por palavra a sente�a a ser linkada, sem o tag.
-//     Sin�nimos:         -
-//     Exemplo:             $vetor_texto[0] => software
-//                        $vetor_texto[1] => livre
-//
-//     Vari�vel:            $inside_tag
-//     Descri��o:         Determina se a an�lise est� sendo feita dentro ou fora do tag
-//     Sin�nimos:         -
-//     Exemplo:             false
-//
-//     Vari�vel:            $tamanho_vetor_texto
-//     Descri��o:         Armazena a n�mero de palavras que se encontram no array $vetor_texto. 
-//     Sin�nimos:         -
-//     Exemplo:             2
-//
-//     Vari�vel:            $i
-//     Descri��o:         Vari�vel utilizada como um contador para uso gen�rico.
-//     Sin�nimos:         -
-//     Exemplo:             -
-//
-//     Vari�vel:            $match
-//     Descri��o:         Armazena o valor 1 caso a string "/href="main.php\?t=(.)&id=(\d+?)"/mi"
-//                        seja encontrada na no array $vetor_texto. Caso contr�rio, armazena 0.
-//     Sin�nimos:         -
-//     Exemplo:             0
-//
-//     Vari�vel:            $idProject 
-//     Descri��o:         Armazena o n�mero identificador do projeto corrente.
-//     Sin�nimos:         -
-//     Exemplo:             1
-//
-//     Vari�vel:            $atributo
-//     Descri��o:         Armazena um tag que indica a refer�ncia para um l�xico
-//     Sin�nimos:         -
-//     Exemplo:             referencia_lexico
-//
-//     Vari�vel:            $query
-//     Descri��o:         Armazena a consulta a ser feita no banco de dados
-//     Sin�nimos:         -
-//     Exemplo:             SELECT nome FROM lexico WHERE id_projeto = $idProject 
-//
-//     Vari�vel:            $result
-//     Descri��o:         Armazena o resultado da consulta feita ao banco de dados
-//     Sin�nimos:         -
-//     Exemplo:             -
-//
-//     Vari�vel:            $row
-//     Descri��o:         Array que armazena tupla a tupla o resultado da consulta realizada
-//     Sin�nimos:         -
-//     Exemplo:             -
-//
-//     Vari�vel:            $valor
-//     Descri��o:         Armazena uma tupla, substituindo os caracteres acentuados pelos seus 
-//                        equivalentes sem acentua��o.
-//     Sin�nimos:         -
-//     Exemplo:             acentuacao
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+Scenario - Generate links created in XML Reports
+Objective: Allow the reports generated in XML format have terms with links to their respective lexicons
+Context: Manager to generate an XML report for one of the projects which is administrator.
+Precondition: Login, registered design and access to the database.
+Actors: System
+Features: System, sentences to be linked, registered data design, database.
+Episodes: The system receives a sentence with the tags themselves the C & L and returns the 
+ HTML link code equivalent to the lexicons cadatrados system.*/
+
+/*    
+
+Lexicons :
+
+     Function: gera_xml_links
+     Description : Analyzes received a sentence in order to identify the tags used in the C & L link to the lexicons and transform XML into links .
+     Synonyms: -
+     example :
+        INPUT : < ! - CL : tam :2 - > <a title="Lexico" href="main.php?t=l&id=228"> free software < / a>
+                 < ! --/CL-- >
+        OUTPUT : <a title="Lexico" href="main.php?t=l&id=228"> < = text referencia_lexico software
+                free > free software < / text > < / a>
+
+     Variable: $ sentence
+     Description : Stores the last expressed by argument to be shifted toward link.
+     Synonyms: -
+     Example : < ! - CL : tam :2 - > <a title="Lexico" href="main.php?t=l&id=228"> free software
+               < / a> < ! --/CL-- >
+
+     Variable: $ regex
+     Description : Stores the pattern to be used to separate the sentence .
+     Synonyms: -
+     Example : " / ( < ! - CL : tam : \ d + - > ( <a[^> ] * ? \ > ) 
+                   ( [ ^ < ] * ? ) < \ / A> < ! - \ / CL -> ) / mi "
+
+     Variable: $ vetor_texto
+     Description : Array that stores word for word senteaa be linked without the tag .
+     Synonyms: -
+     Example : $ vetor_texto [ 0 ] = > software
+                 $ vetor_texto [ 1 ] = > free
+
+     Variable: $ inside_tag
+     Description : Determines if the analysis is being done inside or outside of the tag
+     Synonyms: -
+     Example : false
+
+     Variable: $ tamanho_vetor_texto
+     Description : Stores anmero of words that are in the array $ vetor_texto .
+     Synonyms: -
+     Example : 2
+
+     Variable : $ i
+     Description : The variable used as a counter for general use .
+     Synonyms: -
+     Example : -
+
+     Variable : $ match
+     Description : Stores the value 1 if the string " / href = " main.php \ ' t = ( . ) & Id = ( \ d + ? ) " / Mi"
+                is found in the array $ vetor_texto . Otherwise , stores 0 .
+     Synonyms: -
+     Example : 0
+
+     Variable: $ idProject
+     Description : Stores the number identifier of the current project .
+     Synonyms: -
+     Example : 1
+
+     Variable: $ attribute
+     Description : Stores a tag that indicates the reference for lexicon
+     Synonyms: -
+     Example : referencia_lexico
+
+     Variable : $ query
+     Description : Stores the query to be made ​​in the database
+     Synonyms: -
+     Example : SELECT name FROM WHERE lexicon id_projeto = $ idProject
+
+     Variable : $ result
+    Description : Stores the result of the query against the database
+     Synonyms: -
+     Example : -
+
+     Variable: $ row
+     Description : Array that stores the tuple tuple the result of the consultation
+     Synonyms: -
+     Example : -
+
+     Variable: $ value
+     Description : Stores a tuple , replacing the accented characters by their equivalents without acentuao .
+     Synonyms: -
+     Example : Accent
+*/
 
 
 if (!(function_exists("gera_xml_links"))) {
