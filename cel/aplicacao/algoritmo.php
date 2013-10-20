@@ -1,9 +1,10 @@
 <?php
+session_start();
+
 include 'estruturas.php';
 include_once 'auxiliar_algoritmo.php';
-session_start();
-?>
 
+?>
 <html>
     <head>
         <title>Algoritmo de Gera&ccedil;&atilde;o de Ontologias</title>
@@ -14,6 +15,7 @@ session_start();
     <body>
         <?php
 
+        
         function verifica_consistencia() {
             return TRUE;
         }
@@ -23,10 +25,16 @@ session_start();
             if (count($array1) != count($array2)) {
                 return FALSE;
             }
-
+            else {
+                //Nothing should be done
+            }
+           
             foreach ($array1 as $key => $elem) {
                 if ($elem->verbo != $array2[$key]->verbo) {
                     return FALSE;
+                }
+                else {
+                    //Nothing should be done
                 }
             }
             return TRUE;
@@ -43,8 +51,9 @@ session_start();
          * Procurar sua chave na lista de conceitos.
          * Adicionar a chave como um subconceito do conceito.
          */
-
+        
         function montar_hierarquia($conceito, $nova_lista, $list) {
+            
             foreach ($nova_lista as $subConceito) {
                 $key = existe_conceito($subConceito, $list);
                 $conceito->subconceitos[] = $subConceito;
@@ -79,26 +88,37 @@ session_start();
                     $_SESSION["salvar"] = "TRUE";
                     $_SESSION["conceito"] = new concept($sujeito->nome, $sujeito->nocao);
                     $_SESSION["conceito"]->namespace = "proprio";
-                } else {
+                }
+                else {
                     $_SESSION["salvar"] = "FALSE";
                 }
-
 
                 for (; $_SESSION["index2"] < count($sujeito->impacto); ++$_SESSION["index2"]) {
 
                     $imp = $sujeito->impacto[$_SESSION["index2"]];
 
-                    if (trim($imp) == "")
+                    if (trim($imp) == ""){
                         continue;
-
-                    if (!isset($_SESSION["verbos_selecionados"]))
+                    }
+                    else {
+                        //Nothing should be done
+                    }
+                    if (!isset($_SESSION["verbos_selecionados"])){
                         $_SESSION["verbos_selecionados"] = array();
+                    }
+                    else {
+                        //Nothing should be done
+                    }
 
                     if (!isset($_SESSION["impact"])) {
                         $_SESSION["impact"] = array();
                         $_SESSION["finish_insert"] = FALSE;
                     }
+                    else {
+                        //Nothing should be done
+                    }
                     while (!$_SESSION["finish_insert"]) {
+                        
                         if (!isset($_SESSION["exist"])) {
                             asort($relations);
                             $_SESSION["lista"] = $relations;
@@ -115,6 +135,9 @@ session_start();
                             <?php
                             exit();
                         }
+                        else {
+                            //Nothing should be done
+                        }
 
 
 
@@ -125,21 +148,30 @@ session_start();
                             if ((count($_SESSION["verbos_selecionados"]) != 0) && (array_search($name, $_SESSION["verbos_selecionados"]) !== null)) {
                                 continue;
                             }
+                            else {
+                                //Nothing should be done
+                            }
                             $_SESSION["verbos_selecionados"][] = $name;
                             $i = array_search($name, $relations);
                             if ($i === false) {
                                 $_SESSION["impact"][] = (array_push($relations, $name) - 1);
-                            } else {
+                            } 
+                            else {
                                 $_SESSION["impact"][] = $i;
                             }
-                        } else if ($_POST["indice"] != -1) {
+                        } 
+                        else if ($_POST["indice"] != -1) {
                             session_unregister("exist");
                             if ((count($_SESSION["verbos_selecionados"]) != 0) && array_search($relations[$_POST["indice"]], $_SESSION["verbos_selecionados"]) !== false) {
                                 continue;
                             }
+                            else {
+                                //Nothing should be done
+                            }
                             $_SESSION["verbos_selecionados"][] = $relations[$_POST["indice"]];
                             $_SESSION["impact"][] = $_POST["indice"];
-                        } else {
+                        } 
+                        else {
                             $_SESSION["finish_insert"] = TRUE;
                         }
                     }
@@ -147,13 +179,20 @@ session_start();
                     if (!isset($_SESSION["ind"])) {
                         $_SESSION["ind"] = 0;
                     }
+                    else {
+                        //Nothing should be done
+                    }
 
                     $_SESSION["verbos_selecionados"] = array();
 
                     for (; $_SESSION["ind"] < count($_SESSION["impact"]); ++$_SESSION["ind"]) {
 
-                        if (!isset($_SESSION["predicados_selecionados"]))
+                        if (!isset($_SESSION["predicados_selecionados"])){
                             $_SESSION["predicados_selecionados"] = array();
+                        }
+                        else {
+                            //Nothing should be done
+                        }
 
                         $indice = $_SESSION["impact"][$_SESSION["ind"]];
                         $_SESSION["finish_relation"] = FALSE;
@@ -171,7 +210,8 @@ session_start();
                                 </SCRIPT>
                                 <?php
                                 exit();
-                            } else if (isset($_SESSION["nome2"])) {
+                            } 
+                            else if (isset($_SESSION["nome2"])) {
 
                                 session_unregister("nome2");
                                 session_unregister("nome3");
@@ -184,6 +224,9 @@ session_start();
                                     if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conceito, $_SESSION["predicados_selecionados"]) !== null)) {
                                         continue;
                                     }
+                                    else {
+                                        //Nothing should be done
+                                    }
                                     $_SESSION["predicados_selecionados"][] = $conceito;
 
                                     if (existe_conceito($conceito, $_SESSION['lista_de_conceitos']) == -1) {
@@ -192,28 +235,46 @@ session_start();
                                             $nconc->namespace = $_POST['namespace'];
                                             $_SESSION['lista_de_conceitos'][] = $nconc;
                                         }
+                                        else {
+                                            //Nothing should be done
+                                        }
+                                    }
+                                    else {
+                                        //Nothing should be done
                                     }
 
                                     $indiceRelacao = existe_relacao($_SESSION['nome1'], $_SESSION['conceito']->relacoes);
                                     if ($indiceRelacao != -1) {
-                                        if (array_search($conceito, $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados) === false)
+                                        if (array_search($conceito, $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados) === false){
                                             $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados[] = $conceito;
+                                        }
+                                        else {
+                                            //Nothing should be done
+                                        }
                                     }
                                     else {
                                         $_SESSION["conceito"]->relacoes[] = new relationshipBetweenConcepts($conceito, $_SESSION["nome1"]);
                                     }
-                                } else if ($_POST["indice"] != "-1") {
+                                } 
+                                else if ($_POST["indice"] != "-1") {
                                     $conceito = $concepts[$_POST["indice"]]->nome;
                                     if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conceito, $_SESSION["predicados_selecionados"]) !== null)) {
                                         continue;
+                                    }
+                                    else {
+                                        //Nothing should be done
                                     }
 
                                     $_SESSION["predicados_selecionados"][] = $conceito;
 
                                     $indiceRelacao = existe_relacao($_SESSION['nome1'], $_SESSION['conceito']->relacoes);
                                     if ($indiceRelacao != -1) {
-                                        if (array_search($conceito, $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados) === false)
+                                        if (array_search($conceito, $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados) === false){
                                             $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados[] = $conceito;
+                                        }
+                                        else {
+                                            //Nothing should be done
+                                        }
                                     }
                                     else {
                                         $_SESSION["conceito"]->relacoes[] = new relationshipBetweenConcepts($conceito, $_SESSION["nome1"]);
@@ -221,6 +282,9 @@ session_start();
                                 } else {
                                     $_SESSION["finish_relation"] = TRUE;
                                 }
+                            }
+                            else {
+                                //Nothing should be done
                             }
                         }
                         $_SESSION["predicados_selecionados"] = array();
@@ -239,8 +303,12 @@ session_start();
 
                 $finish_disjoint = FALSE;
                 while (!$finish_disjoint) {
-                    if (!isset($_SESSION["axiomas_selecionados"]))
+                    if (!isset($_SESSION["axiomas_selecionados"])){
                         $_SESSION["axiomas_selecionados"] = array();
+                    }
+                    else {
+                        //Nothing should be done
+                    }
 
                     if (!isset($_SESSION["disjoint"])) {
                         $_SESSION["lista"] = $concepts;
@@ -253,14 +321,21 @@ session_start();
                         <?php
                         exit();
                     }
+                    else {
+                        //Nothing should be done
+                    }
                     if ($_POST["existe"] == "TRUE") {
                         $axiom = $_SESSION["conceito"]->nome . " disjoint " . strtolower($_POST["nome"]);
                         if (array_search($axiom, $axioms) === false) {
                             $axioms[] = $axiom;
                             $_SESSION["axiomas_selecionados"][] = $axiom;
                         }
+                        else {
+                            //Nothing should be done
+                        }
                         session_unregister("disjoint");
-                    } else {
+                    } 
+                    else {
                         $finish_disjoint = TRUE;
                     }
                 }
@@ -271,6 +346,9 @@ session_start();
 
                 if (!verifica_consistencia()) {
                     exit();
+                }
+                else {
+                    //Nothing should be done
                 }
 
                 session_unregister("insert");
@@ -318,11 +396,17 @@ session_start();
                     <?php
                     exit();
                 }
+                else {
+                    //Nothing should be done
+                }
 
                 if ($_POST["existe"] == "FALSE") {
                     $name = strtolower($_POST["nome"]);
                     if (array_search($name, $relations) === false)
                         array_push($relations, $name);
+                }
+                else {
+                    //Nothing should be done
                 }
 
 
@@ -330,6 +414,9 @@ session_start();
 
                 if (!verifica_consistencia()) {
                     exit();
+                }
+                else {
+                    //Nothing should be done
                 }
 
                 session_unregister("exist");
@@ -377,26 +464,38 @@ session_start();
 
                     //$rel = exist($verb->nome, $lista_de_relacoes);
                 }
+                else {
+                    //Nothing should be done
+                }
 
 
                 if (!isset($_SESSION["translate"])) {
                     if ($_POST["main_subject"] == "TRUE") {
                         $_SESSION["translate"] = 1;
                         traduz_sujeito_objeto($aux, &$concepts, &$relations, &$axioms);
-                    } else {
+                    }
+                    else {
                         $_SESSION["translate"] = 2;
                         traduz_verbos($aux, &$relations);
                     }
-                } else if ($_SESSION["translate"] == 1) {
+                } 
+                else if ($_SESSION["translate"] == 1) {
                     traduz_sujeito_objeto($aux, &$concepts, &$relations);
-                } else if ($_SESSION["translate"] == 2) {
+                } 
+                else if ($_SESSION["translate"] == 2) {
                     traduz_verbos($aux, &$relations);
+                }
+                else {
+                    //Nothing should be done
                 }
 
 
 
                 if (!verifica_consistencia()) {
                     exit();
+                }
+                else {
+                    //Nothing should be done
                 }
 
                 session_unregister("main_subject");
@@ -482,6 +581,9 @@ session_start();
 
                         //$rel = exist($verb->nome, $lista_de_relacoes);
                     }
+                    else {
+                        //Nothing should be done
+                    }
 
                     session_unregister("reference");
 
@@ -496,12 +598,19 @@ session_start();
                             if (isset($_POST[$key3])) {
                                 $filhos[] = $filho_nome;
                             }
+                            else {
+                                //Nothing should be done
+                            }
                         }
                         if (count($filhos) > 0) {
                             montar_hierarquia(&$concepts[$key2], $filhos, $concepts);
                             $achou = true;
                         }
-                    } else {
+                        else {
+                            //Nothing should be done
+                        }
+                    } 
+                    else {
                         $finish_relation = true;
                     }
 
@@ -509,10 +618,16 @@ session_start();
                     if (!$achou) {
                         //tentar montar hierarquia pelo vocabulario minimo.
                     }
+                    else {
+                        //Nothing should be done
+                    }
                 }
 
                 if (!verifica_consistencia()) {
                     exit();
+                }
+                else {
+                    //Nothing should be done
                 }
                 //array_splice($conc->subconceitos, 0, 1);
                 //}
@@ -548,7 +663,8 @@ session_start();
                     $objetos = $_SESSION["lista_de_objeto"];
                     $verbos = $_SESSION["lista_de_verbo"];
                     $estados = $_SESSION["lista_de_estado"];
-                } else {
+                }
+                else {
                     echo "ERRO! <br>";
                     exit();
                 }
@@ -562,20 +678,32 @@ session_start();
                     traduz_sujeito_objeto($lista_de_sujeito_e_objeto, &$_SESSION["lista_de_conceitos"], &$_SESSION["lista_de_relacoes"], &$_SESSION["lista_de_axiomas"]);
                     $_SESSION["funcao"] = "verbo";
                 }
+                else {
+                    //Nothing should be done
+                }
 
                 if ($_SESSION["funcao"] == "verbo") {
                     traduz_verbos($verbos, &$_SESSION["lista_de_relacoes"]);
                     $_SESSION["funcao"] = "estado";
+                }
+                else {
+                    //Nothing should be done
                 }
 
                 if ($_SESSION["funcao"] == "estado") {
                     traduz_estados($estados, &$_SESSION["lista_de_conceitos"], &$_SESSION["lista_de_relacoes"], &$_SESSION["lista_de_axiomas"]);
                     $_SESSION["funcao"] = "organiza";
                 }
+                else {
+                    //Nothing should be done
+                }
 
                 if ($_SESSION["funcao"] == "organiza") {
                     organizar_ontologia(&$_SESSION["lista_de_conceitos"], &$_SESSION["lista_de_relacoes"], &$_SESSION["lista_de_axiomas"]);
                     $_SESSION["funcao"] = "fim";
+                }
+                else {
+                    //Nothing should be done
                 }
 
 
