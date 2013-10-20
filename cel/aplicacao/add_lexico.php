@@ -38,7 +38,6 @@ else {
 }
 
 checkUserAuthentication("index.php");
-
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
@@ -99,103 +98,113 @@ else {
         </head>
         <body>
             <script language="JavaScript">
-            <!--
-                function testWhite(form){
-                    nome = form.nome.value;
-                    nocao = form.nocao.value;
-
-                    if (nome == ""){
-                        alert(" Por favor, forne&ccedil;a o NOME do l&eacute;xico.\n O campo NOME &eacute; de preenchimento obrigat&oacute;rio.");
-                        form.nome.focus();
-                        return false;
-                    } 
-                    else {
-                        padrao = /[\\\/\?"<>:|]/;
-                        nOK = padrao.exec(nome);
-                        if (nOK){
-                            window.alert("O nome do l&eacute;xico n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
-                            form.nome.focus();
-                            return false;
-                        }
-                        else {
-                            //Nothing should be done
-                        }
-                    }
-
-                    if (nocao == ""){
-                        alert(" Por favor, forne&ccedil;a a NO&Ccedil;&Atilde;O do l&eacute;xico.\n O campo NO&Ccedil;&Atilde;O &eacute; de preenchimento obrigat&oacute;rio.");
-                        form.nocao.focus();
-                        return false;
-                    }
-                    else {
-                        //Nothing should be done
-                    }
-
-                }
-                function addSinonimo()
-                {
-                    listSinonimo = document.forms[0].elements['listSinonimo[]'];
-
-                    if (document.forms[0].sinonimo.value == "")
-                        return;
-
-                    sinonimo = document.forms[0].sinonimo.value;
-                    padrao = /[\\\/\?"<>:|]/;
-                    nOK = padrao.exec(sinonimo);
-                    if (nOK) {
-                        window.alert("O sin&ocirc;nimo do l&eacute;xico n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
-                        document.forms[0].sinonimo.focus();
-                        return;
-                    }
-                    else {
-                        //Nothing should be done
-                    }
-
-                    listSinonimo.options[listSinonimo.length] = new Option(document.forms[0].sinonimo.value, document.forms[0].sinonimo.value);
-
-                    document.forms[0].sinonimo.value = "";
-
-                    document.forms[0].sinonimo.focus();
-
-                }
-
-                function delSinonimo()
-                {
-                    listSinonimo = document.forms[0].elements['listSinonimo[]'];
-
-                    if (listSinonimo.selectedIndex == -1){
-                        return;
-                    }
-                    else{
-                        listSinonimo.options[listSinonimo.selectedIndex] = null;
-                    }
-
-                    delSinonimo();
-                }
-
-                function doSubmit()
-                {
-                    listSinonimo = document.forms[0].elements['listSinonimo[]'];
-
-                    for (var i = 0; i < listSinonimo.length; i++)
-                        listSinonimo.options[i].selected = true;
-
-                    return true;
-                }
-
             
+            <!--               
+    function testWhite(form){
+                    
+        nome = form.nome.value;
+        nocao = form.nocao.value;
+                 
+        if (nome == ""){
+                        
+            alert(" Por favor, forne&ccedil;a o NOME do l&eacute;xico.\n O campo NOME &eacute; de preenchimento obrigat&oacute;rio.");
+            form.nome.focus();
+                        
+            return false;
+        }                         
+        else {
+                       
+            padrao = /[\\\/\?"<>:|]/;
+            nOK = padrao.exec(nome);
+                        
+            if (nOK){
+                 
+                window.alert("O nome do l&eacute;xico n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
+                form.nome.focus();
+                            
+                return false;
+             }
+              else {                          
+                //Nothing should be done
+              }         
+        }                  
+        if (nocao == ""){
+                        
+            alert(" Por favor, forne&ccedil;a a NO&Ccedil;&Atilde;O do l&eacute;xico.\n O campo NO&Ccedil;&Atilde;O &eacute; de preenchimento obrigat&oacute;rio.");
+            form.nocao.focus();
+                        
+            return false;        
+        }                  
+        else {                      
+            //Nothing should be done
+        }              
+    }
+                
+    function addSinonimo(){
+                    
+        listSinonimo = document.forms[0].elements['listSinonimo[]'];
+               
+        if (document.forms[0].sinonimo.value == ""){                       
+            return;
+        }
+        else {
+            //Nothing should be done
+        }
+                 
+        sinonimo = document.forms[0].sinonimo.value;
+        padrao = /[\\\/\?"<>:|]/;
+        nOK = padrao.exec(sinonimo);
+                    
+        if (nOK) {
+                 
+            window.alert("O sin&ocirc;nimo do l&eacute;xico n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
+            document.forms[0].sinonimo.focus();
+                        
+            return;
+         }
+         else {                      
+            //Nothing should be done
+         }
+                   
+        listSinonimo.options[listSinonimo.length] = new Option(document.forms[0].sinonimo.value, document.forms[0].sinonimo.value);
+        document.forms[0].sinonimo.value = "";
+        document.forms[0].sinonimo.focus();
+               
+    }              
+    function delSinonimo(){
+                    
+        listSinonimo = document.forms[0].elements['listSinonimo[]'];
 
+        if (listSinonimo.selectedIndex == -1){                     
+            return;
+        }
+        else{                       
+            listSinonimo.options[listSinonimo.selectedIndex] = null;                
+        }                   
+        delSinonimo();               
+    }
+
+                
+    function doSubmit(){
+                   
+        listSinonimo = document.forms[0].elements['listSinonimo[]'];
+        
+        for (var i = 0; i < listSinonimo.length; i++){                        
+            listSinonimo.options[i].selected = true;
+        }
+                    
+        return true;               
+    }      
     <?php
-   ?>
-
+   ?>            
             </SCRIPT>
 
             <h4>Adicionar S&iacute;mbolo</h4>
             <br>
     <?php
     if ($sucesso == "s") {
-        ?>
-                <p style="color: blue; font-weight: bold; text-align: center">S&iacute;mbolo inserido com sucesso!</p>
+        ?>               
+            <p style="color: blue; font-weight: bold; text-align: center">S&iacute;mbolo inserido com sucesso!</p>
         <?php
     }
     else {

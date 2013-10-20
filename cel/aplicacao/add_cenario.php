@@ -90,25 +90,24 @@ if (isset($submit)) {
         return;
     }
     ?>
-
+    
     <script language="javascript1.2">
-
-        opener.parent.frames['code'].location.reload();
-        opener.parent.frames['text'].location.replace('main.php?id_projeto=<?= $_SESSION['id_projeto_corrente'] ?>');
+       
+    opener.parent.frames['code'].location.reload();
+    opener.parent.frames['text'].location.replace('main.php?id_projeto=<?= $_SESSION['id_projeto_corrente'] ?>');
     //self.close();
-    //location.href = "http://<?php print( CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo")); ?>add_cenario.php?id_projeto=<?= $idProject  ?>&sucesso=s" ;
-
-
-        location.href = "add_cenario.php?id_projeto=<?= $idProject  ?>&sucesso=s";
+    //location.href = "http://<?php print( CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo")); ?>add_cenario.php?id_projeto=<?= $idProject  ?>&sucesso=s" ;      
+    location.href = "add_cenario.php?id_projeto=<?= $idProject  ?>&sucesso=s";
 
     </script>
 
     <?php
 } 
-else {    // Script called through the top menu
+else {   
+    // Script called through the top menu
     $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
     ?>
-
+  
     <html>
         <head>
             <title>Adicionar Cen&aacute;rio</title>
@@ -116,54 +115,59 @@ else {    // Script called through the top menu
         <body>
             <script language="JavaScript">
             <!--
-                function testWhite(form)
-                {
-                    titulo = form.titulo.value;
-                    objetivo = form.objetivo.value;
-                    contexto = form.contexto.value;
+                
+    function testWhite(form){
+                    
+        titulo = form.titulo.value;
+        objetivo = form.objetivo.value;
+        contexto = form.contexto.value;
 
-                    if ((titulo == "")){
-                        alert("Por favor, digite o titulo do cen&aacute;rio.")
-                        form.titulo.focus()
-                        return false;
-                    }
-                    else {
-                        padrao = /[\\\/\?"<>:|]/;
-                        OK = padrao.exec(titulo);
-                        if (OK){
-                            window.alert("O t&iacute;tulo do cen&aacute;rio n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
-                            form.titulo.focus();
-                            return false;
-                        }
-                        else {
-                            //Nothing should be done
-                        }
-                    }
-
-                    if ((objetivo == "")){
-                        alert("Por favor, digite o objetivo do cen&aacute;rio.")
-                        form.objetivo.focus()
-                        return false;
-                    }
-                    else {
-                        //Nothing should be done
-                    }
-
-                    if ((contexto == "")){
-                        alert("Por favor, digite o contexto do cen&aacute;rio.")
-                        form.contexto.focus()
-                        return false;
-                    }
-                    else{
-                        //Nothing should be done
-                    }
-                }
+       if ((titulo == "")){             
+            alert("Por favor, digite o titulo do cen&aacute;rio.")
+            form.titulo.focus()
+                        
+            return false;
+         }
+         
+        else {
+             padrao = /[\\\/\?"<>:|]/;
+             OK = padrao.exec(titulo);
+             
+            if (OK){
+                window.alert("O t&iacute;tulo do cen&aacute;rio n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
+                form.titulo.focus();
+                            
+                return false;
+             }
+             else {
+                   //Nothing should be done
+             }
+          
+        }
+      if ((objetivo == "")){                
+            alert("Por favor, digite o objetivo do cen&aacute;rio.")
+            form.objetivo.focus()
+                                 
+            return false;                 
+        }                   
+        else {                       
+            //Nothing should be done                    
+        }                  
+        if ((contexto == "")){
+                        
+            alert("Por favor, digite o contexto do cen&aacute;rio.")                      
+            form.contexto.focus()
+                        
+            return false;                   
+        }                   
+        else{                       
+            //Nothing should be done                 
+        }               
+    }
             //-->
 
     <?php
-
-    ?>
-
+    ?>           
             </SCRIPT>
 
             <h4>Adicionar Cen&aacute;rio</h4>
