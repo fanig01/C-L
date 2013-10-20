@@ -34,7 +34,7 @@ if (isset($submit)) {
     } else {
         ?>
         <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
-                <p style="color: red; font-weight: bold; text-align: center">Este s�mbolo ou sin�nimo j� existe!</p>
+                <p style="color: red; font-weight: bold; text-align: center">Este s&iacute;mbolo ou sin&ocirc;nimo j&aacute; existe!</p>
                 <br>
                 <br>
             <center><a href="JavaScript:window.history.go(-1)">Voltar</a></center>
@@ -75,7 +75,7 @@ if (isset($submit)) {
 
                     if (nome == "")
                     {
-                        alert(" Por favor, forne�a o NOME do l�xico.\n O campo NOME � de preenchimento obrigat�rio.");
+                        alert(" Por favor, forne&ccedil;a o NOME do l&eacute;xico.\n O campo NOME &eacute; de preenchimento obrigat&oacute;rio.");
                         form.nome.focus();
                         return false;
                     } else {
@@ -83,7 +83,7 @@ if (isset($submit)) {
                         nOK = padrao.exec(nome);
                         if (nOK)
                         {
-                            window.alert("O nome do l�xico n�o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
+                            window.alert("O nome do l&eacute;xico n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
                             form.nome.focus();
                             return false;
                         }
@@ -91,7 +91,7 @@ if (isset($submit)) {
 
                     if (nocao == "")
                     {
-                        alert(" Por favor, forne�a a NO��O do l�xico.\n O campo NO��O � de preenchimento obrigat�rio.");
+                        alert(" Por favor, forne&ccedil;a a NO&Ccedil;&Atilde;O do l&eacute;xico.\n O campo NO&Ccedil;&Atilde;O &eacute; de preenchimento obrigat&oacute;rio.");
                         form.nocao.focus();
                         return false;
                     }
@@ -109,7 +109,7 @@ if (isset($submit)) {
                     nOK = padrao.exec(sinonimo);
                     if (nOK)
                     {
-                        window.alert("O sin�nimo do l�xico n�o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
+                        window.alert("O sin&ocirc;nimo do l&eacute;xico n&atilde;o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
                         document.forms[0].sinonimo.focus();
                         return;
                     }
@@ -166,12 +166,12 @@ if (isset($submit)) {
 
             </SCRIPT>
 
-            <h4>Adicionar S�mbolo</h4>
+            <h4>Adicionar S&iacute;mbolo</h4>
             <br>
     <?php
     if ($sucesso == "s") {
         ?>
-                <p style="color: blue; font-weight: bold; text-align: center">S�mbolo inserido com sucesso!</p>
+                <p style="color: blue; font-weight: bold; text-align: center">S&iacute;mbolo inserido com sucesso!</p>
         <?php
     }
     ?>       
@@ -186,7 +186,7 @@ if (isset($submit)) {
                         <td><input size="48" name="nome" type="text" value=""></td>
                     </tr>    
                     <tr valign="top">
-                        <td>Sin�nimos:</td>
+                        <td>Sin&ocirc;nimos:</td>
                         <td width="0%">
                             <input name="sinonimo" size="15" type="text" maxlength="50">             
                             &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Adicionar" onclick="addSinonimo()">
@@ -203,7 +203,7 @@ if (isset($submit)) {
                     </tr>
                     </tr>
                     <tr>
-                        <td>No��o:</td>
+                        <td>No&ccedil;&atilde;o:</td>
                         <td><textarea cols="51" name="nocao" rows="3" WRAP="SOFT"></textarea></td>
                     </tr>
                     <tr>
@@ -211,7 +211,7 @@ if (isset($submit)) {
                         <td><textarea  cols="51" name="impacto" rows="3" WRAP="SOFT"></textarea></td>
                     </tr>
                     <tr>
-                        <td>Classifica�ao:</td>
+                        <td>Classifica&ccedil;ao:</td>
                         <td>
                             <SELECT id='classificacao' name='classificacao' size=1 width="300">
                                 <OPTION value='sujeito' selected>Sujeito</OPTION>
@@ -232,7 +232,7 @@ if (isset($submit)) {
                 </table>
             </form>
         <center><a href="javascript:self.close();">Fechar</a></center>            
-        <br><i><a href="showSource.php?file=add_lexico.php">Veja o c�digo fonte!</a></i>
+        <br><i><a href="showSource.php?file=add_lexico.php">Veja o c&oacute;digo fonte!</a></i>
     </body>
 
     </html>
