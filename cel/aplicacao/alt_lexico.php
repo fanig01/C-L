@@ -7,15 +7,23 @@ include("httprequest.inc");
 include_once("bd.inc");
 
 checkUserAuthentication("index.php");
+
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
 if (isset($submit)) {
-    if (!isset($listSinonimo))
+    
+    if (!isset($listSinonimo)) {
+        
         $listSinonimo = array();
+        
+    }
 
     $count = count($listSinonimo);
+    
     for ($i = 0; $i < $count; $i++) {
+        
         if ($listSinonimo[$i] == "") {
+            
             $listSinonimo = null;
         }
     }
@@ -23,11 +31,13 @@ if (isset($submit)) {
     //$count = count($listSinonimo);
 
     foreach ($listSinonimo as $key => $sinonimo) {
+        
         $listSinonimo[$key] = str_replace(">", " ", str_replace("<", " ", $sinonimo));
+        
     }
 
-
-    inserirPedidoAlterarLexico($idProject , $id_lexico, $name, $notion, $impact, $justificativa, $_SESSION['id_usuario_corrente'], $listSinonimo, $classificacao);
+    inserirPedidoAlterarLexico($idProject , $id_lexico, $name, $notion, $impact, $justificativa,
+                               $_SESSION['id_usuario_corrente'], $listSinonimo, $classificacao);
     ?>
     <html>
         <head>
@@ -51,6 +61,7 @@ if (isset($submit)) {
 
     <?php
 } else {
+    
     $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
     $commandSQL = "SELECT * FROM lexico WHERE id_lexico = $id_lexico";
     $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
@@ -73,60 +84,62 @@ if (isset($submit)) {
             <body>
                 <script language="JavaScript">
                 <!--
-                    function testWhite(form)
-                    {
+                    function testWhite(form) {
+                        
                         nocao = form.nocao.value;
 
-                        if (nocao == "")
-                        {
+                        if (nocao == "") {
+                            
                             alert(" Por favor, forne�a a NO��O do l�xico.\n O campo NO��O � de preenchimento obrigat�rio.");
                             form.nocao.focus();
-                            return false;
+                            return false;  
                         }
-
                     }
-                    function addSinonimo()
-                    {
+                    
+                    function addSinonimo() {
+                        
                         listSinonimo = document.forms[0].elements['listSinonimo[]'];
 
-                        if (document.forms[0].sinonimo.value == "")
+                        if (document.forms[0].sinonimo.value == "") {
                             return;
+                        }
 
-                        listSinonimo.options[listSinonimo.length] = new Option(document.forms[0].sinonimo.value, document.forms[0].sinonimo.value);
+                        listSinonimo.options[listSinonimo.length] = 
+                                new Option(document.forms[0].sinonimo.value, 
+                                           document.forms[0].sinonimo.value);
 
                         document.forms[0].sinonimo.value = "";
 
                         document.forms[0].sinonimo.focus();
-
                     }
 
-                    function delSinonimo()
-                    {
+                    function delSinonimo(){
+                        
                         listSinonimo = document.forms[0].elements['listSinonimo[]'];
 
-                        if (listSinonimo.selectedIndex == -1)
+                        if (listSinonimo.selectedIndex == -1) {
                             return;
-                        else
+                            
+                        } else {
+                            
                             listSinonimo.options[listSinonimo.selectedIndex] = null;
+                        }
 
                         delSinonimo();
                     }
 
-                    function doSubmit()
-                    {
+                    function doSubmit() {
                         listSinonimo = document.forms[0].elements['listSinonimo[]'];
 
                         for (var i = 0; i < listSinonimo.length; i++)
+                        {
                             listSinonimo.options[i].selected = true;
+                        }
 
                         return true;
                     }
 
                 //-->
-
-
-
-
     <?php
 
 /*
