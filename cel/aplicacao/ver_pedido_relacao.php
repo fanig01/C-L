@@ -48,10 +48,10 @@ if (isset($submit)) {
     ?>
     <html>
         <head>
-            <title>Pedidos de altera��o das Rela�oes</title>
+            <title>Pedidos de altera&ccedil;&atilde;o das Rela&ccedil;&otilde;es</title>
         </head>
         <body>
-            <h2>Pedidos de Altera��o no Conjunto de Rela��es</h2>
+            <h2>Pedidos de Altera&ccedil;&atilde;o no Conjunto de Rela&ccedil;&otilde;es</h2>
             <form action="?id_projeto=<?= $idProject  ?>" method="post">
 
     <?php
@@ -107,7 +107,7 @@ if (isset($submit)) {
                                     </tr>
                                 </table>
                             <?php } else { ?>
-                                <h3>O usu�rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> a rela��o <font color="#ff0000"><?= $record['nome'] ?></font></h3>
+                                <h3>O usu&aacute;rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> a rela��o <font color="#ff0000"><?= $record['nome'] ?></font></h3>
                             <?php
                             }
                             if ($aprovado == 1) {

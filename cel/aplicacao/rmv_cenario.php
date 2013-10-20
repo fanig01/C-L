@@ -40,7 +40,7 @@ inserirPedidoRemoverCenario($_SESSION['id_projeto_corrente'], $id_cenario, $_SES
 
 </script>
 
-<h4>Operação efetuada com sucesso!</h4>
+<h4>Opera&ccedil;&atilde;o efetuada com sucesso!</h4>
 
 <script language="javascript1.3">
 

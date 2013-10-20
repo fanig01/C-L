@@ -106,12 +106,12 @@ else {
 
             if (strcasecmp($tipo_pedido, 'remover')) {
                 ?>
-                             <h3>O usuário <a  href="mailto:<?= $usuario['email'] ?>" >
-                            <?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> o léxico 
+                             <h3>O usu&aacute;rio <a  href="mailto:<?= $usuario['email'] ?>" >
+                            <?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> o l&eacute;xico 
                                 <font color="#ff0000"> <?= $record['nome'] ?> </font> <?
                             
                             if (!strcasecmp($tipo_pedido, 'alterar')) {
-                                echo "para l�xico abaixo:</h3>";
+                                echo "para léxico abaixo:</h3>";
                             } 
                             else {
                                 echo "</h3>";
@@ -123,7 +123,7 @@ else {
                                     <td><?= $record['nome'] ?></td>
 
                                     <tr>
-                                        <td><b>Noção:</b></td>
+                                        <td><b>No&ccedil;&atilde;o:</b></td>
                                         <td><?= $record['nocao'] ?></td>
                                     </tr>
                                     <tr>
@@ -132,7 +132,7 @@ else {
                                     </tr>
 
                                     <tr>
-                                        <td><b>Sinônimos:</b></td>                
+                                        <td><b>Sin&ocirc;nimos:</b></td>                
                                         <td>
                                 <?php
                                 $sinonimo = $select3->gofirst();
@@ -159,7 +159,7 @@ else {
             } else {
                 ?>
                                 <h3>O usuário <a  href="mailto:<?= $usuario['email'] ?>" >
-                                            <?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> o léxico 
+                                            <?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> o l&eacute;xico 
                                     <font color="#ff0000"><?= $record['nome'] ?></font>
                                 </h3>
 
@@ -182,7 +182,7 @@ else {
 
                     <input name="submit" type="submit" value="Processar">
                     </form>
-                    <br><i><a href="showSource.php?file=ver_pedido_lexico.php">Veja o código fonte!</a></i>
+                    <br><i><a href="showSource.php?file=ver_pedido_lexico.php">Veja o c&oacute;digo fonte!</a></i>
                     </body>
                     </html>
 

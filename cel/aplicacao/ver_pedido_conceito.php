@@ -1,6 +1,5 @@
 <?php
 /* 
- * vim: set expandtab tabstop=4 shiftwidth=4: 
  * 
  * ver_pedido_conceito.php: Esse script exibe os varios pedidos referentes ao conceito.
  *                          O gerente tem a opcao de ver os pedidos jah validados.
