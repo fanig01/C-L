@@ -1,11 +1,4 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4: */
-
-// alt_lexico.php: Este script faz um pedido de alteracao de um lexico do projeto.
-//                 O usuario recebe um form com o lexico corrente (ou seja, com seus campos preenchidos)
-//                 e podera fazer alteracoes em todos os campos menos no nome. Ao final a tela principal
-//                 retorna para a tela de inicio e a arvore e fechada. O form de alteracao tb e fechado.
-// Arquivo chamador: main.php
 
 session_start();
 
@@ -13,21 +6,20 @@ include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
-checkUserAuthentication("index.php");        // Checa se o usuario foi autenticado
-// Conecta ao SGBD
+checkUserAuthentication("index.php");
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
-if (isset($submit)) {       // Script chamado atraves do submit do formulario
+if (isset($submit)) {
     if (!isset($listSinonimo))
         $listSinonimo = array();
 
-    //tira os sinonimos caso aja um nulo.
     $count = count($listSinonimo);
     for ($i = 0; $i < $count; $i++) {
         if ($listSinonimo[$i] == "") {
             $listSinonimo = null;
         }
     }
+    
     //$count = count($listSinonimo);
 
     foreach ($listSinonimo as $key => $sinonimo) {
@@ -58,18 +50,20 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
             </script>
 
     <?php
-} else {        // Script chamado atraves do link do lexico corrente
+} else {
     $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
     $commandSQL = "SELECT * FROM lexico WHERE id_lexico = $id_lexico";
     $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
     $resultArray = mysql_fetch_array($requestResultSQL);
 
-    //sinonimos
+
     // $DB = new PGDB () ;
     // $selectSin = new QUERY ($DB) ;
     // $selectSin->execute("SELECT nome FROM sinonimo WHERE id_lexico = $id_lexico");
+    
     $commandSQLSinonimo = "SELECT nome FROM sinonimo WHERE id_lexico = $id_lexico";
     $requestResultSQLSinonimo = mysql_query($commandSQLSinonimo) or die("Erro ao executar a query");
+    
     //$resultSin = mysql_fetch_array($qrrSin);
     ?>
         <html>
@@ -134,18 +128,28 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
 
 
     <?php
-    //Cen�rios -  Alterar L�xico 
-    //Objetivo:	Permitir a altera��o de uma entrada do dicion�rio l�xico por um usu�rio	
-    //Contexto:	Usu�rio deseja alterar um l�xico previamente cadastrado
-    //              Pr�-Condi��o: Login, l�xico cadastrado no sistema
-    //Atores:	Usu�rio
-    //Recursos:	Sistema, dados cadastrados
-    //Epis�dios:	O sistema fornecer� para o usu�rio a mesma tela de INCLUIR L�XICO,
-    //              por�m com os seguintes dados do l�xico a ser alterado preenchidos
-    //              e edit�veis nos seus respectivos campos: No��o e Impacto.
-    //              Os campos Projeto e Nome estar�o preenchidos, mas n�o edit�veis.
-    //              Ser� exibido um campo Justificativa para o usu�rio colocar uma
-    //              justificativa para a altera��o feita.	
+
+/*
+ * Scenarios: Change Lexicon
+ * 
+ * Objective: Allow alteration of an entry in the dictionary lexicon for a user
+ * 
+ * Context: Usurio want to change a lexicon previously registered
+ * 
+ * Pre condition: Login, registered in the system lexicon
+ * 
+ * Actors: user
+ * 
+ * Resources: System, data registered
+ * 
+ * Episode: The system will provide to the user the same screen INCLUDE lexicon,
+ *          Detailed with the following data to be changed lexicon filled
+ *          And editable in their respective fields: Notion and Impact.
+ *          Fields Project Name and estaro filled, but editable.
+ *          Be shown a field Rationale for the user to place a justification for
+ *          the alteration made.
+ */
+	
     ?>
 
                 </SCRIPT>
