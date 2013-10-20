@@ -1,4 +1,6 @@
 <?php
+include_once("CELConfig/CELConfig.inc");
+include_once("bd.inc");
 
 /*
    Simple PostgreSQL Abstraction Layer v1.0
@@ -35,14 +37,7 @@
           $DB->close ();
  */
 
-/* Aten��o!!!
- *
- * Este script foi adaptado para o MySQL!!!
- *
- */
-
-include_once("CELConfig/CELConfig.inc");
-include_once("bd.inc");
+ // This script was adapted for MySQL
 
 $ipNome = "IpBD =";
 $ipValor = CELConfig_ReadVar("BD_ip");

@@ -13,7 +13,7 @@
         $link = bd_connect() or die("Erro na conex&atilde;o ao BD : " . mysql_error());
 
    
-$query = "show tables";
+        $query = "show tables";
         $resultArray = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
 
 

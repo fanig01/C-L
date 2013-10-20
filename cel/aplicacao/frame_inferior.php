@@ -112,7 +112,10 @@ function bottom_frame($bd, $type, $id) {
                 if (!( $rowc ) && !( $rowl )) {
                             
                     break;
-                } 
+                }
+                else {
+                    //Nothing should be done
+                }
             } 
          } 
          else if ($type == "oc") {
@@ -132,8 +135,7 @@ function bottom_frame($bd, $type, $id) {
                         
                  print "<tr><td CLASS=\"Estilo\"><a href=\"main.php?id=$line[0]&t=or\">$line[1]</a></td><td>$line[2]</TD></tr>";
              }
-         } 
-                
+         }                 
          else if ($type == "or") {
                     
              $commandSQL = "SELECT DISTINCT  c.id_conceito, c.nome 
@@ -151,8 +153,7 @@ function bottom_frame($bd, $type, $id) {
                         
                  print "<tr><td CLASS=\"Estilo\"><a href=\"main.php?id=$line[0]&t=oc\">$line[1]</a></td></tr>";
              }
-         } 
-                
+         }                
          else if ($type == "oa")  {
                   
              $commandSQL = "SELECT   * 
@@ -178,6 +179,9 @@ function bottom_frame($bd, $type, $id) {
                         
                  print "<td CLASS=\"Estilo\"><a href=\"main.php?id=$line2[0]&t=oc\">$axiom[1]</a></td></tr>";                                    
              }                             
+          }
+          else {
+              //Nothing should be done
           }
                 
           ?> 

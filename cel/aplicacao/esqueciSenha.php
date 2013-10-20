@@ -34,19 +34,21 @@
 
                 <?php
                 
-// Scenario: Remember password
-// Objective: Allow registered user, that forgot his password, receive his
-//            password by email
-// Context: System is open, user forgot his password on screen of reminder the
-//          password.
-// Precondition: user have acessed to the system
-// Actors: user, system
-// Resources: database
-// Episode: the user acess the screen of login of the system. 
-//            the user click the link FORGOT PASSWORD
-//            the system show a message on screen, asking to the user that
-// type his login in text box.
-//            The user type his login and click send button.
+/*
+ Scenario: Remember password
+ Objective: Allow registered user, that forgot his password, receive his
+            password by email
+ Context: System is open, user forgot his password on screen of reminder the
+          password.
+ Precondition: user have acessed to the system
+ Actors: user, system
+ Resources: database
+ Episode: the user acess the screen of login of the system. 
+            the user click the link FORGOT PASSWORD
+            the system show a message on screen, asking to the user that
+ type his login in text box.
+            The user type his login and click send button.
+*/
                 
                 ?>
 

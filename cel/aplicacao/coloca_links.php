@@ -55,6 +55,9 @@ function loadScenariosVector($idProject , $idCurrentScenario, $noCurrent) {
         
         $scenariosVector = array();
     }
+    else {
+        //Nothing should be done
+    }
     
     if ($noCurrent) {
     
@@ -139,6 +142,9 @@ function quicksort(&$vector, $initiation, $end, $type) {
         $k = dividesArray($vector, $initiation, $end, $type);
         quicksort($vector, $initiation, $k - 1, $type);
         quicksort($vector, $k + 1, $end, $type);
+    }
+    else {
+        //Nothing should be done
     }
 }
 

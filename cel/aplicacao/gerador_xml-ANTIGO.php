@@ -17,27 +17,33 @@ else {
 
 <?php
 
-// Scenario - To generate XML reports
-// Objective: Allow the administrator generate reports in XML format of a project,
-//            identified for date.
-// Context:  Manager wants generate a report to one projects which is administrator.
-// Pre-Condition: Login, registered project.
-// Actors: Administrator
-// Resource: System, report's data, report's registered data, database.
-// Episodes: System provides to a administrator a view where should provide the data
-//           of the report for later identification, as data and version.
-//           To actualize the generate, enough click in Generate.
-// Restriction: System execute two validations
-//              - If the date is validates.
-//              - If there are scenarios and lexicons in dates equals or previous.
-//              Generating with sucess the report from the registered data of the project
-//              the system provide to the administrator a preview of report generatd XML
-//              including the tags of internal links between lexicons and scenarios
-/// Restriction: Recover the data in XML database and transform him in XSL to display.
+/*
+   Scenario - To generate XML reports
+   Objective: Allow the administrator generate reports in XML format of a project,
+              identified for date.
+   Context:  Manager wants generate a report to one projects which is administrator.
+   Pre-Condition: Login, registered project.
+   Actors: Administrator
+   Resource: System, report's data, report's registered data, database.
+   Episodes: System provides to a administrator a view where should provide the data
+             of the report for later identification, as data and version.
+             To actualize the generate, enough click in Generate.
+   Restriction: System execute two validations
+                - If the date is validates.
+                - If there are scenarios and lexicons in dates equals or previous.
+                Generating with sucess the report from the registered data of the project
+                the system provide to the administrator a preview of report generatd XML
+                including the tags of internal links between lexicons and scenarios
+   Restriction: Recover the data in XML database and transform him in XSL to display.
+*/
 
 function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
+    
     if ($flag_formatado == "ON") {
         $xml_resultante = $xml_resultante . "<?xml-stylesheet type=''text/xsl'' href=''projeto.xsl''?>\n";
+    }
+    else {
+        //Nothing should be done
     }
 
     $xml_resultante = $xml_resultante . "<projeto>\n";
@@ -106,7 +112,10 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
 
             //??$id_temp = id_cenario;
         }
-    } // while
+        else {
+            //Nothing should be done
+        }
+    }
 
     $qry_lexico = "SELECT id_lexico, nome, nocao, impacto
                    FROM lexico
@@ -121,6 +130,7 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
     $id_temp = "";
 
     while ($row = mysql_fetch_row($tb_lexico)) {
+       
         $id_lexico = "<ID>" . $row[0] . "</ID>";
        
         if (($id_temp != $id_lexico) or (primeiro)) {
@@ -146,14 +156,15 @@ function gerar_xml($bd, $idProject , $data_pesquisa, $flag_formatado) {
 
             //$id_temp = id_lexico;
         }
-    } // while
+        else {
+            //Nothing should be done
+        }
+    } 
 
     $xml_resultante = $xml_resultante . "</projeto>\n";
 
     return $xml_resultante;
 }
-
-// gerar_xml
 ?>
 
 <?php
@@ -168,6 +179,7 @@ $qVerifica = "SELECT * FROM publicacao WHERE id_projeto = '$idProject ' AND vers
 $qrrVerifica = mysql_query($qVerifica);
 
 if (!mysql_num_rows($qrrVerifica)) {
+    
     $str_xml = gerar_xml($bd_trabalho, $idProject , $data_pesquisa, $flag_formatado);
 
     $xml_resultante = "<?xml version=''1.0'' encoding=''ISO-8859-1'' ?>\n" . $str_xml;
@@ -201,8 +213,7 @@ if (!mysql_num_rows($qrrVerifica)) {
 
         $html = @xslt_process($xh, 'arg:/_xml', 'projeto.xsl', NULL, $args);
 
-        if (!( $html ))
-        {
+        if (!( $html )){
             die("Erro ao processar o arquivo XML: " . xslt_error($xh));
         }
         else {
@@ -234,7 +245,8 @@ if (!mysql_num_rows($qrrVerifica)) {
 
         <?php
     }
-} else {
+} 
+else {
     ?>
     <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
             <p style="color: red; font-weight: bold; text-align: center">Essa vers�o j� existe!</p>

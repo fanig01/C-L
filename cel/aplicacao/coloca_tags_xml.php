@@ -147,6 +147,9 @@ function exchangeKeysXML($string) {
                 $index2++;
                 continue;
             }
+            else {
+                //Nothing should be done
+            }
 
             if ($link[$index2] == '*' && $link[$index2 + 1] == '*') {
                 $marker = 1;
@@ -154,9 +157,15 @@ function exchangeKeysXML($string) {
                 $index2++;
                 continue;
             }
+            else {
+                //Nothing should be done
+            }
 
             if ($marker == 1) {
                 $link[$index2] = '{';
+            }
+            else {
+                //Nothing should be done
             }
             
             $index2++;

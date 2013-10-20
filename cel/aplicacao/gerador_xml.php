@@ -17,24 +17,26 @@ if (isset($_POST['flag'])) {
 ?>
 
 <?php
-// gerador_xml.php
-// Dada a base e o id do projeto, gera-se o xml
-// dos cen�rios e l�xicos.
-//Cen�rio - Gerar Relat�rios XML 
-//Objetivo:    Permitir ao administrador gerar relat�rios em formato XML de um projeto, identificados por data.     
-//Contexto:    Gerente deseja gerar um relat�rio para um dos projetos da qual � administrador.
-//          Pr�-Condi��o: Login, projeto cadastrado.
-//Atores:    Administrador     
-//Recursos:    Sistema, dados do relat�rio, dados cadastrados do projeto, banco de dados.     
-//Epis�dios:O sistema fornece para o administrador uma tela onde dever� fornecer os dados
-//          do relat�rio para sua posterior identifica��o, como data e vers�o. 
-//          Para efetivar a gera��o do relat�rio, basta clicar em Gerar. 
-//          Restri��o: O sistema executar� duas valida��es: 
-//                      - Se a data � v�lida.
-//                      - Se existem cen�rios e l�xicos em datas iguais ou anteriores.
-//          Gerando com sucesso o relat�rio a partir dos dados cadastrados do projeto,
-//          o sistema fornece ao administrador a tela de visualiza��o do relat�rio XML criado. 
-//          Restri��o: Recuperar os dados em XML do Banco de dados e os transformar por uma XSL para a exibi��o.      
+
+/* gerador_xml.php
+ Dada a base e o id do projeto, gera-se o xml
+ dos cen�rios e l�xicos.
+Cenário - Gerar Relat�rios XML 
+Objetivo:    Permitir ao administrador gerar relat�rios em formato XML de um projeto, identificados por data.     
+Contexto:    Gerente deseja gerar um relat�rio para um dos projetos da qual � administrador.
+          Pr�-Condi��o: Login, projeto cadastrado.
+Atores:    Administrador     
+Recursos:    Sistema, dados do relat�rio, dados cadastrados do projeto, banco de dados.     
+Epis�dios:O sistema fornece para o administrador uma tela onde dever� fornecer os dados
+          do relat�rio para sua posterior identifica��o, como data e vers�o. 
+          Para efetivar a gera��o do relat�rio, basta clicar em Gerar. 
+          Restri��o: O sistema executar� duas valida��es: 
+                      - Se a data � v�lida.
+                      - Se existem cen�rios e l�xicos em datas iguais ou anteriores.
+          Gerando com sucesso o relat�rio a partir dos dados cadastrados do projeto,
+          o sistema fornece ao administrador a tela de visualiza��o do relat�rio XML criado. 
+          Restri��o: Recuperar os dados em XML do Banco de dados e os transformar por uma XSL para a exibi��o.      
+*/
 
 if (!(function_exists("gerar_xml"))) {
 
