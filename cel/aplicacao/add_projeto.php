@@ -31,12 +31,15 @@ if (isset($submit)) {
     $id_projeto_incluido = projectIncludes($name, $description);
 
     if ($id_projeto_incluido != -1) {
+        
         $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
         $gerente = 1;
         $id_usuario_corrente = $_SESSION['id_usuario_corrente'];
         $commandSQL = "INSERT INTO participa (id_usuario, id_projeto, gerente) VALUES ($id_usuario_corrente, $id_projeto_incluido, $gerente  )";
         mysql_query($commandSQL) or die("Erro ao inserir na tabela participa");
+        
     } else {
+        
         ?>
         <html>
             <title>Erro</title>
@@ -67,20 +70,26 @@ if (isset($submit)) {
             <script language="javascript1.3">
 
                 function chkFrmVals() {
+                    
                     if (document.forms[0].nome.value === "") {
+                        
                         alert('Preencha o campo "Nome"');
                         document.forms[0].nome.focus();
                         return false;
+                        
                     } else {
+                        
                         padrao = /[\\\/\?"<>:|]/;
                         nOK = padrao.exec(document.forms[0].nome.value);
-                        if (nOK)
-                        {
+                        
+                        if (nOK) {
+                            
                             window.alert("O nome do projeto n�o pode conter nenhum dos seguintes caracteres:   / \\ : ? \" < > |");
                             document.forms[0].nome.focus();
                             return false;
                         }
                     }
+                    
                     return true;
                 }
 
