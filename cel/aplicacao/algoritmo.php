@@ -41,15 +41,14 @@ include_once 'auxiliar_algoritmo.php';
         }
 
         /*
-          Cenario:	Montar hierarquia.
-          Objetivo:	Montar hierarquia de conceitos.
-          Contexto:	Organizacao da ontologia em andamento.
-          Atores:
-          Recursos:	Sistema, conceito, lista de subconceitos, lista de conceitos.
-          Episodios:
-          - Para cada subconceito
-         * Procurar sua chave na lista de conceitos.
-         * Adicionar a chave como um subconceito do conceito.
+        Scenario: Assemble hierarchy.
+        Objective: Assemble concept hierarchy.
+        Context: Organization ontology in progress.
+        Resources: System, concept, subconcepts list and list of concepts.
+        Episodes:
+            - For each subconceito
+        Search the list of your key concepts.
+        Add subconceito as a key concept.
          */
         
         function montar_hierarquia($conceito, $nova_lista, $list) {
@@ -61,21 +60,20 @@ include_once 'auxiliar_algoritmo.php';
         }
 
         /*
-          Cenario:	Traduzir os termos do lexico classificados como sujeito e objeto.
-          Objetivo:	Traduzir os termos do lexico classificados como sujeito e objeto.
-          Contexto:	Algoritmo de tradu��o iniciado.
-          Atores:		Usuario.
-          Recursos:	Sistema, lista de sujeito e objetos, lista de conceitos, lista de relacoes.
-          Episodios:
-          - Para cada elemento da lista de sujeito e objetos
-         * Criar novo conceito com o mesmo nome e a descricao igual a nocao do elemento.
-         * Para cada impacto do elemento
-          . Verificar com o usuario a existencia do impacto na lista de relacoes.
-          . Caso n�o exista, incluir este impacto na lista de relacoes.
-          . Incluir esta relacao na lista de relacoes do conceito.
-          . Descobrir
-         * Incluir o conceito na lista de conceitos.
-         * Verificar consistencia.
+        Scenario: Translate the terms of lexical classified as subject and object. Objective: To translate the terms of lexical classified as subject and object.
+        Context: Algorithm translation started.
+        Actors: User.
+        Resources: System, list of subjects and objects, concepts list, list of relations.
+        Episodes:
+           - For each element of the list of subjects and objects
+          * Create new concept with the same name and description like the notion of the element.
+          * For each element of the impact
+           . Check with the User the existence of the impact on the list of relations.
+           . If not, this impact include the list of relations.
+           . Include this relation to list in the concept relations.
+           . Discover
+          * Include the concept in the list of concepts.
+          * Check consistency.
          */
 
         function traduz_sujeito_objeto($lista_de_sujeito_e_objeto, $concepts, $relations, $axioms) {
@@ -196,19 +194,24 @@ include_once 'auxiliar_algoritmo.php';
 
                         $indice = $_SESSION["impact"][$_SESSION["ind"]];
                         $_SESSION["finish_relation"] = FALSE;
+                        
                         while (!$_SESSION["finish_relation"]) {
+                            
                             if (!isset($_SESSION["insert_relation"])) {
+                                
                                 asort($concepts);
                                 $_SESSION["lista"] = $concepts;
                                 $_SESSION["nome1"] = $relations[$indice];
                                 $_SESSION["nome2"] = $sujeito->nome;
                                 $_SESSION["nome3"] = $imp;
                                 $_SESSION["job"] = "insert_relation";
+                                
                                 ?>
                                 <SCRIPT language='javascript'>
                                     document.location = "auxiliar_interface.php";
                                 </SCRIPT>
                                 <?php
+                                
                                 exit();
                             } 
                             else if (isset($_SESSION["nome2"])) {
@@ -219,6 +222,7 @@ include_once 'auxiliar_algoritmo.php';
 
 
                                 if ($_POST["existe"] == "FALSE") {
+                                   
                                     $conceito = strtolower($_POST["nome"]);
 
                                     if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conceito, $_SESSION["predicados_selecionados"]) !== null)) {
@@ -230,6 +234,7 @@ include_once 'auxiliar_algoritmo.php';
                                     $_SESSION["predicados_selecionados"][] = $conceito;
 
                                     if (existe_conceito($conceito, $_SESSION['lista_de_conceitos']) == -1) {
+                                        
                                         if (existe_conceito($conceito, $lista_de_sujeito_e_objeto) == -1) {
                                             $nconc = new concept($conceito, "");
                                             $nconc->namespace = $_POST['namespace'];
@@ -244,6 +249,7 @@ include_once 'auxiliar_algoritmo.php';
                                     }
 
                                     $indiceRelacao = existe_relacao($_SESSION['nome1'], $_SESSION['conceito']->relacoes);
+                                   
                                     if ($indiceRelacao != -1) {
                                         if (array_search($conceito, $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados) === false){
                                             $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados[] = $conceito;
@@ -257,6 +263,7 @@ include_once 'auxiliar_algoritmo.php';
                                     }
                                 } 
                                 else if ($_POST["indice"] != "-1") {
+                                    
                                     $conceito = $concepts[$_POST["indice"]]->nome;
                                     if ((count($_SESSION["predicados_selecionados"]) != 0) && (array_search($conceito, $_SESSION["predicados_selecionados"]) !== null)) {
                                         continue;
@@ -268,7 +275,9 @@ include_once 'auxiliar_algoritmo.php';
                                     $_SESSION["predicados_selecionados"][] = $conceito;
 
                                     $indiceRelacao = existe_relacao($_SESSION['nome1'], $_SESSION['conceito']->relacoes);
+                                    
                                     if ($indiceRelacao != -1) {
+                                        
                                         if (array_search($conceito, $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados) === false){
                                             $_SESSION["conceito"]->relacoes[$indiceRelacao]->predicados[] = $conceito;
                                         }
@@ -279,7 +288,9 @@ include_once 'auxiliar_algoritmo.php';
                                     else {
                                         $_SESSION["conceito"]->relacoes[] = new relationshipBetweenConcepts($conceito, $_SESSION["nome1"]);
                                     }
-                                } else {
+                                    
+                                } 
+                                else {
                                     $_SESSION["finish_relation"] = TRUE;
                                 }
                             }
@@ -302,7 +313,9 @@ include_once 'auxiliar_algoritmo.php';
                 }
 
                 $finish_disjoint = FALSE;
+                
                 while (!$finish_disjoint) {
+                    
                     if (!isset($_SESSION["axiomas_selecionados"])){
                         $_SESSION["axiomas_selecionados"] = array();
                     }
@@ -324,8 +337,10 @@ include_once 'auxiliar_algoritmo.php';
                     else {
                         //Nothing should be done
                     }
+                    
                     if ($_POST["existe"] == "TRUE") {
                         $axiom = $_SESSION["conceito"]->nome . " disjoint " . strtolower($_POST["nome"]);
+                        
                         if (array_search($axiom, $axioms) === false) {
                             $axioms[] = $axiom;
                             $_SESSION["axiomas_selecionados"][] = $axiom;
@@ -333,14 +348,15 @@ include_once 'auxiliar_algoritmo.php';
                         else {
                             //Nothing should be done
                         }
+                        
                         session_unregister("disjoint");
                     } 
                     else {
                         $finish_disjoint = TRUE;
                     }
                 }
-                $_SESSION["axiomas_selecionados"] = array();
-
+                
+                $_SESSION["axiomas_selecionados"] = array();                          
                 $concepts[] = $_SESSION["conceito"];
                 asort($concepts);
 
@@ -358,23 +374,24 @@ include_once 'auxiliar_algoritmo.php';
                 session_unregister("conceito");
                 $_SESSION["index2"] = 0;
             }
+            
             $_SESSION["index1"] = 0;
             session_unregister("finish_insert");
             session_unregister("finish_relation");
         }
 
         /*
-          Cenario:	Traduzir os termos do lexico classificados como verbo.
-          Objetivo:	Traduzir os termos do lexico classificados como verbo.
-          Contexto:	Algoritmo de tradu��o iniciado.
-          Atores:		Usuario.
-          Recursos:	Sistema, lista de verbo, lista de relacoes.
-          Episodios:
-          - Para cada elemento da lista de verbo
-         * Verificar com o usuario a existencia do verbo na lista de relacoes.
-         * Caso n�o exista, incluir este verbo na lista de relacoes.
-         * Verificar consistencia.
-         */
+        Scenario: Translate the terms of lexical classified as a verb.
+        Objective: To translate the terms of lexical classified as verb.
+        Context: Algorithm translation started.
+        Actors: User.
+        Resources: System, verb list and list of relations.
+        Episodes:
+           - For each element of the list of verb
+          * Check with the user if there is existence of the verb in the list of relations.
+          * If not, include this in the list of verb relations.
+          * Check consistency.
+        */
 
         function traduz_verbos($verbos, $relations) {
             for (; $_SESSION["index3"] < count($verbos); ++$_SESSION["index3"]) {
@@ -409,9 +426,6 @@ include_once 'auxiliar_algoritmo.php';
                     //Nothing should be done
                 }
 
-
-                //	$lista_de_relacoes = $_SESSION["lista"];
-
                 if (!verifica_consistencia()) {
                     exit();
                 }
@@ -426,20 +440,20 @@ include_once 'auxiliar_algoritmo.php';
         }
 
         /*
-          Cenario:	Traduzir os termos do lexico classificados como estado.
-          Objetivo:	Traduzir os termos do lexico classificados como estado.
-          Contexto:	Algoritmo de traducao iniciado.
-          Atores:		Usuario.
-          Recursos:	Sistema, lista de estado, lista de conceitos, lista de relacoes, lista de axiomas.
-          Episodios:
-          - Para cada elemento da lista de estado
-         * Para cada impacto do elemento
-          . Descobrir
-         * Verificar se o elemento possui importancia central na ontologia.
-         * Caso tenha, traduza como se fosse um sujeito/objeto.
-         * Caso contrario, traduza como se fosse um verbo.
-         * Verificar consistencia.
-         */
+        Scenario: Translate the terms of lexical classified as a state.
+        Objective: To translate the terms of lexical classified as a state.
+        Context: translation algorithm started.
+        Actors: User.
+        Resources: System status list, list of concepts, list of relations, list of axioms.
+        Episodes:
+           - For each element of the list of state
+           * For each element of the impact
+            . Discover
+          * Check if the element has central importance in the ontology.
+          * If yes, translate as if it were a subject / object.
+          * Otherwise, translate as if it were a verb.
+          * Check consistency.
+        */
 
         function traduz_estados($estados, $concepts, $relations, $axioms) {
             for (; $_SESSION["index4"] < count($estados); ++$_SESSION["index4"]) {
@@ -462,7 +476,6 @@ include_once 'auxiliar_algoritmo.php';
                     <?php
                     exit();
 
-                    //$rel = exist($verb->nome, $lista_de_relacoes);
                 }
                 else {
                     //Nothing should be done
@@ -531,6 +544,7 @@ include_once 'auxiliar_algoritmo.php';
 
         function organizar_ontologia($concepts, $relations, $axioms) {
             $_SESSION["salvar"] = "TRUE";
+            
             /* for( ; $_SESSION["index5"] < count($concepts); ++$_SESSION["index5"] )
               {
               $_SESSION["salvar"] = "TRUE";
@@ -560,6 +574,7 @@ include_once 'auxiliar_algoritmo.php';
               }
               }
              */
+            
             //if( count($nova_lista_de_conceitos) >= 2 )
 
             $finish_relation = FALSE;
@@ -568,8 +583,7 @@ include_once 'auxiliar_algoritmo.php';
 
                 if (!isset($_SESSION["reference"])) {
 
-                    $_SESSION["lista"] = $concepts; //array($conc1, $nconc);
-                    //$_SESSION['nome1'] = $nova_lista_de_conceitos;//
+                    $_SESSION["lista"] = $concepts; 
                     $_SESSION["job"] = "reference";
                     ?>
                         <a href="auxiliar_interface.php">auxiliar_interface</a>
@@ -578,8 +592,6 @@ include_once 'auxiliar_algoritmo.php';
                         </SCRIPT>
                         <?php
                         exit();
-
-                        //$rel = exist($verb->nome, $lista_de_relacoes);
                     }
                     else {
                         //Nothing should be done
@@ -616,7 +628,7 @@ include_once 'auxiliar_algoritmo.php';
 
 
                     if (!$achou) {
-                        //tentar montar hierarquia pelo vocabulario minimo.
+                        //Trying to mount hierarchy using minimal vocabulary.
                     }
                     else {
                         //Nothing should be done
@@ -629,32 +641,28 @@ include_once 'auxiliar_algoritmo.php';
                 else {
                     //Nothing should be done
                 }
-                //array_splice($conc->subconceitos, 0, 1);
-                //}
-                //$_SESSION["index5"] = 0;
+ 
             }
 
             /*
-              Cenario:  	Traduzir L�xico para Ontologia.
-              Objetivo: 	Traduzir L�xico para Ontologia.
-              Contexto: 	Existem listas de elementos do l�xico organizadas por tipo, e estes elementos
-              s�o consistentes.
-              Atores:   	Usu�rio.
-              Recursos: 	Sistema, listas de elementos do l�xico organizadas por tipo, listas de elementos
-              da ontologia.
-              Epis�dios:
-              - Criar lista de conceitos vazia.
-              - Criar lista de relacoes vazia.
-              - Criar lista de axiomas vazia.
-              - Traduzir os termos do lexico classificados como sujeito e objeto.
-              - Traduzir os termos do lexico classificados como verbo.
-              - Traduzir os termos do lexico classificados como estado.
-              - Organizar a ontologia.
+            Scenario: Translate lexicon to ontology.
+            Objective: Translate Lexicon to Ontology.
+            Context: There are lists of elements of the lexicon organized by type, and these elements are consistent.
+            Actors: User.
+            Resources: System elements of the lexicon lists organized by type and lists of ontology elements.
+            Episodes:
+               - Create list of empty concepts.
+               - Create empty list of relations.
+               - Create empty list of axioms.
+               - Translate the terms of lexical classified as subject and object.
+               - Translate the terms of lexical classified as a verb.
+               - Translate the terms of lexical classified as a state.
+               - Organize the ontology.
 
              */
 
             function traduz() {
-                //Verifica se as listas foram iniciadas.
+                //Checks if the lists were initiated.
                 if (isset($_SESSION["lista_de_sujeito"]) && isset($_SESSION["lista_de_objeto"]) &&
                         isset($_SESSION["lista_de_verbo"]) && isset($_SESSION["lista_de_estado"]) &&
                         isset($_SESSION["lista_de_conceitos"]) && isset($_SESSION["lista_de_relacoes"]) &&
@@ -728,8 +736,8 @@ include_once 'auxiliar_algoritmo.php';
                   print_r($_SESSION["lista_de_axiomas"]);
                   echo "<br>";
                  */
-                echo 'O processo de gera��o de Ontologias foi conclu�do com sucesso!<br>
-	N�o esque�a de clicar em Salvar.';
+                echo 'O processo de gera&ccedil;&atilde;o de Ontologias foi conclu&iacute;do com sucesso!<br>
+	N&atilde;o esque&ccedil;a de clicar em Salvar.';
                 ?>
             <p>
             <form method="POST" action="auxiliar_bd.php">
