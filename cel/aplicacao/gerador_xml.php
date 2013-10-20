@@ -46,6 +46,9 @@ if (!(function_exists("gerar_xml"))) {
             $xml_resultante = "";
             $xml_resultante = $xml_resultante . "<?xml-stylesheet type='text/xsl' href='projeto.xsl'?>\n";
         }
+        else {
+            // Nothing should be done
+        }
         $xml_resultante = $xml_resultante . "<projeto>\n";
 
         $qry_nome = "SELECT nome
@@ -76,6 +79,7 @@ if (!(function_exists("gerar_xml"))) {
             $vector_scenarios = loadScenariosVector($idProject , $idCurrentScenario, true);
 
             if (($id_temp != $id_cenario) or (primeiro)) {
+                
                 $title = '<titulo id="' . strtr(strip_tags($row[1]), "����������", "aaaaoooeec") . '">' . ucwords(strip_tags($row[1])) . '</titulo>';
 
                 $objective = "<objetivo>" . "<sentenca>" . gera_xml_links(mountLinks($row[2], $vetor_todos_lexicos, $emptyVector)) . "</sentenca>" . "<PT/>" . "</objetivo>";
@@ -288,7 +292,9 @@ if (!(function_exists("gera_xml_links"))) {
             $i = 0;
 
             while ($i < $tamanho_vetor_texto) {
+                
                 preg_match('/href="main.php\?t=(.)&id=(\d+?)"/mi', $vetor_texto[$i], $match);
+                
                 if ($match) {
                     $idProject  = $_SESSION['id_projeto_corrente'];
  
@@ -306,7 +312,8 @@ if (!(function_exists("gera_xml_links"))) {
                         $valor = strtr($row[0], "����������", "aaaaoooeec");
 
                         $vetor_texto[$i + 1] = '<texto ' . $atributo . '="' . $valor . '">' . $vetor_texto[$i + 1] . '</texto>';
-                    } else if ($match[1] == 'c') {
+                    } 
+                    else if ($match[1] == 'c') {
 
                         $vetor_texto[$i] = "";
 
@@ -323,9 +330,13 @@ if (!(function_exists("gera_xml_links"))) {
                     }
 
                     $i = $i + 2;
-                } else {
+                } 
+                else {
                     if (trim($vetor_texto[$i]) != "") {
                         $vetor_texto[$i] = "<texto>" . $vetor_texto[$i] . "</texto>";
+                    }
+                    else {
+                        // Nothing should be done
                     }
 
                     $i = $i + 1;
@@ -333,6 +344,9 @@ if (!(function_exists("gera_xml_links"))) {
             }
 
             return implode("", $vetor_texto);
+        }
+        else {
+            // Nothing should be done
         }
         
         return $sentenca;
@@ -371,7 +385,7 @@ else {
     
     ?>
     <html><head><title>Projeto</title></head><body bgcolor="#FFFFFF">
-            <p style="color: red; font-weight: bold; text-align: center">Essa vers�o j� existe!</p>
+            <p style="color: red; font-weight: bold; text-align: center">Essa vers&atilde;o j&aacute; existe!</p>
             <br>
             <br>
         <center><a href="JavaScript:window.history.go(-1)">Voltar</a></center>
