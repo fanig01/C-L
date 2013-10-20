@@ -24,7 +24,7 @@ if (isset($submit)) {
 
     </script>
 
-    <h4>Opera��o efetuada com sucesso!</h4>
+    <h4>Opera&ccedil;&atilde;o efetuada com sucesso!</h4>
 
     <script language="javascript1.3">
 
@@ -71,10 +71,10 @@ if (isset($submit)) {
 
     <html>
         <head>
-            <title>Alterar Cen�rio</title>
+            <title>Alterar Cen&aacute;rio</title>
         </head>
         <body>
-            <h4>Alterar Cen�rio</h4>
+            <h4>Alterar Cen&aacute;rio</h4>
             <br>
             <form action="?id_projeto=<?= $idProject  ?>" method="post">
                 <table>
@@ -83,7 +83,7 @@ if (isset($submit)) {
                         <td><input disabled size="48" type="text" value="<?= $nameProject ?>"></td>
                     </tr>
                     <input type="hidden" name="id_cenario" value="<?= $resultArray['id_cenario'] ?>">
-                    <td>T�tulo:</td>
+                    <td>T&iacute;tulo:</td>
     <? $resultArray['titulo'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['titulo']); ?>
                     <input type="hidden" name="titulo" value="<?= $resultArray['titulo'] ?>">
                     <td><input disabled maxlength="128" name="titulo2" size="48" type="text" value="<?= $resultArray['titulo'] ?>"></td>
@@ -111,13 +111,13 @@ if (isset($submit)) {
                         <td><textarea name="recursos" cols="48" rows="3"><?= $resultArray['recursos'] ?></textarea></td>
                     </tr>
                     <tr>
-                        <td>Exce��o:</td>
+                        <td>Exce&ccedil;&atilde;o:</td>
     <? $resultArray['excecao'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['excecao']); ?>
 
                         <td><textarea name="excecao" cols="48" rows="3"><?= $resultArray['excecao'] ?></textarea></td>
                     </tr>
                     <tr>
-                        <td>Epis�dios:</td>
+                        <td>Epis&oacute;dios:</td>
     <? $resultArray['episodios'] = preg_replace("'<[\/\!]*?[^<>]*?>'si", "", $resultArray['episodios']); ?>
                         <td><textarea  cols="48" name="episodios" rows="5"><?= $resultArray['episodios'] ?></textarea></td>
                     </tr>
@@ -127,16 +127,16 @@ if (isset($submit)) {
                     </tr>
 
                     <tr>
-                        <td colspan="2"><b><small>Essa justificativa � necess�ria apenas para aqueles usu�rios que n�o s�o administradores.</small></b></td>
+                        <td colspan="2"><b><small>Essa justificativa &oacute; necess&aacute;ria apenas para aqueles usu&aacute;rios que n&atilde;o s&atilde;o administradores.</small></b></td>
                     </tr>
 
                     <tr>
-                        <td align="center" colspan="2" height="60"><input name="submit" type="submit" value="Alterar Cen�rio" onClick="updateOpener()"></td>
+                        <td align="center" colspan="2" height="60"><input name="submit" type="submit" value="Alterar Cen&aacute;rio" onClick="updateOpener()"></td>
                     </tr>
                 </table>
             </form>
         <center><a href="javascript:self.close();">Fechar</a></center>
-        <br><i><a href="showSource.php?file=alt_cenario.php">Veja o c�digo fonte!</a></i>
+        <br><i><a href="showSource.php?file=alt_cenario.php">Veja o c&oacute;digo fonte!</a></i>
     </body>
     </html>
 
