@@ -5,6 +5,7 @@ include_once 'bd.inc';
 session_start();
 
 function get_lista_de_sujeito() {
+    
     $idProject  = $_SESSION['id_projeto'];
     $aux = array();
 
@@ -90,7 +91,8 @@ function verifica_tipo() {
         }
         mysql_free_result($result);
         return($aux);
-    } else {
+    } 
+    else {
         mysql_free_result($result);
         return(TRUE);
     }
@@ -104,9 +106,13 @@ function atualiza_tipo($id_lexico, $type) {
     if (!(($type != "sujeito") || ($type != "objeto") || ($type != "verbo") || ($type != "estado") || ($type != "null"))) {
         return (FALSE);
     }
+    else {
+        //Nothing should be done
+    }
     if ($type == "null") {
         $query = "update lexico set tipo = $type where id_lexico = '$id_lexico';";
-    } else {
+    }
+    else {
         $query = "update lexico set tipo = '$type' where id_lexico = '$id_lexico';";
     }
 
@@ -213,6 +219,9 @@ function get_lista_de_conceitos() {
             if ($conc1->nome == $conceito_nome) {
                 $aux[$key]->subconceitos[] = $subconceito_nome;
             }
+            else {
+               //Nothing should be done 
+            }
         }
     }
 
@@ -313,7 +322,11 @@ function salvar_algoritmo() {
             $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
         }
     }
+    else {
+        //Nothing should be done
+    }
     if (isset($_SESSION["lista_de_conceitos"])) {
+       
         foreach ($_SESSION["lista_de_conceitos"] as $conc) {
             $query = "select id_conceito from conceito where nome = '$conc->nome' and id_projeto='$idProject ';";
             $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
@@ -322,7 +335,8 @@ function salvar_algoritmo() {
             if (mysql_num_rows($result) > 0) {
                 $line = mysql_fetch_array($result, MYSQL_BOTH);
                 $id_conceito = $line['id_conceito'];
-            } else {
+            }
+            else {
                 $query = "insert into conceito (nome,descricao,namespace, id_projeto) values ('$conc->nome', '$conc->descricao','$conc->namespace' ,'$idProject ');";
                 $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
 
@@ -363,8 +377,14 @@ function salvar_algoritmo() {
                     $query = "insert into hierarquia (id_conceito,id_subconceito,id_projeto) values ('$id_conceito', '$id_subconceito','$idProject ');";
                     $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
                 }
+                else {
+                    //Nothing should be done
+                }
             }
         }
+    }
+    else {
+        //Nothing should be done
     }
     if (isset($_SESSION["lista_de_axiomas"])) {
         foreach ($_SESSION["lista_de_axiomas"] as $axiom) {
@@ -372,31 +392,49 @@ function salvar_algoritmo() {
             $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
         }
     }
+    else {
+        //Nothing should be done
+    }
     if (isset($_SESSION["funcao"])) {
         $func = $_SESSION['funcao'];
         $query = "insert into algoritmo (nome, valor, id_projeto) values ('funcao',";
         $query = $query . "'" . $func . "', '$idProject ' );";
         $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
     }
+    else {
+        //Nothing should be done
+    }
     if (isset($_SESSION["index1"])) {
         $query = "insert into algoritmo (nome, valor,id_projeto) values ('index1',";
         $query = $query . "'" . $_SESSION['index1'] . "', '$idProject ');";
         $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
     }
+    else {
+        //Nothing should be done
+    }
     if (isset($_SESSION["index3"])) {
         $query = "insert into algoritmo (nome, valor, id_projeto) values ('index3',";
         $query = $query . "'" . $_SESSION['index3'] . "', '$idProject ');";
         $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
+    } 
+    else {
+        //Nothing should be done
     }
     if (isset($_SESSION["index4"])) {
         $query = "insert into algoritmo (nome, valor, id_projeto) values ('index4',";
         $query = $query . "'" . $_SESSION['index4'] . "', '$idProject ');";
         $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
     }
+    else {
+        //Nothing should be done
+    }
     if (isset($_SESSION["index5"])) {
         $query = "insert into algoritmo (nome, valor, id_projeto) values ('index5',";
         $query = $query . "'" . $_SESSION['index5'] . "', '$idProject ');";
         $result = mysql_query($query) or die("A consulta � BD falhou : " . mysql_error() . __LINE__);
+    }
+    else {
+        //Nothing should be done
     }
     mysql_close($link);
 
@@ -406,7 +444,9 @@ function salvar_algoritmo() {
             document.location = "auxiliar_interface.php";
         </script>
         <?php
-    } else {
+    } 
+    
+    else {
         ?>
         <script>
             document.location = "algoritmo.php";
@@ -430,6 +470,9 @@ if (isset($_SESSION["tipos"])) {
         if (!atualiza_tipo($term, $aux)) {
             echo "ERRO <br>";
         }
+        else {
+            //Nothing should be done
+        }
     }
 
     mysql_close($link);
@@ -439,9 +482,15 @@ if (isset($_SESSION["tipos"])) {
     </script>
     <?php
 }
+else {
+    //Nothing should be done
+}
 
 if (array_key_exists("save", $_POST)) {
     salvar_algoritmo();
+}
+else {
+    //Nothing should be done
 }
 ?>
 
