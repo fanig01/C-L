@@ -1,13 +1,34 @@
 <?php
+session_start();
+
 include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
-// add_lexico.php: Este script cadastra um novo termo no lexico do projeto. 
-//                 � passada, atraves da URL, uma variavel $idProject , que
-//                 indica em que projeto deve ser inserido o novo termo.
+/* add_lexico.php: This script registers a new lexicon project. 
+   Through the URL is passed a variable $idProject indicating that the project
+   should be inserted the new scenario.
+ */
 
-session_start();
+/*
+ Scenarios: Include lexicon
+ Objective: Allow user to the inclusion of a new word lexicon
+ Context: User want to add a new word in the lexicon.
+ Precondition : Login and word lexicon not yet registered
+ Actors: User and System
+ Resources: Data to be registered
+ Episodes: The system provides the user a screen with the following text fields:
+           - Input lexicon.
+           - Concept. 
+                 Restriction: Text box with at least 5 lines of writing visible
+           - Impact. 
+                 Restriction: Text box with at least 5 lines of writing visible
+ Button to confirm the inclusion of the new lexicon entry.
+ Restrictions: After clicking the confirmation button , the system checks whether 
+ all fields have been filled .
+ Exception: If all fields are empty , returns to the user a message that all 
+ fields must be completed and a button to return to the previous page.
+ */
 
 if (!isset($sucesso)) {
     $sucesso = 'n';
@@ -16,16 +37,14 @@ else {
     //Nothing should be done
 }
 
-// Checa se o usu�rio foi autenticado
 checkUserAuthentication("index.php");
 
-// Conecta ao SGBD
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
-//Script chamado atrav�s do submit do formul�rio
 if (isset($submit)) {
 
     $returnCheck = checarLexicoExistente($_SESSION['id_projeto_corrente'], $name);
+    
     if (!isset($listSinonimo)){
         $listSinonimo = array();
     }
@@ -36,6 +55,7 @@ if (isset($submit)) {
     $returnCheckTheSynonym = checarSinonimo($_SESSION['id_projeto_corrente'], $listSinonimo);
 
     if (($returnCheck == true) AND ($returnCheckTheSynonym == true )) {
+       
         $id_usuario_corrente = $_SESSION['id_usuario_corrente'];
         inserirPedidoAdicionarLexico($idProject , $name, $notion, $impact, $id_usuario_corrente, $listSinonimo, $classificacao);
     }
@@ -48,8 +68,10 @@ if (isset($submit)) {
             <center><a href="JavaScript:window.history.go(-1)">Voltar</a></center>
         </body></html>
         <?php
+       
         return;
     }
+    
     $ipValor = CELConfig_ReadVar("HTTPD_ip");
     ?>
 
@@ -61,9 +83,10 @@ if (isset($submit)) {
 
     </script>   
     <?php
-// Script chamado atrav�s do menu superior
+// Script called via the top menu
 } 
 else {
+   
     $commandSQL = "SELECT nome FROM projeto WHERE id_projeto = $idProject ";
     $requestResultSQL = mysql_query($commandSQL) or die("Erro ao executar a query");
     $resultArray = mysql_fetch_array($requestResultSQL);
@@ -72,13 +95,12 @@ else {
 
     <html>
         <head>
-            <title>Adicionar L�xico</title>
+            <title>Adicionar L&eacute;xico</title>
         </head>
         <body>
             <script language="JavaScript">
             <!--
-                function testWhite(form)
-                {
+                function testWhite(form){
                     nome = form.nome.value;
                     nocao = form.nocao.value;
 
@@ -161,25 +183,10 @@ else {
                     return true;
                 }
 
-            //-->
+            
 
     <?php
-    //Cen�rios -  Incluir L�xico 
-    //Objetivo:    Permitir ao usu�rio a inclus�o de uma nova palavra do l�xico
-    //Contexto:    Usu�rio deseja incluir uma nova palavra no l�xico.
-    //                     Pr�-Condi��o: Login, palavra do l�xico ainda n�o cadastrada
-    //Atores:         Usu�rio, Sistema
-    //Recursos:    Dados a serem cadastrados
-    //Epis�dios:    O sistema fornecer� para o usu�rio uma tela com os seguintes campos de texto:
-    //               - Entrada L�xico.
-    //               - No��o.   Restri��o: Caixa de texto com pelo menos 5 linhas de escrita vis�veis
-    //               - Impacto. Restri��o: Caixa de texto com pelo menos 5 linhas de escrita vis�veis
-    //              Bot�o para confirmar a inclus�o da nova entrada do l�xico
-    //              Restri��es: Depois de clicar no bot�o de confirma��o, o sistema verifica se todos
-    //              os campos foram preenchidos. 
-    //Exce��o:    Se todos os campos n�o foram preenchidos, retorna para o usu�rio uma mensagem
-    //              avisando que todos os campos devem ser preenchidos e um bot�o de voltar para a pagina anterior.
-    ?>
+   ?>
 
             </SCRIPT>
 
@@ -245,7 +252,6 @@ else {
                         <td align="center" colspan="2" height="60">
                             <input name="submit" type="submit" onClick="return testWhite(this.form);" value="Adicionar S�mbolo"><BR><BR>
                             </script>
-                            <!--            <A HREF="RegrasLAL.html" TARGET="new">Ver Regras do LAL</A><BR>   -->
                             <A HREF="#" OnClick="javascript:open('RegrasLAL.html', '_blank', 'dependent,height=380,width=520,titlebar');"> Veja as regras do <i>LAL</i></A>
                         </td>
                     </tr>
