@@ -1,28 +1,32 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4: */
 
 // alt_cenario.php: Este script faz um pedido de alteracao de um cenario do projeto.
 // O usuario recebe um form com o cenario corrente (ou seja com seus campos preenchidos)
 // e podera fazer	alteracoes em todos os campos menos no titulo.Ao final a tela principal
 // retorna para a tela de inicio e a arvore e fechada.O form de alteracao tb e fechado.
 // Arquivo chamador: main.php
+
 session_start();
 include("funcoes_genericas.php");
 include("httprequest.inc");
 include_once("bd.inc");
 
-checkUserAuthentication("index.php"); // Checa se o usuario foi autenticado
-// Conecta ao SGBD
+checkUserAuthentication("index.php");
+
 $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 
-if (isset($submit)) {       // Script chamado atraves do submit do formulario
-    inserirPedidoAlterarCenario($_SESSION['id_projeto_corrente'], $id_cenario, $title, $objective, $context, $actors, $resources, $exception, $episodes, $justificativa, $_SESSION['id_usuario_corrente']);
+if (isset($submit)) {
+    
+    inserirPedidoAlterarCenario($_SESSION['id_projeto_corrente'], $id_cenario, 
+                                $title, $objective, $context, $actors, $resources, 
+                                $exception, $episodes, $justificativa, 
+                                $_SESSION['id_usuario_corrente']);
     ?>
 
     <script language="javascript1.3">
 
         opener.parent.frames['code'].location.reload();
-        opener.parent.frames['text'].location.replace('main.php?id_projeto=<?= $_SESSION['id_projeto_corrente'] ?>');
+        opener.parent.frames['text'].location.replace('main.php?id_projeto = <?= $_SESSION['id_projeto_corrente'] ?>');
 
     </script>
 
@@ -35,7 +39,9 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
     </script>
 
     <?php
-} else { // Script chamado atraves do link no cenario corrente
+    
+} else {
+    
     $nameProject = simple_query("nome", "projeto", "id_projeto = " . $_SESSION['id_projeto_corrente']);
 
     $commandSQL = "SELECT * FROM cenario WHERE id_cenario = $id_cenario";
@@ -55,6 +61,7 @@ if (isset($submit)) {       // Script chamado atraves do submit do formulario
 //              Os campos Projeto e T�tulo estar�o preenchidos, mas n�o edit�veis.
 //              Ser� exibido um campo Justificativa para o usu�rio colocar uma
 //              justificativa para a altera��o feita.
+    
     ?>
 
     <html>
