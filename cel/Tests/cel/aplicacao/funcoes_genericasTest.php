@@ -20,5 +20,11 @@ class funcoes_genericasTest extends PHPUnit_Framework_TestCase {
         $expected = NULL;
         $this->assertEquals($expected, $actual);
     }
+    
+    public function testCheckUserValidAuthentication()  {
+        $actual = $this->object->checkUserAuthentication($url);
+        $expected = exit;
+        $this->assertEquals($expected, $actual);
+    }
 }
 ?>
