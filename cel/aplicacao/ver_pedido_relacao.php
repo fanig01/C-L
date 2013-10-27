@@ -1,33 +1,37 @@
 <?php
-/* 
- * vim: set expandtab tabstop=4 shiftwidth=4:
- * ver_pedido_relacao.php:  Esse script exibe os varios pedidos referentes a relacao.
- *                          O gerente tem a opcao de ver os pedidos jah validados.
- *                          O gerente tb podera validar e processar pedidos.
- *                          O gerente tera uma terceira opcao que eh a de remover o pedido validado ou nao da lista de pedidos.
- *                          O gerente podera responder a um pedido via e-mail direto desta pagina.
- * 
- * Arquivo chamador: heading.php
- */
 session_start();
 
 include("funcoes_genericas.php");
 include("httprequest.inc");
 
+/* 
+  This script shows the various requests regarding the relationship.
+  The manager has the option of seeing the requests already validated.
+  The manager also will be able to validate and process orders.
+  The manager will have a third option which is to remove the application validated or not
+  the list of requests.
+  The manager will be able to respond to a request via e-mail directly from this page.
+ */
+
 checkUserAuthentication("index.php");
 
 if (isset($submit)) {
+    
     $DB = new PGDB ();
     $select = new QUERY($DB);
     $update = new QUERY($DB);
     $delete = new QUERY($DB);
+    
     for ($count = 0; $count < sizeof($pedidos); $count++) {
+        
         $update->execute("update pedidorel set aprovado= 1 where id_pedido = $pedidos[$count]");
         tratarPedidoRelacao($pedidos[$count]);
     }
     for ($count = 0; $count < sizeof($remover); $count++) {
+        
         $delete->execute("delete from pedidorel where id_pedido = $remover[$count]");
     }
+    
     ?>
 
     <script language="javascript1.3">
@@ -37,15 +41,19 @@ if (isset($submit)) {
 
     </script>
 
-    <h4>Opera��o efetuada com sucesso!</h4>
+    <h4>Opera&ccedil;&atilde;o efetuada com sucesso!</h4>
     <script language="javascript1.3">
 
         self.close();
 
     </script>
 
-    <?php } else {
-    ?>
+    <?php 
+    
+}
+else {
+    
+        ?>
     <html>
         <head>
             <title>Pedidos de altera&ccedil;&atilde;o das Rela&ccedil;&otilde;es</title>
@@ -55,49 +63,60 @@ if (isset($submit)) {
             <form action="?id_projeto=<?= $idProject  ?>" method="post">
 
     <?php
+   
     /* 
-     * Cenário - Verificar pedidos de alteração de conceitos
-     * Objetivo: Permitir ao administrador gerenciar os pedidos de alteração de conceitos.
-     * Contexto: Gerente deseja visualizar os pedidos de alteração de conceitos.
-     * Pré-Condiçao: Login, projeto cadastrado.
-     * Atores: Administrador
-     * Recursos: Sistema, banco de dados.
-     * Episódios: O administrador clica na opção de Verificar pedidos de alteração de cenários.
-     * Restrição: Somente o Administrador do projeto pode ter essa função visível.
-     *            O sistema fornece para o administrador uma tela onde poderá visualizar o histórico
-     *            de todas as alterações pendentes ou não para os cenários.
-     *            Para novos pedidos de inclusão ou alteração de cenários,o sistema permite que o administrador opte por Aprovar ou Remover.
-     *            Para os pedidos de inclusão ou alterações já aprovados,
-     *            o sistema somente habilita a opção remover para o administrador.
-     *            Para efetivar as sele��es de aprovação e remoção, basta clicar em Processar.
+    Scenario - Verify change requests concepts.
+    Objective: Allow the administrator to manage change requests concepts.
+    Context: Manager wants to view the change requests concepts.
+    Precondition: Login and design registered.
+    Actors: Administrator
+    Features: System database.
+    Episodes: The administrator clicks the option Check requests change scenarios.
+    Restriction: Only the project administrator may have this function visible.
+    The system provides the administrator a screen where you can view the history
+    of all pending changes or not for the scenarios.
+    For new applications for inclusion or modification of scenarios, 
+    the system allows the administrator chooses Approve or Remove.
+    For applications for inclusion or changes already approved,
+    the system only enables the option to remove the administrator.
+    To carry selections approval and removal, simply click Process.
      */
 
     $DB = new PGDB ();
     $select = new QUERY($DB);
     $select2 = new QUERY($DB);
     $select->execute("SELECT * FROM pedidorel WHERE id_projeto = $idProject ");
+    
     if ($select->getntuples() == 0) {
+        
         echo "<BR>Nenhum pedido.<BR>";
-    } else {
+    } 
+    else {
+        
         $i = 0;
         $record = $select->gofirst();
 
         while ($record != 'LAST_RECORD_REACHED') {
+            
             $id_user = $record['id_usuario'];
             $id_pedido = $record['id_pedido'];
             $tipo_pedido = $record['tipo_pedido'];
             $aprovado = $record['aprovado'];
             $select2->execute("SELECT * FROM usuario WHERE id_usuario = $id_user");
             $usuario = $select2->gofirst();
+            
             if (strcasecmp($tipo_pedido, 'remover')) {
                 ?>
 
                             <br>
-                            <h3>O usu�rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> a rela��o <font color="#ff0000"><?= $record['nome'] ?></font> <? if (!strcasecmp($tipo_pedido, 'alterar')) {
+                            <h3>O usu&aacute;rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> a rela&ccedil;&atilde;o <font color="#ff0000"><?= $record['nome'] ?></font> <? if (!strcasecmp($tipo_pedido, 'alterar')) {
                     echo"para conceito abaixo:</h3>";
-                } else {
+                }
+                else {
                     echo"</h3>";
-                } ?>
+                } 
+                ?>
+                                
                                 <table>
                                     <td><b>Nome:</b></td>
                                     <td><?= $record['nome'] ?></td>
@@ -106,30 +125,45 @@ if (isset($submit)) {
                                         <td><textarea name="justificativa" cols="48" rows="2"><?= $record['justificativa'] ?></textarea></td>
                                     </tr>
                                 </table>
-                            <?php } else { ?>
-                                <h3>O usu&aacute;rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> a rela��o <font color="#ff0000"><?= $record['nome'] ?></font></h3>
-                            <?php
-                            }
-                            if ($aprovado == 1) {
-                                echo "[<font color=\"#ff0000\"><STRONG>Aprovado</STRONG></font>]<BR>";
-                            } else {
-                                echo "[<input type=\"checkbox\" name=\"pedidos[]\" value=\"$id_pedido\"> <STRONG>Aprovar</STRONG>]<BR>  ";
-/*
- * echo "Rejeitar<input type=\"checkbox\" name=\"remover[]\" value=\"$id_pedido\">" ;
- */
-                            }
-                            echo "[<input type=\"checkbox\" name=\"remover[]\" value=\"$id_pedido\"> <STRONG>Remover da lista</STRONG>]";
-                            print( "<br>\n<hr color=\"#000000\"><br>\n");
-                            $record = $select->gonext();
-                        }
-                    }
-                    ?>
-                    <input name="submit" type="submit" value="Processar">
-                    </form>
-                    <br><i><a href="showSource.php?file=ver_pedido_cenario.php">Veja o codigo fonte!</a></i>
-                    </body>
-                    </html>
-                    <?php
+                            <?php 
+                            
                 }
-                ?>
+                else { 
+                    ?>
+                                
+                                <h3>O usu&aacute;rio <a  href="mailto:<?= $usuario['email'] ?>" ><?= $usuario['nome'] ?></a> pede para <?= $tipo_pedido ?> a rela&ccedil;&atilde;o <font color="#ff0000"><?= $record['nome'] ?></font></h3>
+                            <?php                           
+                            
+                }                            
+                if ($aprovado == 1) {
+                                
+                    echo "[<font color=\"#ff0000\"><STRONG>Aprovado</STRONG></font>]<BR>";
+                }
+                else {
+                                
+                    echo "[<input type=\"checkbox\" name=\"pedidos[]\" value=\"$id_pedido\"> <STRONG>Aprovar</STRONG>]<BR>  ";
+                }
+                            
+                echo "[<input type=\"checkbox\" name=\"remover[]\" value=\"$id_pedido\"> <STRONG>Remover da lista</STRONG>]";
+                print( "<br>\n<hr color=\"#000000\"><br>\n");
+                            
+                $record = $select->gonext();
+                        
+                
+          }
+      }
+                    
+      ?>
+      
+                                <input name="submit" type="submit" value="Processar">     
+                                </form>          
+            <br><i><a href="showSource.php?file=ver_pedido_cenario.php">Veja o c&oacute;digo fonte!</a></i>     
+        </body>                    
+    </html>
+                    
+        <?php
+                
+        
+}
+?>
 
