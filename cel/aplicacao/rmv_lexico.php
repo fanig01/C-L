@@ -1,7 +1,7 @@
 <?php
 /*
-rmv_lexico.php: This script makes a request to remove a lexicon project. Removes the current lexicon.
-Calling file: main.php
+This script makes a request to remove a lexicon project. Removes the current lexicon.
+
 
 Scenario - Delete Lexicon
 Objective: Allow User to Delete a word from the lexicon that is active.

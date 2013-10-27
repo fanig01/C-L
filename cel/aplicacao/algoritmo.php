@@ -388,9 +388,9 @@ include_once 'auxiliar_algoritmo.php';
         Resources: System, verb list and list of relations.
         Episodes:
            - For each element of the list of verb
-          * Check with the user if there is existence of the verb in the list of relations.
-          * If not, include this in the list of verb relations.
-          * Check consistency.
+        Check with the user if there is existence of the verb in the list of relations.
+        If not, include this in the list of verb relations.
+        Check consistency.
         */
 
         function traduz_verbos($verbos, $relations) {
@@ -447,12 +447,12 @@ include_once 'auxiliar_algoritmo.php';
         Resources: System status list, list of concepts, list of relations, list of axioms.
         Episodes:
            - For each element of the list of state
-           * For each element of the impact
+             For each element of the impact
             . Discover
-          * Check if the element has central importance in the ontology.
-          * If yes, translate as if it were a subject / object.
-          * Otherwise, translate as if it were a verb.
-          * Check consistency.
+        Check if the element has central importance in the ontology.
+        If yes, translate as if it were a subject / object.
+        Otherwise, translate as if it were a verb.
+        Check consistency.
         */
 
         function traduz_estados($estados, $concepts, $relations, $axioms) {
@@ -502,8 +502,6 @@ include_once 'auxiliar_algoritmo.php';
                     //Nothing should be done
                 }
 
-
-
                 if (!verifica_consistencia()) {
                     exit();
                 }
@@ -518,28 +516,29 @@ include_once 'auxiliar_algoritmo.php';
         }
 
         /*
-          Cenario:	Organizar ontologia.
-          Objetivo:	Organizar ontologia.
-          Contexto:	Listas de conceitos, relacoes e axiomas prontas.
-          Atores:		Usuario.
-          Recursos:	Sistema, lista de conceitos, lista de relacoes, lista de axiomas.
-          Episodios:
-          - Faz-se uma copia da lista de conceitos.
-          - Para cada elemento x da lista de conceitos
-         * Cria-se uma nova lista contendo o elemento x.
-         * Para cada elemento subsequente y
-          . Compara as relacoes dos elementos x e y.
-          . Caso possuam as mesmas relacoes, adiciona-se o elemento y a nova lista que ja contem x.
-          . Retira-se y da lista de conceitos.
-         * Retira-se x da lista de conceitos.
-         * Caso a nova lista tenha mais de dois elementos, ou seja, caso x compartilhe as mesmas
-          relacoes com outro termo
-          . Procura por um elemento na lista de conceitos que faca referencia a todos os elementos
-          da nova lista.
-          . Caso exista tal elemento, montar hierarquia.
-          . Caso nao exista, descobrir.
-         * Verificar consistencia.
-          - Restaurar lista de conceitos.
+          Scenario : Organize ontology.
+          Objective : Organize ontology.
+          Context : Lists of concepts and relations and axioms ready.
+          Actors : User.
+          Features : System . list of concepts , list of relations , list of axioms.
+          
+          Episodes:
+            - It is a copy of the list of concepts.
+            - For each element x in the list of concepts.
+           * It creates a new list containing the element x.
+           * For each subsequent element y.
+             Compares the relationships of the elements x and y.
+             If they have the same relations , add the element ya new list that already contains x.
+             Y is removed from the list of concepts.
+             X * is removed from the list of concepts.
+           * If the new list has more than two elements , ie , if x share the same
+             relations with another term
+             Searches for an element in the list of concepts that knife refers to all elements
+            the new list.
+             If there is such an element , set hierarchy.
+             If there is not , find out.
+           * Check consistency.
+            - Restore the list of concepts.
          */
 
         function organizar_ontologia($concepts, $relations, $axioms) {

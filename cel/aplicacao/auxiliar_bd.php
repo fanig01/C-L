@@ -66,6 +66,7 @@ function get_lista_de_estado() {
 function verifica_tipo() {
     
     $idProject  = $_SESSION['id_projeto'];
+    
     /*
      This function checks whether all members of the table has a type defined lexicons. 
      If there are no records in the table define type, the function returns the records. 
@@ -98,6 +99,7 @@ function verifica_tipo() {
 function atualiza_tipo($id_lexico, $type) {
     
     $idProject  = $_SESSION['id_projeto'];
+    
     /*
     This function updates the type of lexical $ id_lexico (integer) for $ type (string)
     and only accepts types: subject, object, verb, state and NULL.
@@ -126,6 +128,7 @@ function obter_lexico($id_lexico) {
       Returns all fields of the lexicon. Each field is a position of
       array that can be indexed by field name or by an integer index.
     */   
+    
     $idProject  = $_SESSION['id_projeto'];
     $query = "select * from lexico where id_lexico = '$id_lexico' AND id_projeto='$idProject ';";
     $result = mysql_query($query) or die("A consulta ao BD falhou : " . mysql_error() . __LINE__);
@@ -224,7 +227,7 @@ function get_lista_de_conceitos() {
     return $aux;
 }
 
-//criar tabela para conceitos (class relacao_entre_conceitos)
+//create table to concepts (class relacao_entre_conceitos)
 function get_lista_de_relacoes() {
     
     $idProject  = $_SESSION['id_projeto'];
@@ -491,7 +494,6 @@ else {
     <head>
         <title>Auxiliar BD</title>
         <style>
-
         </style>
     </head>
     <body>

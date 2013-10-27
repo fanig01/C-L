@@ -80,7 +80,7 @@ else {
     For applications for inclusion or changes already approved,
     the system only enables the option to remove the administrator.
     To carry selections approval and removal, simply click Process.
-     */
+    */
 
     $DB = new PGDB ();
     $select = new QUERY($DB);

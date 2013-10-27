@@ -1,7 +1,11 @@
 <?php
+session_start();
+
+include("funcoes_genericas.php");
+include("httprequest.inc");
 /*
- * This script makes a request to remove a link design.
-Calling file: main.php
+This script makes a request to remove a link design.
+
 Scenario - Delete Concept
 Objective: Allow User to Delete a concept that is active
 Context: User wants to delete a concept.
@@ -13,10 +17,9 @@ This screen also contains a button to confirm the deletion.
 Restriction: After clicking the button, the system checks whether all fields have been filled.
 Exception: If all fields are empty, returns to the user a message that all fields must be completed and a button to return to the previous page.
 */
-session_start();
 
-include("funcoes_genericas.php");
-include("httprequest.inc");
+
+
 checkUserAuthentication("index.php");
 
 inserirPedidoRemoverRelacao($_SESSION['id_projeto_corrente'], $id_relacao, $_SESSION['id_usuario_corrente']);

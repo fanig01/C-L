@@ -43,28 +43,21 @@ if (isset($submit)) {
     $resultArray = mysql_fetch_array($requestResultSQL);
 
 /*
- * Scenario: Change Scenairo
- * 
- * Objetive: Allow the alteration of a scenario for a user
- * 
- * Context: User want to change scenario previously registered
- * 
- * Pre condition: Login, Scenario registered in the system
- * 
- * Actors: User
- * 
- * Resoucers: system, data registered
- * 
- * Exceptions: The name of the scenario being modified to change the name of 
- *             a scenario already exists.
- * 
- * Episode: The system will provide to the user the same screen INCLUDE scenario,
- *          Detailed with the following data to be changed scenario filled
- *          And editable in their respective fields: Purpose, Context, Actors,
- *          Resources and episodes.
- *          Fields Project title and estaro filled, but editable.
- *          Be shown a field rationale for the user to place a justification for
- *          the alteration made.
+  Scenario: Change Scenario.  
+  Objetive: Allow the alteration of a scenario for a user. 
+  Context: User want to change scenario previously registered.
+  Precondition: Login and scenario registered in the system. 
+  Actors: User.
+  Resoucers: system and data registered.
+  Exceptions: The name of the scenario being modified to change the name of 
+              a scenario already exists. 
+  Episode: The system will provide to the user the same screen INCLUDE scenario,
+           Detailed with the following data to be changed scenario filled
+           And editable in their respective fields: Purpose, Context, Actors,
+           Resources and episodes.
+           Fields Project title and estaro filled, but editable.
+           Be shown a field rationale for the user to place a justification for
+           the alteration made.
  */
     
     ?>

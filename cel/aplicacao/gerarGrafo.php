@@ -24,7 +24,7 @@ Context: Manager to generate a graph for one of the versions of XML
 Actors: Administrator
 Resources: System, XML and data registered the project database.
 Restrictions: Having a XML Generated project
- */
+*/
 
 $recoverDatabase = bd_connect() or die("Erro ao conectar ao SGBD");
 $commandSQL = "SELECT * FROM publicacao WHERE id_projeto = '$idProject '";

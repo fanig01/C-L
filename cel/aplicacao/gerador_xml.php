@@ -18,7 +18,7 @@ if (isset($_POST['flag'])) {
 
 <?php
 
-/* gerador_xml.php
+/* 
 Given the base and the id of the project , it generates the xml scenarios and lexicons .
 Scenario - Generate XML Reports
 Objective : Allow the administrator to generate reports in XML format to a project , identified by date .
@@ -193,8 +193,7 @@ Precondition: Login, registered design and access to the database.
 Actors: System
 Features: System, sentences to be linked, registered data design, database.
 Episodes: The system receives a sentence with the tags themselves the C & L and returns the 
- HTML link code equivalent to the lexicons cadatrados system.*/
-
+HTML link code equivalent to the lexicons cadatrados system.
 /*    
 
 Lexicons :

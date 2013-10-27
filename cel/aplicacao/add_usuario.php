@@ -33,30 +33,24 @@ if (isset($submit)) {
         } else {
 
 /*
- *  Scenario: Inclusion of independent user
- * 
- * Objective: Allow a user, it is not registered as administrator, sign-up with
- *            a profile of administrator.
- * 
- * Context: Open system and the user want sign-up in system as administrator.
- *          User in registered user's screen
- * 
- * Pre condition: user have acess to the system
- * 
- * Actors: user, system
- * 
- * Resoucers: Interface, database
- * 
- * Episode: The system return to the user a interface with fields for nome,
- *          email, login, password and the password confirmation entry.
- *          The user filled the fields and click in sign-up
- *          The system check to see if all fields were filled.
- *          If some field fail to be filled, the system warning that all fields
- *          must be filled.
- *          If al fields are filled, the system check in database to see if
- *          this login already exist.
- *          If that typed login already exist, the systme return the same page
- *          to warning to the user that must choose other login.
+  Scenario: Inclusion of independent user  
+  Objective: Allow a user, it is not registered as administrator, sign-up with
+             a profile of administrator. 
+  Context: Open system and the user want sign-up in system as administrator.
+           User in registered user's screen
+  Pre condition: user have acess to the system 
+  Actors: user and system 
+  Resoucers: Interface and database  
+  Episode: The system return to the user a interface with fields for nome,
+           email, login, password and the password confirmation entry.
+           The user filled the fields and click in sign-up
+           The system check to see if all fields were filled.
+           If some field fail to be filled, the system warning that all fields
+           must be filled.
+           If al fields are filled, the system check in database to see if
+           this login already exist.
+           If that typed login already exist, the systme return the same page
+           to warning to the user that must choose other login.
  */
 
             $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
@@ -64,36 +58,24 @@ if (isset($submit)) {
             $requestResultSQL = mysql_query($commandSQL) or die("Erro ao enviar a query");
             
             if (mysql_num_rows($requestResultSQL)) {
-                
-/* $p_style = "color: red; font-weight: bold";
- * $p_text = "Login j� existente no sistema. Favor escolher outro login.";
- * recarrega("?p_style=$p_style&p_text=$p_text&nome=$name&email=$email&senha=$senha&senha_conf=$senha_conf&novo=$novo"
- */ 
-
-                
+                                
 /*
- * Scenario: Add user
- * 
- * Objective: Allow to the administrator create new users.
- * 
- * Context: The administrator want add new users (not registered)
- * 
- * Pre condition: Login
- * 
- * Actors: administrator
- * 
- * Resoucers: user's data
- * 
- * Episode: administrator click in link "add user (not registered) in this project
- *          entering with information of new user: nome, email, login and password
- *          If the login already exist, appear a eoor message on the screen
- *          informing that login already existe.
+  Scenario: Add user. 
+  Objective: Allow to the administrator create new users.
+  Context: The administrator want add new users (not registered).
+  Precondition: Login. 
+  Actors: administrator. 
+  Resoucers: user's data.  
+  Episode: administrator click in link "add user (not registered) in this project
+           entering with information of new user: nome, email, login and password
+           If the login already exist, appear a eoor message on the screen
+           informing that login already existe.
  */
  
                 
                 ?> 
                 <script language="JavaScript">
-                    alert("Login j� existente no sistema. Favor escolher outro login.")
+                    alert("Login existente no sistema. Favor escolher outro login.")
                 </script>
 
                 <?php
@@ -121,23 +103,17 @@ if (isset($submit)) {
     if ($novo == "true") {
 
 /*
- * Scenario: Inclusion of independent user
- * 
- * Objetive: Allow a user who isn't registered as administrator, register with
- *           a profile of administrator.
- * 
- * Context: Open system and user want sing-up in system as administrator
- *          User in registered user's screen
- * 
- * Pre condition: user have acess to the system
- * 
- * Actors: user, system
- * 
- * Resoucers: Interface, database
- * 
- * Episode:  If that login typed in there, the system registers this user as an
- *           administrator in the database, enabling:
- *              - Redirect him to interface REGISTER NEW PROJECT
+  Scenario: Inclusion of independent user 
+  Objetive: Allow a user who isn't registered as administrator, register with
+            a profile of administrator.
+  Context: Open system and user want sing-up in system as administrator
+           User in registered user's screen 
+  Precondition: user have acess to the system 
+  Actors: user, system 
+  Resoucers: Interface, database 
+  Episode:  If that login typed in there, the system registers this user as an
+            administrator in the database, enabling:
+               - Redirect him to interface REGISTER NEW PROJECT
  */
         
         $id_usuario_corrente = simple_query("id_usuario", "usuario", "login = '$login'");
@@ -159,7 +135,7 @@ if (isset($submit)) {
         
         $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
         
-        // $login eh o login do usuario incluido, passado na URL
+        // $login is user`s login included via URL
         
         $id_usuario_incluido = simple_query("id_usuario", "usuario", "login = '$login'");
         
@@ -174,7 +150,7 @@ if (isset($submit)) {
 
         <script language="javascript1.3">
 
-            document.writeln('<p style="color: blue; font-weight: bold; text-align: center">Usu�rio <b><?= $nome_usuario ?></b> cadastrado e inclu�do no projeto <b><?= $nameProject ?></b></p>');
+            document.writeln('<p style="color: blue; font-weight: bold; text-align: center">Usuário <b><?= $nome_usuario ?></b> cadastrado e incluído no projeto <b><?= $nameProject ?></b></p>');
             document.writeln('<p align="center"><a href="javascript:self.close();">Fechar</a></p>');
 
         </script>
@@ -202,7 +178,7 @@ if (isset($submit)) {
 
     <html>
         <head>
-            <title>Cadastro de Usu�rio</title>
+            <title>Cadastro de Usu&aacute;rio</title>
             <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         </head>
         <body>
@@ -257,31 +233,25 @@ if (isset($submit)) {
                     </tr>
                     <tr>
                         <td>Senha:</td><td><input name="senha" maxlength="32" size="16" type="password" value="<?= $password ?>"></td>
-                        <td>Senha (confirma��o):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
+                        <td>Senha (confirma&ccedil;&atilde;o):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
                     </tr>
                     <tr>
 
     <?php
     
 /*
- * Scenario: Inclusion of independent user
- * 
- * Objetive: Allow a user who isn't registered as administrator, register with
- *           a profile of administrator.
- * 
- * Context: Open system and user want sing-up in system as administrator
- *          User in registered user's screen
- * 
- * Pre condition: user have acess to the system
- * 
- * Actors: administrator
- * 
- * Resoucers: user's data
- * 
- * Episode: By clicking the Register button to confirm the addition of the new
- *          user to the selescted  project.
- *          The new user created will receive a message by email with login and
- *          password.
+  Scenario: Inclusion of independent user. 
+  Objetive: Allow a user who isn't registered as administrator, register with
+            a profile of administrator. 
+  Context: Open system and user want sing-up in system as administrator and
+           user in registered user's screen. 
+  Precondition: user have acess to the system. 
+  Actors: administrator. 
+  Resoucers: user's data. 
+  Episode: By clicking the Register button to confirm the addition of the new
+           user to the selescted  project.
+           The new user created will receive a message by email with login and
+           password.
  */
     
     ?>
@@ -290,7 +260,7 @@ if (isset($submit)) {
                     </tr>
                 </table>
             </form>
-            <br><i><a href="showSource.php?file=add_usuario.php">Veja o c�digo fonte!</a></i>
+            <br><i><a href="showSource.php?file=add_usuario.php">Veja o c&oacute;digo fonte!</a></i>
         </body>
     </html>
 

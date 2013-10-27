@@ -60,19 +60,19 @@ else {
 
     <?php
     /*
-     * Scenario - Check requests for changes in the terms of the lexicon.
-     * Objective: Enable the administrator to control requests for changes in the terms of the lexicon.
-     * Context: Manager want to view the change requests the terms of lexicon.
-     * Precondition: Login and project registered.
-     * Actors: Administrator
-     * Features: System and database.
-     * Episodes:
-     * 1 - The administrator clicks the option Check Requests changes in terms of the lexicon.
-     *  Restriction: Only the Project Manager may have this function visible.
-     * 2 - The system provides for the Administrator a screen where he can view the history of all changes (pending or not) to the terms of the lexicon.
-     * 3 - For new requests to include or modification of terms of the lexicon, the system allows the administrator to choose to Approve or Remove.
-     * 4 - For requests to add or modification already approved, the system only enables the Remove option for the Administrator.
-     * 5 - To complete the selections approval and removal, the administrator must click Process.
+      Scenario - Check requests for changes in the terms of the lexicon.
+      Objective: Enable the administrator to control requests for changes in the terms of the lexicon.
+      Context: Manager want to view the change requests the terms of lexicon.
+      Precondition: Login and project registered.
+      Actors: Administrator
+      Features: System and database.
+      Episodes:
+      1 - The administrator clicks the option Check Requests changes in terms of the lexicon.
+       Restriction: Only the Project Manager may have this function visible.
+      2 - The system provides for the Administrator a screen where he can view the history of all changes (pending or not) to the terms of the lexicon.
+      3 - For new requests to include or modification of terms of the lexicon, the system allows the administrator to choose to Approve or Remove.
+      4 - For requests to add or modification already approved, the system only enables the Remove option for the Administrator.
+      5 - To complete the selections approval and removal, the administrator must click Process.
      */
 
     $DB = new PGDB();

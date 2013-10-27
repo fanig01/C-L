@@ -143,28 +143,21 @@ if (isset($submit)) {
     <?php
 
 /*
- * Scenarios: Change Lexicon
- * 
- * Objective: Allow alteration of an entry in the dictionary lexicon for a user
- * 
- * Context: Usurio want to change a lexicon previously registered
- * 
- * Pre condition: Login, registered in the system lexicon
- * 
- * Actors: user
- * 
- * Resources: System, data registered
- * 
- * Episode: The system will provide to the user the same screen INCLUDE lexicon,
- *          Detailed with the following data to be changed lexicon filled
- *          And editable in their respective fields: Notion and Impact.
- *          Fields Project Name and estaro filled, but editable.
- *          Be shown a field Rationale for the user to place a justification for
- *          the alteration made.
+  Scenarios: Change Lexicon.
+  Objective: Allow alteration of an entry in the dictionary lexicon for a user.
+  Context: User want to change a lexicon previously registered. 
+  Precondition: Login and registered in the system lexicon. 
+  Actors: user.
+  Resources: System and data registered.  
+  Episode: The system will provide to the user the same screen INCLUDE lexicon,
+           Detailed with the following data to be changed lexicon filled
+           And editable in their respective fields: Notion and Impact.
+           Fields Project Name and estaro filled, but editable.
+           Be shown a field Rationale for the user to place a justification for
+           the alteration made.
  */
 	
     ?>
-
                 </SCRIPT>
 
                 <h4>Alterar S&iacute;mbolo</h4>

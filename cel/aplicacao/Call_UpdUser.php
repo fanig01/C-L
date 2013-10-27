@@ -9,15 +9,15 @@ $SgbdConnect = bd_connect() or die("Erro ao conectar ao SGBD");
 Scenario - Changing registration
 
 Objective: Allow the user to perform changes in registration data.
-Context: Open System, User have accessed the system and logged
-            User want to change your registration
-            Precondition: User has accessed the system
+Context: Open System, User have accessed the system and logged,
+user want to change your registration
+Precondition: User has accessed the system
 Actors: User and System.
 Features: Interface.
 Episodes: The system provides the user a screen with the following text fields,
 filled with user data to be changed: name, email, login, password and confirm 
 password, and a button to update the information provided.
- */
+*/
 
 $id_user = $_SESSION['id_usuario_corrente'];
 
@@ -32,6 +32,7 @@ $email = $row[2];
 $login = $row[3];
 $password = $row[4];
 ?>
+
 <html>
     <head>
         <title>Alterar dados de Usu&aacute;rio</title>

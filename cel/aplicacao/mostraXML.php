@@ -19,7 +19,7 @@ Actors: Administrator
 Features: System, report data, data registered project and database.
 Episodes: Generating the report from the registered data project, 
 the system provides for the Administrator screen display XML report created.
- */
+*/
 
 $queryResult = "SELECT * FROM publicacao WHERE id_projeto = $idProject  AND versao = $version";
 
