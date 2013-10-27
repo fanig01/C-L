@@ -32,16 +32,15 @@ else {
 
 /*
   Inserts a scenario in the database.
-  Receives id_projeto, title, objective, context, actors, resources, exception and episodes. (1.1)
-  Insert values ​​in table SCENARIO lexicon. (1.2)
-  Returns the id_cenario. (1.4)
+  Receives id_projeto, title, objective, context, actors, resources, exception and episodes. 
+  Insert values ​​in table SCENARIO lexicon. 
+  Returns the id_cenario. 
 */
 
 if (!(function_exists("scenarioIncludes"))) {
 
     function scenarioIncludes($idProject , $title, $objective, $context, $actors, $resources, $exception, $episodes) {
-        
-       
+              
         $SgbdConnectStatus = bd_connect() or die("Erro ao conectar ao SGBD<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
         $date = date("Y-m-d");
         $commandSQL = "INSERT INTO cenario (id_projeto,data, titulo, objetivo, contexto, atores, recursos, excecao, episodios) 
@@ -707,7 +706,7 @@ if (!(function_exists("changeScenario"))) {
                     (preg_match($regex, $result['episodios']) != 0)) {  
                 
                 $commandSQL = "INSERT INTO centocen (id_cenario_from, id_cenario_to)
-	                      VALUES (" . $result['id_cenario'] . ", $idScenario)"; // (2.2.1)
+	                      VALUES (" . $result['id_cenario'] . ", $idScenario)"; 
                 mysql_query($commandSQL) or die("Erro ao enviar a query de INSERT<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
             }
             else {
@@ -881,7 +880,7 @@ if (!(function_exists("changeLexicon"))) {
 
         $query_result = "SELECT id_cenario, titulo, objetivo, contexto, atores, recursos, excecao, episodios
                          FROM cenario
-                          WHERE id_projeto = $idProject ";
+                         WHERE id_projeto = $idProject ";
 
         $requestResultSQL = mysql_query($query_result) or die("Erro ao enviar a query de SELECT 1<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 
@@ -907,12 +906,14 @@ if (!(function_exists("changeLexicon"))) {
             }
         }
 
-        # Verifica se há alguma ocorrencia de algum dos sinonimos do lexico nos cenarios existentes no banco
+        // Checks for any occurrence of any of the synonyms in the lexicon scenarios existing in the data base.
         //&sininonimos = sinonimos do novo lexico
         $count = count($sinonimos);
-        for ($i = 0; $i < $count; $i++) {//Para cada sinonimo
+        for ($i = 0; $i < $count; $i++) {
+            
             $requestResultSQL = mysql_query($query_result) or die("Erro ao enviar a query de SELECT 2<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
-            while ($result2 = mysql_fetch_array($requestResultSQL)) {// para cada cenario
+            
+            while ($result2 = mysql_fetch_array($requestResultSQL)) {
 
                 $nomeSinonimoEscapado = escapa_metacaracteres($sinonimos[$i]);
                 $regex = "/(\s|\b)(" . $nomeSinonimoEscapado . ")(\s|\b)/i";
@@ -930,15 +931,19 @@ if (!(function_exists("changeLexicon"))) {
                 else {
                     //Nothing should be done
                 }
-            }//while            
-        } //for
-        # Fim da verificacao
-        ########
-        ### VERIFICACAO DE OCORRENCIA EM LEXICOS
-        ########
-        # Verifica a ocorrencia do titulo do lexico alterado no texto dos outros lexicos
-        # Verifica a ocorrencia do titulo dos outros lexicos no lexico alterado
-        //select para pegar todos os outros lexicos
+            }            
+        } 
+        
+        /*
+        End of the verification
+ 
+        VERIFICATION OF OCCURRENCE IN LEXICONS     
+         Verifies the occurrence of the title text changed in the lexicon of other lexicons
+         Verifies the occurrence of other lexicons title changed in lexical       
+        */
+        
+        //select to catch all other lexical
+        
         $qlo = "SELECT id_lexico, nome, nocao, impacto, tipo
                FROM lexico
                WHERE id_projeto = $idProject 
@@ -946,8 +951,9 @@ if (!(function_exists("changeLexicon"))) {
 
         $requestResultSQL = mysql_query($qlo) or die("Erro ao enviar a query de SELECT no LEXICO<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 
-        while ($result = mysql_fetch_array($requestResultSQL)) { // para cada lexico exceto o que esta sendo alterado    // (3)
-            # Verifica a ocorrencia do titulo do lexico alterado no texto dos outros lexicos
+        while ($result = mysql_fetch_array($requestResultSQL)) {
+            // for each lexical except what is being changed    
+            // verifies the occurrence of the title text changed in the lexicon of other lexicons
             $escapedName = escapa_metacaracteres($name);
             $regex = "/(\s|\b)(" . $escapedName . ")(\s|\b)/i";
 
@@ -962,7 +968,7 @@ if (!(function_exists("changeLexicon"))) {
                 //Nothing should be done
             }
 
-            # Verifica a ocorrencia do titulo dos outros lexicos no texto do lexico alterado
+            // Verifies the occurrence of the title other lexicons in text lexicon changed
 
             $escapedName = escapa_metacaracteres($result['nome']);
             $regex = "/(\s|\b)(" . $escapedName . ")(\s|\b)/i";
@@ -977,30 +983,32 @@ if (!(function_exists("changeLexicon"))) {
             else {
                 //Nothing should be done
             }
-        }// while
-        # Fim da verificao por titulo
+        }
+        # End of verification by title
 
         $ql = "SELECT id_lexico, nome, nocao, impacto
               FROM lexico
               WHERE id_projeto = $idProject 
               AND id_lexico <> $id_lexico";
 
-        # Verifica a ocorrencia dos sinonimos do lexico alterado nos outros lexicos
+        // Verifies the occurrence of synonyms of lexical change in other lexicons
 
         $count = count($sinonimos);
-        for ($i = 0; $i < $count; $i++) {// para cada sinonimo do lexico alterado
+        for ($i = 0; $i < $count; $i++) {
+        // for each synonym of lexical change
 
             $requestResultSQL = mysql_query($ql) or die("Erro ao enviar a query de select no lexico<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
-            while ($resultl = mysql_fetch_array($requestResultSQL)) {// para cada lexico exceto o alterado
+            while ($resultl = mysql_fetch_array($requestResultSQL)) {
+            // for each lexical changed except
                 $nomeSinonimoEscapado = escapa_metacaracteres($sinonimos[$i]);
                 $regex = "/(\s|\b)(" . $nomeSinonimoEscapado . ")(\s|\b)/i";
 
-                // verifica sinonimo[i] do lexico alterado no texto de cada lexico
+                // checks synonym [i] changed the lexicon in the text of each lexical
 
                 if ((preg_match($regex, $resultl['nocao']) != 0) ||
                         (preg_match($regex, $resultl['impacto']) != 0)) {
 
-                    // Verifica  se a relacao encontrada ja se encontra no banco de dados. Se tiver nao faz nada, senao cadastra uma nopva relacao
+                    // Checks if the relationship is already found in the database. If you do not do anything else or registers a new relationship
                     $qverif = "SELECT * FROM lextolex where id_lexico_from=" . $resultl['id_lexico'] . " and id_lexico_to=$id_lexico";
                     echo("Query: " . $qverif . "<br>");
                     $result = mysql_query($qverif) or die("Erro ao enviar query de select no lextolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
@@ -1013,9 +1021,9 @@ if (!(function_exists("changeLexicon"))) {
                 else {
                     //Nothing should be done
                 }
-            }//while
-        }//for
-        # Verifica a ocorrencia dos sinonimos dos outros lexicos no lexico alterado
+            }
+        }
+        // Verifies the occurrence of synonyms in the lexicons of other lexical changed
 
         $qSinonimos = "SELECT nome, id_lexico 
         		FROM sinonimo 
@@ -1035,7 +1043,7 @@ if (!(function_exists("changeLexicon"))) {
             if ((preg_match($regex, $notion) != 0) ||
                     (preg_match($regex, $impact) != 0)) {
 
-                // Verifica  se a relacao encontrada ja se encontra no banco de dados. Se tiver nao faz nada, senao cadastra uma nopva relacao
+                // Checks if the relationship is already found in the database. If you do not do anything else or registers a new relationship
                 $qv = "SELECT * FROM lextolex where id_lexico_from=$id_lexico and id_lexico_to=" . $rowSinonimo['id_lexico'];
                 $result = mysql_query($qv) or die("Erro ao enviar query de select no lextolex<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
                 if (!resultado) {
@@ -1053,7 +1061,7 @@ if (!(function_exists("changeLexicon"))) {
             }
         }
 
-        # Cadastra os sinonimos novamente
+        // Register synonyms again
 
         if (!is_array($sinonimos)){
             $sinonimos = array();
@@ -1069,7 +1077,7 @@ if (!(function_exists("changeLexicon"))) {
             mysql_query($commandSQL, $SgbdConnectStatus) or die("Erro ao enviar a query<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
         }
 
-        # Fim - cadastro de sinonimos        
+        // End - registration synonyms      
     }
 
 }
@@ -1077,15 +1085,12 @@ else {
     //Nothing should be done
 }
 
+// This function receives an id of concept and remove all your links and existing relationships.
 
-
-###################################################################
-# Essa funcao recebe um id de conceito e remove todos os seus
-# links e relacionamentos existentes.
-###################################################################
 if (!(function_exists("removeConcept"))) {
 
     function removeConcept($idProject , $id_conceito) {
+       
         $DB = new PGDB ();
         $sql = new QUERY($DB);
         $sql2 = new QUERY($DB);
@@ -1094,6 +1099,7 @@ if (!(function_exists("removeConcept"))) {
         $sql5 = new QUERY($DB);
         $sql6 = new QUERY($DB);
         $sql7 = new QUERY($DB);
+       
         # Este select procura o cenario a ser removido
         # dentro do projeto
 
@@ -2194,15 +2200,15 @@ function removeProjeto($idProject ) {
     $qv = "Delete FROM cenario WHERE id_projeto = '$idProject ' ";
     $deletaLexico = mysql_query($qv) or die("Erro ao apagar pedidos do cenario<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 
-    //remover participantes
+    //remove participants
     $qv = "Delete FROM participa WHERE id_projeto = '$idProject ' ";
     $deletaParticipantes = mysql_query($qv) or die("Erro ao apagar no participa<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 
-    //remover publicacao
+    //remove publication
     $qv = "Delete FROM publicacao WHERE id_projeto = '$idProject ' ";
     $deletaPublicacao = mysql_query($qv) or die("Erro ao apagar no publicacao<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 
-    //remover projeto
+    //remove project
     $qv = "Delete FROM projeto WHERE id_projeto = '$idProject ' ";
     $deletaProjeto = mysql_query($qv) or die("Erro ao apagar no participa<br>" . mysql_error() . "<br>" . __FILE__ . __LINE__);
 }
