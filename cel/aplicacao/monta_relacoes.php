@@ -1,6 +1,5 @@
 <?php
 
-include_once("monta_relacoes.php");
 include_once("coloca_links.php");
 
 // Assemble the relations used in the side menu
