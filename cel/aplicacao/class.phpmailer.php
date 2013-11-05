@@ -1,13 +1,15 @@
 <?php
 
 /**
- * PHPMailer - PHP email transport class
- * @package PHPMailer
- * @author Brent R. Matzelle
- * @copyright 2001 - 2003 Brent R. Matzelle
+  *PHPMailer - PHP email transport class
+  *@package PHPMailer
+  *@author Brent R. Matzelle
+  *@copyright 2001 - 2003 Brent R. Matzelle
  */
+
 class PHPMailer {
-    // PUBLIC VARIABLES
+    
+// PUBLIC VARIABLES
 
     /**
      * Email priority (1 = High, 3 = Normal, 5 = low).

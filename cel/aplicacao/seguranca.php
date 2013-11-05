@@ -12,7 +12,7 @@ Removes whitespace from the beginning and end of the string.
 Replaces & by amp; (so that no problems to generate the XML).
 Removes tags html and php from string
 Verify if the directive get_magic_quotes_gpc() is activated, if it is, the function stripslashes is used in the string
- */
+*/
 
 function prepara_dado($string) {
     

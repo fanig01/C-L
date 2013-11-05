@@ -10,7 +10,7 @@ include_once("coloca_links.php");
 //URL of the directory containing the files DAML 
 $_SESSION['site'] = "http://" . CELConfig_ReadVar("HTTPD_ip") . "/" . CELConfig_ReadVar("CEL_dir_relativo") . CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
         
-//Caminho relativo ao CEL do diretorio contendo os arquivos de DAML
+//Relative path to the directory containing the CEL files DAML.
 $_SESSION['diretorio'] = CELConfig_ReadVar("DAML_dir_relativo_ao_CEL");
 
 checkUserAuthentication("index.php");

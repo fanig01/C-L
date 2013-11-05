@@ -22,17 +22,17 @@ include_once 'auxiliar_algoritmo.php';
                 <td align='left' valign='top'>
                     <?php
                     
-                    /*
-                     Scenario: Verify the existence of a name on a list with the user.
-                     Objective: To verify the existence of a name on a list with the user.
-                     Context: translation algorithm started.
-                     Actors: User.
-                     Features: System name and list.
-                     Episodes:
-                            - Update true or false, if true put the index together, 
-                              if false, the index and ignored. - Posta true ou false, caso true 
-                              posta o indice junto, caso false o indice e ignorado.
-                     */
+/*
+  Scenario: Verify the existence of a name on a list with the user.
+  Objective: To verify the existence of a name on a list with the user.
+  Context: translation algorithm started.
+  Actors: User.
+  Features: System name and list.
+  Episodes:
+         - Update true or false, if true put the index together, 
+           if false, the index and ignored. - Put true or false, if true
+           put the index together, false if the index and ignored.
+  */
                                     
                     function exist($name, $list) {
                         
@@ -168,17 +168,16 @@ function importancia_central($termo, $impactos) {
                         $_SESSION["main_subject"] = 1;
                     }
 
-                    /* -------- UNCERTAIN --------
-                      Scenario: Check if a concept references another.
-                      Objective: To determine if a concept references another.
-                      Context: translation algorithm started.
-                      Actors: User.
-                      Resources: Concept 1 Concept 2.
-                      Episodes:
-                            - Returns TRUE if references.
-                     */
+/* -------- UNCERTAIN --------
+  Scenario: Check if a concept references another.
+  Objective: To determine if a concept references another.
+  Context: translation algorithm started.
+  Actors: User.
+  Resources: Concept 1 Concept 2.
+  Episodes:
+        - Returns TRUE if references.
+ */
 
-//function faz_referencia($con1, $con2)
                     function faz_referencia($concepts, $subconcepts) {
                         ?>
 
@@ -278,7 +277,6 @@ function importancia_central($termo, $impactos) {
         print("check.checked = false;\n");
     }
     ?>
-
                             }
                         </script>
 
@@ -286,15 +284,6 @@ function importancia_central($termo, $impactos) {
     $_SESSION["reference"] = 1;
 }
 
-/* -------- INCERTO --------
-  Cenario:    Insere tipo.
-  Objetivo:    Deixar o bd consistente.
-  Contexto:    .
-  Atores:        Usuario.
-  Recursos:    lista de termos sem tipo.
-  Episodios:
-  - .
- */
 
 function insere_tipo($list) {
     $_SESSION["tipos"] = 2;

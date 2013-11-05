@@ -1,8 +1,7 @@
 <?php
 
 /*
-rmv_cenario.php:This script does a request to remove a scenario project.
-Calling file: main.php
+This script does a request to remove a scenario project.
 
 Scenario: Remove Scenario
 Objective: Allow user to Remove a setting that is active

@@ -19,22 +19,6 @@ include_once("bd.inc");
    please send it to author.
    Tanks to my colleagues.
 
-   Usage :
-          $DB = new PGDB ();
-          $sql = new QUERY ($DB);
-          $sql->execute ("select name, surname, email from users where " .
-                "username = '$username'");
-
-          if ($sql->getntuples () == 0) {
-                 echo "No records found !";
-                 $DB->close ();
-                 exit;
-          }
- 
-          $record = $sql->gofirst ();
-          $name = $record['name'];
-          echo "Realname of ($username) : " . $name;
-          $DB->close ();
  */
 
  // This script was adapted for MySQL
@@ -89,7 +73,6 @@ class PGDB extends Abstract_DB {
         
         $this->db_linkid = bd_connect() or die("Erro na conex�o � BD : " . mysql_error());
 
-//              if( $this->db_linkid && mysql_select_db(CELConfig_ReadVar("BD_database") . "" ) )
         
         if ($this->db_linkid) {
             

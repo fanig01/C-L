@@ -6,7 +6,6 @@ checkUserAuthentication("index.php");
 Scenario: access control
 Objective: Given the basis of the type "c" (scenario), "l" (lexicon), "oc" (concept) "or" (link) and 
 "oa" (axiom) and the id of its shows data needed in the frame. 
-
  */
 
 function bottom_frame($bd, $type, $id) {

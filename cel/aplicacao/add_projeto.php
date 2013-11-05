@@ -8,23 +8,22 @@ include("httprequest.inc");
 checkUserAuthentication("index.php");
 
 /*
- * This script is call when happen a request of inclusion of new project,
- * or when a new user sign-up in system
- * Scenario: Register a New project
- * Objetive: Allow the user register a new project
- * Context: User want include a new project in database
- * Pre condition: login
- * Actors: user
- * Resources: System, project data, database
- * Episode: user click in option "add project" found in top menu
- *          The system avaiable a screen to user specify the dataof the new
- *          project whit the project name and it description.
- *          User click in button "insert".
- *          System records the new project in database and automatically
- *          builds a navegation for the new project
- * Exception: if is specified a project name already exist and that belonging
- *            or had a participation of this user, the system display a error
- *            message
+  This script is call when happen a request of inclusion of new project,
+  or when a new user sign-up in system
+  Scenario: Register a New project
+  Objetive: Allow the user register a new project
+  Context: User want include a new project in database
+  Pre condition: login
+  Actors: user
+  Resources: System, project data, database
+  Episode: user click in option "add project" found in top menu
+           The system avaiable a screen to user specify the dataof the new
+           project whit the project name and it description.
+           User click in button "insert".
+           System records the new project in database and automatically
+           builds a navegation for the new project
+  Exception: if is specified a project name already exist and that belonging
+             or had a participation of this user, the system display a error message.
  */
 if (isset($submit)) {
 

@@ -35,9 +35,9 @@ class SMTP {
         $this->setLevelDebug = 0;
     }
 
-    /**************************************************************
-     *                    CONNECTION FUNCTIONS                  *
-     * ********************************************************* */
+
+     // CONNECTION FUNCTIONS  
+
 
      /* SMTP CODE SUCCESS: 220
      * SMTP CODE FAILURE: 421

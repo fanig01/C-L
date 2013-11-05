@@ -7,7 +7,6 @@
 		<watches/>
 	</project_entity>
 	<project_entity ID="project_roots">
-		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\_main.php"/>
 		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\add_cenario.php"/>
 		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\add_lexico.php"/>
 		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\add_projeto.php"/>
@@ -72,7 +71,6 @@
 		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\ver_pedido_lexico.php"/>
 		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\ver_pedido_relacao.php"/>
 		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\VertBar.htm"/>
-		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\zera_tipos.php"/>
 		<vfile name="F:\Apache\Apache2\htdocs\cel_vf\aplicacao\CELConfig\CELConfig.inc"/>
 	</project_entity>
 	<project_entity ID="bookmarks"/>
