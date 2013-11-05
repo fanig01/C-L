@@ -1,14 +1,11 @@
 <?php
 session_start();
-?>
+//<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
-<?php
 
 include("funcoes_genericas.php");
-include("httprequest.inc");
 include_once("bd.inc");
+include("httprequest.inc");
 
 $primeira_vez = "true";
 
@@ -141,7 +138,7 @@ if (isset($submit)) {
  */
         
         $id_usuario_corrente = simple_query("id_usuario", "usuario", "login = '$login'");
-        session_register("id_usuario_corrente");
+        $_SESSION["id_usuario_corrente"];
         ?>
 
         <script language="javascript1.3">
@@ -247,7 +244,7 @@ if (isset($submit)) {
             <form action="?novo=<?= $novo ?>" method="post">
                 <table>
                     <tr>
-                        <td>Nome:</td><td colspan="3"><input name="nome" maxlength="255" size="48" type="text" value="<?= $name ?>"></td>
+                        <td>Nome:</td><td colspan="3"><input name="name" maxlength="255" size="48" type="text" value="<?= $name ?>"></td>
                     </tr>
                     <tr>
                         <td>E-mail:</td><td colspan="3"><input name="email" maxlength="64" size="48" type="text" value="<?= $email ?>" OnBlur="checkEmail(this)"></td>
@@ -256,7 +253,7 @@ if (isset($submit)) {
                         <td>Login:</td><td><input name="login" maxlength="32" size="24" type="text" value="<?= $login ?>"></td>
                     </tr>
                     <tr>
-                        <td>Senha:</td><td><input name="senha" maxlength="32" size="16" type="password" value="<?= $password ?>"></td>
+                        <td>Senha:</td><td><input name="password" maxlength="32" size="16" type="password" value="<?= $password ?>"></td>
                         <td>Senha (confirma��o):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
                     </tr>
                     <tr>
