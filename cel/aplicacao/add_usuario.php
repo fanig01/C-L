@@ -230,7 +230,7 @@ if (isset($submit)) {
                     </tr>
                     <tr>
                         <td>Senha:</td><td><input name="password" maxlength="32" size="16" type="password" value="<?= $password ?>"></td>
-                        <td>Senha (confirma��o):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
+                        <td>Senha (confirma&ccedil;&atilde;o):</td><td><input name="senha_conf" maxlength="32" size="16" type="password" value=""></td>
                     </tr>
                     <tr>
 
