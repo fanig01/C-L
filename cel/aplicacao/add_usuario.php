@@ -72,7 +72,7 @@ if (isset($submit)) {
                 
                 ?> 
                 <script language="JavaScript">
-                    alert("Login existente no sistema. Favor escolher outro login.")
+                    alert("Login existente no sistema. Favor escolher outro login.");
                 </script>
 
                 <?php
@@ -201,13 +201,13 @@ if (isset($submit)) {
                     if (email.value.length > 0) {
                         
                         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-                            return (true)
+                            return (true);
                         }
                         
-                        alert("Aten��o: o E-mail digitado n�o � v�lido.")
+                        alert("Aten��o: o E-mail digitado n�o � v�lido.");
                         email.focus();
                         email.select();
-                        return (false)
+                        return (false);
                         
                     }
                     
@@ -223,7 +223,7 @@ if (isset($submit)) {
                         <td>Nome:</td><td colspan="3"><input name="name" maxlength="255" size="48" type="text" value="<?= $name ?>"></td>
                     </tr>
                     <tr>
-                        <td>E-mail:</td><td colspan="3"><input name="email" maxlength="64" size="48" type="text" value="<?= $email ?>" OnBlur="checkEmail(this)"></td>
+                        <td>E-mail:</td><td colspan="3"><input name="email" maxlength="64" size="48" type="text" value="<?= $email ?>" OnBlur="checkEmail(this);"></td>
                     </tr>
                     <tr>
                         <td>Login:</td><td><input name="login" maxlength="32" size="24" type="text" value="<?= $login ?>"></td>
