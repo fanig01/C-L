@@ -101,11 +101,11 @@ if (isset($submit)) {
                 <table>
                     <tr>
                         <td>Nome:</td>
-                        <td><input maxlength="128" name="nome" size="48" type="text"></td>
+                        <td><input maxlength="128" name="name" size="48" type="text"></td>
                     </tr>
                     <tr>
                         <td>Descri&ccedil;&atilde;o:</td>
-                        <td><textarea cols="48" name="descricao" rows="4"></textarea></td>
+                        <td><textarea cols="48" name="description" rows="4"></textarea></td>
                     <tr>
                         <td align="center" colspan="2" height="60"><input name="submit" type="submit" value="Adicionar Projeto"></td>
                     </tr>

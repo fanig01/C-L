@@ -35,6 +35,7 @@ if ($submit == 'Entrar') {
 
     if (!mysql_num_rows($requestResultSQL)) {
         ?>
+
         <script language="javascript1.3">
             document.location.replace('login.php?wrong=true&url=<?= $url ?>');
         </script>
@@ -44,11 +45,11 @@ if ($submit == 'Entrar') {
         $wrong = $_get["wrong"];
     }
     else {
-
+       
         $row = mysql_fetch_row($requestResultSQL);
         $id_usuario_corrente = $row[0];
 
-        $_SESSION["id_usuario_corrente"];
+        $_SESSION['id_usuario_corrente'] =  $id_usuario_corrente;
         //session_register("id_usuario_corrente");
         
         ?>
@@ -97,7 +98,7 @@ else {
          <div align="center">
             <table cellpadding="5">
                 <tr><td>Login:</td><td><input maxlength="32" name="login" size="24" type="text"></td></tr>
-                <tr><td>Senha:</td><td><input maxlength="32" name="senha" size="24" type="password"></td></tr>
+                <tr><td>Senha:</td><td><input maxlength="32" name="password" size="24" type="password"></td></tr>
                 <tr><td height="10"></td></tr>
                 <tr><td align="center" colspan="2"><input name="submit" type="submit" value="Entrar"></td></tr>
             </table>
